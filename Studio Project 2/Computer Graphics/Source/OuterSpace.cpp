@@ -152,6 +152,24 @@ void OuterSpace::Update(double dt) {
 
 }
 
+void OuterSpace::UpdateSpaceInteractable(double &dt)
+{
+	for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); ++it)
+	{
+		(*it)->Interact(player->GetShip(), dt);
+		(*it)->PlayAnimation(player->GetShip(), dt);
+		if ((*it)->GetInteracting() == true)
+		{
+			camera.SetTarget((*it)->GetPosition());
+		}
+		else
+		{
+			camera.FollowObject(player->GetShip(), Vector3(0.0f, 3.0f, -12.0f));
+		}
+	}
+
+}
+
 void OuterSpace::BoundsCheck()
 {
 	if (player->GetShip()->GetPosition().x>2000 || player->GetShip()->GetPosition().x<-2000 || player->GetShip()->GetPosition().y>2000 || player->GetShip()->GetPosition().y<-2000 || player->GetShip()->GetPosition().z>2000 || player->GetShip()->GetPosition().z<-2000)
