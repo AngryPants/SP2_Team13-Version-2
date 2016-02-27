@@ -49,6 +49,7 @@ bool Collision::CollisionCheck(SpaceObject* object1, SpaceObject* object2) {
 	double dist = Physics::getDistance(object2->GetPosition(), object1->GetPosition());//B.center.distance(A.center);
 	double sumRadii = (object2->GetRadius() + object1->GetRadius());
 	dist -= sumRadii;
+
 	Vector3 movevec;
 	movevec = object1->GetVelocity();
 

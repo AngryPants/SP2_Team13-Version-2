@@ -8,6 +8,7 @@
 #include "Pirate.h"
 #include "Alien.h"
 #include "PlayerShip.h"
+#include "Ship.h"
 
 /****************************************************************************/
 /*!
@@ -30,7 +31,10 @@ public:
 	static int counter;
 
 	//Functions
-	static void SpawnObjects(SpaceObject* object, int i, Vector3 zoneCentre, float zoneRadius, list<SpaceObject*> &objectList);
+	static void SpawnObjects(Ship* object, int i, Vector3 zoneCentre, float zoneRadius, list<Ship*> &objectList);
+	static void SpawnObjects(Asteroid* object, int i, Vector3 zoneCentre, float zoneRadius, list<Asteroid*> &objectList);
+
+	static void UpdateObjects(Vector3 playerPos, Vector3 &zoneCenterValue);
 
 };
 

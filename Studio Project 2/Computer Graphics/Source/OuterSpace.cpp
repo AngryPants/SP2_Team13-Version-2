@@ -1,5 +1,6 @@
 #include "OuterSpace.h"
 
+#include<iostream>
 OuterSpace::OuterSpace() {
 }
 
@@ -98,24 +99,43 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	SetSkybox("Image//Skybox//Top.tga", "Image//Skybox//Bottom.tga", "Image//Skybox//Front.tga", "Image//Skybox//Left.tga", "Image//Skybox//Back.tga", "Image//Skybox//Right.tga");
 
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
+	//enemies.push_back(new Drone());
+	//enemies.push_back(new Drone());
+	//enemies.push_back(new Drone());
+	//enemies.push_back(new Drone());
+	//enemies.push_back(new Drone());
+
+	for (int i = 0; i < 5; ++i)
+	{
+		Spawn::SpawnObjects(new Drone(), i, Vector3(-1025, -1025, 1025), 3300.0f, enemies);
+		Spawn::SpawnObjects(new Pirate(), i, Vector3(1025, -1025, -1025), 3300.0f, enemies);
+		Spawn::SpawnObjects(new Alien(), i, Vector3(-1025, -1025, -1025), 3300.0f, enemies);
+
+		Spawn::SpawnObjects(new Veldspar(), i, Vector3(-1025, 1025, 1025), 3300.0f, asteroids);
+		Spawn::SpawnObjects(new Omber(), i, Vector3(1025, 1025, -1025), 3300.0f, asteroids);
+		Spawn::SpawnObjects(new Kernite(), i, Vector3(-1025, 1025, -1025), 3300.0f, asteroids);
+	}
+
 	player = new Player("Malcolm", "", "", "");
+
+	player->GetShip()->SetPosition(80,80,80);
+	iSpaceObjects.push_back(new CarrickStation());
+	iSpaceObjects.push_back(new Portal());
+	iSpaceObjects.push_back(new Portal());
+	iSpaceObjects.push_back(new Portal());
+	iSpaceObjects.push_back(new Portal());
+	iSpaceObjects.push_back(new Portal());
+	iSpaceObjects.push_back(new Portal());
+	iSpaceObjects.push_back(new Portal());
+	iSpaceObjects.push_back(new Portal());
+	warning = false;
 	player->GetShip()->SetPosition(50, 10, 5);
 
 }
 
 void OuterSpace::Update(double dt) {
 
+	BoundCheck();
 	PlayerControl::RotateShip(player->GetShip(), 160.0f * dt, dt);
 	PlayerControl::MoveShip(player->GetShip(), 50000.0f, dt);
 	PlayerControl::Shoot(player->GetShip(), camera.GetPosition() + player->GetShip()->GetForwardVector());
@@ -144,6 +164,43 @@ void OuterSpace::Update(double dt) {
 
 }
 
+void OuterSpace::BoundCheck()
+{
+	if (player->GetShip()->GetPosition().x>2000 || player->GetShip()->GetPosition().x<-2000 || player->GetShip()->GetPosition().y>2000 || player->GetShip()->GetPosition().y<-2000 || player->GetShip()->GetPosition().z>2000 || player->GetShip()->GetPosition().z<-2000)
+	{
+		warning = true;
+	}
+	else
+	{
+		warning = false;
+	}
+
+	if (player->GetShip()->GetPosition().x>2400 || player->GetShip()->GetPosition().x<-2400 || player->GetShip()->GetPosition().y>2400 || player->GetShip()->GetPosition().y<-2400 || player->GetShip()->GetPosition().z>2400 || player->GetShip()->GetPosition().z<-2400)
+	{
+		int shortestDist = 10000;
+		Vector3 location;
+		for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); ++it)
+		{
+			if ((*it)->GetName() == "Portal")
+			{
+				int temp = Physics::getDistance(player->GetShip()->GetPosition(), (*it)->GetPosition());
+				if (shortestDist > temp)
+				{
+					shortestDist = temp;
+					location.Set((*it)->GetPosition().x, (*it)->GetPosition().y, (*it)->GetPosition().z);
+				}
+			}
+			if (iSpaceObjects.back() != 0)
+			{
+				player->GetShip()->SetPosition(location.x, location.y, location.z);
+			}
+		}
+	}
+
+	Spawn::UpdateObjects(player->GetShip()->GetPosition(), zoneCenter);
+
+}
+
 void OuterSpace::Render() { //Render VBO here.
 
 	//Clear colour & depth buffer every frame
@@ -155,7 +212,7 @@ void OuterSpace::Render() { //Render VBO here.
 	modelStack.LoadIdentity();
 
 	RenderSkybox();
-
+	RenderObjects();
 	RenderObject(player->GetShip(), true);
 
 	for (list<Bullet>::iterator bullet_iter = (*player->GetShip()->GetBullets()).begin(); bullet_iter != (*player->GetShip()->GetBullets()).end(); ++bullet_iter) {
@@ -165,8 +222,12 @@ void OuterSpace::Render() { //Render VBO here.
 	}
 
 	for (list<Ship*>::iterator ship_iter = enemies.begin(); ship_iter != enemies.end(); ++ship_iter) {
-	
-		RenderObject(*ship_iter, true);
+		
+		if ((Physics::getDistance(player->GetShip()->GetPosition(), zoneCenter) <= 3400.0f) && 
+			(Physics::getDistance((*ship_iter)->GetPosition(), zoneCenter) <= 3300.0f)) {
+
+			RenderObject(*ship_iter, true);
+		}
 
 		for (list<Bullet>::iterator bullet_iter = (*(*ship_iter)->GetBullets()).begin(); bullet_iter != (*(*ship_iter)->GetBullets()).end(); ++bullet_iter) {
 		
@@ -176,9 +237,63 @@ void OuterSpace::Render() { //Render VBO here.
 
 	}
 
+	for (list<Asteroid*>::iterator asteroid_iter = asteroids.begin(); asteroid_iter != asteroids.end(); ++asteroid_iter){
+
+		if ((Physics::getDistance(player->GetShip()->GetPosition(), zoneCenter) <= 3400.0f) && 
+			(Physics::getDistance((*asteroid_iter)->GetPosition(), zoneCenter) <= 3300.0f))	{
+
+			RenderObject(*asteroid_iter, true);
+		}
+	}
+
+	if (warning)
+	{
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Going out of Bounds,please Turn back", Colour(1, 0, 0), 100, 4.0f, 7.0f);
+	}
+	for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); ++it)
+	{
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], (*it)->GetRenderMessage(), Colour(1, 0, 0), 100, 4.0f, 1.0f);
+	}
+
 	RenderTextOnScreen(mesh[FONT_CONSOLAS], "X: " + std::to_string(player->GetShip()->GetPosition().x) + "Y: " + std::to_string(player->GetShip()->GetPosition().y) + "Z: " + std::to_string(player->GetShip()->GetPosition().z), Colour(0, 1, 0), 100, 6, 6);
 	RenderTextOnScreen(mesh[FONT_CONSOLAS], std::to_string((int)player->GetShip()->GetHealth()), Colour(1, 0, 0), 100, 3, 3);
 
+}
+
+void OuterSpace::RenderObjects()
+{
+	int x, y, z;
+	int no = 1;
+	for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); ++it)
+	{
+		modelStack.PushMatrix();
+		if ((*it)->GetName() == "OuterSpaceStation")
+		{
+			modelStack.Translate((*it)->GetPosition().x, (*it)->GetPosition().y, (*it)->GetPosition().z);
+			RenderMesh((*it)->GetMesh(), true);
+
+		}
+		else if ((*it)->GetName() == "Portal")
+		{
+			switch (no)
+			{
+			case 1:x = 1, y = 1, z = 1; break;
+			case 2:x = -1, y = 1, z = 1; break;
+			case 3:x = -1, y = -1, z = 1; break;
+			case 4:x = -1, y = 1, z = -1; break;
+			case 5:x = -1, y = -1, z = -1; break;
+			case 6:x = 1, y = -1, z = -1; break;
+			case 7:x = 1, y = 1, z = -1; break;
+			case 8:x = 1, y = -1, z = 1; break;
+			}
+
+			modelStack.Translate(1750 * x, 1750 * y, 1750 * z);
+			(*it)->SetPosition(1750 * x, 1750 * y, 1750 * z);
+			no++;
+			RenderMesh((*it)->GetMesh(), true);
+		}
+		modelStack.PopMatrix();
+	}
 }
 
 void OuterSpace::Exit() {
