@@ -12,6 +12,7 @@ struct Collision
 	static void BulletToSpaceObject(Bullet* bullet, SpaceObject* object);
 	static void GameObjectToStaticObject(GameObject* object1, StaticObject* object2);
 	static bool CollisionCheck(SpaceObject* object, SpaceObject* object2);
+	static bool CollisionCheck(SpaceObject* object, Bullet &bullets);
 
 };
 #endif

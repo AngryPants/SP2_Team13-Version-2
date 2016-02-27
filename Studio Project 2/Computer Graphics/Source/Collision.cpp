@@ -17,7 +17,7 @@ void Collision::SpaceObjectToSpaceObject(SpaceObject* object1, SpaceObject* obje
 
 	}
 
-	if (CollisionCheck(object1, object2) == true) {
+	if (CollisionCheck(object1, object2)) {
 	
 		object1->DecreaseHealth(((object2->GetVelocity().Length() + object1->GetVelocity().Length()) * dt)/2.0f);
 		object2->DecreaseHealth(((object2->GetVelocity().Length() + object1->GetVelocity().Length()) * dt)/2.0f);
@@ -121,5 +121,11 @@ bool Collision::CollisionCheck(SpaceObject* object1, SpaceObject* object2) {
 	movevec*distance;
 
 	return true;
+
+}
+
+bool Collision::CollisionCheck(SpaceObject* object, Bullet &bullets) {
+
+
 
 }
