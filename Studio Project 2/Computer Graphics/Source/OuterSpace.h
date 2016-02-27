@@ -8,6 +8,9 @@
 #include "Alien.h"
 #include "Asteroid.h"
 #include "AI.h";
+#include "Interactable.h"
+#include "CarrickStation.h"
+#include "Portal.h"
 
 class OuterSpace : public GameScene {
 
@@ -18,6 +21,7 @@ public:
 
 	//GameObjects
 	list<Ship*> enemies;
+	list<Interactable*> iSpaceObjects;
 	list<Asteroid*> asteroids;
 	Player* player;
 
@@ -26,6 +30,10 @@ public:
 	virtual void Update(double dt);
 	virtual void Render();
 	virtual void Exit();
+
+	void BoundCheck();
+	void RenderObjects();
+	bool warning;
 
 };
 

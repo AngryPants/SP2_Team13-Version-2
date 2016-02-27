@@ -1,5 +1,6 @@
 #include "OuterSpace.h"
 
+#include<iostream>
 OuterSpace::OuterSpace() {
 }
 
@@ -100,11 +101,23 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	enemies.push_back(new Drone());
 	player = new Player("Malcolm", "", "", "");
+	player->GetShip()->SetPosition(80,80,80);
+	iSpaceObjects.push_back(new CarrickStation());
+	iSpaceObjects.push_back(new Portal());
+	iSpaceObjects.push_back(new Portal());
+	iSpaceObjects.push_back(new Portal());
+	iSpaceObjects.push_back(new Portal());
+	iSpaceObjects.push_back(new Portal());
+	iSpaceObjects.push_back(new Portal());
+	iSpaceObjects.push_back(new Portal());
+	iSpaceObjects.push_back(new Portal());
+	warning = false;
 
 }
 
 void OuterSpace::Update(double dt) {
 
+	BoundCheck();
 	PlayerControl::RotateShip(player->GetShip(), 160.0f * dt, dt);
 	PlayerControl::MoveShip(player->GetShip(), 50000.0f, dt);
 	PlayerControl::Shoot(player->GetShip(), camera.GetPosition() + player->GetShip()->GetForwardVector());
@@ -131,6 +144,40 @@ void OuterSpace::Update(double dt) {
 
 }
 
+void OuterSpace::BoundCheck()
+{
+	if (player->GetShip()->GetPosition().x>2000 || player->GetShip()->GetPosition().x<-2000 || player->GetShip()->GetPosition().y>2000 || player->GetShip()->GetPosition().y<-2000 || player->GetShip()->GetPosition().z>2000 || player->GetShip()->GetPosition().z<-2000)
+	{
+		warning = true;
+	}
+	else
+	{
+		warning = false;
+	}
+
+	if (player->GetShip()->GetPosition().x>2400 || player->GetShip()->GetPosition().x<-2400 || player->GetShip()->GetPosition().y>2400 || player->GetShip()->GetPosition().y<-2400 || player->GetShip()->GetPosition().z>2400 || player->GetShip()->GetPosition().z<-2400)
+	{
+		int shortestDist = 10000;
+		Vector3 location;
+		for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); ++it)
+		{
+			if ((*it)->GetName() == "Portal")
+			{
+				int temp = Physics::getDistance(player->GetShip()->GetPosition(), (*it)->GetPosition());
+				if (shortestDist > temp)
+				{
+					shortestDist = temp;
+					location.Set((*it)->GetPosition().x, (*it)->GetPosition().y, (*it)->GetPosition().z);
+				}
+			}
+			if (iSpaceObjects.back() != 0)
+			{
+				player->GetShip()->SetPosition(location.x, location.y, location.z);
+			}
+		}
+	}
+}
+
 void OuterSpace::Render() { //Render VBO here.
 
 	//Clear colour & depth buffer every frame
@@ -142,7 +189,7 @@ void OuterSpace::Render() { //Render VBO here.
 	modelStack.LoadIdentity();
 
 	RenderSkybox();
-
+	RenderObjects();
 	RenderObject(player->GetShip(), true);
 
 	for (list<Bullet>::iterator bullet_iter = (*player->GetShip()->GetBullets()).begin(); bullet_iter != (*player->GetShip()->GetBullets()).end(); ++bullet_iter) {
@@ -163,6 +210,50 @@ void OuterSpace::Render() { //Render VBO here.
 
 	}
 
+	if (warning)
+	{
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Going out of Bounds,please Turn back", Colour(1, 0, 0), 100, 4.0f, 7.0f);
+	}
+	for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); ++it)
+	{
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], (*it)->GetRenderMessage(), Colour(1, 0, 0), 100, 4.0f, 1.0f);
+	}
+}
+
+void OuterSpace::RenderObjects()
+{
+	int x, y, z;
+	int no = 1;
+	for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); ++it)
+	{
+		modelStack.PushMatrix();
+		if ((*it)->GetName() == "OuterSpaceStation")
+		{
+			modelStack.Translate((*it)->GetPosition().x, (*it)->GetPosition().y, (*it)->GetPosition().z);
+			RenderMesh((*it)->GetMesh(), true);
+
+		}
+		else if ((*it)->GetName() == "Portal")
+		{
+			switch (no)
+			{
+			case 1:x = 1, y = 1, z = 1; break;
+			case 2:x = -1, y = 1, z = 1; break;
+			case 3:x = -1, y = -1, z = 1; break;
+			case 4:x = -1, y = 1, z = -1; break;
+			case 5:x = -1, y = -1, z = -1; break;
+			case 6:x = 1, y = -1, z = -1; break;
+			case 7:x = 1, y = 1, z = -1; break;
+			case 8:x = 1, y = -1, z = 1; break;
+			}
+
+			modelStack.Translate(1750 * x, 1750 * y, 1750 * z);
+			(*it)->SetPosition(1750 * x, 1750 * y, 1750 * z);
+			no++;
+			RenderMesh((*it)->GetMesh(), true);
+		}
+		modelStack.PopMatrix();
+	}
 }
 
 void OuterSpace::Exit() {
