@@ -99,10 +99,6 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	SetSkybox("Image//Skybox//Top.tga", "Image//Skybox//Bottom.tga", "Image//Skybox//Front.tga", "Image//Skybox//Left.tga", "Image//Skybox//Back.tga", "Image//Skybox//Right.tga");
 
 	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
 	player = new Player("Malcolm", "", "", "");
 
 }
@@ -123,8 +119,13 @@ void OuterSpace::Update(double dt) {
 		AI::MoveToTarget(*iter, player->GetShip(), 9000.0f, dt);
 		AI::ShootAtTarget(*iter, player->GetShip());
 		(*iter)->Update(dt);
+		
 		rigidBodyPointer = *iter;
 		RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
+
+		SpaceObject* spaceObjectPointer1 = *iter;
+		SpaceObject* spaceObjectPointer2 = player->GetShip();
+		Collision::SpaceObjectToSpaceObject(spaceObjectPointer1, spaceObjectPointer2, dt);
 
 	}
 

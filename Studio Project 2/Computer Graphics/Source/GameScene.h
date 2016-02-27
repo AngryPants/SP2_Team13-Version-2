@@ -10,6 +10,7 @@
 #include "shader.hpp"
 #include "Utility.h"
 #include "PlayerControl.h"
+#include "Collision.h"
 
 using std::list;
 
