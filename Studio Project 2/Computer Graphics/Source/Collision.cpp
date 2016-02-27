@@ -17,12 +17,23 @@ void Collision::SpaceObjectToSpaceObject(SpaceObject* object1, SpaceObject* obje
 
 	}
 
-	if (CollisionCheck(object1, object2)) {
+	if (CollisionCheck(object1, object2) == true) {
 	
-		object1->DecreaseHealth(object2->GetVelocity().Length() + object1->GetVelocity().Length());
-		object2->DecreaseHealth(object2->GetVelocity().Length() + object1->GetVelocity().Length());
-		object1->AddForce((object1->GetPosition() - object2->GetPosition()).Normalized() * object2->GetVelocity().Length(), dt);
-		object2->AddForce((object2->GetPosition() - object1->GetPosition()).Normalized() * object1->GetVelocity().Length(), dt);
+		object1->DecreaseHealth(((object2->GetVelocity().Length() + object1->GetVelocity().Length()) * dt)/2.0f);
+		object2->DecreaseHealth(((object2->GetVelocity().Length() + object1->GetVelocity().Length()) * dt)/2.0f);
+
+		if ((object1->GetVelocity().Length() + object2->GetVelocity().Length()) > 50.0f) {
+		
+			object1->AddForce((object1->GetPosition() - object2->GetPosition()).Normalized() * ((object1->GetVelocity().Length() + object2->GetVelocity().Length()) * 800.0f), dt);
+			object2->AddForce((object2->GetPosition() - object1->GetPosition()).Normalized() * ((object1->GetVelocity().Length() + object2->GetVelocity().Length()) * 800.0f), dt);
+
+		} else {
+		
+			object1->AddForce((object1->GetPosition() - object2->GetPosition()).Normalized() * (40.0f * 800.0f), dt);
+			object2->AddForce((object2->GetPosition() - object1->GetPosition()).Normalized() * (40.0f * 800.0f), dt);
+		
+		}
+		
 
 	}
 
