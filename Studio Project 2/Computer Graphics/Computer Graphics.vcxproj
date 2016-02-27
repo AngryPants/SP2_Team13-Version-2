@@ -107,6 +107,7 @@
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\Omber.cpp" />
     <ClCompile Include="Source\OuterSpace.cpp" />
+    <ClCompile Include="Source\Portal.cpp" />
     <ClCompile Include="Source\SpaceStation.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
     <ClCompile Include="Source\Pirate.cpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="Source\Collision.h" />
     <ClInclude Include="Source\Colour.h" />
     <ClInclude Include="Source\Interactable.h" />
+    <ClInclude Include="Source\Portal.h" />
     <ClInclude Include="Source\SpaceStation.h" />
     <ClInclude Include="Source\PlayerControl.h" />
     <ClInclude Include="Source\Drone.h" />
