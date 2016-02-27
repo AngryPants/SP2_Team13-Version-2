@@ -105,16 +105,16 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	//enemies.push_back(new Drone());
 	//enemies.push_back(new Drone());
 
-	for (int i = 0; i < 5; ++i)
-	{
-		Spawn::SpawnObjects(new Drone(), i, Vector3(-1025, -1025, 1025), 3300.0f, enemies);
-		Spawn::SpawnObjects(new Pirate(), i, Vector3(1025, -1025, -1025), 3300.0f, enemies);
-		Spawn::SpawnObjects(new Alien(), i, Vector3(-1025, -1025, -1025), 3300.0f, enemies);
+	//for (int i = 0; i < 5; ++i)
+	//{
+	//	Spawn::SpawnObjects(new Drone(), i, Vector3(-1025, -1025, 1025), 3300.0f, enemies);
+	//	Spawn::SpawnObjects(new Pirate(), i, Vector3(1025, -1025, -1025), 3300.0f, enemies);
+	//	Spawn::SpawnObjects(new Alien(), i, Vector3(-1025, -1025, -1025), 3300.0f, enemies);
 
-		Spawn::SpawnObjects(new Veldspar(), i, Vector3(-1025, 1025, 1025), 3300.0f, asteroids);
-		Spawn::SpawnObjects(new Omber(), i, Vector3(1025, 1025, -1025), 3300.0f, asteroids);
-		Spawn::SpawnObjects(new Kernite(), i, Vector3(-1025, 1025, -1025), 3300.0f, asteroids);
-	}
+	//	Spawn::SpawnObjects(new Veldspar(), i, Vector3(-1025, 1025, 1025), 3300.0f, asteroids);
+	//	Spawn::SpawnObjects(new Omber(), i, Vector3(1025, 1025, -1025), 3300.0f, asteroids);
+	//	Spawn::SpawnObjects(new Kernite(), i, Vector3(-1025, 1025, -1025), 3300.0f, asteroids);
+	//}
 
 	player = new Player("Malcolm", "", "", "");
 
@@ -136,6 +136,7 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 void OuterSpace::Update(double dt) {
 
 	BoundCheck();
+	UpdateSpaceInteractable(dt);
 	PlayerControl::RotateShip(player->GetShip(), 160.0f * dt, dt);
 	PlayerControl::MoveShip(player->GetShip(), 50000.0f, dt);
 	PlayerControl::Shoot(player->GetShip(), camera.GetPosition() + player->GetShip()->GetForwardVector());
@@ -161,6 +162,24 @@ void OuterSpace::Update(double dt) {
 	RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
 
 	camera.FollowObject(player->GetShip(), Vector3(0.0f, 3.0f, - 15.0f));
+
+}
+
+void OuterSpace::UpdateSpaceInteractable(double &dt)
+{
+	for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); ++it)
+	{
+		(*it)->Interact(player->GetShip(), dt);
+		(*it)->PlayAnimation(player->GetShip(), dt);
+		if ((*it)->GetInteracting() == true)
+		{
+			camera.SetTarget((*it)->GetPosition());
+		}
+		else
+		{
+			camera.FollowObject(player->GetShip(), Vector3(0.0f, 3.0f, -12.0f));
+		}
+	}
 
 }
 

@@ -37,6 +37,7 @@ public:
 
 	void BoundCheck();
 	void RenderObjects();
+	void UpdateSpaceInteractable(double &dt);
 	bool warning;
 
 };
