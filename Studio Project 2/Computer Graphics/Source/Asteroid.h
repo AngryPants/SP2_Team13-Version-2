@@ -5,14 +5,19 @@
 
 class Asteroid : public SpaceObject {
 
-public:
+private:
 	int minimumDamage;
 
+public:
 	//Constructor & Destructor
+	Asteroid(string name, float mass, int minimumDamage, const char* textureFile, float health, int ID);
 	~Asteroid();
 
-protected:
-	Asteroid(string name, float mass, int minimumDamage, const char* textureFile, float health, int ID);
+	//Getters
+	int GetMinimumDamage();
+
+	//Setters
+	void SetMinimumDamage(int minimumDamage);
 
 };
 #endif

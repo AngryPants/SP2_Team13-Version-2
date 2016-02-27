@@ -66,6 +66,92 @@ void Spawn::SpawnObjects(Ship* object, int i , Vector3 zoneCentre, float zoneRad
 
 }
 
+void Spawn::SpawnObjects(Asteroid* object, float objectRadius, unsigned int numObjects, SpawnZone spawnZone, list<Asteroid> &asteroids, int seed) {
+
+	if (objectRadius > spawnZone.GetSpawnRadius()) {
+	
+		std::cout << "The spawn radius is to small. Unable to spawn " + object->GetName() + "." << std::endl;
+		return;
+
+	}
+
+	unsigned int totalTimesFailed = 0;
+	srand(seed);
+	list<Asteroid>::iterator startPoint;
+
+	if (asteroids.begin() != asteroids.end()) {
+	
+		startPoint = asteroids.end();
+		--startPoint;
+
+	} else {
+	
+		startPoint = asteroids.begin();
+
+	}
+
+	for (unsigned int i = 0; i < numObjects && totalTimesFailed <= 5; ++i) {
+
+		unsigned int timesFailed = 0;
+		bool regenerate = true;
+
+		while (timesFailed < 20 && regenerate) {
+		
+			MS spawnStack;
+			spawnStack.Rotate(GenerateRange(0, 360), 1, 0, 0);
+			spawnStack.Rotate(GenerateRange(0, 360), 0, 1, 0);
+			spawnStack.Rotate(GenerateRange(0, 360), 0, 0, 1);
+			spawnStack.Translate(GenerateRange(spawnZone.GetPosition().x - spawnZone.GetSpawnRadius(), spawnZone.GetPosition().x + spawnZone.GetSpawnRadius()), GenerateRange(spawnZone.GetPosition().y - spawnZone.GetSpawnRadius(), spawnZone.GetPosition().y + spawnZone.GetSpawnRadius()), GenerateRange(spawnZone.GetPosition().z - spawnZone.GetSpawnRadius(), spawnZone.GetPosition().z + spawnZone.GetSpawnRadius()));
+		
+			object->SetPosition(spawnStack.Top().a[12], spawnStack.Top().a[13], spawnStack.Top().a[14]);
+
+			for (list<Asteroid>::iterator iter = startPoint;; ++iter) {
+			
+				if (iter == asteroids.end()) {
+				
+					Asteroid newAsteroid = *object;
+					asteroids.push_back(newAsteroid);
+					regenerate = false;
+
+					if (startPoint == asteroids.end()) {
+					
+						--startPoint;
+
+					}
+
+					break;
+
+				}
+
+				if (Physics::getDistance(object->GetPosition(), iter->GetPosition()) < objectRadius * 2) {
+				
+					++timesFailed;
+					break;
+
+				}
+
+			}
+
+		}
+
+		if (timesFailed >= 20) {
+		
+			++totalTimesFailed;
+
+		}
+
+	}
+
+	if (totalTimesFailed >= 5) {
+	
+		std::cout << "Unable to spawn all " + object->GetName() + ". There may not be enough space." << std::endl;
+
+	}
+
+	delete object;
+
+}
+
 void Spawn::SpawnObjects(Asteroid* object, int i, Vector3 zoneCentre, float zoneRadius, list<Asteroid*> &objectList) {
 
 	float sValue = time(NULL) * (i + counter) + 1;

@@ -127,6 +127,6 @@ bool Collision::CollisionCheck(SpaceObject* object1, SpaceObject* object2) {
 
 bool Collision::CollisionCheck(SpaceObject* object, Bullet &bullets) {
 
-
+	return false;
 
 }

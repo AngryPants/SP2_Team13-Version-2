@@ -4,9 +4,31 @@ Asteroid::Asteroid(string name, float mass, int minimumDamage, const char* textu
 : SpaceObject(name, "OBJ//Asteroid//Asteroid.obj", textureFile, MaterialList::GetInstance()->material[MaterialList::CEMENT], mass, 20.0f, health, ID)
 {
 
-	this->minimumDamage = minimumDamage;
+	SetMinimumDamage(minimumDamage);
 
 }
 
 Asteroid::~Asteroid() {
+}
+
+//Getters
+int Asteroid::GetMinimumDamage() {
+
+	return minimumDamage;
+
+}
+
+//Setters
+void Asteroid::SetMinimumDamage(int minimumDamage) {
+
+	if (minimumDamage >= 0) {
+	
+		this->minimumDamage = minimumDamage;	
+
+	} else {
+	
+		this->minimumDamage = 0;
+	
+	}
+
 }

@@ -31,11 +31,9 @@ protected:
 	list<Bullet> bullets;
 	BULLET_COLOUR bulletColour;
 
-	//Constructor
-	Ship(string name, int ID, float radius, float health, string meshFile, const char* textureFile, Material material, float mass, float maxSpeed, int fireRate, int damage, BULLET_COLOUR bulletColour);
-
 public:
-	//Destructor
+	//Constructor & Destructor
+	Ship(string name, int ID, float radius, float health, string meshFile, const char* textureFile, Material material, float mass, float maxSpeed, int fireRate, int damage, BULLET_COLOUR bulletColour);
 	virtual ~Ship();
 
 	//Functions

@@ -9,6 +9,8 @@
 #include "Alien.h"
 #include "PlayerShip.h"
 #include "Ship.h"
+#include "SpawnZone.h"
+#include "GenerateRange.h"
 
 /****************************************************************************/
 /*!
@@ -33,8 +35,9 @@ public:
 	//Functions
 	static void SpawnObjects(Ship* object, int i, Vector3 zoneCentre, float zoneRadius, list<Ship*> &objectList);
 	static void SpawnObjects(Asteroid* object, int i, Vector3 zoneCentre, float zoneRadius, list<Asteroid*> &objectList);
-
 	static void UpdateObjects(Vector3 playerPos, Vector3 &zoneCenterValue);
+
+	static void SpawnObjects(Asteroid* object, float objectRadius, unsigned int numObjects, SpawnZone spawnZone, list<Asteroid> &asteroids, int seed);
 
 };
 

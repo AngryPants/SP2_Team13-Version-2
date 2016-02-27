@@ -99,27 +99,15 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	SetSkybox("Image//Skybox//Top.tga", "Image//Skybox//Bottom.tga", "Image//Skybox//Front.tga", "Image//Skybox//Left.tga", "Image//Skybox//Back.tga", "Image//Skybox//Right.tga");
 
-	//enemies.push_back(new Drone());
-	//enemies.push_back(new Drone());
-	//enemies.push_back(new Drone());
-	//enemies.push_back(new Drone());
-	//enemies.push_back(new Drone());
+	spawnZone1.SetPosition(0, 0, 0);
+	spawnZone1.SetSpawnRadius(500);
+	spawnZone1.SetDespawnRadius(700);
 
-	for (int i = 0; i < 5; ++i)
-	{
-		Spawn::SpawnObjects(new Drone(), i, Vector3(-1025, -1025, 1025), 3300.0f, enemies);
-		Spawn::SpawnObjects(new Pirate(), i, Vector3(1025, -1025, -1025), 3300.0f, enemies);
-		Spawn::SpawnObjects(new Alien(), i, Vector3(-1025, -1025, -1025), 3300.0f, enemies);
-
-		Spawn::SpawnObjects(new Veldspar(), i, Vector3(-1025, 1025, 1025), 3300.0f, asteroids);
-		Spawn::SpawnObjects(new Omber(), i, Vector3(1025, 1025, -1025), 3300.0f, asteroids);
-		Spawn::SpawnObjects(new Kernite(), i, Vector3(-1025, 1025, -1025), 3300.0f, asteroids);
-	}
+	Spawn::SpawnObjects(new Veldspar(), Veldspar().GetRadius(), 200, spawnZone1, asteroids, 17);
 
 	player = new Player("Malcolm", "", "", "");
 
-	player->GetShip()->SetPosition(80,80,80);
-	iSpaceObjects.push_back(new CarrickStation());
+	/*iSpaceObjects.push_back(new CarrickStation());
 	iSpaceObjects.push_back(new Portal());
 	iSpaceObjects.push_back(new Portal());
 	iSpaceObjects.push_back(new Portal());
@@ -127,7 +115,7 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	iSpaceObjects.push_back(new Portal());
 	iSpaceObjects.push_back(new Portal());
 	iSpaceObjects.push_back(new Portal());
-	iSpaceObjects.push_back(new Portal());
+	iSpaceObjects.push_back(new Portal());*/
 	warning = false;
 	player->GetShip()->SetPosition(50, 10, 5);
 
@@ -135,7 +123,7 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 void OuterSpace::Update(double dt) {
 
-	BoundCheck();
+	//BoundsCheck();
 	PlayerControl::RotateShip(player->GetShip(), 160.0f * dt, dt);
 	PlayerControl::MoveShip(player->GetShip(), 50000.0f, dt);
 	PlayerControl::Shoot(player->GetShip(), camera.GetPosition() + player->GetShip()->GetForwardVector());
@@ -164,7 +152,7 @@ void OuterSpace::Update(double dt) {
 
 }
 
-void OuterSpace::BoundCheck()
+void OuterSpace::BoundsCheck()
 {
 	if (player->GetShip()->GetPosition().x>2000 || player->GetShip()->GetPosition().x<-2000 || player->GetShip()->GetPosition().y>2000 || player->GetShip()->GetPosition().y<-2000 || player->GetShip()->GetPosition().z>2000 || player->GetShip()->GetPosition().z<-2000)
 	{
@@ -227,6 +215,7 @@ void OuterSpace::Render() { //Render VBO here.
 			(Physics::getDistance((*ship_iter)->GetPosition(), zoneCenter) <= 3300.0f)) {
 
 			RenderObject(*ship_iter, true);
+
 		}
 
 		for (list<Bullet>::iterator bullet_iter = (*(*ship_iter)->GetBullets()).begin(); bullet_iter != (*(*ship_iter)->GetBullets()).end(); ++bullet_iter) {
@@ -237,23 +226,20 @@ void OuterSpace::Render() { //Render VBO here.
 
 	}
 
-	for (list<Asteroid*>::iterator asteroid_iter = asteroids.begin(); asteroid_iter != asteroids.end(); ++asteroid_iter){
+	for (list<Asteroid>::iterator asteroid_iter = asteroids.begin(); asteroid_iter != asteroids.end(); ++asteroid_iter){
 
-		if ((Physics::getDistance(player->GetShip()->GetPosition(), zoneCenter) <= 3400.0f) && 
-			(Physics::getDistance((*asteroid_iter)->GetPosition(), zoneCenter) <= 3300.0f))	{
+		RenderObject(&(*asteroid_iter), true);
 
-			RenderObject(*asteroid_iter, true);
-		}
 	}
 
-	if (warning)
+	/*if (warning)
 	{
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Going out of Bounds,please Turn back", Colour(1, 0, 0), 100, 4.0f, 7.0f);
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Going out of Bounds, please Turn back", Colour(1, 0, 0), 100, 4.0f, 7.0f);
 	}
 	for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); ++it)
 	{
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], (*it)->GetRenderMessage(), Colour(1, 0, 0), 100, 4.0f, 1.0f);
-	}
+	}*/
 
 	RenderTextOnScreen(mesh[FONT_CONSOLAS], "X: " + std::to_string(player->GetShip()->GetPosition().x) + "Y: " + std::to_string(player->GetShip()->GetPosition().y) + "Z: " + std::to_string(player->GetShip()->GetPosition().z), Colour(0, 1, 0), 100, 6, 6);
 	RenderTextOnScreen(mesh[FONT_CONSOLAS], std::to_string((int)player->GetShip()->GetHealth()), Colour(1, 0, 0), 100, 3, 3);

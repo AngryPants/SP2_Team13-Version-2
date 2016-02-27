@@ -23,7 +23,8 @@ public:
 	//GameObjects
 	list<Ship*> enemies;
 	list<Interactable*> iSpaceObjects;
-	list<Asteroid*> asteroids;
+	list<Asteroid> asteroids;
+	SpawnZone spawnZone1;
 	Player* player;
 	double frameTime;
 	Vector3 zoneCenter;
@@ -35,7 +36,7 @@ public:
 	virtual void Render();
 	virtual void Exit();
 
-	void BoundCheck();
+	void BoundsCheck();
 	void RenderObjects();
 	bool warning;
 

@@ -123,6 +123,7 @@
     <ClCompile Include="Source\PlayerControl.cpp" />
     <ClCompile Include="Source\SpaceObject.cpp" />
     <ClCompile Include="Source\Spawn.cpp" />
+    <ClCompile Include="Source\SpawnZone.cpp" />
     <ClCompile Include="Source\StaticObject.cpp" />
     <ClCompile Include="Source\Upgrade.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="Source\Veldspar.h" />
     <ClInclude Include="Source\Vertex.h" />
     <ClInclude Include="Source\WarpGate.h" />
+    <ClInclude Include="Source\SpawnZone.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
