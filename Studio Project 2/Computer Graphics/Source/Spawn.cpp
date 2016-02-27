@@ -38,11 +38,11 @@ A float value that determines how far each zone stretches
 A list that would have the final result pushed into
 */
 /****************************************************************************/
-void Spawn::SpawnObjects(SpaceObject* object, int i , Vector3 zoneCentre, float zoneRadius, list<SpaceObject*> &objectList) {
+void Spawn::SpawnObjects(Ship* object, int i , Vector3 zoneCentre, float zoneRadius, list<Ship*> &objectList) {
 
 	float sValue = time(NULL) * (i + counter) + 1;
 
-	SpaceObject* listObject;
+	Ship* listObject;
 
 	listObject = object;
 	srand(sValue);
@@ -62,5 +62,99 @@ void Spawn::SpawnObjects(SpaceObject* object, int i , Vector3 zoneCentre, float 
 	}
 	counter++;
 	objectList.push_back(listObject);
+	cout << "enermyship" << std::endl;
 
+}
+
+void Spawn::SpawnObjects(Asteroid* object, int i, Vector3 zoneCentre, float zoneRadius, list<Asteroid*> &objectList) {
+
+	float sValue = time(NULL) * (i + counter) + 1;
+
+	Asteroid* listObject;
+
+	listObject = object;
+	srand(sValue);
+
+	int xValue, yValue, zValue;
+	while (Physics::getDistance(zoneCentre, listObject->GetPosition()) > zoneRadius);
+	{
+		srand(sValue);
+		xValue = sValue = rand() % 1900 - 950 + (zoneCentre.x);
+		srand(sValue);
+		yValue = sValue = rand() % 1900 - 950 + (zoneCentre.y);
+		srand(sValue);
+		zValue = sValue = rand() % 1900 - 950 + (zoneCentre.z);
+
+		counter += 1;
+		listObject->SetPosition(xValue, yValue, zValue);
+	}
+	counter++;
+	objectList.push_back(listObject);
+
+	cout << "Asteroid" << std::endl;
+}
+
+void Spawn::UpdateObjects(Vector3 playerPos, Vector3 &zoneCenterValue)
+{
+	if (playerPos.x > 50) //(+, , )
+	{
+		if (playerPos.y > 50) //(+,+, )
+		{
+			if (playerPos.z > 50) //(+,+,+)
+			{
+				//HighEmptyZone
+				zoneCenterValue = Vector3(1025, 1025, 1025);
+
+			}
+			else if (playerPos.z < -50) //(+,+,-)
+			{
+				//OmberZone
+				zoneCenterValue = Vector3(1025, 1025, -1025);
+			}
+		}
+		else if (playerPos.y < -50) //(+,-, )
+		{
+
+			if (playerPos.z > 50) //(+,-,+)
+			{
+				//LowEmptyZone
+				zoneCenterValue = Vector3(1025, -1025, 1025);
+			}
+			else if (playerPos.z < -50) //(+,-,-)
+			{
+				//PirateZone
+				zoneCenterValue = Vector3(1025, -1025, -1025);
+			}
+		}
+	}
+	else if (playerPos.x < -50) //(-, , )
+	{
+		if (playerPos.y > 50) //(-,+, )
+		{
+			if (playerPos.z > 50) //(-,+,+)
+			{
+				//VeldsparZone
+				zoneCenterValue = Vector3(-1025, 1025, 1025);
+			}
+			else if (playerPos.z < -50) //(-,+,-)
+			{
+				//KerniteZone
+				zoneCenterValue = Vector3(-1025, 1025, -1025);
+			}
+		}
+		else if (playerPos.y < -50) //(-,-, )
+		{
+
+			if (playerPos.z > 50) //(-,-,+)
+			{
+				//DroneZone
+				zoneCenterValue = Vector3(-1025, -1025, 1025);
+			}
+			else if (playerPos.z < -50) //(-,-,-)
+			{
+				//AlienZone
+				zoneCenterValue = Vector3(-1025, -1025, -1025);
+			}
+		}
+	}
 }

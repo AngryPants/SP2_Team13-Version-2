@@ -99,17 +99,23 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	SetSkybox("Image//Skybox//Top.tga", "Image//Skybox//Bottom.tga", "Image//Skybox//Front.tga", "Image//Skybox//Left.tga", "Image//Skybox//Back.tga", "Image//Skybox//Right.tga");
 
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
-	enemies.push_back(new Drone());
+	//enemies.push_back(new Drone());
+	//enemies.push_back(new Drone());
+	//enemies.push_back(new Drone());
+	//enemies.push_back(new Drone());
+	//enemies.push_back(new Drone());
+
+	for (int i = 0; i < 5; ++i)
+	{
+		Spawn::SpawnObjects(new Drone(), i, Vector3(-1025, -1025, 1025), 3300.0f, enemies);
+		Spawn::SpawnObjects(new Pirate(), i, Vector3(1025, -1025, -1025), 3300.0f, enemies);
+		Spawn::SpawnObjects(new Alien(), i, Vector3(-1025, -1025, -1025), 3300.0f, enemies);
+
+		Spawn::SpawnObjects(new Veldspar(), i, Vector3(-1025, 1025, 1025), 3300.0f, asteroids);
+		Spawn::SpawnObjects(new Omber(), i, Vector3(1025, 1025, -1025), 3300.0f, asteroids);
+		Spawn::SpawnObjects(new Kernite(), i, Vector3(-1025, 1025, -1025), 3300.0f, asteroids);
+	}
+
 	player = new Player("Malcolm", "", "", "");
 
 	player->GetShip()->SetPosition(80,80,80);
@@ -190,6 +196,9 @@ void OuterSpace::BoundCheck()
 			}
 		}
 	}
+
+	Spawn::UpdateObjects(player->GetShip()->GetPosition(), zoneCenter);
+
 }
 
 void OuterSpace::Render() { //Render VBO here.
@@ -213,8 +222,12 @@ void OuterSpace::Render() { //Render VBO here.
 	}
 
 	for (list<Ship*>::iterator ship_iter = enemies.begin(); ship_iter != enemies.end(); ++ship_iter) {
-	
-		RenderObject(*ship_iter, true);
+		
+		if ((Physics::getDistance(player->GetShip()->GetPosition(), zoneCenter) <= 3400.0f) && 
+			(Physics::getDistance((*ship_iter)->GetPosition(), zoneCenter) <= 3300.0f)) {
+
+			RenderObject(*ship_iter, true);
+		}
 
 		for (list<Bullet>::iterator bullet_iter = (*(*ship_iter)->GetBullets()).begin(); bullet_iter != (*(*ship_iter)->GetBullets()).end(); ++bullet_iter) {
 		
@@ -222,6 +235,15 @@ void OuterSpace::Render() { //Render VBO here.
 
 		}
 
+	}
+
+	for (list<Asteroid*>::iterator asteroid_iter = asteroids.begin(); asteroid_iter != asteroids.end(); ++asteroid_iter){
+
+		if ((Physics::getDistance(player->GetShip()->GetPosition(), zoneCenter) <= 3400.0f) && 
+			(Physics::getDistance((*asteroid_iter)->GetPosition(), zoneCenter) <= 3300.0f))	{
+
+			RenderObject(*asteroid_iter, true);
+		}
 	}
 
 	if (warning)
