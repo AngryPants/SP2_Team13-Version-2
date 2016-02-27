@@ -99,7 +99,18 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	SetSkybox("Image//Skybox//Top.tga", "Image//Skybox//Bottom.tga", "Image//Skybox//Front.tga", "Image//Skybox//Left.tga", "Image//Skybox//Back.tga", "Image//Skybox//Right.tga");
 
 	enemies.push_back(new Drone());
+	enemies.push_back(new Drone());
+	enemies.push_back(new Drone());
+	enemies.push_back(new Drone());
+	enemies.push_back(new Drone());
+	enemies.push_back(new Drone());
+	enemies.push_back(new Drone());
+	enemies.push_back(new Drone());
+	enemies.push_back(new Drone());
+	enemies.push_back(new Drone());
+	enemies.push_back(new Drone());
 	player = new Player("Malcolm", "", "", "");
+	player->GetShip()->SetPosition(50, 10, 5);
 
 }
 
@@ -109,25 +120,27 @@ void OuterSpace::Update(double dt) {
 	PlayerControl::MoveShip(player->GetShip(), 50000.0f, dt);
 	PlayerControl::Shoot(player->GetShip(), camera.GetPosition() + player->GetShip()->GetForwardVector());
 	player->GetShip()->Update(dt);
-	RigidBody* rigidBodyPointer  = player->GetShip();
-	RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
-	camera.FollowObject(player->GetShip(), Vector3(0.0f, 3.0f, - 15.0f));
 
 	for (list<Ship*>::iterator iter = enemies.begin(); iter != enemies.end(); ++iter) {
 	
-		AI::FaceTarget(*iter, player->GetShip(), 120 * dt, dt);
+		AI::FaceTarget(*iter, player->GetShip(), 240 * dt, dt);
 		AI::MoveToTarget(*iter, player->GetShip(), 9000.0f, dt);
 		AI::ShootAtTarget(*iter, player->GetShip());
 		(*iter)->Update(dt);
 		
-		rigidBodyPointer = *iter;
-		RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
-
 		SpaceObject* spaceObjectPointer1 = *iter;
 		SpaceObject* spaceObjectPointer2 = player->GetShip();
 		Collision::SpaceObjectToSpaceObject(spaceObjectPointer1, spaceObjectPointer2, dt);
-
+		
+		RigidBody* rigidBodyPointer = *iter;
+		RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
+		
 	}
+
+	RigidBody* rigidBodyPointer = player->GetShip();
+	RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
+
+	camera.FollowObject(player->GetShip(), Vector3(0.0f, 3.0f, - 15.0f));
 
 }
 
@@ -162,6 +175,9 @@ void OuterSpace::Render() { //Render VBO here.
 		}
 
 	}
+
+	RenderTextOnScreen(mesh[FONT_CONSOLAS], "X: " + std::to_string(player->GetShip()->GetPosition().x) + "Y: " + std::to_string(player->GetShip()->GetPosition().y) + "Z: " + std::to_string(player->GetShip()->GetPosition().z), Colour(0, 1, 0), 100, 6, 6);
+	RenderTextOnScreen(mesh[FONT_CONSOLAS], std::to_string((int)player->GetShip()->GetHealth()), Colour(1, 0, 0), 100, 3, 3);
 
 }
 
