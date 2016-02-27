@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{49C5D062-17F5-4017-A2B9-3B3CB65C84A3}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ComputerGraphics</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\glew\include;$(SolutionDir)\glfw\include;$(SolutionDir)\Common Library\Source</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)\glew\lib;$(SolutionDir)\glfw\lib-msvc120;$(SolutionDir)$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;glfw3.lib;opengl32.lib;winmm.lib;Common Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\glew\include;$(SolutionDir)\glfw\include;$(SolutionDir)\Common Library\Source</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)\glew\lib;$(SolutionDir)\glfw\lib-msvc120;$(SolutionDir)$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;glfw3.lib;opengl32.lib;winmm.lib;Common Library.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\AI.cpp" />
+    <ClCompile Include="Source\Alien.cpp" />
+    <ClCompile Include="Source\Application.cpp" />
+    <ClCompile Include="Source\Asteroid.cpp" />
+    <ClCompile Include="Source\Bullet.cpp" />
+    <ClCompile Include="Source\Camera.cpp" />
+    <ClCompile Include="Source\Drone.cpp" />
+    <ClCompile Include="Source\GameObject.cpp" />
+    <ClCompile Include="Source\GameScene.cpp" />
+    <ClCompile Include="Source\Inventory.cpp" />
+    <ClCompile Include="Source\Kernite.cpp" />
+    <ClCompile Include="Source\Light.cpp" />
+    <ClCompile Include="Source\Load.cpp" />
+    <ClCompile Include="Source\LoadOBJ.cpp" />
+    <ClCompile Include="Source\LoadTGA.cpp" />
+    <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\Material.cpp" />
+    <ClCompile Include="Source\MaterialList.cpp" />
+    <ClCompile Include="Source\Mesh.cpp" />
+    <ClCompile Include="Source\MeshBuilder.cpp" />
+    <ClCompile Include="Source\Omber.cpp" />
+    <ClCompile Include="Source\OuterSpace.cpp" />
+    <ClCompile Include="Source\Physics.cpp" />
+    <ClCompile Include="Source\Pirate.cpp" />
+    <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\PlayerHuman.cpp" />
+    <ClCompile Include="Source\Portal.cpp" />
+    <ClCompile Include="Source\Position.cpp" />
+    <ClCompile Include="Source\Quest.cpp" />
+    <ClCompile Include="Source\RigidBody.cpp" />
+    <ClCompile Include="Source\SharedData.cpp" />
+    <ClCompile Include="Source\shader.cpp" />
+    <ClCompile Include="Source\PlayerShip.cpp" />
+    <ClCompile Include="Source\Ship.cpp" />
+    <ClCompile Include="Source\PlayerControl.cpp" />
+    <ClCompile Include="Source\SpaceObject.cpp" />
+    <ClCompile Include="Source\SpaceStation.cpp" />
+    <ClCompile Include="Source\Spawn.cpp" />
+    <ClCompile Include="Source\StaticObject.cpp" />
+    <ClCompile Include="Source\Upgrade.cpp" />
+    <ClCompile Include="Source\Utility.cpp" />
+    <ClCompile Include="Source\Veldspar.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\AI.h" />
+    <ClInclude Include="Source\Alien.h" />
+    <ClInclude Include="Source\Asteroid.h" />
+    <ClInclude Include="Source\Bullet.h" />
+    <ClInclude Include="Source\Application.h" />
+    <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\Colour.h" />
+    <ClInclude Include="Source\PlayerControl.h" />
+    <ClInclude Include="Source\Drone.h" />
+    <ClInclude Include="Source\GameObject.h" />
+    <ClInclude Include="Source\GameScene.h" />
+    <ClInclude Include="Source\Inventory.h" />
+    <ClInclude Include="Source\Kernite.h" />
+    <ClInclude Include="Source\Light.h" />
+    <ClInclude Include="Source\Load.h" />
+    <ClInclude Include="Source\LoadOBJ.h" />
+    <ClInclude Include="Source\LoadTGA.h" />
+    <ClInclude Include="Source\Material.h" />
+    <ClInclude Include="Source\MaterialList.h" />
+    <ClInclude Include="Source\Mesh.h" />
+    <ClInclude Include="Source\MeshBuilder.h" />
+    <ClInclude Include="Source\MousePosition.h" />
+    <ClInclude Include="Source\Omber.h" />
+    <ClInclude Include="Source\OuterSpace.h" />
+    <ClInclude Include="Source\Physics.h" />
+    <ClInclude Include="Source\Pirate.h" />
+    <ClInclude Include="Source\Player.h" />
+    <ClInclude Include="Source\PlayerHuman.h" />
+    <ClInclude Include="Source\Position.h" />
+    <ClInclude Include="Source\Quest.h" />
+    <ClInclude Include="Source\RigidBody.h" />
+    <ClInclude Include="Source\Scene.h" />
+    <ClInclude Include="Source\SharedData.h" />
+    <ClInclude Include="Source\shader.hpp" />
+    <ClInclude Include="Source\PlayerShip.h" />
+    <ClInclude Include="Source\Ship.h" />
+    <ClInclude Include="Source\SpaceObject.h" />
+    <ClInclude Include="Source\SpaceStation.h" />
+    <ClInclude Include="Source\Spawn.h" />
+    <ClInclude Include="Source\StaticObject.h" />
+    <ClInclude Include="Source\Upgrade.h" />
+    <ClInclude Include="Source\Utility.h" />
+    <ClInclude Include="Source\Veldspar.h" />
+    <ClInclude Include="Source\Vertex.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

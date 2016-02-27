@@ -1,0 +1,34 @@
+Name Cheap Cannon
+Type Weapon
+Desc A lousy basic cannon.
+Seller Reynard
+Cost 5000
+Fire Rate 10
+Damage 200
+End
+
+Name Steel Plating
+Type Armour
+Desc Basic 350 year old design.
+Seller Terry
+Cost 5000
+Armour 1000
+End
+
+Name Miracle Engine
+Type Engine
+Desc It's a miracle it works.
+Seller Daniel
+Cost 5000
+Speed 150
+Fuel 10000
+End
+
+Name Improved Engine
+Type Engine
+Desc It's a miracle it works.
+Seller Daniel
+Cost 20000
+Speed 200
+Fuel 15000
+End

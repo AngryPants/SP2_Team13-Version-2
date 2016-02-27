@@ -1,0 +1,7 @@
+Armour 1000.000000
+Gold 0
+Fuel 5000
+Veldspar 0
+Omber 0
+Kernite 0
+End

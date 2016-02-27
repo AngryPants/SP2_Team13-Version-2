@@ -1,0 +1,66 @@
+Name Pirates!
+Desc Kill 5 Pirates
+Giver Teck Lee
+ConditionID 2
+Current 0
+Target 5
+Active 1
+Complete 0
+Reward 20000
+End
+
+Name E.T. Phone Home
+Desc Kill 5 Aliens
+Giver Teck Lee
+ConditionID 3
+Current 0
+Target 5
+Active 1
+Complete 0
+Reward 20000
+End
+
+Name Professional Miner
+Desc Mine 50000 Kernite.
+Giver Teck Ling
+ConditionID 6
+Current 0
+Target 50000
+Active 0
+Complete 0
+Reward 50000
+End
+
+Name Rocking Your World
+Desc Mine 5000 Veldspar.
+Giver Teck Ling
+ConditionID 4
+Current 0
+Target 5000
+Active 0
+Complete 0
+Reward 5000
+End
+
+Name Upgrade Time
+Desc Mine 20000 Omber.
+Giver Teck Ling
+ConditionID 5
+Current 0
+Target 20000
+Active 0
+Complete 0
+Reward 20000
+End
+
+Name Drone Problems
+Desc Kill 5 Drones
+Giver Teck Lee
+ConditionID 1
+Current 0
+Target 5
+Active 0
+Complete 1
+Reward 5000
+End
+

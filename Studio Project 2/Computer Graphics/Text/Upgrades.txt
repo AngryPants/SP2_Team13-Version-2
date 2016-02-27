@@ -1,0 +1,77 @@
+Name Cheap Cannon
+Type Weapon
+Desc A lousy basic cannon.
+Seller Reynard
+Cost 5000
+Fire Rate 10
+Damage 200
+End
+
+Name Laser Cannon
+Type Weapon
+Desc An advance weapon made from Alien technology.
+Seller Reynard
+Cost 20000
+Fire Rate 15
+Damage 500
+End
+
+Name Railgun
+Type Weapon
+Desc It's real.
+Seller Reynard
+Cost 50000
+Fire Rate 10
+Damage 1500
+End
+
+Name Steel Plating
+Type Armour
+Desc Basic 350 year old design.
+Seller Terry
+Cost 5000
+Armour 1000
+End
+
+Name Composite Armour
+Type Armour
+Desc An enhanced version of the steel plating armour.
+Seller Terry
+Cost 20000
+Armour 3000
+End
+
+Name Titan Armour
+Type Armour
+Desc High-end modern armour.
+Seller Terry
+Cost 50000
+Armour 8000
+End
+
+Name Miracle Engine
+Type Engine
+Desc It's a miracle it works.
+Seller Sek Heng
+Cost 5000
+Speed 25
+Fuel 10000
+End
+
+Name Improved Engine
+Type Engine
+Desc It's okay I guess.
+Seller Sek Heng
+Cost 20000
+Speed 30
+Fuel 20000
+End
+
+Name Thomas The Tank Engine
+Type Engine
+Desc The best engine in the game.
+Seller Sek Heng
+Cost 50000
+Speed 40
+Fuel 40000
+End
