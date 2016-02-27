@@ -20,7 +20,6 @@ public:
 	list<Ship*> enemies;
 	list<Asteroid*> asteroids;
 	Player* player;
-	double frameTime;
 
 	//Public Functions
 	virtual void Init();

@@ -109,7 +109,6 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 void OuterSpace::Update(double dt) {
 
-	frameTime = 1.0/dt;
 	PlayerControl::RotateShip(player->GetShip(), 160.0f * dt, dt);
 	PlayerControl::MoveShip(player->GetShip(), 50000.0f, dt);
 	PlayerControl::Shoot(player->GetShip(), camera.GetPosition() + player->GetShip()->GetForwardVector());
@@ -140,8 +139,6 @@ void OuterSpace::Render() { //Render VBO here.
 	viewStack.LookAt(camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z, camera.GetTarget().x, camera.GetTarget().y, camera.GetTarget().z, camera.GetUp().x, camera.GetUp().y, camera.GetUp().z);
 
 	modelStack.LoadIdentity();
-
-	RenderTextOnScreen(mesh[FONT_CONSOLAS], std::to_string(frameTime), Colour(0, 1, 0), 100, 5, 5);
 
 	RenderSkybox();
 
