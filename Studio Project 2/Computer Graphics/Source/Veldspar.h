@@ -6,8 +6,12 @@
 class Veldspar : public Asteroid {
 
 public:
+	//Constructor & Destructor
 	Veldspar();
 	~Veldspar();
+
+	//Functions
+	virtual void Die(Player &player);
 
 };
 

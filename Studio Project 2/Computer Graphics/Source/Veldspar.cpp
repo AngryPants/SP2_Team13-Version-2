@@ -5,3 +5,9 @@ Veldspar::Veldspar() : Asteroid("Veldspar", 40000.0f, 200, "Image//Asteroid//Vel
 
 Veldspar::~Veldspar() {
 }
+
+void Veldspar::Die(Player &player) {
+
+	player.GetInventory()->AddVeldspar(1000);
+
+}

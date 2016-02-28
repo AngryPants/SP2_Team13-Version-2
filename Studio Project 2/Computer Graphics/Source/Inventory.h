@@ -1,13 +1,18 @@
 #ifndef _INVENTORY_H
 #define _INVENTORY_H
 
+#include "Item.h"
+#include <list>
+#include <map>
+
+using std::list;
+using std::map;
+
 class Inventory {
 
 private:
 	int gold;
-	int veldspar;
-	int omber;
-	int kernite;
+	map<string, list<Item>> items;
 
 public:
 	//Constructor & Destructor
@@ -16,25 +21,16 @@ public:
 
 	//Functions
 	void AddGold(int gold);
-	void AddVeldspar(int veldspar);
-	void AddOmber(int omber);
-	void AddKernite(int kernite);
 	bool DecreaseGold(int gold);
-	bool DecreaseVeldspar(int veldspar);
-	bool DecreaseOmber(int omber);
-	bool DecreaseKernite(int kernite);
+	void AddItem(Item* item, int numItems);
+	int DecreaseItem(Item* item, int numItems);
 
 	//Getters
 	int GetGold();
-	int GetVeldspar();
-	int GetOmber();
-	int GetKernite();
+	int GetNumberOf(Item *item);
 
 	//Setters
-	void SetGold(int gold);
-	void SetVeldspar(int veldspar);
-	void SetOmber(int omber);
-	void SetKernite(int kernite);
+	void SetGold(int gold);;
 
 };
 

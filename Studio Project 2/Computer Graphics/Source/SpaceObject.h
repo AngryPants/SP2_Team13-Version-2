@@ -9,18 +9,25 @@ protected:
 	//Variables
 	unsigned int ID;
 	float health;
+	float maxHealth;
+
+	//Constructor
+	SpaceObject(string name, string meshFile, const char* textureFile, Material material, float mass, float radius, float health, int ID);
 
 public:
-	//Constructor & Destructor
-	SpaceObject(string name, string meshFile, const char* textureFile, Material material, float mass, float radius, float health, int ID);
+	//Destructor
 	~SpaceObject();
 
 	//Functions
 	void AddHealth(float addAmount);
 	void DecreaseHealth(float decreaseAmount);
+	void Spawn();
+	void Spawn(Vector3 position);
+	void Spawn(float x, float y, float z);
+	void Despawn();
 
 	//Is-ters
-	bool isDead();
+	bool IsDead();
 
 	//Getters
 	float GetHealth();

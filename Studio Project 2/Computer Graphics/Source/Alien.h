@@ -6,6 +6,7 @@
 class Alien : public Ship {
 
 public:
+	//Constructor & Destructor
 	Alien();
 	virtual ~Alien();
 

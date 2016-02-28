@@ -6,8 +6,12 @@
 class Kernite : public Asteroid {
 
 public:
+	//Constructor & Destructor
 	Kernite();
 	~Kernite();
+
+	//Functions
+	virtual void Die(Player &player);
 
 };
 

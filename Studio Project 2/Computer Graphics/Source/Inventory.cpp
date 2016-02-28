@@ -4,9 +4,6 @@
 Inventory::Inventory() {
 
 	SetGold(0);
-	SetVeldspar(0);
-	SetOmber(0);
-	SetKernite(0);
 
 }
 
@@ -18,24 +15,6 @@ Inventory::~Inventory() {
 void Inventory::AddGold(int gold) {
 
 	this->gold += gold;
-
-}
-
-void Inventory::AddVeldspar(int veldspar) {
-
-	this->veldspar += veldspar;
-
-}
-
-void Inventory::AddOmber(int omber) {
-
-	this->omber += omber;
-
-}
-
-void Inventory::AddKernite(int kernite) {
-
-	this->kernite += kernite;
 
 }
 
@@ -52,42 +31,58 @@ bool Inventory::DecreaseGold(int gold) {
 
 }
 
-bool Inventory::DecreaseVeldspar(int veldspar) {
+void Inventory::AddItem(Item* item, int numItems) {
 
-	if (veldspar > this->veldspar) {
+	if (items.find(item->GetName()) == items.end()) {
 	
-		return false;
+		list<Item> newItems;
+
+		for (int i = 0; i < numItems; ++i) {
+		
+			newItems.push_front(*item);
+			items.insert(std::pair<string, list<Item>>(item->GetName(), newItems));
+
+		}
+
+	} else {
+	
+		list<Item>* listPtr = &(items.find(item->GetName())->second);
+		
+		for (int i = 0; i < numItems; ++i) {
+			
+			listPtr->push_front(*item);
+
+		}
 
 	}
-
-	this->veldspar -= veldspar;
-	return true;
 
 }
 
-bool Inventory::DecreaseOmber(int omber) {
+int Inventory::DecreaseItem(Item* item, int numItem) {
 
-	if (omber > this->omber) {
+	if (numItem <= 0 || items.find(item->GetName()) == items.end()) {
 	
-		return false;
+		return 0;
+
+	}
+	
+	int itemsRemoved = 0;
+	list<Item>* listPtr = &(items.find(item->GetName())->second);
+
+	for (list<Item>::iterator iter = listPtr->begin(); iter != listPtr->end() && itemsRemoved <= numItem;) {
+	
+		iter = listPtr->erase(iter);
+		++itemsRemoved;
 
 	}
 
-	this->omber -= omber;
-	return true;
-
-}
-
-bool Inventory::DecreaseKernite(int kernite) {
-
-	if (kernite > this->kernite) {
-
-		return false;
+	if (listPtr->size() == 0) {
+	
+		items.erase(item->GetName());
 
 	}
 
-	this->kernite -= kernite;
-	return true;
+	return itemsRemoved;
 
 }
 
@@ -98,21 +93,15 @@ int Inventory::GetGold() {
 
 }
 
-int Inventory::GetVeldspar() {
+int Inventory::GetNumberOf(Item* item) {
 
-	return this->veldspar;
+	if (items.find(item->GetName()) == items.end()) {
+	
+		return 0;
 
-}
+	}
 
-int Inventory::GetOmber() {
-
-	return this->veldspar;
-
-}
-
-int Inventory::GetKernite() {
-
-	return this->kernite;
+	return items.find(item->GetName())->second.size();
 
 }
 
@@ -122,36 +111,6 @@ void Inventory::SetGold(int gold) {
 	if (gold >= 0) {
 	
 		this->gold = gold;
-
-	}
-
-}	 
-	 
-void Inventory::SetVeldspar(int velspar) {
-
-	if (velspar >= 0) {
-	
-		this->veldspar = veldspar;
-
-	}
-
-}
-
-void Inventory::SetOmber(int omber) {
-
-	if (omber >= 0) {
-	
-		this->omber = omber;
-
-	}
-
-}
-
-void Inventory::SetKernite(int kernite) {
-
-	if (kernite >= 0) {
-	
-		this->kernite = kernite;
 
 	}
 

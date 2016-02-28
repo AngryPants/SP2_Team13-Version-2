@@ -96,6 +96,7 @@
     <ClCompile Include="Source\Interactable.cpp" />
     <ClCompile Include="Source\Interaction.cpp" />
     <ClCompile Include="Source\Inventory.cpp" />
+    <ClCompile Include="Source\Item.cpp" />
     <ClCompile Include="Source\Kernite.cpp" />
     <ClCompile Include="Source\Light.cpp" />
     <ClCompile Include="Source\Load.cpp" />
@@ -142,6 +143,7 @@
     <ClInclude Include="Source\Colour.h" />
     <ClInclude Include="Source\Interactable.h" />
     <ClInclude Include="Source\Interaction.h" />
+    <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\SpaceStation.h" />
     <ClInclude Include="Source\PlayerControl.h" />
     <ClInclude Include="Source\Drone.h" />

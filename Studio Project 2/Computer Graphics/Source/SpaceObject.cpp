@@ -7,6 +7,7 @@ SpaceObject::SpaceObject(string name, string meshFile, const char* textureFile, 
 
 	SetID(ID);
 	SetHealth(health);
+	this->maxHealth = this->health;
 
 }
 
@@ -39,12 +40,38 @@ void SpaceObject::DecreaseHealth(float decreaseAmount) {
 
 }
 
+void SpaceObject::Spawn() {
+
+	Spawn(GetPosition());
+
+}
+
+void SpaceObject::Spawn(Vector3 position) {
+
+	Enable();
+	SetPosition(position);
+	health = maxHealth;
+
+}
+
+void SpaceObject::Spawn(float x, float y, float z) {
+
+	Spawn(Vector3(x, y, z));
+
+}
+
+void SpaceObject::Despawn() {
+
+	Disable();
+
+}
+
 //Destructor
 SpaceObject::~SpaceObject() {
 }
 
 //Is-ters
-bool SpaceObject::isDead() {
+bool SpaceObject::IsDead() {
 
 	if (health > Math::EPSILON) {
 	

@@ -6,8 +6,12 @@
 class Omber : public Asteroid {
 
 public:
+	//Constructor & Destructor
 	Omber();
 	~Omber();
+
+	//Functions
+	virtual void Die(Player &player);
 
 };
 

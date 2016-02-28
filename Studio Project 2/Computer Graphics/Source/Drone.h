@@ -6,6 +6,7 @@
 class Drone : public Ship {
 
 public:
+	//Constructor & Destructor
 	Drone();
 	virtual ~Drone();
 
