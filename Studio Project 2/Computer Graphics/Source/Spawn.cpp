@@ -244,3 +244,13 @@ void Spawn::UpdateObjects(Vector3 playerPos, Vector3 &zoneCenterValue)
 		}
 	}
 }
+
+void Spawn::EnableObject(SpawnZone &spawnZone, GameObject* object, Vector3 playerPosition) {
+
+
+
+}
+
+void Spawn::DisableObject(SpawnZone &spawnZone, GameObject* object, Vector3 playerPosition) {
+
+}

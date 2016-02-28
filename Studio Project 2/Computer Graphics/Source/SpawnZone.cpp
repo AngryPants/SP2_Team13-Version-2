@@ -6,15 +6,17 @@ SpawnZone::SpawnZone() {
 	SetName("<Zone Name>");
 	SetPosition(0.0f, 0.0f, 0.0f);
 	SetSpawnRadius(0.0f);
+	SetRenderRadius(0.0f);
 	SetDespawnRadius(0.0f);
 
 }
 
-SpawnZone::SpawnZone(string name, Vector3 position, float spawnRadius, float despawnRadius) {
+SpawnZone::SpawnZone(string name, Vector3 position, float spawnRadius, float renderRadius, float despawnRadius) {
 
 	SetName(name);
 	SetPosition(position);
 	SetSpawnRadius(spawnRadius);
+	SetRenderRadius(renderRadius);
 	SetDespawnRadius(despawnRadius);
 
 }
@@ -33,6 +35,12 @@ Vector3 SpawnZone::GetPosition() {
 float SpawnZone::GetSpawnRadius() {
 
 	return this->spawnRadius;
+
+}
+
+float SpawnZone::GetRenderRadius() {
+
+	return this->renderRadius;
 
 }
 
@@ -75,15 +83,29 @@ void SpawnZone::SetSpawnRadius(float radius) {
 
 }
 
-void SpawnZone::SetDespawnRadius(float radius) {
+void SpawnZone::SetRenderRadius(float radius) {
 
 	if (radius >= this->spawnRadius) {
+
+		this->renderRadius = radius;
+
+	} else {
+	
+		this->renderRadius = this->spawnRadius;
+
+	}
+
+}
+
+void SpawnZone::SetDespawnRadius(float radius) {
+
+	if (radius >= this->renderRadius) {
 
 		this->despawnRadius = radius;
 
 	} else {
 	
-		this->despawnRadius = this->spawnRadius;
+		this->despawnRadius = this->renderRadius;
 
 	}
 

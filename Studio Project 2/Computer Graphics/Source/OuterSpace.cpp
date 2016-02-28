@@ -102,7 +102,8 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	spawnZone1.SetName("Testing Zone");
 	spawnZone1.SetPosition(0, 0, 0);
 	spawnZone1.SetSpawnRadius(500);
-	spawnZone1.SetDespawnRadius(700);
+	spawnZone1.SetRenderRadius(700);
+	spawnZone1.SetDespawnRadius(900);
 
 	Spawn::SpawnObjects(new Veldspar(), Veldspar().GetRadius(), 200, spawnZone1, asteroids, 17);
 
