@@ -2,6 +2,7 @@
 #define _SPACEOBJECT_H
 
 #include "RigidBody.h"
+#include "Item.h"
 
 class SpaceObject : public RigidBody {
 
@@ -10,6 +11,9 @@ protected:
 	unsigned int ID;
 	float health;
 	float maxHealth;
+	Item rewardItem;
+	int numItems;
+	int rewardGold;
 
 	//Constructor
 	SpaceObject(string name, string meshFile, const char* textureFile, Material material, float mass, float radius, float health, int ID);
@@ -32,10 +36,15 @@ public:
 	//Getters
 	float GetHealth();
 	unsigned int GetID();
+	Item GetRewardItem();
+	int GetRewardGold();
+	int GetNumberOfRewardItems();
 
 	//Setters
 	void SetHealth(float health);
 	void SetID(unsigned int ID);
+	void SetRewardItem(Item item, int numItems);
+	void SetRewardGold(int gold);
 
 };
 

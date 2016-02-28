@@ -45,3 +45,16 @@ PlayerHuman* Player::GetHuman() {
 	return &(this->human);
 
 }
+
+PLAYER_STATE Player::GetState() {
+
+	return this->playerState;
+
+}
+
+//Setters
+void Player::SetState(PLAYER_STATE playerState) {
+
+	this->playerState = playerState;
+
+}

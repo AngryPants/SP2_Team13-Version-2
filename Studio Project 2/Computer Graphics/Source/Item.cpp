@@ -3,7 +3,7 @@
 //Constructors
 Item::Item() {
 
-	name = "<Item Name>";
+	name = "";
 	value = 0;
 
 }

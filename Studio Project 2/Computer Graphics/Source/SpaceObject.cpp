@@ -8,6 +8,8 @@ SpaceObject::SpaceObject(string name, string meshFile, const char* textureFile, 
 	SetID(ID);
 	SetHealth(health);
 	this->maxHealth = this->health;
+	this->numItems = 0;
+	this->rewardGold = 0;
 
 }
 
@@ -96,6 +98,18 @@ unsigned int SpaceObject::GetID() {
 
 }
 
+Item SpaceObject::GetRewardItem() {
+
+	return this->rewardItem;
+
+}
+
+int SpaceObject::GetNumberOfRewardItems() {
+
+	this->numItems;
+
+}
+
 //Setters
 void SpaceObject::SetHealth(float health) {
 
@@ -114,5 +128,35 @@ void SpaceObject::SetHealth(float health) {
 void SpaceObject::SetID(unsigned int ID) {
 
 	this->ID = ID;
+
+}
+
+void SpaceObject::SetRewardItem(Item item, int numItems) {
+
+	this->rewardItem = item;
+
+	if (numItems > 0) {
+		
+		this->numItems = numItems;
+
+	} else {
+	
+		this->numItems = 0;
+
+	}
+
+}
+
+void SpaceObject::SetRewardGold(int gold) {
+
+	if (gold > 0) {
+	
+		this->rewardGold = gold;
+
+	} else {
+
+		this->rewardGold = 0;
+
+	}
 
 }
