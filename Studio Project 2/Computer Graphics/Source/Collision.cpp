@@ -127,10 +127,6 @@ bool Collision::CollisionCheck(SpaceObject* object1, SpaceObject* object2) {
 
 bool Collision::CollisionCheck(SpaceObject* object, Bullet &bullets) {
 
-<<<<<<< HEAD
-	return false;
+return false;
 
-=======
-	return true;
->>>>>>> origin/master
 }

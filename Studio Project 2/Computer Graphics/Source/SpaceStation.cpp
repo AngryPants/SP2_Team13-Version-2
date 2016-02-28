@@ -1,8 +1,8 @@
 #include "SpaceStation.h"
 #include "PlayerShip.h"
 
-SpaceStation::SpaceStation(float messageRadius, float interactRadius, string message, string name, string meshFile, const char* textureFile, Material material, unsigned int sceneNumber)
-: Interactable(messageRadius,interactRadius, message,name,meshFile, textureFile,material)
+SpaceStation::SpaceStation(string name, float approachRadius, float interactRadius, string approachMessage, string interactMessage, string meshFile, const char* textureFile, Material material, unsigned int sceneNumber)
+: Interactable(name, approachRadius, interactRadius, approachMessage, interactMessage, meshFile, textureFile, material)
 {
 
 	this->sceneNumber = sceneNumber;
@@ -12,30 +12,16 @@ SpaceStation::SpaceStation(float messageRadius, float interactRadius, string mes
 SpaceStation::~SpaceStation() {
 }
 
-void SpaceStation::Interact(RigidBody * object, double &dt)
+void SpaceStation::Interact(Player &player, double &dt)
 {
 	
-	if (Physics::getDistance(object->GetPosition(), this->GetPosition())<GetMessageRadius() && Physics::getDistance(object->GetPosition(), this->GetPosition())>GetInteractRadius()) {
-
-		SetRenderMessage("Heading Towards " + GetName());
-
-	} else if (Physics::getDistance(object->GetPosition(), this->GetPosition())<GetInteractRadius()) {
-		
-		SetRenderMessage("Entering " + GetName());
-		SetInteracting(true);
-		PlayAnimation(object,dt);
-
-	} else { //Not close to the station.
-
-		SetRenderMessage("");
-
-	}
+	SharedData::GetInstance()->sceneNumber = 1;
 
 }
 
-void SpaceStation::PlayAnimation(RigidBody * object, double &dt) {
+void SpaceStation::PlayAnimation(Player &object, double &dt) {
 
-	if (GetInteracting() == true) {
+	/*if (GetInteracting() == true) {
 
 		//playAnimation
 		if (object->GetPosition().x < -20)
@@ -69,7 +55,8 @@ void SpaceStation::PlayAnimation(RigidBody * object, double &dt) {
 
 		SetInteracting(false);
 
-	}
+	}*/
+
 }
 
 

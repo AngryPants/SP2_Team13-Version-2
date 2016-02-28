@@ -1,77 +1,75 @@
 #include"Interactable.h"
 
-Interactable::Interactable(float messageRadius, float interactRadius, string message,  string name, string meshFile, const char* textureFile, Material material) : GameObject(name, meshFile, textureFile, material) {
+//Constructor
+Interactable::Interactable(string name, float approachRadius, float interactRadius, string approachMessage, string interactMessage, string meshFile, const char* textureFile, Material material)
+: GameObject(name, meshFile, textureFile, material)
+{
 	
-	this->messageRadius = messageRadius;
+	this->approachRadius = approachRadius;
 	this->interactRadius = interactRadius;
-	this->message = message;
-	this->isInteracting = false;
+	this->approachMessage = approachMessage;
+	this->interactMessage = interactMessage;
 
 }
 
+//Destructor
 Interactable::~Interactable() {
 }
 
-string Interactable::GetRenderMessage() {
-	
-	return message;
+//Getters
+string Interactable::GetApproachMessage() {
+
+	return this->approachMessage;
 
 }
 
-float Interactable::GetMessageRadius() {
-	
-	return messageRadius;
+string Interactable::GetInteractMessage() {
+
+	return this->interactMessage;
 
 }
+
+float Interactable::GetApproachRadius() {
+
+	return this->approachRadius;
+
+}
+
 float Interactable::GetInteractRadius() {
-	
-	return interactRadius;
 
-}
-
-bool Interactable::GetInteracting() {
-
-	return isInteracting;
+	return this->interactRadius;
 
 }
 
 //Setters
-void Interactable::SetRenderMessage(string message) {
-	
-	this->message = message;
+void Interactable::SetApproachMessage(string message) {
+
+	this->approachMessage = message;
 
 }
 
-void Interactable::SetMessageRadius(float radius) {
+void Interactable::SetInteractMessage(string message) {
 
-	if (radius <= 0.0f) {
-	
-		this->messageRadius = 0.0f;
+	this->interactMessage = message;
 
-	} else {
+}
 
-		this->messageRadius = radius;
+void Interactable::SetApproachRadius(float radius) {
 
-	}
+	this->approachMessage = radius;
 
 }
 
 void Interactable::SetInteractRadius(float radius) {
 
-	if (radius > GetMessageRadius()) {
+	if (radius > approachRadius) {
 	
-		this->interactRadius = GetMessageRadius();
+		this->interactRadius = approachRadius;
 
 	} else {
-		
+	
 		this->interactRadius = radius;
 
 	}
-
-}
-
-void Interactable::SetInteracting(bool interact) {
-
-	this->isInteracting = interact;
 
 }

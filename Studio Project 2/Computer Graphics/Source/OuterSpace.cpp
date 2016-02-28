@@ -27,9 +27,9 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	glBindVertexArray(m_vertexArrayID);
 	
 	light[0].type = Light::LIGHT_DIRECTIONAL;
-	light[0].position.Set(-20, 100, -15);
+	light[0].position.Set(-20, 120, -15);
 	light[0].colour.Set(1, 1, 1);
-	light[0].power = 1.0f;
+	light[0].power = 2.0f;
 	light[0].kC = 0.1f;
 	light[0].kL = 0.01f;
 	light[0].kQ = 0.001f;
@@ -86,9 +86,9 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	glUniform1f(m_parameters[U_LIGHT0_EXPONENT], light[0].exponent);
 	
 	//Directional Light
-	Vector3 lightDir(light[1].position.x, light[1].position.y, light[1].position.z);
+	Vector3 lightDir(light[0].position.x, light[0].position.y, light[0].position.z);
 	Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
-	glUniform3fv(m_parameters[U_LIGHT1_POSITION], 1, &lightDirection_cameraspace.x);
+	glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightDirection_cameraspace.x);
 	
 	//Get a handle for our "MVP" uniform
 	m_parameters[U_MVP] = glGetUniformLocation(m_programID, "MVP");
@@ -99,6 +99,7 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	SetSkybox("Image//Skybox//Top.tga", "Image//Skybox//Bottom.tga", "Image//Skybox//Front.tga", "Image//Skybox//Left.tga", "Image//Skybox//Back.tga", "Image//Skybox//Right.tga");
 
+	spawnZone1.SetName("Testing Zone");
 	spawnZone1.SetPosition(0, 0, 0);
 	spawnZone1.SetSpawnRadius(500);
 	spawnZone1.SetDespawnRadius(700);
@@ -129,44 +130,30 @@ void OuterSpace::Update(double dt) {
 	PlayerControl::Shoot(player->GetShip(), camera.GetPosition() + player->GetShip()->GetForwardVector());
 	player->GetShip()->Update(dt);
 
-	for (list<Ship*>::iterator iter = enemies.begin(); iter != enemies.end(); ++iter) {
+	for (list<Ship>::iterator iter = enemies.begin(); iter != enemies.end(); ++iter) {
+
+		if (!iter->IsDisabled()) {
 	
-		AI::FaceTarget(*iter, player->GetShip(), 240 * dt, dt);
-		AI::MoveToTarget(*iter, player->GetShip(), 9000.0f, dt);
-		AI::ShootAtTarget(*iter, player->GetShip());
-		(*iter)->Update(dt);
-		
-		SpaceObject* spaceObjectPointer1 = *iter;
-		SpaceObject* spaceObjectPointer2 = player->GetShip();
-		Collision::SpaceObjectToSpaceObject(spaceObjectPointer1, spaceObjectPointer2, dt);
-		
-		RigidBody* rigidBodyPointer = *iter;
-		RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
-		
+			AI::FaceTarget(&(*iter), player->GetShip(), 240 * dt, dt);
+			AI::MoveToTarget(&(*iter), player->GetShip(), 9000.0f, dt);
+			AI::ShootAtTarget(&(*iter), player->GetShip());
+			iter->Update(dt);
+			
+			SpaceObject* spaceObjectPointer1 = &(*iter);
+			SpaceObject* spaceObjectPointer2 = player->GetShip();
+			Collision::SpaceObjectToSpaceObject(spaceObjectPointer1, spaceObjectPointer2, dt);
+			
+			RigidBody* rigidBodyPointer = &(*iter);
+			RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
+	
+		}
+
 	}
 
 	RigidBody* rigidBodyPointer = player->GetShip();
 	RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
 
 	camera.FollowObject(player->GetShip(), Vector3(0.0f, 3.0f, - 15.0f));
-
-}
-
-void OuterSpace::UpdateSpaceInteractable(double &dt)
-{
-	for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); ++it)
-	{
-		(*it)->Interact(player->GetShip(), dt);
-		(*it)->PlayAnimation(player->GetShip(), dt);
-		if ((*it)->GetInteracting() == true)
-		{
-			camera.SetTarget((*it)->GetPosition());
-		}
-		else
-		{
-			camera.FollowObject(player->GetShip(), Vector3(0.0f, 3.0f, -12.0f));
-		}
-	}
 
 }
 
@@ -203,8 +190,6 @@ void OuterSpace::BoundsCheck()
 		}
 	}
 
-	Spawn::UpdateObjects(player->GetShip()->GetPosition(), zoneCenter);
-
 }
 
 void OuterSpace::Render() { //Render VBO here.
@@ -214,6 +199,11 @@ void OuterSpace::Render() { //Render VBO here.
 
 	viewStack.LoadIdentity();
 	viewStack.LookAt(camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z, camera.GetTarget().x, camera.GetTarget().y, camera.GetTarget().z, camera.GetUp().x, camera.GetUp().y, camera.GetUp().z);
+
+	//Directional Light
+	Vector3 lightDir(light[0].position.x, light[0].position.y, light[0].position.z);
+	Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
+	glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightDirection_cameraspace.x);
 
 	modelStack.LoadIdentity();
 
@@ -227,16 +217,12 @@ void OuterSpace::Render() { //Render VBO here.
 
 	}
 
-	for (list<Ship*>::iterator ship_iter = enemies.begin(); ship_iter != enemies.end(); ++ship_iter) {
+	for (list<Ship>::iterator ship_iter = enemies.begin(); ship_iter != enemies.end(); ++ship_iter) {
 		
-		if ((Physics::getDistance(player->GetShip()->GetPosition(), zoneCenter) <= 3400.0f) && 
-			(Physics::getDistance((*ship_iter)->GetPosition(), zoneCenter) <= 3300.0f)) {
 
-			RenderObject(*ship_iter, true);
+		RenderObject(&(*ship_iter), true);
 
-		}
-
-		for (list<Bullet>::iterator bullet_iter = (*(*ship_iter)->GetBullets()).begin(); bullet_iter != (*(*ship_iter)->GetBullets()).end(); ++bullet_iter) {
+		for (list<Bullet>::iterator bullet_iter = (*(&(*ship_iter))->GetBullets()).begin(); bullet_iter != (*(&(*ship_iter))->GetBullets()).end(); ++bullet_iter) {
 		
 			RenderObject(&(*bullet_iter), false);
 
@@ -250,17 +236,10 @@ void OuterSpace::Render() { //Render VBO here.
 
 	}
 
-	/*if (warning)
-	{
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Going out of Bounds, please Turn back", Colour(1, 0, 0), 100, 4.0f, 7.0f);
-	}
-	for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); ++it)
-	{
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], (*it)->GetRenderMessage(), Colour(1, 0, 0), 100, 4.0f, 1.0f);
-	}*/
-
-	RenderTextOnScreen(mesh[FONT_CONSOLAS], "X: " + std::to_string(player->GetShip()->GetPosition().x) + "Y: " + std::to_string(player->GetShip()->GetPosition().y) + "Z: " + std::to_string(player->GetShip()->GetPosition().z), Colour(0, 1, 0), 100, 6, 6);
-	RenderTextOnScreen(mesh[FONT_CONSOLAS], std::to_string((int)player->GetShip()->GetHealth()), Colour(1, 0, 0), 100, 3, 3);
+	//Debug Info
+	RenderTextOnScreen(mesh[FONT_CONSOLAS], "Debug Info:", Colour(0, 1, 0), 70, 1, 4);
+	RenderTextOnScreen(mesh[FONT_CONSOLAS], "X: " + std::to_string(player->GetShip()->GetPosition().x) + " Y: " + std::to_string(player->GetShip()->GetPosition().y) + " Z: " + std::to_string(player->GetShip()->GetPosition().z), Colour(0, 1, 0), 70, 1, 3);
+	RenderTextOnScreen(mesh[FONT_CONSOLAS], "Health: " + std::to_string((int)player->GetShip()->GetHealth()), Colour(0, 1, 0), 70, 1, 2);
 
 }
 

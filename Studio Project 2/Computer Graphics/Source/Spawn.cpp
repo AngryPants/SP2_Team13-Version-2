@@ -123,7 +123,7 @@ void Spawn::SpawnObjects(Asteroid* object, float objectRadius, unsigned int numO
 
 				}
 
-				if (Physics::getDistance(object->GetPosition(), iter->GetPosition()) < objectRadius * 2) {
+				if (Physics::getDistance(object->GetPosition(), iter->GetPosition()) < objectRadius * 2 + 1.0f) {
 				
 					++timesFailed;
 					break;

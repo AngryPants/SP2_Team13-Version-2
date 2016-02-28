@@ -156,7 +156,7 @@ protected:
 
 	//Functions
 	void BoundsChecking(GameObject* object, Vector3 boundarySize);
-	//void BoundsChecking(GameObject* object, Vector3 position);
+	void BoundsChecking(GameObject* object, float radius);
 
 	//Setters
 	void SetSkybox(const char* topTexture, const char* bottomTexture, const char* frontTexture, const char* leftTexture, const char* backTexture, const char* rightTexture);

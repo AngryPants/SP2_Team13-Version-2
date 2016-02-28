@@ -94,6 +94,7 @@
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\GameScene.cpp" />
     <ClCompile Include="Source\Interactable.cpp" />
+    <ClCompile Include="Source\Interaction.cpp" />
     <ClCompile Include="Source\Inventory.cpp" />
     <ClCompile Include="Source\Kernite.cpp" />
     <ClCompile Include="Source\Light.cpp" />
@@ -107,7 +108,6 @@
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\Omber.cpp" />
     <ClCompile Include="Source\OuterSpace.cpp" />
-    <ClCompile Include="Source\Portal.cpp" />
     <ClCompile Include="Source\SpaceStation.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
     <ClCompile Include="Source\Pirate.cpp" />
@@ -141,7 +141,7 @@
     <ClInclude Include="Source\Collision.h" />
     <ClInclude Include="Source\Colour.h" />
     <ClInclude Include="Source\Interactable.h" />
-    <ClInclude Include="Source\Portal.h" />
+    <ClInclude Include="Source\Interaction.h" />
     <ClInclude Include="Source\SpaceStation.h" />
     <ClInclude Include="Source\PlayerControl.h" />
     <ClInclude Include="Source\Drone.h" />

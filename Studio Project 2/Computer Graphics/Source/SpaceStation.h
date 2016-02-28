@@ -10,11 +10,12 @@ private:
 
 public:
 	//Constructors & Destructor
-	virtual void Interact(RigidBody* object,double &dt);
-	virtual void PlayAnimation(RigidBody* object, double &dt);
-
-	SpaceStation(float messageRadius, float interactRadius, string message, string name, string meshFile, const char* textureFile, Material material, unsigned int sceneNumber);
+	SpaceStation(string name, float approachRadius, float interactRadius, string approachMessage, string interactMessage, string meshFile, const char* textureFile, Material material, unsigned int sceneNumber);
 	virtual ~SpaceStation();
+
+	//Functions
+	virtual void Interact(Player &player,double &dt);
+	virtual void PlayAnimation(Player &player, double &dt);
 
 };
 

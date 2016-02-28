@@ -1,46 +1,42 @@
 #ifndef _INTERACTABLE_H
 #define _INTERACTABLE_H
 
-#include"GameObject.h"
 #include "Application.h"
 #include "SharedData.h"
-#include "RigidBody.h"
+#include "Player.h"
 
 class Interactable : public GameObject {
 
 private:
 	//Variables
-	float messageRadius;
+	float approachRadius;
 	float interactRadius;
-	string message;
+	string approachMessage;
+	string interactMessage;
 
 protected:
-	bool isInteracting;
-
 	//Constructor
-	Interactable(float messageRadius, float interactRadius, string message, string name, string meshFile, const char* textureFile, Material material);
+	Interactable(string name, float approachRadius, float interactRadius, string approachMessage, string interactMessage, string meshFile, const char* textureFile, Material material);
 
 public:
 	//Destructor
 	virtual ~Interactable();
 	
-	//Is-ter
-	//bool isInteracting();
+	//Functions
+	virtual void Interact(Player &player, double &dt) = 0;
+	virtual void PlayAnimation(Player &player, double &dt) = 0;
 
 	//Getters
-	string GetRenderMessage();
-	float GetMessageRadius();
+	string GetApproachMessage();
+	string GetInteractMessage();
+	float GetApproachRadius();
 	float GetInteractRadius();
-	bool GetInteracting();
 
 	//Setters
-	void SetRenderMessage(string message); //Make sure the radiuses are minimum 0.0f
-	void SetMessageRadius(float radius); //Make sure the message radius > interact radius.
+	void SetApproachMessage(string message);
+	void SetInteractMessage(string message);
+	void SetApproachRadius(float radius);
 	void SetInteractRadius(float radius);
-	void SetInteracting(bool interact);
-
-	virtual void Interact(RigidBody * object, double &dt) {}
-	virtual void PlayAnimation(RigidBody * object, double &dt) {}
 
 };
 

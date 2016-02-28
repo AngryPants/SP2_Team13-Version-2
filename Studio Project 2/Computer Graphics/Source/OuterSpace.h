@@ -10,36 +10,37 @@
 #include "AI.h"
 #include "Interactable.h"
 #include "CarrickStation.h"
-#include "Portal.h"
 #include "Spawn.h"
 
 class OuterSpace : public GameScene {
+
+private:
+	//Variables
+	bool warning;
+	string nameCheck;
+
+	//GameObjects
+	list<Ship> enemies;
+	list<Interactable*> iSpaceObjects;
+	list<Asteroid> asteroids;
+	SpawnZone spawnZone1;
+	Player* player;
+	
+	//Functions
+	void BoundsCheck();
+	void RenderObjects();
+	void UpdateSpaceInteractable(double &dt);
 
 public:
 	//Constructor & Destructor
 	OuterSpace();
 	~OuterSpace();
 
-	//GameObjects
-	list<Ship*> enemies;
-	list<Interactable*> iSpaceObjects;
-	list<Asteroid> asteroids;
-	SpawnZone spawnZone1;
-	Player* player;
-	double frameTime;
-	Vector3 zoneCenter;
-	string nameCheck;
-
 	//Public Functions
 	virtual void Init();
 	virtual void Update(double dt);
 	virtual void Render();
 	virtual void Exit();
-
-	void BoundsCheck();
-	void RenderObjects();
-	void UpdateSpaceInteractable(double &dt);
-	bool warning;
 
 };
 

@@ -170,13 +170,17 @@ void GameScene::RenderObjectOnScreen(Mesh* mesh, float size, float x, float y) {
 
 void GameScene::RenderObject(GameObject* object, bool enableLight) {
 
-	modelStack.PushMatrix();
-				
-		modelStack.Translate(object->GetPosition().x, object->GetPosition().y, object->GetPosition().z);
-		modelStack.MultMatrix(object->GetRotationMatrix());
-		RenderMesh(object->GetMesh(), enableLight);
+	if (!object->IsDisabled()) {
 
-	modelStack.PopMatrix();
+		modelStack.PushMatrix();
+					
+			modelStack.Translate(object->GetPosition().x, object->GetPosition().y, object->GetPosition().z);
+			modelStack.MultMatrix(object->GetRotationMatrix());
+			RenderMesh(object->GetMesh(), enableLight);
+
+		modelStack.PopMatrix();
+
+	}
 
 }
 
@@ -260,6 +264,22 @@ void GameScene::BoundsChecking(GameObject* object, Vector3 boundarySize) {
 	if (object->GetPosition().z < -boundarySize.z/2.0f) {
 	
 		object->SetPosition(object->GetPosition().x, object->GetPosition().y, -boundarySize.z/2.0f);
+
+	}
+
+}
+
+void GameScene::BoundsChecking(GameObject* object, float radius) {
+
+	if (object->GetPosition().Length() < 10.0f || radius < 10.0f) {
+	
+		return;
+
+	}
+
+	if (object->GetPosition().Length() > radius) {
+	
+		object->SetPosition(object->GetPosition().Normalized() * radius);
 
 	}
 
