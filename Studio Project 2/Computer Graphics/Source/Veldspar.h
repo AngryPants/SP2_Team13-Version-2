@@ -10,9 +10,6 @@ public:
 	Veldspar();
 	~Veldspar();
 
-	//Functions
-	virtual void Die(Player &player);
-
 };
 
 #endif

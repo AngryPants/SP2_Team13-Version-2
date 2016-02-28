@@ -8,7 +8,6 @@ class Pirate : public Ship {
 public:
 	Pirate();
 	virtual ~Pirate();
-	virtual void Die(Player &player);
 
 };
 

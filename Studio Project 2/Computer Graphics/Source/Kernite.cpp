@@ -5,9 +5,3 @@ Kernite::Kernite() : Asteroid("Kernite", 40000.0f, 1500, "Image//Asteroid//Kerni
 
 Kernite::~Kernite() {
 }
-
-void Kernite::Die(Player &player) {
-
-	player.GetInventory()->AddKernite(8000);
-
-}

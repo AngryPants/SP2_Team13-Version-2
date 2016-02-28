@@ -7,9 +7,3 @@ Ship("Pirate", 2, 10.0f, 3000.0f, "OBJ//Enemies//Pirate.obj", "Image//Enemies//P
 
 Pirate::~Pirate() {
 }
-
-void Pirate::Die(Player &player) {
-
-	player.GetInventory()->AddGold(5000);
-
-}

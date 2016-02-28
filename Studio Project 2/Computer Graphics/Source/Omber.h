@@ -10,9 +10,6 @@ public:
 	Omber();
 	~Omber();
 
-	//Functions
-	virtual void Die(Player &player);
-
 };
 
 #endif
