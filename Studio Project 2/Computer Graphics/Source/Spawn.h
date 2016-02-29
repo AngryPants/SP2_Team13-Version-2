@@ -7,7 +7,7 @@
 #include "Drone.h"
 #include "Pirate.h"
 #include "Alien.h"
-#include "PlayerShip.h"
+#include "Player.h"
 #include "Ship.h"
 #include "SpawnZone.h"
 #include "GenerateRange.h"
@@ -40,6 +40,9 @@ public:
 	static void SpawnObjects(Asteroid* object, float objectRadius, unsigned int numObjects, SpawnZone spawnZone, list<Asteroid> &asteroids, int seed);
 	static void EnableObject(SpawnZone &spawnZone, GameObject* object, Vector3 playerPosition);
 	static void DisableObject(SpawnZone &spawnZone, GameObject* object, Vector3 playerPosition);
+
+	static void CheckKill(SpaceObject* object, Player &player);
+	static void CheckKill(Player &player);
 
 };
 

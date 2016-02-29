@@ -254,3 +254,31 @@ void Spawn::EnableObject(SpawnZone &spawnZone, GameObject* object, Vector3 playe
 void Spawn::DisableObject(SpawnZone &spawnZone, GameObject* object, Vector3 playerPosition) {
 
 }
+
+void Spawn::CheckKill(SpaceObject* object, Player &player) {
+
+	if (object->IsDead() <= 0.0f) {
+	
+		player.GetInventory()->AddGold(object->GetRewardGold());
+
+		if (object->GetRewardItem().GetName != "" && object->GetRewardItem().GetValue != 0) {
+		
+			player.GetInventory()->AddItem(&(object->GetRewardItem()), object->GetNumberOfRewardItems());
+
+		}
+
+		object->Disable();
+
+	}
+
+}
+
+void Spawn::CheckKill(Player &player) {
+
+	if (player.GetShip()->IsDead()) {
+	
+		player.SetState(DEAD);
+
+	}
+
+}

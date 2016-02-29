@@ -12,6 +12,19 @@
 using std::list;
 using std::string;
 
+enum PLAYER_STATE {
+
+	MAIN_MENU = 0,
+	SHOP_MENU,
+	QUEST_MENU,
+	ANIMATING,
+	PLAYING,
+	DEAD,
+
+	NUM_STATE,
+
+};
+
 struct Player {
 
 private:
@@ -20,6 +33,7 @@ private:
 	list<Quest> quests;
 	PlayerShip ship;
 	PlayerHuman human;
+	PLAYER_STATE playerState;
 
 public:
 	//Constructor & Destructor
@@ -32,6 +46,10 @@ public:
 	list<Quest>* GetQuests();
 	PlayerShip* GetShip();
 	PlayerHuman* GetHuman();
+	PLAYER_STATE GetState();
+
+	//Setters
+	void SetState(PLAYER_STATE playerState);
 
 };
 
