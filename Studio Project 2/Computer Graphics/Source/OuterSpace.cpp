@@ -106,13 +106,13 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	spawnZone1.SetDespawnRadius(900);
 
 	meshList[CROSSHAIR] = MeshBuilder::GenerateQuad("Crosshair", Colour(1, 0, 0), 1,1);
-	meshList[CROSSHAIR]->textureID = LoadTGA("Image//CrossHair//Crosshair.tga");
+	meshList[CROSSHAIR]->textureID = LoadTGA("Image//UI//CrossHair//Crosshair.tga");
 
-	meshList[MAXHEALTH] = MeshBuilder::GenerateQuad("MAX HP", Colour(1, 0, 0), 1, 1 );
-	//meshList[MAXHEALTH]->textureID = LoadTGA("Image//CrossHair//Crosshair.tga");
+	meshList[MAXHEALTH] = MeshBuilder::GenerateQuad("MAX HP", Colour(1, 0, 0), 1, 1);
+	meshList[MAXHEALTH]->textureID = LoadTGA("Image//UI//Life//MaxLife.tga");
 
 	meshList[CURRHEALTH] = MeshBuilder::GenerateQuad("Current HP", Colour(0, 1, 0), 1,1);
-	//meshList[CURRHEALTH]->textureID = LoadTGA("Image//CrossHair//Crosshair.tga");
+	meshList[CURRHEALTH]->textureID = LoadTGA("Image//UI//Life//CurrentLife.tga");
 
 
 	Spawn::SpawnObjects(new Veldspar(), Veldspar().GetRadius(), 200, spawnZone1, asteroids, 17);
@@ -152,9 +152,9 @@ void OuterSpace::Update(double dt) {
 
 		if (!iter->IsDisabled()) {
 	
-			//AI::FaceTarget(&(*iter), player->GetShip(), 240 * dt, dt);
-			//AI::MoveToTarget(&(*iter), player->GetShip(), 9000.0f, dt);
-			//AI::ShootAtTarget(&(*iter), player->GetShip());
+			AI::FaceTarget(&(*iter), player->GetShip(), 240 * dt, dt);
+			AI::MoveToTarget(&(*iter), player->GetShip(), 9000.0f, dt);
+			AI::ShootAtTarget(&(*iter), player->GetShip());
 			iter->Update(dt);
 			
 			SpaceObject* spaceObjectPointer1 = &(*iter);
@@ -264,8 +264,6 @@ void OuterSpace::Render() { //Render VBO here.
 		
 
 		RenderObject(&(*ship_iter), true);
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], std::to_string(ship_iter->GetHealth()), Colour(0, 0, 1), 100, 5, 5);
-
 		for (list<Bullet>::iterator bullet_iter = (*(&(*ship_iter))->GetBullets()).begin(); bullet_iter != (*(&(*ship_iter))->GetBullets()).end(); ++bullet_iter) {
 		
 			RenderObject(&(*bullet_iter), false);
@@ -294,20 +292,22 @@ void OuterSpace::UserInterFace()
 	
 	RenderTextOnScreen(mesh[FONT_CONSOLAS], Interaction::GetRenderMessage(), Colour(0, 1, 0), 100, 5,8);
 
-//	RenderTextOnScreen(mesh[FONT_CONSOLAS], "+", Colour(1, 0, 0), 100, 9.5, 5.2);
-	
-	
 	if (warning)
 	{
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "You Are leaving Area, please turn back", Colour(0, 1, 0), 100, 5, 8);
 	}
 
-	RenderObjectOnScreen(meshList[CROSSHAIR], 50, 19.2, 10.8, 180, 1, 0, 0);
-	//modelStack.PushMatrix();
-	//modelStack.Scale(1,1*player->GetShip()->GetHealth(),1);
-	RenderObjectOnScreen(meshList[MAXHEALTH], 100000, 0, 0, 180, 1, 0, 0);
-	RenderObjectOnScreen(meshList[CURRHEALTH], 100000, 0, 0, 180, 1, 0, 0);
-	//modelStack.PopMatrix();
+	RenderObjectOnScreen(meshList[CROSSHAIR], 50,50,50,19.2, 10.8, 180, 1, 0, 0);
+
+	/*modelStack.PushMatrix();
+	modelStack.Scale(1, 10 * player->GetShip()->GetMaxHealth(), 1);
+	RenderObjectOnScreen(meshList[MAXHEALTH], 100, 10, 10, 180, 1, 0, 0);
+	modelStack.PopMatrix();*/
+
+	std::cout << player->GetShip()->GetHealth() << std::endl;
+	modelStack.PushMatrix();
+	RenderObjectOnScreen(meshList[CURRHEALTH], 0.1 * player->GetShip()->GetHealth(), 40/* - 0.1* player->GetShip()->GetHealth()*/, 10, 2, 2, 180, 1, 0, 0);
+	modelStack.PopMatrix();
 }
 
 void OuterSpace::RenderObjects()
