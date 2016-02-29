@@ -282,18 +282,9 @@ void OuterSpace::Render() { //Render VBO here.
 
 
 	UserInterFace();
-<<<<<<< HEAD
-=======
+
 }
 
-void OuterSpace::UpdateUserInterFace(double &dt)
-{
-	for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); it++)
-	{
-		Interaction::ShipToObject(*player, (*it), dt);
-	}
->>>>>>> 24d7aa36e33b28d973a407ab7aa2dcf1eaa5b23c
-}
 
 void OuterSpace::UserInterFace()
 {
