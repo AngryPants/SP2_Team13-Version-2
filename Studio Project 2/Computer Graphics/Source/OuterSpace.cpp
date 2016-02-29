@@ -120,17 +120,18 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	player = new Player("Malcolm", "", "", "");
 
 	iSpaceObjects.push_back(new CarrickStation());
-	iSpaceObjects.push_back(new WarpGate("Portal", Vector3(1750,1750,1750), Vector3(50,10,5)));
-	iSpaceObjects.push_back(new WarpGate("Portal", Vector3(-1750,1750,1750), Vector3(50,10,5)));
-	iSpaceObjects.push_back(new WarpGate("Portal", Vector3(1750,-1750,1750), Vector3(50,10,5)));
-	iSpaceObjects.push_back(new WarpGate("Portal", Vector3(1750,1750,-1750), Vector3(50,10,5)));
-	iSpaceObjects.push_back(new WarpGate("Portal", Vector3(-1750,-1750,1750), Vector3(50,10,5)));
-	iSpaceObjects.push_back(new WarpGate("Portal", Vector3(-1750,1750,-1750), Vector3(50,10,5)));
-	iSpaceObjects.push_back(new WarpGate("Portal", Vector3(1750,-1750,-1750), Vector3(50,10,5)));
-	iSpaceObjects.push_back(new WarpGate("Portal", Vector3(-1750,-1750,-1750), Vector3(50,10,5)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Anna", Vector3(1750,1750,1750), Vector3(50,10,5)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Boris", Vector3(-1750,1750,1750), Vector3(50,10,5)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Chariton", Vector3(1750,-1750,1750), Vector3(50,10,5)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Dmitri", Vector3(1750,1750,-1750), Vector3(50,10,5)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Elena", Vector3(-1750,-1750,1750), Vector3(50,10,5)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Fedor", Vector3(-1750,1750,-1750), Vector3(50,10,5)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Grigorij", Vector3(1750,-1750,-1750), Vector3(50,10,5)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Hariton", Vector3(-1750,-1750,-1750), Vector3(50,10,5)));
 	enemies.push_back(Drone());
 	warning = false;
 	player->GetShip()->SetPosition(100,50,100);
+
 }
 
 void OuterSpace::Update(double dt) {

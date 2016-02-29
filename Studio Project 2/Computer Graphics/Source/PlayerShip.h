@@ -12,6 +12,7 @@ private:
 	//Variables
 	float speed;
 	Upgrade* upgrades[Upgrade::NUM_UPGRADE];
+	//Mesh* miningLaserMesh;
 
 public:
 	//Constructors & Destructor
