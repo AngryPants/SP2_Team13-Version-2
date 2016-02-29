@@ -147,6 +147,7 @@ void Hangar::Update(double dt) {
 	}
 	else if (player->GetState() == ANIMATING)
 	{
+		PlayerControl::RotateShip(player->GetShip(), 160.0f * dt, dt);
 		LeavingAnimation(dt);
 	}
 	RigidBody* rigidBodyPointer = player->GetShip();

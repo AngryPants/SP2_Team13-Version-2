@@ -1,4 +1,5 @@
 #include "SpawnZone.h"
+#include "Spawn.h"
 
 //Constructors
 SpawnZone::SpawnZone() {
@@ -8,6 +9,7 @@ SpawnZone::SpawnZone() {
 	SetSpawnRadius(0.0f);
 	SetRenderRadius(0.0f);
 	SetDespawnRadius(0.0f);
+	SetRenderable(false);
 
 }
 
@@ -18,6 +20,7 @@ SpawnZone::SpawnZone(string name, Vector3 position, float spawnRadius, float ren
 	SetSpawnRadius(spawnRadius);
 	SetRenderRadius(renderRadius);
 	SetDespawnRadius(despawnRadius);
+	SetRenderable(false);
 
 }
 
@@ -55,6 +58,25 @@ string SpawnZone::GetName() {
 	return this->name;
 
 }
+
+list<Asteroid>* SpawnZone::GetAsteroidList() {
+	
+	return &(this->asteroids);
+
+}
+
+list<Ship>* SpawnZone::GetEnemyList() {
+
+	return &(this->enemies);
+
+}
+
+bool SpawnZone::GetRenderable() {
+
+	return this->renderable;
+
+}
+
 
 //Setters
 void SpawnZone::SetPosition(Vector3 position) {
@@ -114,5 +136,59 @@ void SpawnZone::SetDespawnRadius(float radius) {
 void SpawnZone::SetName(string name) {
 
 	this->name = name;
+
+}
+
+void SpawnZone::SetAsteroidList(list<Asteroid> asteroidList) {
+
+	this->asteroids = asteroidList;
+
+}
+
+void SpawnZone::SetEnemyList(list<Ship> enemyList) {
+
+	this->enemies = enemyList;
+
+}
+
+void SpawnZone::SetRenderable(bool inArea) {
+
+	this->renderable = inArea;
+
+}
+
+void SpawnZone::GenerateAsteroidCoordinates(SpawnZone &spawnZone, Asteroid* object) {
+
+	list<Asteroid> generatedList;
+	/*Asteroid newAsteroid = *object;*/
+	Spawn::SpawnObjects(object, object->GetRadius(), 50, spawnZone, generatedList, 17);
+
+	SetAsteroidList(generatedList);
+
+}
+
+void SpawnZone::GenerateShipCoordinates(SpawnZone &spawnZone, Ship* object) {
+
+	list<Ship> generatedList;
+	/*Asteroid newAsteroid = *object;*/
+	Spawn::SpawnObjects(object, object->GetRadius(), 50, spawnZone, generatedList, 17);
+
+	SetEnemyList(generatedList);
+
+}
+
+void SpawnZone::CheckSpawn(SpawnZone &spawnZone, Vector3 &playerPos) {
+
+	if (Physics::getDistance(spawnZone.GetPosition(), playerPos) >= spawnZone.GetDespawnRadius()) {
+		
+		spawnZone.SetRenderable(false);
+
+	}
+	else if (Physics::getDistance(spawnZone.GetPosition(), playerPos) <= spawnZone.GetRenderRadius()) {
+
+		spawnZone.SetRenderable(true);
+
+	}
+
 
 }
