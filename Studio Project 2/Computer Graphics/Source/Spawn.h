@@ -38,8 +38,8 @@ public:
 	static void UpdateObjects(Vector3 playerPos, Vector3 &zoneCenterValue);
 
 	static void SpawnObjects(Asteroid* object, float objectRadius, unsigned int numObjects, SpawnZone spawnZone, list<Asteroid> &asteroids, int seed);
-	static void EnableObject(SpawnZone &spawnZone, GameObject* object, Vector3 playerPosition);
-	static void DisableObject(SpawnZone &spawnZone, GameObject* object, Vector3 playerPosition);
+	static void EnableObject(SpawnZone &spawnZone, Vector3 playerPosition);
+	static void DisableObject(SpawnZone &spawnZone, Vector3 playerPosition);
 
 	static void CheckKill(SpaceObject* object, Player &player);
 	static void CheckKill(Player &player);

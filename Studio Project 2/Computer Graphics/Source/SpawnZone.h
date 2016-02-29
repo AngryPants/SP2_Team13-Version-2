@@ -15,6 +15,8 @@ private:
 	float spawnRadius;
 	float renderRadius;
 	float despawnRadius;
+	list<Asteroid> asteroids;
+	list<Ship> ships;
 
 public:
 	//Constructors & Destructor
@@ -28,6 +30,8 @@ public:
 	float GetRenderRadius();
 	float GetDespawnRadius();
 	string GetName();
+	list<Asteroid>* GetAsteroidList;
+	list<Ship>* GetShipList;
 
 	//Setters
 	void SetPosition(float x, float y, float z);
