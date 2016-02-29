@@ -129,9 +129,9 @@ void OuterSpace::Update(double dt) {
 
 		if (!iter->IsDisabled()) {
 	
-			//AI::FaceTarget(&(*iter), player->GetShip(), 240 * dt, dt);
-			//AI::MoveToTarget(&(*iter), player->GetShip(), 9000.0f, dt);
-			//AI::ShootAtTarget(&(*iter), player->GetShip());
+			AI::FaceTarget(&(*iter), player->GetShip(), 240 * dt, dt);
+			AI::MoveToTarget(&(*iter), player->GetShip(), 9000.0f, dt);
+			AI::ShootAtTarget(&(*iter), player->GetShip());
 			iter->Update(dt);
 			
 			SpaceObject* spaceObjectPointer1 = &(*iter);
@@ -230,7 +230,6 @@ void OuterSpace::Render() { //Render VBO here.
 		
 
 		RenderObject(&(*ship_iter), true);
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], std::to_string(ship_iter->GetHealth()), Colour(0, 0, 1), 100, 5, 5);
 
 		for (list<Bullet>::iterator bullet_iter = (*(&(*ship_iter))->GetBullets()).begin(); bullet_iter != (*(&(*ship_iter))->GetBullets()).end(); ++bullet_iter) {
 		
@@ -264,7 +263,7 @@ void OuterSpace::UserInterFace()
 	RenderTextOnScreen(mesh[FONT_CONSOLAS], "Debug Info:", Colour(0, 1, 0), 70, 1, 4);
 	RenderTextOnScreen(mesh[FONT_CONSOLAS], "X: " + std::to_string(player->GetShip()->GetPosition().x) + " Y: " + std::to_string(player->GetShip()->GetPosition().y) + " Z: " + std::to_string(player->GetShip()->GetPosition().z), Colour(0, 1, 0), 70, 1, 3);
 	RenderTextOnScreen(mesh[FONT_CONSOLAS], "Health: " + std::to_string((int)player->GetShip()->GetHealth()), Colour(0, 1, 0), 70, 1, 2);
-	
+	RenderTextOnScreen(mesh[FONT_CONSOLAS], "Gold: " + std::to_string(player->GetInventory()->GetGold()), Colour(0, 1, 0), 70, 1, 1);
 	
 }
 
