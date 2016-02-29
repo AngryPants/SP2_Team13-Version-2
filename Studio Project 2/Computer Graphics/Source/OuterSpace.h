@@ -17,9 +17,20 @@
 class OuterSpace : public GameScene {
 
 private:
+
+	enum GEOMETRY
+	{
+		CROSSHAIR,
+		MAXHEALTH,
+		CURRHEALTH,
+		END,
+	};
+
 	//Variables
 	bool warning;
 	string nameCheck;
+	string message1;
+	Mesh*meshList[END];
 
 	//GameObjects
 	list<Ship> enemies;

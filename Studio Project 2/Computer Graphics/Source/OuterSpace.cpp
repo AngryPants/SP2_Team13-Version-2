@@ -105,26 +105,49 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	spawnZone1.SetRenderRadius(700);
 	spawnZone1.SetDespawnRadius(900);
 
+	meshList[CROSSHAIR] = MeshBuilder::GenerateQuad("Crosshair", Colour(1, 0, 0), 1,1);
+	meshList[CROSSHAIR]->textureID = LoadTGA("Image//CrossHair//Crosshair.tga");
+
+	meshList[MAXHEALTH] = MeshBuilder::GenerateQuad("MAX HP", Colour(1, 0, 0), 1, 1 );
+	//meshList[MAXHEALTH]->textureID = LoadTGA("Image//CrossHair//Crosshair.tga");
+
+	meshList[CURRHEALTH] = MeshBuilder::GenerateQuad("Current HP", Colour(0, 1, 0), 1,1);
+	//meshList[CURRHEALTH]->textureID = LoadTGA("Image//CrossHair//Crosshair.tga");
+
+
 	Spawn::SpawnObjects(new Veldspar(), Veldspar().GetRadius(), 200, spawnZone1, asteroids, 17);
 
 	player = new Player("Malcolm", "", "", "");
 
-	//iSpaceObjects.push_back(new CarrickStation());
+	iSpaceObjects.push_back(new CarrickStation());
+	iSpaceObjects.push_back(new WarpGate("Portal", Vector3(1750,1750,1750), Vector3(50,10,5)));
+	iSpaceObjects.push_back(new WarpGate("Portal", Vector3(-1750,1750,1750), Vector3(50,10,5)));
+	iSpaceObjects.push_back(new WarpGate("Portal", Vector3(1750,-1750,1750), Vector3(50,10,5)));
+	iSpaceObjects.push_back(new WarpGate("Portal", Vector3(1750,1750,-1750), Vector3(50,10,5)));
+	iSpaceObjects.push_back(new WarpGate("Portal", Vector3(-1750,-1750,1750), Vector3(50,10,5)));
+	iSpaceObjects.push_back(new WarpGate("Portal", Vector3(-1750,1750,-1750), Vector3(50,10,5)));
+	iSpaceObjects.push_back(new WarpGate("Portal", Vector3(1750,-1750,-1750), Vector3(50,10,5)));
+	iSpaceObjects.push_back(new WarpGate("Portal", Vector3(-1750,-1750,-1750), Vector3(50,10,5)));
 	enemies.push_back(Drone());
 	warning = false;
-	player->GetShip()->SetPosition(50, 10, 5);
-
+	player->GetShip()->SetPosition(100,50,100);
 }
 
 void OuterSpace::Update(double dt) {
-
+	if (Application::IsKeyPressed('1')) {
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+	else if (Application::IsKeyPressed('2')) {
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
 	BoundsCheck();
-	UpdateUserInterFace(dt);
+	//Player Update
 	PlayerControl::RotateShip(player->GetShip(), 160.0f * dt, dt);
 	PlayerControl::MoveShip(player->GetShip(), 50000.0f, dt);
 	PlayerControl::Shoot(player->GetShip(), camera.GetPosition() + player->GetShip()->GetForwardVector());
 	player->GetShip()->Update(dt);
 
+	//Enemies Update
 	for (list<Ship>::iterator iter = enemies.begin(); iter != enemies.end(); ++iter) {
 
 		if (!iter->IsDisabled()) {
@@ -151,11 +174,22 @@ void OuterSpace::Update(double dt) {
 
 	}
 
+	//Interactables Update
+	UpdateSpaceInteractable(dt);
+
 	RigidBody* rigidBodyPointer = player->GetShip();
 	RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
-
 	camera.FollowObject(player->GetShip(), Vector3(0.0f, 3.0f, - 15.0f));
 
+}
+
+void OuterSpace::UpdateSpaceInteractable(double &dt)
+{
+	bool stopLoop = false;
+	for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); !stopLoop && it != iSpaceObjects.end(); it++)
+	{
+		stopLoop = Interaction::ShipToObject((*player), (*it), dt);
+	}
 }
 
 void OuterSpace::BoundsCheck()
@@ -238,25 +272,31 @@ void OuterSpace::Render() { //Render VBO here.
 	}
 
 
-	//UserInterFace();
-}
-
-void OuterSpace::UpdateUserInterFace(double &dt)
-{
-	for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); it++)
-	{
-		Interaction::ShipToObject(*player, (*it), dt);
-	}
+	UserInterFace();
 }
 
 void OuterSpace::UserInterFace()
 {
 	//Debug Info
-	RenderTextOnScreen(mesh[FONT_CONSOLAS], "Debug Info:", Colour(0, 1, 0), 70, 1, 4);
-	RenderTextOnScreen(mesh[FONT_CONSOLAS], "X: " + std::to_string(player->GetShip()->GetPosition().x) + " Y: " + std::to_string(player->GetShip()->GetPosition().y) + " Z: " + std::to_string(player->GetShip()->GetPosition().z), Colour(0, 1, 0), 70, 1, 3);
-	RenderTextOnScreen(mesh[FONT_CONSOLAS], "Health: " + std::to_string((int)player->GetShip()->GetHealth()), Colour(0, 1, 0), 70, 1, 2);
+	RenderTextOnScreen(mesh[FONT_CONSOLAS], "X: " + std::to_string((int)(player->GetShip()->GetPosition().x)) + " Y: " + std::to_string((int)(player->GetShip()->GetPosition().y)) + " Z: " + std::to_string((int)(player->GetShip()->GetPosition().z)), Colour(0, 1, 0), 70, 0, 15);
+	RenderTextOnScreen(mesh[FONT_CONSOLAS], "Health: " + std::to_string((int)player->GetShip()->GetHealth()), Colour(1, 0, 0), 70, 0, 1);
+	
+	RenderTextOnScreen(mesh[FONT_CONSOLAS], Interaction::GetRenderMessage(), Colour(0, 1, 0), 100, 5,8);
+
+//	RenderTextOnScreen(mesh[FONT_CONSOLAS], "+", Colour(1, 0, 0), 100, 9.5, 5.2);
 	
 	
+	if (warning)
+	{
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "You Are leaving Area, please turn back", Colour(0, 1, 0), 100, 5, 8);
+	}
+
+	RenderObjectOnScreen(meshList[CROSSHAIR], 50, 19.2, 10.8, 180, 1, 0, 0);
+	//modelStack.PushMatrix();
+	//modelStack.Scale(1,1*player->GetShip()->GetHealth(),1);
+	RenderObjectOnScreen(meshList[MAXHEALTH], 100000, 0, 0, 180, 1, 0, 0);
+	RenderObjectOnScreen(meshList[CURRHEALTH], 100000, 0, 0, 180, 1, 0, 0);
+	//modelStack.PopMatrix();
 }
 
 void OuterSpace::RenderObjects()
@@ -264,16 +304,8 @@ void OuterSpace::RenderObjects()
 	for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); ++it)
 	{
 		modelStack.PushMatrix();
-		if ((*it)->GetName() == "OuterSpaceStation")
-		{
-			modelStack.Translate((*it)->GetPosition().x, (*it)->GetPosition().y, (*it)->GetPosition().z);
-			RenderMesh((*it)->GetMesh(), true);
-
-		}
-		else if ((*it)->GetName() == "Portal")
-		{
-			RenderMesh((*it)->GetMesh(), true);
-		}
+		modelStack.Translate((*it)->GetPosition().x, (*it)->GetPosition().y, (*it)->GetPosition().z);
+		RenderMesh((*it)->GetMesh(), true);
 		modelStack.PopMatrix();
 	}
 }
