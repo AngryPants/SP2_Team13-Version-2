@@ -126,6 +126,7 @@ bool Collision::CollisionCheck(SpaceObject* object1, SpaceObject* object2) {
 }
 
 bool Collision::CollisionCheck(SpaceObject* object, Bullet &bullets) {
+
 	// Early Escape test: if the length of the movevec is less
 	// than distance between the centers of these circles minus
 	// their radii, there's no way they can hit.

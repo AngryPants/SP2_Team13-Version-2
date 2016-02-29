@@ -33,56 +33,45 @@ bool Inventory::DecreaseGold(int gold) {
 
 void Inventory::AddItem(Item* item, int numItems) {
 
-	if (items.find(item->GetName()) == items.end()) {
+	if (numItems <= 0) {
 	
-		list<Item> newItems;
+		return;
 
-		for (int i = 0; i < numItems; ++i) {
-		
-			newItems.push_front(*item);
-			items.insert(std::pair<string, list<Item>>(item->GetName(), newItems));
+	}
 
-		}
+	map<Item, int>::iterator mapPtr = items.find(*item);
+
+	if (mapPtr == items.end()) {
+	
+		items.insert(std::pair<Item, int>(*item, numItems));
 
 	} else {
 	
-		list<Item>* listPtr = &(items.find(item->GetName())->second);
-		
-		for (int i = 0; i < numItems; ++i) {
-			
-			listPtr->push_front(*item);
-
-		}
+		mapPtr->second += numItems;
 
 	}
 
 }
 
-int Inventory::DecreaseItem(Item* item, int numItem) {
+bool Inventory::DecreaseItem(Item* item, int numItem) {
 
-	if (numItem <= 0 || items.find(item->GetName()) == items.end()) {
-	
-		return 0;
+	map<Item, int>::iterator mapPtr = items.find(*item);
 
-	}
-	
-	int itemsRemoved = 0;
-	list<Item>* listPtr = &(items.find(item->GetName())->second);
-
-	for (list<Item>::iterator iter = listPtr->begin(); iter != listPtr->end() && itemsRemoved <= numItem;) {
-	
-		iter = listPtr->erase(iter);
-		++itemsRemoved;
+	if (numItem <= 0 || mapPtr == items.end() || mapPtr->second < numItem) {
+		
+		return false;
 
 	}
 
-	if (listPtr->size() == 0) {
+	mapPtr->second -= numItem;
 	
-		items.erase(item->GetName());
+	if (mapPtr->second <= 0) {
+	
+		mapPtr = items.erase(mapPtr);
 
 	}
 
-	return itemsRemoved;
+	return true;
 
 }
 
@@ -95,13 +84,15 @@ int Inventory::GetGold() {
 
 int Inventory::GetNumberOf(Item* item) {
 
-	if (items.find(item->GetName()) == items.end()) {
+	map<Item, int>::iterator mapPtr = items.find(*item);
+
+	if (mapPtr == items.end()) {
 	
 		return 0;
 
 	}
 
-	return items.find(item->GetName())->second.size();
+	return mapPtr->second;
 
 }
 
