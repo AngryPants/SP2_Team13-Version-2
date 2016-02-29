@@ -31,7 +31,7 @@ bool Inventory::DecreaseGold(int gold) {
 
 }
 
-void Inventory::AddItem(Item* item, int numItems) {
+void Inventory::AddItem(Item item, int numItems) {
 
 	if (numItems <= 0) {
 	
@@ -39,23 +39,23 @@ void Inventory::AddItem(Item* item, int numItems) {
 
 	}
 
-	map<Item, int>::iterator mapPtr = items.find(*item);
+	//map<Item, int>::iterator mapPtr = items.find(item);
 
-	if (mapPtr == items.end()) {
+	/*if (mapPtr == items.end()) {
 	
-		items.insert(std::pair<Item, int>(*item, numItems));
+		items.insert(std::pair<Item, int>(item, numItems));
 
 	} else {
 	
 		mapPtr->second += numItems;
 
-	}
+	}*/
 
 }
 
-bool Inventory::DecreaseItem(Item* item, int numItem) {
+bool Inventory::DecreaseItem(Item item, int numItem) {
 
-	map<Item, int>::iterator mapPtr = items.find(*item);
+	/*map<Item, int>::iterator mapPtr = items.find(item);
 
 	if (numItem <= 0 || mapPtr == items.end() || mapPtr->second < numItem) {
 		
@@ -65,11 +65,11 @@ bool Inventory::DecreaseItem(Item* item, int numItem) {
 
 	mapPtr->second -= numItem;
 	
-	if (mapPtr->second <= 0) {
+	if (mapPtr->second == 0) {
 	
 		mapPtr = items.erase(mapPtr);
 
-	}
+	}*/
 
 	return true;
 
@@ -82,9 +82,11 @@ int Inventory::GetGold() {
 
 }
 
-int Inventory::GetNumberOf(Item* item) {
+int Inventory::GetNumberOf(Item item) {
 
-	map<Item, int>::iterator mapPtr = items.find(*item);
+	return 0;
+
+	/*map<Item, int>::iterator mapPtr = items.find(item);
 
 	if (mapPtr == items.end()) {
 	
@@ -92,7 +94,7 @@ int Inventory::GetNumberOf(Item* item) {
 
 	}
 
-	return mapPtr->second;
+	return mapPtr->second;*/
 
 }
 

@@ -263,7 +263,7 @@ void Spawn::CheckKill(SpaceObject* object, Player &player) {
 
 		if (object->GetRewardItem().GetName() != "" && object->GetRewardItem().GetValue() != 0) {
 		
-			player.GetInventory()->AddItem(&(object->GetRewardItem()), object->GetNumberOfRewardItems());
+			player.GetInventory()->AddItem((object->GetRewardItem()), object->GetNumberOfRewardItems());
 
 		}
 

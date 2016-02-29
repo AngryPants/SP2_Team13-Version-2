@@ -110,6 +110,12 @@ int SpaceObject::GetNumberOfRewardItems() {
 
 }
 
+int SpaceObject::GetRewardGold() {
+
+	return this->rewardGold;
+
+}
+
 //Setters
 void SpaceObject::SetHealth(float health) {
 
@@ -159,9 +165,4 @@ void SpaceObject::SetRewardGold(int gold) {
 
 	}
 
-}
-
-int SpaceObject::GetRewardGold()
-{
-	return this->rewardGold;
 }

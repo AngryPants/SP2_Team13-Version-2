@@ -22,12 +22,12 @@ public:
 	//Functions
 	void AddGold(int gold);
 	bool DecreaseGold(int gold);
-	void AddItem(Item* item, int numItems);
-	bool DecreaseItem(Item* item, int numItems);
+	void AddItem(Item item, int numItems);
+	bool DecreaseItem(Item item, int numItems);
 
 	//Getters
 	int GetGold();
-	int GetNumberOf(Item *item);
+	int GetNumberOf(Item item);
 
 	//Setters
 	void SetGold(int gold);;
