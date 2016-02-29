@@ -109,15 +109,8 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	player = new Player("Malcolm", "", "", "");
 
-	/*iSpaceObjects.push_back(new CarrickStation());
-	iSpaceObjects.push_back(new Portal());
-	iSpaceObjects.push_back(new Portal());
-	iSpaceObjects.push_back(new Portal());
-	iSpaceObjects.push_back(new Portal());
-	iSpaceObjects.push_back(new Portal());
-	iSpaceObjects.push_back(new Portal());
-	iSpaceObjects.push_back(new Portal());
-	iSpaceObjects.push_back(new Portal());*/
+	//iSpaceObjects.push_back(new CarrickStation());
+	enemies.push_back(Drone());
 	warning = false;
 	player->GetShip()->SetPosition(50, 10, 5);
 
@@ -147,6 +140,12 @@ void OuterSpace::Update(double dt) {
 			RigidBody* rigidBodyPointer = &(*iter);
 			RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
 	
+			for (list<Bullet>::iterator bullet_iter = iter->GetBullets()->begin(); bullet_iter != iter->GetBullets()->end(); ++bullet_iter) {
+			
+				Collision::BulletToSpaceObject(&(*bullet_iter), spaceObjectPointer2);
+
+			}
+
 		}
 
 	}

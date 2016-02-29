@@ -4,7 +4,13 @@
 
 void Collision::BulletToSpaceObject(Bullet* bullet, SpaceObject* object) {
 
-	//Do Collision check here.
+	return;
+
+	if (CollisionCheck(object, *bullet)) {
+	
+		object->DecreaseHealth(bullet->GetDamage());
+
+	}
 
 }
 
