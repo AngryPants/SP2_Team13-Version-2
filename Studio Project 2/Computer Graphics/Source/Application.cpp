@@ -3,6 +3,7 @@
 #include "OuterSpace.h"
 #include "SpaceStation.h"
 #include "SharedData.h"
+#include "Hangar.h"
 
 const unsigned char FPS = 60; // FPS of this game
 const unsigned int frameTime = 1000 / FPS; // time for each frame
@@ -97,12 +98,32 @@ void Application::Init() {
 void Application::Run() {
 
 	//Main Loop
-	GameScene* scene = new OuterSpace();
-	scene->Init();
+	//LoadInventory("Text//Inventory.txt");
+	//ShopSystem::GetInstance();
+	//QuestSystem::GetInstance();
+	//PlayerShip::GetInstance();
+
+	Scene* hangar = new Hangar();
+	Scene* outerSpace = new OuterSpace();
+	Scene* scene;
+
 
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
 	while (!glfwWindowShouldClose(m_window) && !SharedData::GetInstance()->quitGame) {
 
+		if (SharedData::GetInstance()->sceneNumber == 1) {
+			//Save("Text//Inventory.txt", "Text//Quests.txt", "Text//EquipUpgrades.txt", "Text//EquipUpgradesTest.txt");
+			scene = hangar;
+			scene->Init();
+			SharedData::GetInstance()->sceneNumber = 0;
+		}
+
+		if (SharedData::GetInstance()->sceneNumber == 2) {
+			//Save("Text//Inventory.txt", "Text//Quests.txt", "Text//EquipUpgrades.txt", "Text//EquipUpgradesTest.txt");
+			scene = outerSpace;
+			scene->Init();
+			SharedData::GetInstance()->sceneNumber = 0;
+		}
 		scene->Update(m_timer.getElapsedTime());
 		scene->Render();
 

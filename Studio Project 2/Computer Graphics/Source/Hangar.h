@@ -1,5 +1,5 @@
-#ifndef _OUTERSPACE_H
-#define _OUTERSPACE_H
+#ifndef _HANGAR_H
+#define _HANGAR_H
 
 #include "GameScene.h";
 #include "Player.h"
@@ -13,11 +13,11 @@
 #include "WarpGate.h"
 #include "Spawn.h"
 #include "Interaction.h"
+#include "Upgrade.h"
 
-class OuterSpace : public GameScene {
+class Hangar : public GameScene {
 
 private:
-
 	enum KEYPRESS
 	{
 		UP,
@@ -25,6 +25,7 @@ private:
 		BACK,
 		RETURN,
 		E,
+		S,
 		NONE,
 	};
 
@@ -39,10 +40,9 @@ private:
 	enum GEOMETRY
 	{
 		CROSSHAIR,
+		HANGAR,
 		MAXHEALTH,
 		CURRHEALTH,
-		DISPLAY,
-		TAB,
 		END,
 	};
 
@@ -53,7 +53,7 @@ private:
 	Mesh*meshList[END];
 	MENU menuOption;
 	bool isPressed[NONE];
-	bool pause;
+	bool pause,Leave,Shop;
 
 	//GameObjects
 	list<Ship> enemies;
@@ -61,20 +61,19 @@ private:
 	list<Asteroid> asteroids;
 	SpawnZone spawnZone1;
 	Player* player;
-	
+
 	//Functions
-	void BoundsCheck();
+	void BoundsCheck(Vector3 position);
 	void RenderObjects();
-	void UpdateSpaceInteractable(double &dt);
-	void UpdateUserInterFace(double&dt);
-	void UserInterFace();
 	void UpdateStartMenu();
 	void CheckKeyPress();
 	void RenderStartMenu();
+	void LeavingAnimation(double &dt);
+	void RenderUI();
 public:
 	//Constructor & Destructor
-	OuterSpace();
-	~OuterSpace();
+	Hangar();
+	~Hangar();
 
 	//Public Functions
 	virtual void Init();

@@ -29,8 +29,18 @@ bool Interaction::ShipToObject(Player &player, Interactable* object, double &dt)
 		{
 			message = object->GetInteractMessage();
 
-			if (Application::IsKeyPressed('E')) 
+			if (object->GetName() == "Portal" ) 
 			{
+				if (Application::IsKeyPressed('E'))
+				{
+
+					object->Interact(player, dt);
+
+				}
+			}
+			else
+			{
+
 				object->Interact(player, dt);
 
 			}

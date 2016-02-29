@@ -1,6 +1,7 @@
 #include "OuterSpace.h"
 
 #include<iostream>
+
 OuterSpace::OuterSpace() {
 }
 
@@ -114,6 +115,11 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	meshList[CURRHEALTH] = MeshBuilder::GenerateQuad("Current HP", Colour(0, 1, 0), 1,1);
 	meshList[CURRHEALTH]->textureID = LoadTGA("Image//UI//Life//CurrentLife.tga");
 
+	meshList[DISPLAY] = MeshBuilder::GenerateQuad("Display",Colour(0,1,0),1,1);
+	meshList[DISPLAY]->textureID = LoadTGA("Image//UI//Overlay//TextDisplay.tga");
+
+	meshList[TAB] = MeshBuilder::GenerateQuad("Tab", Colour(0, 1, 0), 1, 1);
+	meshList[TAB]->textureID = LoadTGA("Image//UI//Overlay//QuestScreen.tga");
 
 	Spawn::SpawnObjects(new Veldspar(), Veldspar().GetRadius(), 200, spawnZone1, asteroids, 17);
 
@@ -130,61 +136,73 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	iSpaceObjects.push_back(new WarpGate("Portal", Vector3(-1750,-1750,-1750), Vector3(50,10,5)));
 	enemies.push_back(Drone());
 	warning = false;
-	player->GetShip()->SetPosition(100,50,100);
-	
+	player->GetShip()->SetPosition(100,50,150);
+
+
+
 }
 
 void OuterSpace::Update(double dt) {
 
 	BoundsCheck();
-	//Player Update
-	PlayerControl::RotateShip(player->GetShip(), 160.0f * dt, dt);
-	PlayerControl::MoveShip(player->GetShip(), 50000.0f, dt);
-	PlayerControl::Shoot(player->GetShip(), camera.GetPosition() + player->GetShip()->GetForwardVector());
-	player->GetShip()->Update(dt);
+	//if (player->GetState() == MAIN_MENU)
+	//{
+	//	CheckKeyPress();
+	//	UpdateStartMenu();
 
-	//Enemies Update
-	for (list<Ship>::iterator iter = enemies.begin(); iter != enemies.end(); ++iter) {
+	//}
+	//else if (player->GetState() == PLAYING)
+	//{
+		//Player Update
+		PlayerControl::RotateShip(player->GetShip(), 160.0f * dt, dt);
+		PlayerControl::MoveShip(player->GetShip(), 50000.0f, dt);
+		PlayerControl::Shoot(player->GetShip(), camera.GetPosition() + player->GetShip()->GetForwardVector());
+		player->GetShip()->Update(dt);
 
-		if (!iter->IsDisabled()) {
-	
-			AI::FaceTarget(&(*iter), player->GetShip(), 240 * dt, dt);
-			AI::MoveToTarget(&(*iter), player->GetShip(), 9000.0f, dt);
-			AI::ShootAtTarget(&(*iter), player->GetShip());
-			iter->Update(dt);
-			
-			SpaceObject* spaceObjectPointer1 = &(*iter);
-			SpaceObject* spaceObjectPointer2 = player->GetShip();
-			Collision::SpaceObjectToSpaceObject(spaceObjectPointer1, spaceObjectPointer2, dt);
-			
-			RigidBody* rigidBodyPointer = &(*iter);
-			RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
-	
-			for (list<Bullet>::iterator bullet_iter = player->GetShip()->GetBullets()->begin(); bullet_iter != player->GetShip()->GetBullets()->end(); ++bullet_iter) {
-			
-				Collision::BulletToSpaceObject(&(*bullet_iter), spaceObjectPointer1);
+		//Enemies Update
+		for (list<Ship>::iterator iter = enemies.begin(); iter != enemies.end(); ++iter) {
 
-			}
-			
-			Spawn::CheckKill(spaceObjectPointer1, *player);
+			if (!iter->IsDisabled()) {
 
-			for (list<Bullet>::iterator bullet_iter = iter->GetBullets()->begin(); bullet_iter != iter->GetBullets()->end(); ++bullet_iter) {
-			
-				Collision::BulletToSpaceObject(&(*bullet_iter), spaceObjectPointer2);
+				AI::FaceTarget(&(*iter), player->GetShip(), 240 * dt, dt);
+				AI::MoveToTarget(&(*iter), player->GetShip(), 9000.0f, dt);
+				AI::ShootAtTarget(&(*iter), player->GetShip());
+				iter->Update(dt);
+
+				SpaceObject* spaceObjectPointer1 = &(*iter);
+				SpaceObject* spaceObjectPointer2 = player->GetShip();
+				Collision::SpaceObjectToSpaceObject(spaceObjectPointer1, spaceObjectPointer2, dt);
+
+				RigidBody* rigidBodyPointer = &(*iter);
+				RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
+
+				for (list<Bullet>::iterator bullet_iter = player->GetShip()->GetBullets()->begin(); bullet_iter != player->GetShip()->GetBullets()->end(); ++bullet_iter) {
+
+					Collision::BulletToSpaceObject(&(*bullet_iter), spaceObjectPointer1);
+
+				}
+
+				Spawn::CheckKill(spaceObjectPointer1, *player);
+
+				for (list<Bullet>::iterator bullet_iter = iter->GetBullets()->begin(); bullet_iter != iter->GetBullets()->end(); ++bullet_iter) {
+
+					Collision::BulletToSpaceObject(&(*bullet_iter), spaceObjectPointer2);
+
+				}
 
 			}
 
 		}
 
-	}
+		//Interactables Update
+		UpdateSpaceInteractable(dt);
 
-	//Interactables Update
-	UpdateSpaceInteractable(dt);
-
+		
+	//}
 	RigidBody* rigidBodyPointer = player->GetShip();
 	RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
-	camera.FollowObject(player->GetShip(), Vector3(0.0f, 3.0f, - 15.0f));
-	
+	camera.FollowObject(player->GetShip(), Vector3(0.0f, 3.0f, -15.0f));
+
 
 }
 
@@ -208,7 +226,7 @@ void OuterSpace::BoundsCheck()
 		warning = false;
 	}
 
-	if (player->GetShip()->GetPosition().x>2400 || player->GetShip()->GetPosition().x<-2400 || player->GetShip()->GetPosition().y>2400 || player->GetShip()->GetPosition().y<-2400 || player->GetShip()->GetPosition().z>2400 || player->GetShip()->GetPosition().z<-2400)
+	if (player->GetShip()->GetPosition().x>2200 || player->GetShip()->GetPosition().x<-2200 || player->GetShip()->GetPosition().y>2200 || player->GetShip()->GetPosition().y<-2200 || player->GetShip()->GetPosition().z>2200 || player->GetShip()->GetPosition().z<-2200)
 	{
 		int shortestDist = 10000;
 		Vector3 location;
@@ -246,23 +264,24 @@ void OuterSpace::Render() { //Render VBO here.
 	glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightDirection_cameraspace.x);
 
 	modelStack.LoadIdentity();
-
+	
 	RenderSkybox();
+
 	RenderObjects();
 	RenderObject(player->GetShip(), true);
 
 	for (list<Bullet>::iterator bullet_iter = (*player->GetShip()->GetBullets()).begin(); bullet_iter != (*player->GetShip()->GetBullets()).end(); ++bullet_iter) {
-		
+
 		RenderObject(&(*bullet_iter), false);
 
 	}
 
 	for (list<Ship>::iterator ship_iter = enemies.begin(); ship_iter != enemies.end(); ++ship_iter) {
-		
+
 
 		RenderObject(&(*ship_iter), true);
 		for (list<Bullet>::iterator bullet_iter = (*(&(*ship_iter))->GetBullets()).begin(); bullet_iter != (*(&(*ship_iter))->GetBullets()).end(); ++bullet_iter) {
-		
+
 			RenderObject(&(*bullet_iter), false);
 
 		}
@@ -278,19 +297,22 @@ void OuterSpace::Render() { //Render VBO here.
 
 	UserInterFace();
 
-}
 
+}
 
 void OuterSpace::UserInterFace()
 {
 	//Debug Info
 	RenderTextOnScreen(mesh[FONT_CONSOLAS], "X: " + std::to_string((int)(player->GetShip()->GetPosition().x)) + " Y: " + std::to_string((int)(player->GetShip()->GetPosition().y)) + " Z: " + std::to_string((int)(player->GetShip()->GetPosition().z)), Colour(0, 1, 0), 70, 11, 14.8);
 
-	
-	RenderTextOnScreen(mesh[FONT_CONSOLAS], Interaction::GetRenderMessage(), Colour(0, 1, 0), 100, 5,8);
-
+	if (Interaction::GetRenderMessage() != "")
+	{
+		RenderObjectOnScreen(meshList[DISPLAY], 1200 , 100, 100, 1000, 825, 180, 1, 0, 0);
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], Interaction::GetRenderMessage(), Colour(0, 1, 0), 100, 5, 8);
+	}
 	if (warning)
 	{
+		RenderObjectOnScreen(meshList[DISPLAY], 1200, 100, 100, 1070, 825, 180, 1, 0, 0);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "You Are leaving Area, please turn back", Colour(0, 1, 0), 100, 5, 8);
 	}
 
@@ -300,13 +322,14 @@ void OuterSpace::UserInterFace()
 	
 	if (Application::IsKeyPressed(VK_TAB)) // UI 2
 	{
+		RenderObjectOnScreen(meshList[TAB], 1000, 1100, 100, 500, 550, 180, 0, 1, 0);
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "STATUS", Colour(1, 0, 0), 300, 0.8, 3);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Current Health : " + std::to_string(((int)player->GetShip()->GetHealth())) + "/" + std::to_string(((int)player->GetShip()->GetMaxHealth())), Colour(1, 0, 0), 100, 1, 8);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Gold : " + std::to_string(((int)player->GetInventory()->GetGold())), Colour(1, 1, 0.1), 100, 1, 7);
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], "veldspar : " + std::to_string(((int)player)), Colour(0.5,0.5,0.5), 100, 1, 6);
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], "omber : " + std::to_string(((int)player->GetShip()->GetHealth())), Colour(0.5, 0.35, 0.05), 100, 1, 5);
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], "kernite : " + std::to_string(((int)player->GetInventory()->GetGold())), Colour(0, 1, 1), 100, 1, 4);
-		//RenderTextOnScreen(mesh[FONT_CONSOLAS], "kernite : " + std::to_string(((int)player->GetInventory()->GetGold())), Colour(0, 1, 1), 100, 1, 4);
-
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "veldspar : " /*+ std::to_string(((int)player))*/, Colour(0.5,0.5,0.5), 100, 1, 6);
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "omber : "/* + std::to_string(((int)player->GetShip()->GetHealth()))*/, Colour(0.5, 0.35, 0.05), 100, 1, 5);
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "kernite : " /*+ std::to_string(((int)player->GetInventory()->GetGold()))*/, Colour(0, 1, 1), 100, 1, 4);
+	
 	}
 
 }

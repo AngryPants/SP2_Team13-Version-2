@@ -12,8 +12,36 @@ SpaceStation::~SpaceStation() {
 
 void SpaceStation::Interact(Player &player, double &dt)
 {
+	//playAnimation
 	
+	if (player.GetShip()->GetPosition().x < -20)
+	{
+	player.GetShip()->Translate(10.0f * dt, 0, 0);
+	}
+	else if (player.GetShip()->GetPosition().x > 20)
+	{
+	player.GetShip()->Translate(-10.0f * dt, 0, 0);
+	}
+	else if (player.GetShip()->GetPosition().y < -20)
+	{
+	player.GetShip()->Translate(0, 10.0f * dt, 0);
+	}
+	else if (player.GetShip()->GetPosition().y > 20)
+	{
+	player.GetShip()->Translate(0, -10.0f * dt, 0);
+	}
+	else if (player.GetShip()->GetPosition().z < -20)
+	{
+	player.GetShip()->Translate(0, 0, 10.0f * dt);
+	}
+	else if (player.GetShip()->GetPosition().z > 20)
+	{
+	player.GetShip()->Translate(0, 0, -10.0f * dt);
+	}
+	else
+	{
 	SharedData::GetInstance()->sceneNumber = 1;
+	}
 
 }
 
