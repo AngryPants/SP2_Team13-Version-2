@@ -39,37 +39,37 @@ void Inventory::AddItem(Item item, int numItems) {
 
 	}
 
-	//map<Item, int>::iterator mapPtr = items.find(item);
+	map<Item, int>::iterator mapIter = items.find(item);
 
-	/*if (mapPtr == items.end()) {
+	if (mapIter == items.end()) {
 	
 		items.insert(std::pair<Item, int>(item, numItems));
 
 	} else {
 	
-		mapPtr->second += numItems;
+		mapIter->second += numItems;
 
-	}*/
+	}
 
 }
 
 bool Inventory::DecreaseItem(Item item, int numItem) {
 
-	/*map<Item, int>::iterator mapPtr = items.find(item);
+	map<Item, int>::iterator mapIter = items.find(item);
 
-	if (numItem <= 0 || mapPtr == items.end() || mapPtr->second < numItem) {
+	if (numItem <= 0 || mapIter == items.end() || mapIter->second < numItem) {
 		
 		return false;
 
 	}
 
-	mapPtr->second -= numItem;
+	mapIter->second -= numItem;
 	
-	if (mapPtr->second == 0) {
+	if (mapIter->second == 0) {
 	
-		mapPtr = items.erase(mapPtr);
+		mapIter = items.erase(mapIter);
 
-	}*/
+	}
 
 	return true;
 
@@ -86,15 +86,15 @@ int Inventory::GetNumberOf(Item item) {
 
 	return 0;
 
-	/*map<Item, int>::iterator mapPtr = items.find(item);
+	map<Item, int>::iterator mapIter = items.find(item);
 
-	if (mapPtr == items.end()) {
+	if (mapIter == items.end()) {
 	
 		return 0;
 
 	}
 
-	return mapPtr->second;*/
+	return mapIter->second;
 
 }
 
