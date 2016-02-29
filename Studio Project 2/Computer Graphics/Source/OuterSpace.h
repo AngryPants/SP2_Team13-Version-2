@@ -12,6 +12,7 @@
 #include "CarrickStation.h"
 #include "WarpGate.h"
 #include "Spawn.h"
+#include "Interaction.h"
 
 class OuterSpace : public GameScene {
 
@@ -31,7 +32,8 @@ private:
 	void BoundsCheck();
 	void RenderObjects();
 	void UpdateSpaceInteractable(double &dt);
-
+	void UpdateUserInterFace(double&dt);
+	void UserInterFace();
 public:
 	//Constructor & Destructor
 	OuterSpace();

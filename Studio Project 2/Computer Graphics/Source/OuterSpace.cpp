@@ -126,7 +126,8 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 void OuterSpace::Update(double dt) {
 
-	//BoundsCheck();
+	BoundsCheck();
+	UpdateUserInterFace(dt);
 	PlayerControl::RotateShip(player->GetShip(), 160.0f * dt, dt);
 	PlayerControl::MoveShip(player->GetShip(), 50000.0f, dt);
 	PlayerControl::Shoot(player->GetShip(), camera.GetPosition() + player->GetShip()->GetForwardVector());
@@ -238,11 +239,26 @@ void OuterSpace::Render() { //Render VBO here.
 
 	}
 
+
+	//UserInterFace();
+}
+
+void OuterSpace::UpdateUserInterFace(double &dt)
+{
+	for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); it++)
+	{
+		Interaction::ShipToObject(*player, (*it), dt);
+	}
+}
+
+void OuterSpace::UserInterFace()
+{
 	//Debug Info
 	RenderTextOnScreen(mesh[FONT_CONSOLAS], "Debug Info:", Colour(0, 1, 0), 70, 1, 4);
 	RenderTextOnScreen(mesh[FONT_CONSOLAS], "X: " + std::to_string(player->GetShip()->GetPosition().x) + " Y: " + std::to_string(player->GetShip()->GetPosition().y) + " Z: " + std::to_string(player->GetShip()->GetPosition().z), Colour(0, 1, 0), 70, 1, 3);
 	RenderTextOnScreen(mesh[FONT_CONSOLAS], "Health: " + std::to_string((int)player->GetShip()->GetHealth()), Colour(0, 1, 0), 70, 1, 2);
-
+	
+	
 }
 
 void OuterSpace::RenderObjects()
