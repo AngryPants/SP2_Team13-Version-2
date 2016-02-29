@@ -257,7 +257,7 @@ void Spawn::DisableObject(SpawnZone &spawnZone, GameObject* object, Vector3 play
 
 void Spawn::CheckKill(SpaceObject* object, Player &player) {
 
-	if (object->IsDead() <= 0.0f) {
+	if (object->IsDead()) {
 	
 		player.GetInventory()->AddGold(object->GetRewardGold());
 

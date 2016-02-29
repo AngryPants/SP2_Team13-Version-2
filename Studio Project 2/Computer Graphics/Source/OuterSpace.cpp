@@ -129,9 +129,9 @@ void OuterSpace::Update(double dt) {
 
 		if (!iter->IsDisabled()) {
 	
-			AI::FaceTarget(&(*iter), player->GetShip(), 240 * dt, dt);
-			AI::MoveToTarget(&(*iter), player->GetShip(), 9000.0f, dt);
-			AI::ShootAtTarget(&(*iter), player->GetShip());
+			//AI::FaceTarget(&(*iter), player->GetShip(), 240 * dt, dt);
+			//AI::MoveToTarget(&(*iter), player->GetShip(), 9000.0f, dt);
+			//AI::ShootAtTarget(&(*iter), player->GetShip());
 			iter->Update(dt);
 			
 			SpaceObject* spaceObjectPointer1 = &(*iter);
@@ -141,6 +141,14 @@ void OuterSpace::Update(double dt) {
 			RigidBody* rigidBodyPointer = &(*iter);
 			RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
 	
+			for (list<Bullet>::iterator bullet_iter = player->GetShip()->GetBullets()->begin(); bullet_iter != player->GetShip()->GetBullets()->end(); ++bullet_iter) {
+			
+				Collision::BulletToSpaceObject(&(*bullet_iter), spaceObjectPointer1);
+
+			}
+			
+			Spawn::CheckKill(spaceObjectPointer1, *player);
+
 			for (list<Bullet>::iterator bullet_iter = iter->GetBullets()->begin(); bullet_iter != iter->GetBullets()->end(); ++bullet_iter) {
 			
 				Collision::BulletToSpaceObject(&(*bullet_iter), spaceObjectPointer2);
@@ -222,6 +230,7 @@ void OuterSpace::Render() { //Render VBO here.
 		
 
 		RenderObject(&(*ship_iter), true);
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], std::to_string(ship_iter->GetHealth()), Colour(0, 0, 1), 100, 5, 5);
 
 		for (list<Bullet>::iterator bullet_iter = (*(&(*ship_iter))->GetBullets()).begin(); bullet_iter != (*(&(*ship_iter))->GetBullets()).end(); ++bullet_iter) {
 		

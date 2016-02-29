@@ -4,8 +4,6 @@
 
 void Collision::BulletToSpaceObject(Bullet* bullet, SpaceObject* object) {
 
-	//return;
-
 	if (CollisionCheck(object, *bullet)) {
 	
 		object->DecreaseHealth(bullet->GetDamage());
@@ -134,7 +132,6 @@ bool Collision::CollisionCheck(SpaceObject* object1, SpaceObject* object2) {
 
 bool Collision::CollisionCheck(SpaceObject* object, Bullet &bullet) {
 
-
 	//Holy shit this took forever to understand!
 	if (bullet.GetSpeed() <= 0.1f || object->GetRadius() <= 0.1f) {
 	
@@ -142,10 +139,12 @@ bool Collision::CollisionCheck(SpaceObject* object, Bullet &bullet) {
 
 	}
 
+	//Discriminant
 	float b = 2 * ((bullet.GetForwardVector().x * (bullet.GetPosition().x - object->GetPosition().x)) + (bullet.GetForwardVector().y * (bullet.GetPosition().y - object->GetPosition().y)) + (bullet.GetForwardVector().z * (bullet.GetPosition().z - object->GetPosition().z)));
 	float c = (bullet.GetPosition().x - object->GetPosition().x) * (bullet.GetPosition().x - object->GetPosition().x) +
 			  (bullet.GetPosition().y - object->GetPosition().y) * (bullet.GetPosition().y - object->GetPosition().y) +
-			  (bullet.GetPosition().z - object->GetPosition().z) * (bullet.GetPosition().z - object->GetPosition().z);
+			  (bullet.GetPosition().z - object->GetPosition().z) * (bullet.GetPosition().z - object->GetPosition().z) -
+			  (object->GetRadius() * object->GetRadius());
 
 	if ((b*b - 4*c) < 0.0f) {
 	
@@ -153,6 +152,15 @@ bool Collision::CollisionCheck(SpaceObject* object, Bullet &bullet) {
 
 	}
 
-	return true;
+	float d1 = -b + sqrt(b*b - 4*c);
+	float d2 = -b - sqrt(b*b - 4*c);
+
+	if (d1 <= bullet.GetSpeed() || d2<= bullet.GetSpeed()) {
+	
+		return true;
+
+	}
+
+	return false;
 
 }
