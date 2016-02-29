@@ -38,34 +38,7 @@ A float value that determines how far each zone stretches
 A list that would have the final result pushed into
 */
 /****************************************************************************/
-void Spawn::SpawnObjects(Ship* object, int i , Vector3 zoneCentre, float zoneRadius, list<Ship*> &objectList) {
-
-	float sValue = time(NULL) * (i + counter) + 1;
-
-	Ship* listObject;
-
-	listObject = object;
-	srand(sValue);
-
-	int xValue, yValue, zValue;
-	while (Physics::getDistance(zoneCentre, listObject->GetPosition()) > zoneRadius);
-	{
-		srand(sValue);
-		xValue = sValue = rand() % 1900 - 950 + (zoneCentre.x);
-		srand(sValue);
-		yValue = sValue = rand() % 1900 - 950 + (zoneCentre.y);
-		srand(sValue);
-		zValue = sValue = rand() % 1900 - 950 + (zoneCentre.z);
-
-		counter += 1;
-		listObject->SetPosition(xValue,yValue,zValue);
-	}
-	counter++;
-	objectList.push_back(listObject);
-
-}
-
-void Spawn::SpawnObjects(Asteroid* object, float objectRadius, unsigned int numObjects, SpawnZone spawnZone, list<Asteroid> &asteroids, int seed) {
+void Spawn::SpawnObjects(Asteroid* object, float objectRadius, unsigned int numObjects, SpawnZone &spawnZone, list<Asteroid> &asteroids, int seed) {
 
 	if (objectRadius > spawnZone.GetSpawnRadius()) {
 	
@@ -151,32 +124,94 @@ void Spawn::SpawnObjects(Asteroid* object, float objectRadius, unsigned int numO
 
 }
 
-void Spawn::SpawnObjects(Asteroid* object, int i, Vector3 zoneCentre, float zoneRadius, list<Asteroid*> &objectList) {
 
-	float sValue = time(NULL) * (i + counter) + 1;
+void Spawn::SpawnObjects(Ship* object, float objectRadius, unsigned int numObjects, SpawnZone &spawnZone, list<Ship> &ship, int seed) {
 
-	Asteroid* listObject;
+	if (objectRadius > spawnZone.GetSpawnRadius()) {
 
-	listObject = object;
-	srand(sValue);
+		std::cout << "The spawn radius is to small. Unable to spawn " + object->GetName() + "." << std::endl;
+		return;
 
-	int xValue, yValue, zValue;
-	while (Physics::getDistance(zoneCentre, listObject->GetPosition()) > zoneRadius);
-	{
-		srand(sValue);
-		xValue = sValue = rand() % 1900 - 950 + (zoneCentre.x);
-		srand(sValue);
-		yValue = sValue = rand() % 1900 - 950 + (zoneCentre.y);
-		srand(sValue);
-		zValue = sValue = rand() % 1900 - 950 + (zoneCentre.z);
-
-		counter += 1;
-		listObject->SetPosition(xValue, yValue, zValue);
 	}
-	counter++;
-	objectList.push_back(listObject);
+
+	unsigned int totalTimesFailed = 0;
+	srand(seed);
+	list<Ship>::iterator startPoint;
+
+	if (ship.begin() != ship.end()) {
+
+		startPoint = ship.end();
+		--startPoint;
+
+	}
+	else {
+
+		startPoint = ship.begin();
+
+	}
+
+	for (unsigned int i = 0; i < numObjects && totalTimesFailed <= 5; ++i) {
+
+		unsigned int timesFailed = 0;
+		bool regenerate = true;
+
+		while (timesFailed < 20 && regenerate) {
+
+			MS spawnStack;
+			spawnStack.Rotate(GenerateRange(0, 360), 1, 0, 0);
+			spawnStack.Rotate(GenerateRange(0, 360), 0, 1, 0);
+			spawnStack.Rotate(GenerateRange(0, 360), 0, 0, 1);
+			spawnStack.Translate(GenerateRange(spawnZone.GetPosition().x - spawnZone.GetSpawnRadius(), spawnZone.GetPosition().x + spawnZone.GetSpawnRadius()), GenerateRange(spawnZone.GetPosition().y - spawnZone.GetSpawnRadius(), spawnZone.GetPosition().y + spawnZone.GetSpawnRadius()), GenerateRange(spawnZone.GetPosition().z - spawnZone.GetSpawnRadius(), spawnZone.GetPosition().z + spawnZone.GetSpawnRadius()));
+
+			object->SetPosition(spawnStack.Top().a[12], spawnStack.Top().a[13], spawnStack.Top().a[14]);
+
+			for (list<Ship>::iterator iter = startPoint;; ++iter) {
+
+				if (iter == ship.end()) {
+
+					Ship newShip = *object;
+					ship.push_back(newShip);
+					regenerate = false;
+
+					if (startPoint == ship.end()) {
+
+						--startPoint;
+
+					}
+
+					break;
+
+				}
+
+				if (Physics::getDistance(object->GetPosition(), iter->GetPosition()) < objectRadius * 2 + 1.0f) {
+
+					++timesFailed;
+					break;
+
+				}
+
+			}
+
+		}
+
+		if (timesFailed >= 20) {
+
+			++totalTimesFailed;
+
+		}
+
+	}
+
+	if (totalTimesFailed >= 5) {
+
+		std::cout << "Unable to spawn all " + object->GetName() + ". There may not be enough space." << std::endl;
+
+	}
+
+	delete object;
 
 }
+
 
 void Spawn::UpdateObjects(Vector3 playerPos, Vector3 &zoneCenterValue)
 {
@@ -278,3 +313,4 @@ void Spawn::CheckKill(Player &player) {
 
 	}
 }
+

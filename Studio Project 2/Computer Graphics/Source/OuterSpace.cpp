@@ -99,6 +99,7 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	SetSkybox("Image//Skybox//Top.tga", "Image//Skybox//Bottom.tga", "Image//Skybox//Front.tga", "Image//Skybox//Left.tga", "Image//Skybox//Back.tga", "Image//Skybox//Right.tga");
 
+
 	spawnZone1.SetName("Testing Zone");
 	spawnZone1.SetPosition(0, 0, 0);
 	spawnZone1.SetSpawnRadius(500);
@@ -129,12 +130,70 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	iSpaceObjects.push_back(new WarpGate("Warp Gate Grigorij", Vector3(1750,-1750,-1750), Vector3(50,10,5)));
 	iSpaceObjects.push_back(new WarpGate("Warp Gate Hariton", Vector3(-1750,-1750,-1750), Vector3(50,10,5)));
 	enemies.push_back(Drone());
+
+	
+	veldsparZone.SetName("Veldspar Zone");
+	//veldsparZone.SetPosition(-1025.0f, 1025.0f, 1025.0f);
+	veldsparZone.SetPosition(0, 0, 0);
+	veldsparZone.SetSpawnRadius(1100.0f);
+	veldsparZone.SetRenderRadius(1300.0f);
+	veldsparZone.SetDespawnRadius(1500.0f);
+	//veldsparZone.GenerateAsteroidCoordinates(veldsparZone, new Veldspar());
+	Spawn::SpawnObjects(new Veldspar(), Veldspar().GetRadius(), 50, veldsparZone, (*veldsparZone.GetAsteroidList()), 8);
+
+	omberZone.SetName("Omber Zone");
+	omberZone.SetPosition(1025.0f, 1025.0f, -1025.0f);
+	omberZone.SetSpawnRadius(1100.0f);
+	omberZone.SetRenderRadius(1300.0f);
+	omberZone.SetDespawnRadius(1500.0f);
+	Spawn::SpawnObjects(new Omber(), Omber().GetRadius(), 50, omberZone, (*omberZone.GetAsteroidList()), 8);
+
+	kerniteZone.SetName("Kernite Zone");
+	kerniteZone.SetPosition(-1025.0f, 1025.0f, -1025.0f);
+	kerniteZone.SetSpawnRadius(1100.0f);
+	kerniteZone.SetRenderRadius(1300.0f);
+	kerniteZone.SetDespawnRadius(1500.0f);
+	Spawn::SpawnObjects(new Kernite(), Kernite().GetRadius(), 50, kerniteZone, (*kerniteZone.GetAsteroidList()), 8);
+
+	droneZone.SetName("Drone Zone");
+	droneZone.SetPosition(-1025.0f, -1025.0f, 1025.0f);
+	droneZone.SetSpawnRadius(1100.0f);
+	droneZone.SetRenderRadius(1300.0f);
+	droneZone.SetDespawnRadius(1500.0f);
+	Spawn::SpawnObjects(new Drone(), Drone().GetRadius(), 50, droneZone, (*droneZone.GetEnemyList()), 8);
+
+	pirateZone.SetName("Pirate Zone");
+	pirateZone.SetPosition(1025.0f, -1025.0f, -1025.0f);
+	pirateZone.SetSpawnRadius(1100.0f);
+	pirateZone.SetRenderRadius(1300.0f);
+	pirateZone.SetDespawnRadius(1500.0f);
+	Spawn::SpawnObjects(new Pirate(), Pirate().GetRadius(), 50, pirateZone, (*pirateZone.GetEnemyList()), 8);
+
+	alienZone.SetName("Alien Zone");
+	alienZone.SetPosition(-1025.0f, -1025.0f, -1025.0f);
+	alienZone.SetSpawnRadius(1100.0f);
+	alienZone.SetRenderRadius(1300.0f);
+	alienZone.SetDespawnRadius(1500.0f);
+	Spawn::SpawnObjects(new Alien(), Alien().GetRadius(), 50, alienZone, (*alienZone.GetEnemyList()), 8);
+
+	player = new Player("Malcolm", "", "", "");
+
+	//iSpaceObjects.push_back(new CarrickStation());
+	//enemies.push_back(Drone());
+
 	warning = false;
 	player->GetShip()->SetPosition(100,50,100);
 	
 }
 
 void OuterSpace::Update(double dt) {
+
+	if (Application::IsKeyPressed('1')) {
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+	else if (Application::IsKeyPressed('2')) {
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
 
 	BoundsCheck();
 	//Player Update
@@ -172,11 +231,11 @@ void OuterSpace::Update(double dt) {
 			
 				Collision::BulletToSpaceObject(&(*bullet_iter), spaceObjectPointer2);
 
-			}
+	//		}
 
-		}
+	//	}
 
-	}
+	//}
 
 	//Interactables Update
 	UpdateSpaceInteractable(dt);
@@ -185,7 +244,15 @@ void OuterSpace::Update(double dt) {
 	RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
 	camera.FollowObject(player->GetShip(), Vector3(0.0f, 3.0f, - 15.0f));
 	
+	//Spawn::CheckSpawn(spawnZone1, player->GetShip()->GetPosition());
+	SpawnZone::CheckSpawn(veldsparZone, player->GetShip()->GetPosition());
+	SpawnZone::CheckSpawn(omberZone, player->GetShip()->GetPosition());
+	SpawnZone::CheckSpawn(kerniteZone, player->GetShip()->GetPosition());
+	SpawnZone::CheckSpawn(droneZone, player->GetShip()->GetPosition());
+	SpawnZone::CheckSpawn(pirateZone, player->GetShip()->GetPosition());
+	SpawnZone::CheckSpawn(alienZone, player->GetShip()->GetPosition());
 
+	cout << player->GetShip()->GetPosition().x << " " << player->GetShip()->GetPosition().y << " " << player->GetShip()->GetPosition().z << endl;
 }
 
 void OuterSpace::UpdateSpaceInteractable(double &dt)
@@ -195,6 +262,7 @@ void OuterSpace::UpdateSpaceInteractable(double &dt)
 	{
 		stopLoop = Interaction::ShipToObject((*player), (*it), dt);
 	}
+
 }
 
 void OuterSpace::BoundsCheck()
@@ -251,27 +319,61 @@ void OuterSpace::Render() { //Render VBO here.
 	RenderObjects();
 	RenderObject(player->GetShip(), true);
 
-	for (list<Bullet>::iterator bullet_iter = (*player->GetShip()->GetBullets()).begin(); bullet_iter != (*player->GetShip()->GetBullets()).end(); ++bullet_iter) {
-		
-		RenderObject(&(*bullet_iter), false);
+	//RenderObject(new Drone(), true);
+
+	//for (list<Bullet>::iterator bullet_iter = (*player->GetShip()->GetBullets()).begin(); bullet_iter != (*player->GetShip()->GetBullets()).end(); ++bullet_iter) {
+	//	
+	//	RenderObject(&(*bullet_iter), false);
+
+	//}
+
+	//for (list<Ship>::iterator ship_iter = enemies.begin(); ship_iter != enemies.end(); ++ship_iter) {
+	//	
+
+	//	RenderObject(&(*ship_iter), true);
+
+	//	for (list<Bullet>::iterator bullet_iter = (*(&(*ship_iter))->GetBullets()).begin(); bullet_iter != (*(&(*ship_iter))->GetBullets()).end(); ++bullet_iter) {
+	//	
+	//		RenderObject(&(*bullet_iter), false);
+
+	//	}
+
+	//}
+
+	//for (list<Asteroid>::iterator asteroid_iter = asteroids.begin(); asteroid_iter != asteroids.end(); ++asteroid_iter){
+
+	//	RenderObject(&(*asteroid_iter), true);
+
+	//}
+
+	if (veldsparZone.GetRenderable() == true) {
+	
+		RenderAsteroids(veldsparZone);
+		cout << "VeldsparZone";
+	}
+	if (omberZone.GetRenderable() == true) {
+
+		RenderAsteroids(omberZone);
 
 	}
+	if (kerniteZone.GetRenderable() == true) {
 
-	for (list<Ship>::iterator ship_iter = enemies.begin(); ship_iter != enemies.end(); ++ship_iter) {
-		
-
-		RenderObject(&(*ship_iter), true);
-		for (list<Bullet>::iterator bullet_iter = (*(&(*ship_iter))->GetBullets()).begin(); bullet_iter != (*(&(*ship_iter))->GetBullets()).end(); ++bullet_iter) {
-		
-			RenderObject(&(*bullet_iter), false);
-
-		}
+		RenderAsteroids(kerniteZone);
 
 	}
+	if (droneZone.GetRenderable() == true) {
 
-	for (list<Asteroid>::iterator asteroid_iter = asteroids.begin(); asteroid_iter != asteroids.end(); ++asteroid_iter){
+		RenderEnemy(droneZone);
 
-		RenderObject(&(*asteroid_iter), true);
+	}
+	if (pirateZone.GetRenderable() == true) {
+
+		RenderEnemy(pirateZone);
+
+	}
+	if (alienZone.GetRenderable() == true) {
+
+		RenderEnemy(alienZone);
 
 	}
 
@@ -320,6 +422,43 @@ void OuterSpace::RenderObjects()
 		RenderMesh((*it)->GetMesh(), true);
 		modelStack.PopMatrix();
 	}
+
+	
+
+
+}
+
+void OuterSpace::RenderAsteroids(SpawnZone spawnZone) {
+
+	
+
+	for (list<Asteroid>::iterator iter = (*spawnZone.GetAsteroidList()).begin(); iter != (*spawnZone.GetAsteroidList()).end(); ++iter) {
+
+		modelStack.PushMatrix();
+	
+		//modelStack.Scale(20, 20, 20);
+		RenderMesh(iter->GetMesh(), true);
+		cout << "rendered";
+
+		modelStack.PopMatrix();
+		cout << "render";
+	}
+
+	
+}
+
+void OuterSpace::RenderEnemy(SpawnZone spawnZone) {
+
+	modelStack.PushMatrix();
+
+		for (list<Ship>::iterator iter = (*spawnZone.GetEnemyList()).begin(); iter != (*spawnZone.GetEnemyList()).end(); ++iter) {
+
+			RenderMesh(iter->GetMesh(), true);
+
+		}
+
+	modelStack.PopMatrix();
+
 }
 
 void OuterSpace::Exit() {
