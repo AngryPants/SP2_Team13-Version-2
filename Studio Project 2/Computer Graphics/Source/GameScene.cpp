@@ -165,7 +165,7 @@ void GameScene::RenderTextOnScreen(Mesh* mesh, std::string text, Colour colour, 
 
 }
 
-void GameScene::RenderObjectOnScreen(Mesh* mesh, float size, float x, float y) {
+void GameScene::RenderObjectOnScreen(Mesh* mesh, float size, float x, float y,float rotate,float rx,float ry,float rz) {
 
 	if (!mesh || mesh->textureID <= 0) {//Proper error check
 		return;
@@ -174,7 +174,6 @@ void GameScene::RenderObjectOnScreen(Mesh* mesh, float size, float x, float y) {
 	glDisable(GL_DEPTH_TEST);
 
 	Mtx44 ortho;
-
 	ortho.SetToOrtho(0, glfwGetVideoMode(glfwGetPrimaryMonitor())->width, 0, glfwGetVideoMode(glfwGetPrimaryMonitor())->height, -10, 10); //size of screen UI
 	projectionStack.PushMatrix();
 	projectionStack.LoadMatrix(ortho);
@@ -183,9 +182,11 @@ void GameScene::RenderObjectOnScreen(Mesh* mesh, float size, float x, float y) {
 	viewStack.LoadIdentity(); //No need camera for ortho mode
 	modelStack.PushMatrix();
 	modelStack.LoadIdentity(); //Reset modelStack
+
 	modelStack.Scale(size, size, size);
 	modelStack.Translate(x, y, 0);
-	RenderMesh(mesh, true);
+	modelStack.Rotate(rotate,rx,ry,rz);
+	RenderMesh(mesh, false);
 
 	projectionStack.PopMatrix();
 	viewStack.PopMatrix();

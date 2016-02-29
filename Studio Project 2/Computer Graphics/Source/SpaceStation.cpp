@@ -4,9 +4,7 @@
 SpaceStation::SpaceStation(string name, float approachRadius, float interactRadius, string approachMessage, string interactMessage, string meshFile, const char* textureFile, Material material, unsigned int sceneNumber)
 : Interactable(name, approachRadius, interactRadius, approachMessage, interactMessage, meshFile, textureFile, material)
 {
-
 	this->sceneNumber = sceneNumber;
-
 }
 
 SpaceStation::~SpaceStation() {

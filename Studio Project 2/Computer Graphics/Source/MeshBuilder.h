@@ -22,6 +22,7 @@ private:
 public:
 	static Mesh* GenerateAxes(const std::string &meshName = "Reference Axes", float size = 1000.0f);
 	static Mesh* GenerateQuad(const std::string &meshName = "Quad", Colour colour = Colour(1.0f, 1.0f, 1.0f), float size = 1.0f);
+	static Mesh* GenerateQuad(const std::string &meshName, Colour colour , float LengthX,float LengthY);
 	static Mesh* GenerateCube(const std::string &meshName = "Cube", Colour colour = Colour(1.0f, 1.0f, 1.0f), float size = 1.0f);
 	static Mesh* GenerateCircle(const std::string &meshName = "Circle", Colour colour = Colour(1.0f, 1.0f, 1.0f), unsigned int numSlices = 36, float diameter = 1.0f);
 	static Mesh* GenerateRing(const std::string &meshName = "Ring", Colour colour = Colour(1.0f, 1.0f, 1.0f), unsigned int numSlices = 36, float innerDiameter = 0.8f, float outerDiameter = 1.0f);

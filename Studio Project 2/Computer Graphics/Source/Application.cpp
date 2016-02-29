@@ -60,7 +60,7 @@ void Application::Init() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); //We don't want the old OpenGL 
 
 	//Create a window and create its OpenGL context
-	//m_window = glfwCreateWindow(1600, 900, "Computer Graphics", NULL, NULL);
+	//m_window = glfwCreateWindow(800, 600, "Computer Graphics", NULL, NULL);
 	//m_window = glfwCreateWindow(glfwGetVideoMode(glfwGetPrimaryMonitor())->width, glfwGetVideoMode(glfwGetPrimaryMonitor())->height, "Computer Graphics", glfwGetPrimaryMonitor(), NULL);
 	m_window = glfwCreateWindow(glfwGetVideoMode(glfwGetPrimaryMonitor())->width, glfwGetVideoMode(glfwGetPrimaryMonitor())->height, "Computer Graphics", NULL, NULL);
 

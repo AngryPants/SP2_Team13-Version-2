@@ -88,7 +88,57 @@ Then generate the VBO/IBO and store them in Mesh object
 \return Pointer to mesh storing VBO/IBO of quad
 */
 /******************************************************************************/
-Mesh* MeshBuilder::GenerateQuad(const std::string &meshName, Colour colour, float size) {
+
+Mesh* MeshBuilder::GenerateQuad(const std::string &meshName, Colour color, float lengthX, float lengthY)
+{
+	std::vector<Vertex> vertex_buffer_data;
+	std::vector<GLuint> index_buffer_data;
+	Vertex v;
+	
+	v.position.Set(-0.5f *lengthX, 0.5f*lengthY, 0);
+	v.colour.Set(color.r, color.g, color.b);
+	v.normal.Set(0, 0, 1);
+	v.texCoord.Set(1, 1);
+	vertex_buffer_data.push_back(v);
+
+	v.position.Set(0.5f*lengthX, 0.5f*lengthY, 0);
+	v.colour.Set(color.r, color.g, color.b);
+	v.normal.Set(0, 0, 1);
+	v.texCoord.Set(0, 1);
+	vertex_buffer_data.push_back(v);
+
+	v.position.Set(-0.5f*lengthX, -0.5f*lengthY, 0);
+	v.colour.Set(color.r, color.g, color.b);
+	v.normal.Set(0, 0, 1);
+	v.texCoord.Set(1, 0);
+	vertex_buffer_data.push_back(v);
+
+	v.position.Set(0.5f*lengthX, -0.5f*lengthY, 0);
+	v.colour.Set(color.r, color.g, color.b);
+	v.normal.Set(0, 0, 1);
+	v.texCoord.Set(0, 0);
+	vertex_buffer_data.push_back(v);
+
+	for (int i = 0; i < 4; ++i)
+	{
+		index_buffer_data.push_back(i);
+	}
+
+	Mesh *mesh = new Mesh(meshName);
+
+	glBindBuffer(GL_ARRAY_BUFFER, mesh->vertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, vertex_buffer_data.size() * sizeof(Vertex), &vertex_buffer_data[0], GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ARRAY_BUFFER, mesh->indexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, index_buffer_data.size() * sizeof(GLuint), &index_buffer_data[0], GL_STATIC_DRAW);
+
+	mesh->indexSize = 4;
+	mesh->mode = Mesh::DRAW_TRIANGLE_STRIP;
+
+	return mesh;
+}
+
+Mesh* MeshBuilder::GenerateQuad(const std::string &meshName, Colour colour, float size	) {
 	
 	vector<Vertex> vertex_buffer_data;
 	vector<GLuint> index_buffer_data;

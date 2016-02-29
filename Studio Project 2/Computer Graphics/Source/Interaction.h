@@ -17,7 +17,7 @@ public:
 	static string GetRenderMessage();
 
 	//Functions
-	static void ShipToObject(Player &player, Interactable* object, double &dt);
+	static bool ShipToObject(Player &player, Interactable* object, double &dt);
 
 };
 
