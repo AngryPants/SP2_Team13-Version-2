@@ -10,7 +10,7 @@ private:
 
 public:
 	//Constructors & Destructor
-	WarpGate(string name, Vector3 exitPosition);
+	WarpGate(string name, Vector3 position, Vector3 exitPosition);
 	virtual ~WarpGate();
 	
 	//Functions

@@ -106,7 +106,7 @@ Item SpaceObject::GetRewardItem() {
 
 int SpaceObject::GetNumberOfRewardItems() {
 
-	this->numItems;
+	return this->numItems;
 
 }
 
@@ -159,4 +159,9 @@ void SpaceObject::SetRewardGold(int gold) {
 
 	}
 
+}
+
+int SpaceObject::GetRewardGold()
+{
+	return this->rewardGold;
 }
