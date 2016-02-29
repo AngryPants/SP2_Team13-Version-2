@@ -12,7 +12,7 @@ class Inventory {
 
 private:
 	int gold;
-	map<string, list<Item>> items;
+	map<Item, int> items;
 
 public:
 	//Constructor & Destructor
@@ -23,7 +23,7 @@ public:
 	void AddGold(int gold);
 	bool DecreaseGold(int gold);
 	void AddItem(Item* item, int numItems);
-	int DecreaseItem(Item* item, int numItems);
+	bool DecreaseItem(Item* item, int numItems);
 
 	//Getters
 	int GetGold();
