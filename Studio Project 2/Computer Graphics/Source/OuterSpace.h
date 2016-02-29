@@ -32,18 +32,30 @@ private:
 	string message1;
 	Mesh*meshList[END];
 	//GameObjects
-	list<Ship> enemies;
+	//list<Asteroid> asteroids;
+	//list<Ship> enemies;
 	list<Interactable*> iSpaceObjects;
-	list<Asteroid> asteroids;
 	SpawnZone spawnZone1;
+
+	SpawnZone veldsparZone;
+	SpawnZone omberZone;
+	SpawnZone kerniteZone;
+
+	SpawnZone droneZone;
+	SpawnZone pirateZone;
+	SpawnZone alienZone;
+
 	Player* player;
 	
 	//Functions
 	void BoundsCheck();
 	void RenderObjects();
+	void RenderAsteroids(SpawnZone spawnZone);
+	void RenderEnemy(SpawnZone spawnZone);
 	void UpdateSpaceInteractable(double &dt);
 	void UpdateUserInterFace(double&dt);
 	void UserInterFace();
+
 public:
 	//Constructor & Destructor
 	OuterSpace();
