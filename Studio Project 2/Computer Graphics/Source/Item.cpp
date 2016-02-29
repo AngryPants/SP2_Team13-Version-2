@@ -5,10 +5,11 @@ Item::Item() {
 
 	name = "";
 	value = 0;
+	itemID = 0;
 
 }
 
-Item::Item(string name, int value) {
+Item::Item(string name, int value, int itemID) {
 
 	this->name = name;
 	
@@ -22,6 +23,16 @@ Item::Item(string name, int value) {
 
 	}
 
+	if (itemID <= 0) {
+	
+		this->itemID = itemID;
+
+	} else {
+	
+		this->itemID = 0;
+
+	}
+
 }
 
 //Destructors
@@ -31,7 +42,7 @@ Item::~Item() {
 //Functions
 bool Item::operator==(Item &rhs) {
 
-	if (rhs.GetName() == GetName() && rhs.GetValue() == GetValue()) {
+	if (rhs.GetID() == GetID()) {
 	
 		return true;
 
@@ -43,7 +54,19 @@ bool Item::operator==(Item &rhs) {
 
 bool Item::operator!=(Item &rhs) {
 
-	if (rhs.GetName() != GetName() || rhs.GetValue() != GetValue()) {
+	if (rhs.GetID() != GetID()) {
+	
+		return true;
+
+	}
+
+	return false;
+
+}
+
+bool Item::operator<(const Item &rhs) const {
+
+	if (rhs.GetID() > GetID()) {
 	
 		return true;
 
@@ -63,5 +86,17 @@ string Item::GetName() {
 int Item::GetValue() {
 
 	return this->value;
+
+}
+
+int Item::GetID() {
+
+	return this->itemID;
+
+}
+
+int Item::GetID() const {
+
+	return GetID();
 
 }
