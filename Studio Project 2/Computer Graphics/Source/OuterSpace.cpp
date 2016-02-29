@@ -238,7 +238,7 @@ void OuterSpace::Render() { //Render VBO here.
 	}
 
 
-	//UserInterFace();
+	UserInterFace();
 }
 
 void OuterSpace::UpdateUserInterFace(double &dt)
