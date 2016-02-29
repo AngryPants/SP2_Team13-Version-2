@@ -245,8 +245,6 @@ void OuterSpace::Render() { //Render VBO here.
 
 void OuterSpace::RenderObjects()
 {
-	int x, y, z;
-	int no = 1;
 	for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); ++it)
 	{
 		modelStack.PushMatrix();
@@ -258,21 +256,6 @@ void OuterSpace::RenderObjects()
 		}
 		else if ((*it)->GetName() == "Portal")
 		{
-			switch (no)
-			{
-			case 1:x = 1, y = 1, z = 1; break;
-			case 2:x = -1, y = 1, z = 1; break;
-			case 3:x = -1, y = -1, z = 1; break;
-			case 4:x = -1, y = 1, z = -1; break;
-			case 5:x = -1, y = -1, z = -1; break;
-			case 6:x = 1, y = -1, z = -1; break;
-			case 7:x = 1, y = 1, z = -1; break;
-			case 8:x = 1, y = -1, z = 1; break;
-			}
-
-			modelStack.Translate(1750 * x, 1750 * y, 1750 * z);
-			(*it)->SetPosition(1750 * x, 1750 * y, 1750 * z);
-			no++;
 			RenderMesh((*it)->GetMesh(), true);
 		}
 		modelStack.PopMatrix();

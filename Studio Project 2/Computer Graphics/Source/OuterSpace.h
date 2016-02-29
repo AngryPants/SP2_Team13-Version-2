@@ -10,6 +10,7 @@
 #include "AI.h"
 #include "Interactable.h"
 #include "CarrickStation.h"
+#include "WarpGate.h"
 #include "Spawn.h"
 
 class OuterSpace : public GameScene {
