@@ -183,9 +183,10 @@ void GameScene::RenderObjectOnScreen(Mesh* mesh, float sizex,float sizey,float s
 	modelStack.PushMatrix();
 	modelStack.LoadIdentity(); //Reset modelStack
 
-	modelStack.Scale(sizex, sizey, sizez);
+	
 	modelStack.Translate(x, y, 0);
 	modelStack.Rotate(rotate,rx,ry,rz);
+	modelStack.Scale(sizex, sizey, sizez);
 	RenderMesh(mesh, false);
 
 	projectionStack.PopMatrix();

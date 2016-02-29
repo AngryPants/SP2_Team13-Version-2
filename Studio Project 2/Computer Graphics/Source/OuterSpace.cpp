@@ -131,6 +131,7 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	enemies.push_back(Drone());
 	warning = false;
 	player->GetShip()->SetPosition(100,50,100);
+	
 }
 
 void OuterSpace::Update(double dt) {
@@ -183,6 +184,7 @@ void OuterSpace::Update(double dt) {
 	RigidBody* rigidBodyPointer = player->GetShip();
 	RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
 	camera.FollowObject(player->GetShip(), Vector3(0.0f, 3.0f, - 15.0f));
+	
 
 }
 
@@ -282,8 +284,8 @@ void OuterSpace::Render() { //Render VBO here.
 void OuterSpace::UserInterFace()
 {
 	//Debug Info
-	RenderTextOnScreen(mesh[FONT_CONSOLAS], "X: " + std::to_string((int)(player->GetShip()->GetPosition().x)) + " Y: " + std::to_string((int)(player->GetShip()->GetPosition().y)) + " Z: " + std::to_string((int)(player->GetShip()->GetPosition().z)), Colour(0, 1, 0), 70, 0, 15);
-	RenderTextOnScreen(mesh[FONT_CONSOLAS], "Health: " + std::to_string((int)player->GetShip()->GetHealth()), Colour(1, 0, 0), 70, 0, 1);
+	RenderTextOnScreen(mesh[FONT_CONSOLAS], "X: " + std::to_string((int)(player->GetShip()->GetPosition().x)) + " Y: " + std::to_string((int)(player->GetShip()->GetPosition().y)) + " Z: " + std::to_string((int)(player->GetShip()->GetPosition().z)), Colour(0, 1, 0), 70, 11, 14.8);
+
 	
 	RenderTextOnScreen(mesh[FONT_CONSOLAS], Interaction::GetRenderMessage(), Colour(0, 1, 0), 100, 5,8);
 
@@ -292,17 +294,21 @@ void OuterSpace::UserInterFace()
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "You Are leaving Area, please turn back", Colour(0, 1, 0), 100, 5, 8);
 	}
 
-	RenderObjectOnScreen(meshList[CROSSHAIR], 50,50,50,19.2, 10.8, 180, 1, 0, 0);
+	RenderObjectOnScreen(meshList[CROSSHAIR], 50, 50, 50, 955, 550, 180, 1, 0, 0);
+	RenderObjectOnScreen(meshList[MAXHEALTH], 600.0f, 40, 40, 955, 1000, 180, 1, 0, 0);
+	RenderObjectOnScreen(meshList[CURRHEALTH], player->GetShip()->GetHealth() / player->GetShip()->GetMaxHealth() * 600.0f, 40, 40, 955, 1000, 180, 1, 0, 0);
+	
+	if (Application::IsKeyPressed(VK_TAB)) // UI 2
+	{
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Current Health : " + std::to_string(((int)player->GetShip()->GetHealth())) + "/" + std::to_string(((int)player->GetShip()->GetMaxHealth())), Colour(1, 0, 0), 100, 1, 8);
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Gold : " + std::to_string(((int)player->GetInventory()->GetGold())), Colour(1, 1, 0.1), 100, 1, 7);
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "veldspar : " + std::to_string(((int)player)), Colour(0.5,0.5,0.5), 100, 1, 6);
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "omber : " + std::to_string(((int)player->GetShip()->GetHealth())), Colour(0.5, 0.35, 0.05), 100, 1, 5);
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "kernite : " + std::to_string(((int)player->GetInventory()->GetGold())), Colour(0, 1, 1), 100, 1, 4);
+		//RenderTextOnScreen(mesh[FONT_CONSOLAS], "kernite : " + std::to_string(((int)player->GetInventory()->GetGold())), Colour(0, 1, 1), 100, 1, 4);
 
-	/*modelStack.PushMatrix();
-	modelStack.Scale(1, 10 * player->GetShip()->GetMaxHealth(), 1);
-	RenderObjectOnScreen(meshList[MAXHEALTH], 100, 10, 10, 180, 1, 0, 0);
-	modelStack.PopMatrix();*/
+	}
 
-	std::cout << player->GetShip()->GetHealth() << std::endl;
-	modelStack.PushMatrix();
-	RenderObjectOnScreen(meshList[CURRHEALTH], 0.1 * player->GetShip()->GetHealth(), 40/* - 0.1* player->GetShip()->GetHealth()*/, 10, 2, 2, 180, 1, 0, 0);
-	modelStack.PopMatrix();
 }
 
 void OuterSpace::RenderObjects()
