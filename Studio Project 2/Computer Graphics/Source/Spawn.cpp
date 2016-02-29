@@ -280,5 +280,4 @@ void Spawn::CheckKill(Player &player) {
 		player.SetState(DEAD);
 
 	}
-
 }
