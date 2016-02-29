@@ -165,7 +165,7 @@ void GameScene::RenderTextOnScreen(Mesh* mesh, std::string text, Colour colour, 
 
 }
 
-void GameScene::RenderObjectOnScreen(Mesh* mesh, float size, float x, float y,float rotate,float rx,float ry,float rz) {
+void GameScene::RenderObjectOnScreen(Mesh* mesh, float sizex,float sizey,float sizez, float x, float y,float rotate,float rx,float ry,float rz) {
 
 	if (!mesh || mesh->textureID <= 0) {//Proper error check
 		return;
@@ -183,9 +183,10 @@ void GameScene::RenderObjectOnScreen(Mesh* mesh, float size, float x, float y,fl
 	modelStack.PushMatrix();
 	modelStack.LoadIdentity(); //Reset modelStack
 
-	modelStack.Scale(size, size, size);
+	
 	modelStack.Translate(x, y, 0);
 	modelStack.Rotate(rotate,rx,ry,rz);
+	modelStack.Scale(sizex, sizey, sizez);
 	RenderMesh(mesh, false);
 
 	projectionStack.PopMatrix();

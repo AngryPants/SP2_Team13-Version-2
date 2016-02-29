@@ -31,7 +31,6 @@ private:
 	string nameCheck;
 	string message1;
 	Mesh*meshList[END];
-
 	//GameObjects
 	list<Ship> enemies;
 	list<Interactable*> iSpaceObjects;
