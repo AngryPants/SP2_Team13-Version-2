@@ -166,6 +166,32 @@ void GameScene::RenderTextOnScreen(Mesh* mesh, std::string text, Colour colour, 
 }
 
 void GameScene::RenderObjectOnScreen(Mesh* mesh, float size, float x, float y) {
+
+	if (!mesh || mesh->textureID <= 0) {//Proper error check
+		return;
+	}
+
+	glDisable(GL_DEPTH_TEST);
+
+	Mtx44 ortho;
+
+	ortho.SetToOrtho(0, glfwGetVideoMode(glfwGetPrimaryMonitor())->width, 0, glfwGetVideoMode(glfwGetPrimaryMonitor())->height, -10, 10); //size of screen UI
+	projectionStack.PushMatrix();
+	projectionStack.LoadMatrix(ortho);
+
+	viewStack.PushMatrix();
+	viewStack.LoadIdentity(); //No need camera for ortho mode
+	modelStack.PushMatrix();
+	modelStack.LoadIdentity(); //Reset modelStack
+	modelStack.Scale(size, size, size);
+	modelStack.Translate(x, y, 0);
+	RenderMesh(mesh, true);
+
+	projectionStack.PopMatrix();
+	viewStack.PopMatrix();
+	modelStack.PopMatrix();
+
+	glEnable(GL_DEPTH_TEST);
 }
 
 void GameScene::RenderObject(GameObject* object, bool enableLight) {

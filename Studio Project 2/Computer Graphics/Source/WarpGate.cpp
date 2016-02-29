@@ -14,8 +14,6 @@ WarpGate::~WarpGate() {
 
 //Functions
 void WarpGate::Interact(Player &player, double &dt) {
-	
-
 	player.GetShip()->SetPosition(exitPosition);
 }
 

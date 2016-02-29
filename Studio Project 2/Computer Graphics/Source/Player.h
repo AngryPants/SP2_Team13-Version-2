@@ -2,7 +2,7 @@
 #define _PLAYER_H
 
 #include <string>
-#include "Inventory.h"
+//#include "Inventory.h"
 #include "Quest.h"
 #include <list>
 #include "PlayerShip.h"
