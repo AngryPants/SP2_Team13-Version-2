@@ -92,6 +92,12 @@ float SpaceObject::GetHealth() {
 
 }
 
+float SpaceObject::GetMaxHealth() {
+
+	return this->maxHealth;
+
+}
+
 unsigned int SpaceObject::GetID() {
 
 	return this->ID;
@@ -126,6 +132,22 @@ void SpaceObject::SetHealth(float health) {
 	} else {
 	
 		this->health = 0.0f;
+
+	}
+
+}
+
+void SpaceObject::SetMaxHealth(float health) {
+
+	if (health >= 0.0f) {
+	
+		this->maxHealth = health;
+
+	}
+
+	if (this->health > this->maxHealth) {
+	
+		this->health = this->maxHealth;
 
 	}
 

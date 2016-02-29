@@ -103,7 +103,7 @@ void AI::ShootAtTarget(Ship* ship, GameObject* target) {
 
 	Vector3 targetVector = target->GetPosition() - ship->GetPosition();
 
-	if (targetVector.Length() > 0.1f) {
+	if (targetVector.Length() > 0.1f && Physics::getDistance(ship->GetPosition(), target->GetPosition()) <= 250.0f) {
 	
 		if (ship->GetForwardVector().AngleBetween(targetVector) <= 25.0f) {
 		

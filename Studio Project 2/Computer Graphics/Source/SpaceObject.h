@@ -35,6 +35,7 @@ public:
 
 	//Getters
 	float GetHealth();
+	float GetMaxHealth();
 	unsigned int GetID();
 	Item GetRewardItem();
 	int GetRewardGold();
@@ -42,6 +43,7 @@ public:
 
 	//Setters
 	void SetHealth(float health);
+	void SetMaxHealth(float health);
 	void SetID(unsigned int ID);
 	void SetRewardItem(Item item, int numItems);
 	void SetRewardGold(int gold);

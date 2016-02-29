@@ -134,12 +134,7 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 }
 
 void OuterSpace::Update(double dt) {
-	if (Application::IsKeyPressed('1')) {
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	}
-	else if (Application::IsKeyPressed('2')) {
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	}
+
 	BoundsCheck();
 	//Player Update
 	PlayerControl::RotateShip(player->GetShip(), 160.0f * dt, dt);
