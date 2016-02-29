@@ -62,7 +62,6 @@ void Spawn::SpawnObjects(Ship* object, int i , Vector3 zoneCentre, float zoneRad
 	}
 	counter++;
 	objectList.push_back(listObject);
-	cout << "enermyship" << std::endl;
 
 }
 
@@ -177,7 +176,6 @@ void Spawn::SpawnObjects(Asteroid* object, int i, Vector3 zoneCentre, float zone
 	counter++;
 	objectList.push_back(listObject);
 
-	cout << "Asteroid" << std::endl;
 }
 
 void Spawn::UpdateObjects(Vector3 playerPos, Vector3 &zoneCenterValue)
@@ -246,7 +244,6 @@ void Spawn::UpdateObjects(Vector3 playerPos, Vector3 &zoneCenterValue)
 }
 
 void Spawn::EnableObject(SpawnZone &spawnZone, GameObject* object, Vector3 playerPosition) {
-
 
 
 }
