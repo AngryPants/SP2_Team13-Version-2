@@ -8,7 +8,13 @@ AI::~AI() {
 
 void AI::FaceTarget(GameObject* object, GameObject* target, float maxTurnAngle, double &dt) {
 	
-	if (Physics::getDistance(object->GetPosition(), target->GetPosition()) < 0.5f) {
+	float distance = Physics::getDistance(object->GetPosition(), target->GetPosition());
+
+	if (distance < 0.5f) {
+	
+		return;
+
+	} else if (distance < 50.0f && object->GetForwardVector().AngleBetween(target->GetPosition() - object->GetPosition()) <= 90.0f) {
 	
 		return;
 

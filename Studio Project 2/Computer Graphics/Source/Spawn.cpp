@@ -70,11 +70,12 @@ void Spawn::SpawnObjects(Asteroid* object, float objectRadius, unsigned int numO
 		while (timesFailed < 20 && regenerate) {
 		
 			MS spawnStack;
+			spawnStack.Translate(spawnZone.GetPosition().x, spawnZone.GetPosition().y, spawnZone.GetPosition().z);
 			spawnStack.Rotate(GenerateRange(0, 360), 1, 0, 0);
 			spawnStack.Rotate(GenerateRange(0, 360), 0, 1, 0);
 			spawnStack.Rotate(GenerateRange(0, 360), 0, 0, 1);
-			spawnStack.Translate(GenerateRange(spawnZone.GetPosition().x - spawnZone.GetSpawnRadius(), spawnZone.GetPosition().x + spawnZone.GetSpawnRadius()), GenerateRange(spawnZone.GetPosition().y - spawnZone.GetSpawnRadius(), spawnZone.GetPosition().y + spawnZone.GetSpawnRadius()), GenerateRange(spawnZone.GetPosition().z - spawnZone.GetSpawnRadius(), spawnZone.GetPosition().z + spawnZone.GetSpawnRadius()));
-		
+			spawnStack.Translate(GenerateRange(-spawnZone.GetSpawnRadius() + object->GetRadius(), spawnZone.GetSpawnRadius() - object->GetRadius()), GenerateRange(-spawnZone.GetSpawnRadius() + object->GetRadius(), spawnZone.GetSpawnRadius() - object->GetRadius()), GenerateRange(-spawnZone.GetSpawnRadius() + object->GetRadius(), spawnZone.GetSpawnRadius() - object->GetRadius()));
+
 			object->SetPosition(spawnStack.Top().a[12], spawnStack.Top().a[13], spawnStack.Top().a[14]);
 
 			for (list<Asteroid>::iterator iter = startPoint;; ++iter) {
@@ -157,10 +158,11 @@ void Spawn::SpawnObjects(Ship* object, float objectRadius, unsigned int numObjec
 		while (timesFailed < 20 && regenerate) {
 
 			MS spawnStack;
+			spawnStack.Translate(spawnZone.GetPosition().x, spawnZone.GetPosition().y, spawnZone.GetPosition().z);
 			spawnStack.Rotate(GenerateRange(0, 360), 1, 0, 0);
 			spawnStack.Rotate(GenerateRange(0, 360), 0, 1, 0);
 			spawnStack.Rotate(GenerateRange(0, 360), 0, 0, 1);
-			spawnStack.Translate(GenerateRange(spawnZone.GetPosition().x - spawnZone.GetSpawnRadius(), spawnZone.GetPosition().x + spawnZone.GetSpawnRadius()), GenerateRange(spawnZone.GetPosition().y - spawnZone.GetSpawnRadius(), spawnZone.GetPosition().y + spawnZone.GetSpawnRadius()), GenerateRange(spawnZone.GetPosition().z - spawnZone.GetSpawnRadius(), spawnZone.GetPosition().z + spawnZone.GetSpawnRadius()));
+			spawnStack.Translate(GenerateRange(-spawnZone.GetSpawnRadius() + object->GetRadius(), spawnZone.GetSpawnRadius() - object->GetRadius()), GenerateRange(-spawnZone.GetSpawnRadius() + object->GetRadius(), spawnZone.GetSpawnRadius() - object->GetRadius()), GenerateRange(-spawnZone.GetSpawnRadius() + object->GetRadius(), spawnZone.GetSpawnRadius() - object->GetRadius()));
 
 			object->SetPosition(spawnStack.Top().a[12], spawnStack.Top().a[13], spawnStack.Top().a[14]);
 
@@ -231,9 +233,16 @@ void Spawn::RespawnEnemies(SpawnZone &spawnZone, int seed) {
 
 void Spawn::CheckKill(SpaceObject* object, Player &player) {
 
-	if (object->IsDead()) {
+	if (object->IsDead() && !object->IsDisabled()) {
 	
 		player.GetInventory()->AddGold(object->GetRewardGold());
+		player.GetShip()->AddHealth(object->GetMaxHealth()/3.0f);
+		
+		if (player.GetShip()->GetHealth() > player.GetShip()->GetMaxHealth()) {
+		
+			player.GetShip()->SetHealth(player.GetShip()->GetMaxHealth());
+
+		}
 
 		if (object->GetRewardItem().GetID() != 0) {
 		

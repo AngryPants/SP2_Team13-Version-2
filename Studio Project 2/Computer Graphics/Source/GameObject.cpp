@@ -4,8 +4,7 @@ GameObject::GameObject(string name, string meshFile, const char* textureFile, Ma
 
 	this->name = name;
 	this->position = Vector3(0, 0, 0);
-	this->mesh = MeshBuilder::GenerateOBJ(name, meshFile);
-	this->mesh->textureID = LoadTGA(textureFile);
+	this->mesh = MeshBuilder::GenerateOBJ(name, meshFile);	this->mesh->textureID = LoadTGA(textureFile);
 	this->mesh->material = material;
 	this->rotationMatrix.SetToIdentity();
 	Enable();
