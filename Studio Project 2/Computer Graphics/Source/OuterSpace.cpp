@@ -119,23 +119,23 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	iSpaceObjects.push_back(new CarrickStation());
 
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Anna 1", Vector3(1750, 1750, 1750), Vector3(190, 190, 190)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Boris 1", Vector3(-1750, 1750, 1750), Vector3(-190, 190, 190)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Chariton 1", Vector3(1750, -1750, 1750), Vector3(190, -190, 190)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Dmitri 1", Vector3(1750, 1750, -1750), Vector3(190, 190, -190)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Elena 1", Vector3(-1750, -1750, 1750), Vector3(-190, -190, 190)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Fedor 1", Vector3(-1750, 1750, -1750), Vector3(-190, 190, -190)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Gregory 1", Vector3(1750, -1750, -1750), Vector3(190, -190, -190)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Hariton 1", Vector3(-1750, -1750, -1750), Vector3(-190, -190, -190)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Omber 2", Vector3(1750, 1750, 1750), Vector3(190, 190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Kernite 2", Vector3(-1750, 1750, 1750), Vector3(-190, 190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Drone 2", Vector3(1750, -1750, 1750), Vector3(190, -190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Dmitri 2", Vector3(1750, 1750, -1750), Vector3(190, 190, -190)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Elena 2", Vector3(-1750, -1750, 1750), Vector3(-190, -190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Veldspar 2", Vector3(-1750, 1750, -1750), Vector3(-190, 190, -190)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Alien 2", Vector3(1750, -1750, -1750), Vector3(190, -190, -190)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Pirate 2", Vector3(-1750, -1750, -1750), Vector3(-190, -190, -190)));
 
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Anna 2", Vector3(150,150,150), Vector3(1710, 1710, 1710)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Boris 2", Vector3(-150,150,150), Vector3(-1710, 1710, 1710)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Chariton 2", Vector3(150,-150,150), Vector3(1710, -1710, 1710)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Dmitri 2", Vector3(150,150,-150), Vector3(1710, 1710, -1710)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Elena 2", Vector3(-150,-150,150), Vector3(-1710, -1710, 1710)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Fedor 2", Vector3(-150,150,-150), Vector3(-1710, 1710, -1710)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Gregory 2", Vector3(150,-150,-150), Vector3(1710, -1710, -1710)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Hariton 2", Vector3(-150,-150,-150), Vector3(-1710, -1710, -1710)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Omber 1", Vector3(150, 150, 150), Vector3(1600, 1600, 1600)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Kernite 1", Vector3(-150, 150, 150), Vector3(-1600, 1600, 1600)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Drone 1", Vector3(150,-150,150), Vector3(1525, -1525, 1525)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Dmitri 1", Vector3(150, 150, -150), Vector3(1600, 1600, -1600)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Elena 1", Vector3(-150,-150,150), Vector3(-1525, -1525, 1525)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Veldspar 1", Vector3(-150, 150, -150), Vector3(-1600, 1600, -1600)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Alien 1", Vector3(150,-150,-150), Vector3(1525, -1525, -1525)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Pirate 1", Vector3(-150,-150,-150), Vector3(-1525, -1525, -1525)));
 
 	spawnZones.push_back(SpawnZone("Veldspar Zone", Vector3(-1250, 1250, -1250), 600.0f, 900.0f, 1200.0f));
 	Spawn::SpawnObjects(new Veldspar(), Veldspar().GetRadius(), 25, spawnZones[0], (*spawnZones[0].GetAsteroidList()), 7990);
