@@ -93,6 +93,7 @@
     <ClCompile Include="Source\Drone.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\GameScene.cpp" />
+    <ClCompile Include="Source\Hangar.cpp" />
     <ClCompile Include="Source\Interactable.cpp" />
     <ClCompile Include="Source\Interaction.cpp" />
     <ClCompile Include="Source\Inventory.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="Source\CarrickStation.h" />
     <ClInclude Include="Source\Collision.h" />
     <ClInclude Include="Source\Colour.h" />
+    <ClInclude Include="Source\Hangar.h" />
     <ClInclude Include="Source\Interactable.h" />
     <ClInclude Include="Source\Interaction.h" />
     <ClInclude Include="Source\Item.h" />

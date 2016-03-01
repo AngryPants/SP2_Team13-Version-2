@@ -218,7 +218,7 @@ void GameScene::RenderSkybox() {
 
 		modelStack.Translate(camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z);
 
-		float scaleSkybox = 1000.0f;
+		float scaleSkybox = 6000.0f;
 
 		for (GEOMETRY_TYPE i = SKYBOX_FRONT; i <= SKYBOX_RIGHT; i = static_cast<GEOMETRY_TYPE>(i + 1)) {
 

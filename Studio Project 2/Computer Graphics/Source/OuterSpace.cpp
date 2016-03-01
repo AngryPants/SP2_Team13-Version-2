@@ -15,7 +15,7 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	Mtx44 projection;
 	
-	projection.SetToPerspective(75.0f, (float)(glfwGetVideoMode(glfwGetPrimaryMonitor())->width)/(glfwGetVideoMode(glfwGetPrimaryMonitor())->height), 0.1f, 5000.0f); //FOV, Aspect Ratio, Near Plane, Far Plane.
+	projection.SetToPerspective(75.0f, (float)(glfwGetVideoMode(glfwGetPrimaryMonitor())->width)/(glfwGetVideoMode(glfwGetPrimaryMonitor())->height), 0.1f, 6000.0f); //FOV, Aspect Ratio, Near Plane, Far Plane.
 	projectionStack.LoadMatrix(projection);
 
 	glEnable(GL_DEPTH_TEST);
@@ -128,24 +128,24 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	iSpaceObjects.push_back(new WarpGate("Warp Gate Fedor", Vector3(-1750,1750,-1750), Vector3(50,10,5)));
 	iSpaceObjects.push_back(new WarpGate("Warp Gate Grigorij", Vector3(1750,-1750,-1750), Vector3(50,10,5)));
 	iSpaceObjects.push_back(new WarpGate("Warp Gate Hariton", Vector3(-1750,-1750,-1750), Vector3(50,10,5)));*/
-
-	spawnZones.push_back(SpawnZone("Veldspar Zone", Vector3(-750, 750, -750), 550.0f, 650.0f, 700.0f));
+	
+	spawnZones.push_back(SpawnZone("Veldspar Zone", Vector3(-1200, 1200, -1200), 1200.0f, 1500.0f, 1800.0f));
 	Spawn::SpawnObjects(new Veldspar(), Veldspar().GetRadius(), 1000, spawnZones[0], (*spawnZones[0].GetAsteroidList()), 7990);
-	spawnZones.push_back(SpawnZone("Omber Zone", Vector3(750, 750, 750), 550.0f, 650.0f, 700.0f));
+	spawnZones.push_back(SpawnZone("Omber Zone", Vector3(1200, 1200, 1200), 1200.0f, 1500.0f, 1800.0f));
 	Spawn::SpawnObjects(new Omber(), Omber().GetRadius(), 1000, spawnZones[1], (*spawnZones[1].GetAsteroidList()), 12);
-	spawnZones.push_back(SpawnZone("Kernite Zone", Vector3(-750, 750, -750), 550.0f, 650.0f, 700.0f));
+	spawnZones.push_back(SpawnZone("Kernite Zone", Vector3(-1200, 1200, 1200), 1200.0f, 1500.0f, 1800.0f));
 	Spawn::SpawnObjects(new Kernite(), Kernite().GetRadius(), 1000, spawnZones[2], (*spawnZones[2].GetAsteroidList()), 489);
-	spawnZones.push_back(SpawnZone("Drone Zone", Vector3(800, -800, 800), 300.0f, 400.0f, 700.0f));
+	spawnZones.push_back(SpawnZone("Drone Zone", Vector3(1300, -1300, 1300), 1200.0f, 1500.0f, 1700.0f));
 	Spawn::SpawnObjects(new Drone(), Drone().GetRadius(), 6, spawnZones[3], (*spawnZones[3].GetEnemyList()), 42);
-	spawnZones.push_back(SpawnZone("Pirate Zone", Vector3(-800, -800, -800), 300.0f, 400.0f, 700.0f));
+	spawnZones.push_back(SpawnZone("Pirate Zone", Vector3(-1300, -1300, -1300), 1200.0f, 1500.0f, 1700.0f));
 	Spawn::SpawnObjects(new Pirate(), Pirate().GetRadius(), 6, spawnZones[4], (*spawnZones[4].GetEnemyList()), 234);
-	spawnZones.push_back(SpawnZone("Alien Zone", Vector3(800, -800, -800), 300.0f, 400.0f, 700.0f));
+	spawnZones.push_back(SpawnZone("Alien Zone", Vector3(1300, -1300, -1300), 1200.0f, 1500.0f, 1700.0f));
 	Spawn::SpawnObjects(new Alien(), Alien().GetRadius(), 6, spawnZones[5], (*spawnZones[5].GetEnemyList()), 153);
 
 	player = new Player("Malcolm", "", "", "");
 
 	warning = false;
-	player->GetShip()->SetPosition(100,50,150);
+	player->GetShip()->SetPosition(400, 300, 400);
 
 
 
