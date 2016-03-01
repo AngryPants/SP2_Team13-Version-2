@@ -101,7 +101,7 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	SetSkybox("Image//Skybox//Top.tga", "Image//Skybox//Bottom.tga", "Image//Skybox//Front.tga", "Image//Skybox//Left.tga", "Image//Skybox//Back.tga", "Image//Skybox//Right.tga");
 
 	meshList[CROSSHAIR] = MeshBuilder::GenerateQuad("Crosshair", Colour(1, 0, 0), 1,1);
-	meshList[CROSSHAIR]->textureID = LoadTGA("Image//UI//CrossHair//Crosshair.tga");
+	meshList[CROSSHAIR]->textureID = LoadTGA("Image//UI//Crosshair.tga");
 
 	meshList[MAXHEALTH] = MeshBuilder::GenerateQuad("MAX HP", Colour(1, 0, 0), 1, 1);
 	meshList[MAXHEALTH]->textureID = LoadTGA("Image//UI//Life//MaxLife.tga");
@@ -119,17 +119,27 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	player = new Player("Malcolm", "", "", "");
 
-	/*iSpaceObjects.push_back(new CarrickStation());
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Anna", Vector3(1750,1750,1750), Vector3(50,10,5)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Boris", Vector3(-1750,1750,1750), Vector3(50,10,5)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Chariton", Vector3(1750,-1750,1750), Vector3(50,10,5)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Dmitri", Vector3(1750,1750,-1750), Vector3(50,10,5)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Elena", Vector3(-1750,-1750,1750), Vector3(50,10,5)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Fedor", Vector3(-1750,1750,-1750), Vector3(50,10,5)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Grigorij", Vector3(1750,-1750,-1750), Vector3(50,10,5)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Hariton", Vector3(-1750,-1750,-1750), Vector3(50,10,5)));*/
-	
-	spawnZones.push_back(SpawnZone("Veldspar Zone", Vector3(-1200, 1200, -1200), 1200.0f, 1500.0f, 1800.0f));
+	iSpaceObjects.push_back(new CarrickStation());
+
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Anna 1", Vector3(1750, 1750, 1750), Vector3(320, 320, 320)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Boris 1", Vector3(-1750, 1750, 1750), Vector3(-320, 320, 320)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Chariton 1", Vector3(1750, -1750, 1750), Vector3(320, -320, 320)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Dmitri 1", Vector3(1750, 1750, -1750), Vector3(320, 320, -320)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Elena 1", Vector3(-1750, -1750, 1750), Vector3(-320, -320, 320)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Fedor 1", Vector3(-1750, 1750, -1750), Vector3(-320, 320, -320)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Gregory 1", Vector3(1750, -1750, -1750), Vector3(320, -320, -320)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Hariton 1", Vector3(-1750, -1750, -1750), Vector3(-320, -320, -320)));
+
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Anna 2", Vector3(150,150,150), Vector3(1950, 1950, 1950)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Boris 2", Vector3(-150,150,150), Vector3(-1950, 1950, 1950)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Chariton 2", Vector3(150,-150,150), Vector3(1950, -1950, 1950)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Dmitri 2", Vector3(150,150,-150), Vector3(1950, 1950, -1950)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Elena 2", Vector3(-150,-150,150), Vector3(-1950, -1950, 1950)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Fedor 2", Vector3(-150,150,-150), Vector3(-1950, 1950, -1950)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Gregory 2", Vector3(150,-150,-150), Vector3(1950, -1950, -1950)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Hariton 2", Vector3(-150,-150,-150), Vector3(-1950, -1950, -1950)));
+
+	spawnZones.push_back(SpawnZone("Veldspar Zone", Vector3(-750, 750, -750), 550.0f, 650.0f, 700.0f));
 	Spawn::SpawnObjects(new Veldspar(), Veldspar().GetRadius(), 1000, spawnZones[0], (*spawnZones[0].GetAsteroidList()), 7990);
 	spawnZones.push_back(SpawnZone("Omber Zone", Vector3(1200, 1200, 1200), 1200.0f, 1500.0f, 1800.0f));
 	Spawn::SpawnObjects(new Omber(), Omber().GetRadius(), 1000, spawnZones[1], (*spawnZones[1].GetAsteroidList()), 12);
@@ -261,7 +271,7 @@ void OuterSpace::BoundsCheck()
 		Vector3 location;
 		for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); ++it)
 		{
-			if ((*it)->GetName() == "Portal")
+			if ((*it)->GetName() != "Carrick Station")
 			{
 				int temp = Physics::getDistance(player->GetShip()->GetPosition(), (*it)->GetPosition());
 				if (shortestDist > temp)
@@ -353,9 +363,9 @@ void OuterSpace::UserInterFace()
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "You Are leaving Area, please turn back", Colour(0, 1, 0), 100, 5, 8);
 	}
 
-	RenderObjectOnScreen(meshList[CROSSHAIR], 50, 50, 50, 955, 550, 180, 1, 0, 0);
-	RenderObjectOnScreen(meshList[MAXHEALTH], 600.0f, 40, 40, 955, 1000, 180, 1, 0, 0);
-	RenderObjectOnScreen(meshList[CURRHEALTH], player->GetShip()->GetHealth() / player->GetShip()->GetMaxHealth() * 600.0f, 40, 40, 955, 1000, 180, 1, 0, 0);
+	RenderObjectOnScreen(meshList[CROSSHAIR], 50, 50, 50, 957.5, 542, 180, 1, 0, 0);
+	RenderObjectOnScreen(meshList[MAXHEALTH], 600.0f, 30, 40, 955, 1000, 180, 1, 0, 0);
+	RenderObjectOnScreen(meshList[CURRHEALTH], player->GetShip()->GetHealth() / player->GetShip()->GetMaxHealth() * 600.0f, 30, 40, 955, 1000, 180, 1, 0, 0);
 	
 	if (Application::IsKeyPressed(VK_TAB)) // UI 2
 	{
