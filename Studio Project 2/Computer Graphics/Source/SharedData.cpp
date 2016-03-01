@@ -2,7 +2,7 @@
 
 SharedData::SharedData() {
 
-	sceneNumber = 2;
+	sceneNumber = 1;
 	soundOn = true;
 	quitGame = false;
 
