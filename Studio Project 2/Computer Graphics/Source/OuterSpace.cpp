@@ -115,49 +115,45 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	meshList[TAB] = MeshBuilder::GenerateQuad("Tab", Colour(0, 1, 0), 1, 1);
 	meshList[TAB]->textureID = LoadTGA("Image//UI//Overlay//QuestScreen.tga");
 
-	//Spawn::SpawnObjects(new Veldspar(), Veldspar().GetRadius(), 200, spawnZone1, asteroids, 17);
-
 	player = new Player("Malcolm", "", "", "");
 
 	iSpaceObjects.push_back(new CarrickStation());
 
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Anna 1", Vector3(1750, 1750, 1750), Vector3(320, 320, 320)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Boris 1", Vector3(-1750, 1750, 1750), Vector3(-320, 320, 320)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Chariton 1", Vector3(1750, -1750, 1750), Vector3(320, -320, 320)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Dmitri 1", Vector3(1750, 1750, -1750), Vector3(320, 320, -320)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Elena 1", Vector3(-1750, -1750, 1750), Vector3(-320, -320, 320)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Fedor 1", Vector3(-1750, 1750, -1750), Vector3(-320, 320, -320)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Gregory 1", Vector3(1750, -1750, -1750), Vector3(320, -320, -320)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Hariton 1", Vector3(-1750, -1750, -1750), Vector3(-320, -320, -320)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Anna 1", Vector3(1750, 1750, 1750), Vector3(190, 190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Boris 1", Vector3(-1750, 1750, 1750), Vector3(-190, 190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Chariton 1", Vector3(1750, -1750, 1750), Vector3(190, -190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Dmitri 1", Vector3(1750, 1750, -1750), Vector3(190, 190, -190)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Elena 1", Vector3(-1750, -1750, 1750), Vector3(-190, -190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Fedor 1", Vector3(-1750, 1750, -1750), Vector3(-190, 190, -190)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Gregory 1", Vector3(1750, -1750, -1750), Vector3(190, -190, -190)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Hariton 1", Vector3(-1750, -1750, -1750), Vector3(-190, -190, -190)));
 
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Anna 2", Vector3(150,150,150), Vector3(1950, 1950, 1950)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Boris 2", Vector3(-150,150,150), Vector3(-1950, 1950, 1950)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Chariton 2", Vector3(150,-150,150), Vector3(1950, -1950, 1950)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Dmitri 2", Vector3(150,150,-150), Vector3(1950, 1950, -1950)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Elena 2", Vector3(-150,-150,150), Vector3(-1950, -1950, 1950)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Fedor 2", Vector3(-150,150,-150), Vector3(-1950, 1950, -1950)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Gregory 2", Vector3(150,-150,-150), Vector3(1950, -1950, -1950)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Hariton 2", Vector3(-150,-150,-150), Vector3(-1950, -1950, -1950)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Anna 2", Vector3(150,150,150), Vector3(1710, 1710, 1710)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Boris 2", Vector3(-150,150,150), Vector3(-1710, 1710, 1710)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Chariton 2", Vector3(150,-150,150), Vector3(1710, -1710, 1710)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Dmitri 2", Vector3(150,150,-150), Vector3(1710, 1710, -1710)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Elena 2", Vector3(-150,-150,150), Vector3(-1710, -1710, 1710)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Fedor 2", Vector3(-150,150,-150), Vector3(-1710, 1710, -1710)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Gregory 2", Vector3(150,-150,-150), Vector3(1710, -1710, -1710)));
+	iSpaceObjects.push_back(new WarpGate("Warp Gate Hariton 2", Vector3(-150,-150,-150), Vector3(-1710, -1710, -1710)));
 
-	spawnZones.push_back(SpawnZone("Veldspar Zone", Vector3(-750, 750, -750), 550.0f, 650.0f, 700.0f));
-	Spawn::SpawnObjects(new Veldspar(), Veldspar().GetRadius(), 1000, spawnZones[0], (*spawnZones[0].GetAsteroidList()), 7990);
-	spawnZones.push_back(SpawnZone("Omber Zone", Vector3(1200, 1200, 1200), 1200.0f, 1500.0f, 1800.0f));
-	Spawn::SpawnObjects(new Omber(), Omber().GetRadius(), 1000, spawnZones[1], (*spawnZones[1].GetAsteroidList()), 12);
-	spawnZones.push_back(SpawnZone("Kernite Zone", Vector3(-1200, 1200, 1200), 1200.0f, 1500.0f, 1800.0f));
-	Spawn::SpawnObjects(new Kernite(), Kernite().GetRadius(), 1000, spawnZones[2], (*spawnZones[2].GetAsteroidList()), 489);
-	spawnZones.push_back(SpawnZone("Drone Zone", Vector3(1300, -1300, 1300), 1200.0f, 1500.0f, 1700.0f));
-	Spawn::SpawnObjects(new Drone(), Drone().GetRadius(), 6, spawnZones[3], (*spawnZones[3].GetEnemyList()), 42);
-	spawnZones.push_back(SpawnZone("Pirate Zone", Vector3(-1300, -1300, -1300), 1200.0f, 1500.0f, 1700.0f));
+	spawnZones.push_back(SpawnZone("Veldspar Zone", Vector3(-1250, 1250, -1250), 600.0f, 900.0f, 1200.0f));
+	Spawn::SpawnObjects(new Veldspar(), Veldspar().GetRadius(), 25, spawnZones[0], (*spawnZones[0].GetAsteroidList()), 7990);
+	spawnZones.push_back(SpawnZone("Omber Zone", Vector3(1250, 1250, 1250), 600.0f, 900.0f, 1200.0f));
+	Spawn::SpawnObjects(new Omber(), Omber().GetRadius(), 25, spawnZones[1], (*spawnZones[1].GetAsteroidList()), 12);
+	spawnZones.push_back(SpawnZone("Kernite Zone", Vector3(-1250, 1250, 1250), 600.0f, 900.0f, 1200.0f));
+	Spawn::SpawnObjects(new Kernite(), Kernite().GetRadius(), 25, spawnZones[2], (*spawnZones[2].GetAsteroidList()), 489);
+	spawnZones.push_back(SpawnZone("Drone Zone", Vector3(1250, -1250, 1250), 150.0f, 500.0f, 800.0f));
+	Spawn::SpawnObjects(new Drone(), Drone().GetRadius(), 8, spawnZones[3], (*spawnZones[3].GetEnemyList()), 42);
+	spawnZones.push_back(SpawnZone("Pirate Zone", Vector3(-1250, -1250, -1250), 150.0f, 500.0f, 800.0f));
 	Spawn::SpawnObjects(new Pirate(), Pirate().GetRadius(), 6, spawnZones[4], (*spawnZones[4].GetEnemyList()), 234);
-	spawnZones.push_back(SpawnZone("Alien Zone", Vector3(1300, -1300, -1300), 1200.0f, 1500.0f, 1700.0f));
-	Spawn::SpawnObjects(new Alien(), Alien().GetRadius(), 6, spawnZones[5], (*spawnZones[5].GetEnemyList()), 153);
+	spawnZones.push_back(SpawnZone("Alien Zone", Vector3(1250, -1250, -1250), 150.0f, 500.0f, 800.0f));
+	Spawn::SpawnObjects(new Alien(), Alien().GetRadius(), 4, spawnZones[5], (*spawnZones[5].GetEnemyList()), 153);
 
 	player = new Player("Malcolm", "", "", "");
 
 	warning = false;
-	player->GetShip()->SetPosition(400, 300, 400);
-
-
+	player->GetShip()->SetPosition(1250, -1250, -1250);
 
 }
 
@@ -173,7 +169,7 @@ void OuterSpace::Update(double dt) {
 	//BoundsCheck();
 	//Player Update
 	PlayerControl::RotateShip(player->GetShip(), 160.0f * dt, dt);
-	PlayerControl::MoveShip(player->GetShip(), 150000.0f, dt);
+	PlayerControl::MoveShip(player->GetShip(), 400000.0f, dt);
 	PlayerControl::Shoot(player->GetShip(), camera.GetPosition() + player->GetShip()->GetForwardVector());
 	player->GetShip()->Update(dt);
 
@@ -240,8 +236,7 @@ void OuterSpace::Update(double dt) {
 	RigidBody* rigidBodyPointer = player->GetShip();
 	RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
 	camera.FollowObject(player->GetShip(), Vector3(0.0f, 3.0f, - 15.0f));
-	
-	cout << player->GetShip()->GetPosition().x << " " << player->GetShip()->GetPosition().y << " " << player->GetShip()->GetPosition().z << endl;
+
 }
 
 void OuterSpace::UpdateSpaceInteractable(double &dt)

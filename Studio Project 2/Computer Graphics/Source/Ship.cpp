@@ -82,7 +82,7 @@ void Ship::Shoot(Vector3 bulletPosition) {
 
 	if (timeToFire <= 0.0f) {
 
-		Bullet bullet = Bullet(bulletPosition, GetRotationMatrix(), GetDamage(), textureFile, GetVelocity().Length() + 1300.0f);
+		Bullet bullet = Bullet(bulletPosition, GetRotationMatrix(), GetDamage(), textureFile, GetVelocity().Length() + 500.0f);
 		bullets.push_back(bullet);
 		timeToFire = 1.0f/fireRate;
 

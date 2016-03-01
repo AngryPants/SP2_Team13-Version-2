@@ -9,7 +9,7 @@ SpawnZone::SpawnZone() {
 	SetSpawnRadius(0.0f);
 	SetActiveRadius(0.0f);
 	SetDespawnRadius(0.0f);
-	zoneState = INACTIVE;
+	zoneState = ACTIVE;
 
 }
 
@@ -20,7 +20,7 @@ SpawnZone::SpawnZone(string name, Vector3 position, float spawnRadius, float act
 	SetSpawnRadius(spawnRadius);
 	SetActiveRadius(activeRadius);
 	SetDespawnRadius(despawnRadius);
-	zoneState = INACTIVE;
+	zoneState = ACTIVE;
 
 }
 
