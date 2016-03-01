@@ -15,6 +15,8 @@ WarpGate::~WarpGate() {
 //Functions
 void WarpGate::Interact(Player &player, double &dt) {
 	player.GetShip()->SetPosition(exitPosition);
+	player.GetShip()->SetVelocity(0, 0, 0);
+	player.GetShip()->SetAcceleration(0, 0, 0);
 }
 
 void WarpGate::PlayAnimation(Player &player, double &dt) {

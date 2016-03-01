@@ -29,7 +29,7 @@ bool Interaction::ShipToObject(Player &player, Interactable* object, double &dt)
 		{
 			message = object->GetInteractMessage();
 
-			if (object->GetName() == "Portal" ) 
+			if (object->GetName() != "Carrick Station" ) 
 			{
 				if (Application::IsKeyPressed('E'))
 				{
