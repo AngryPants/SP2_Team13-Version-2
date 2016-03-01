@@ -98,6 +98,12 @@ int Inventory::GetNumberOf(Item item) {
 
 }
 
+map<Item, int>* Inventory::GetItems() {
+
+	return &(this->items);
+
+}
+
 //Setters
 void Inventory::SetGold(int gold) {
 	 

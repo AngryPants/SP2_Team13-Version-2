@@ -28,6 +28,7 @@ public:
 	//Getters
 	int GetGold();
 	int GetNumberOf(Item item);
+	map<Item, int>* GetItems();
 
 	//Setters
 	void SetGold(int gold);;

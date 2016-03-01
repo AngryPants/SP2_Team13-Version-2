@@ -115,6 +115,18 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	meshList[TAB] = MeshBuilder::GenerateQuad("Tab", Colour(0, 1, 0), 1, 1);
 	meshList[TAB]->textureID = LoadTGA("Image//UI//Overlay//QuestScreen.tga");
 
+	meshList[VELDSPAR] = MeshBuilder::GenerateOBJ("VELDSPAR", "OBJ//Asteroid//Asteroid.obj");
+	meshList[VELDSPAR]->textureID = LoadTGA("Image//Asteroid//Veldspar.tga");
+	meshList[VELDSPAR]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
+
+	meshList[OMBER] = MeshBuilder::GenerateOBJ("OMBER", "OBJ//Asteroid//Asteroid.obj");
+	meshList[OMBER]->textureID = LoadTGA("Image//Asteroid//Omber.tga");
+	meshList[OMBER]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
+
+	meshList[KERNITE] = MeshBuilder::GenerateOBJ("KERNITE", "OBJ//Asteroid//Asteroid.obj");
+	meshList[KERNITE]->textureID = LoadTGA("Image//Asteroid//Kernite.tga");
+	meshList[KERNITE]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
+
 	//Spawn::SpawnObjects(new Veldspar(), Veldspar().GetRadius(), 200, spawnZone1, asteroids, 17);
 
 	player = new Player("Malcolm", "", "", "");
@@ -153,7 +165,7 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	Spawn::SpawnObjects(new Alien(), Alien().GetRadius(), 6, spawnZones[5], (*spawnZones[5].GetEnemyList()), 153);
 
 	player = new Player("Malcolm", "", "", "");
-
+	player->GetInventory()->AddItem(Item("Test Item", 123, 5), 12);
 	warning = false;
 	player->GetShip()->SetPosition(100,50,150);
 
@@ -240,8 +252,6 @@ void OuterSpace::Update(double dt) {
 	RigidBody* rigidBodyPointer = player->GetShip();
 	RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
 	camera.FollowObject(player->GetShip(), Vector3(0.0f, 3.0f, - 15.0f));
-	
-	cout << player->GetShip()->GetPosition().x << " " << player->GetShip()->GetPosition().y << " " << player->GetShip()->GetPosition().z << endl;
 }
 
 void OuterSpace::UpdateSpaceInteractable(double &dt)
@@ -354,29 +364,35 @@ void OuterSpace::UserInterFace()
 
 	if (Interaction::GetRenderMessage() != "")
 	{
-		RenderObjectOnScreen(meshList[DISPLAY], 1200 , 100, 100, 1000, 825, 180, 1, 0, 0);
+		RenderObjectOnScreen(meshList[DISPLAY], 1200 , 100, 100, 1000, 825,0, 180, 1, 0, 0);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], Interaction::GetRenderMessage(), Colour(0, 1, 0), 100, 5, 8);
 	}
 	if (warning)
 	{
-		RenderObjectOnScreen(meshList[DISPLAY], 1200, 100, 100, 1070, 825, 180, 1, 0, 0);
+		RenderObjectOnScreen(meshList[DISPLAY], 1200, 100, 100, 1070, 825,0, 180, 1, 0, 0);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "You Are leaving Area, please turn back", Colour(0, 1, 0), 100, 5, 8);
 	}
 
-	RenderObjectOnScreen(meshList[CROSSHAIR], 50, 50, 50, 957.5, 542, 180, 1, 0, 0);
-	RenderObjectOnScreen(meshList[MAXHEALTH], 600.0f, 30, 40, 955, 1000, 180, 1, 0, 0);
-	RenderObjectOnScreen(meshList[CURRHEALTH], player->GetShip()->GetHealth() / player->GetShip()->GetMaxHealth() * 600.0f, 30, 40, 955, 1000, 180, 1, 0, 0);
+	RenderObjectOnScreen(meshList[CROSSHAIR], 50, 50, 50, 957.5, 542,0, 180, 1, 0, 0);
+	RenderObjectOnScreen(meshList[MAXHEALTH], 600.0f, 30, 40, 955, 1000,0, 180, 1, 0, 0);
+	RenderObjectOnScreen(meshList[CURRHEALTH], player->GetShip()->GetHealth() / player->GetShip()->GetMaxHealth() * 600.0f, 30, 40, 955, 1000,0, 180, 1, 0, 0);
 	
 	if (Application::IsKeyPressed(VK_TAB)) // UI 2
 	{
-		RenderObjectOnScreen(meshList[TAB], 1000, 1100, 100, 500, 550, 180, 0, 1, 0);
+		RenderObjectOnScreen(meshList[TAB], 1000, 1100, 100, 500, 550,0, 180, 0, 1, 0);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "STATUS", Colour(1, 0, 0), 300, 0.8, 3);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Current Health : " + std::to_string(((int)player->GetShip()->GetHealth())) + "/" + std::to_string(((int)player->GetShip()->GetMaxHealth())), Colour(1, 0, 0), 100, 1, 8);
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Gold : " + std::to_string(((int)player->GetInventory()->GetGold())), Colour(1, 1, 0.1), 100, 1, 7);
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], "veldspar : " /*+ std::to_string(((int)player))*/, Colour(0.5,0.5,0.5), 100, 1, 6);
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], "omber : "/* + std::to_string(((int)player->GetShip()->GetHealth()))*/, Colour(0.5, 0.35, 0.05), 100, 1, 5);
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], "kernite : " /*+ std::to_string(((int)player->GetInventory()->GetGold()))*/, Colour(0, 1, 1), 100, 1, 4);
-	
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Gold : " + std::to_string(player->GetInventory()->GetGold()), Colour(1, 1, 0.1), 100, 1, 7);
+
+		int posY = 6;
+
+		for (map<Item, int>::iterator iter = player->GetInventory()->GetItems()->begin(); iter != player->GetInventory()->GetItems()->end(); ++iter) {
+
+			RenderTextOnScreen(mesh[FONT_CONSOLAS], (iter->first).GetName() + ": " + std::to_string(iter->second), Colour(0, 1, 1), 100, 1, posY);
+			--posY;
+
+		}
+
 	}
 
 }
