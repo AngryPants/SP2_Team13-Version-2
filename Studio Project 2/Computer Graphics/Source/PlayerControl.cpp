@@ -88,8 +88,17 @@ void PlayerControl::MoveShip(PlayerShip* ship, float force, double &dt) {
 
 	if (ship->GetVelocity().Length() > ship->GetSpeed()) {
 	
-		ship->SetVelocity(ship->GetVelocity().Normalized() * ship->GetSpeed());
-		ship->SetAcceleration(0.0f, 0.0f, 0.0f);
+		if (ship->GetVelocity().Length() <= 0.1f) {
+		
+			ship->SetVelocity(0.0f, 0.0f, 0.0f);
+			ship->SetAcceleration(0.0f, 0.0f, 0.0f);
+
+		} else {
+
+			ship->SetVelocity(ship->GetVelocity().Normalized() * ship->GetSpeed());
+			ship->SetAcceleration(0.0f, 0.0f, 0.0f);
+
+		}
 
 	}
 

@@ -31,19 +31,12 @@ private:
 	string nameCheck;
 	string message1;
 	Mesh*meshList[END];
-	//GameObjects
-	//list<Asteroid> asteroids;
-	//list<Ship> enemies;
+	
+	//Interactable Objects
 	list<Interactable*> iSpaceObjects;
-	SpawnZone spawnZone1;
-
-	SpawnZone veldsparZone;
-	SpawnZone omberZone;
-	SpawnZone kerniteZone;
-
-	SpawnZone droneZone;
-	SpawnZone pirateZone;
-	SpawnZone alienZone;
+	
+	//Zones
+	vector<SpawnZone> spawnZones;
 
 	Player* player;
 	

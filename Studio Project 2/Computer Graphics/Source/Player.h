@@ -21,7 +21,7 @@ enum PLAYER_STATE {
 	PLAYING,
 	DEAD,
 
-	NUM_STATE,
+	NUM_PLAYER_STATE,
 
 };
 

@@ -33,13 +33,10 @@ public:
 	static int counter;
 
 	//Functions
-	static void UpdateObjects(Vector3 playerPos, Vector3 &zoneCenterValue);
-
 	static void SpawnObjects(Asteroid* object, float objectRadius, unsigned int numObjects, SpawnZone &spawnZone, list<Asteroid> &asteroids, int seed);
 	static void SpawnObjects(Ship* object, float objectRadius, unsigned int numObjects, SpawnZone &spawnZone, list<Ship> &ship, int seed);
-	static void EnableObject(SpawnZone &spawnZone, GameObject* object, Vector3 playerPosition);
-	static void DisableObject(SpawnZone &spawnZone, GameObject* object, Vector3 playerPosition);
-
+	static void RespawnEnemies(SpawnZone &spawnZone, int seed);
+	static void CheckZone(SpawnZone &spawnZone, Vector3 playerPosition);
 	static void CheckKill(SpaceObject* object, Player &player);
 	static void CheckKill(Player &player);
 

@@ -24,21 +24,36 @@ void Collision::SpaceObjectToSpaceObject(SpaceObject* object1, SpaceObject* obje
 
 	if (CollisionCheck(object1, object2)) {
 	
-		object1->DecreaseHealth(((object2->GetVelocity().Length() + object1->GetVelocity().Length()) * dt)/2.0f);
-		object2->DecreaseHealth(((object2->GetVelocity().Length() + object1->GetVelocity().Length()) * dt)/2.0f);
+		object1->DecreaseHealth(((object2->GetVelocity().Length() + object1->GetVelocity().Length()) * dt));
+		object2->DecreaseHealth(((object2->GetVelocity().Length() + object1->GetVelocity().Length()) * dt));
 
-		if ((object1->GetVelocity().Length() + object2->GetVelocity().Length()) > 50.0f) {
+		if (object1->GetMass() > object2->GetMass()) {
+		
+			object2->SetPosition(object1->GetPosition() + (object2->GetPosition() - object1->GetPosition()).Normalized() * (object2->GetRadius() + object1->GetRadius()));
+
+		} else if (object1->GetMass() < object2->GetMass()) {
+		
+			object1->SetPosition(object2->GetPosition() + (object1->GetPosition() - object2->GetPosition()).Normalized() * (object2->GetRadius() + object1->GetRadius()));
+
+		} else {
+		
+			Vector3 object1Position = object1->GetPosition();
+			object1->SetPosition(object2->GetPosition() + (object1->GetPosition() - object2->GetPosition()).Normalized() * ((object2->GetRadius() + object1->GetRadius())/1.0f));
+			object2->SetPosition(object1Position + (object2->GetPosition() - object1Position).Normalized() * ((object2->GetRadius() + object1->GetRadius())/1.0f));
+
+		}
+
+		if ((object1->GetVelocity().Length() + object2->GetVelocity().Length()) > 20.0f) {
 		
 			object1->AddForce((object1->GetPosition() - object2->GetPosition()).Normalized() * ((object1->GetVelocity().Length() + object2->GetVelocity().Length()) * 800.0f), dt);
 			object2->AddForce((object2->GetPosition() - object1->GetPosition()).Normalized() * ((object1->GetVelocity().Length() + object2->GetVelocity().Length()) * 800.0f), dt);
 
 		} else {
 		
-			object1->AddForce((object1->GetPosition() - object2->GetPosition()).Normalized() * (40.0f * 800.0f), dt);
-			object2->AddForce((object2->GetPosition() - object1->GetPosition()).Normalized() * (40.0f * 800.0f), dt);
+			object1->AddForce((object1->GetPosition() - object2->GetPosition()).Normalized() * (20.0f * 800.0f), dt);
+			object2->AddForce((object2->GetPosition() - object1->GetPosition()).Normalized() * (20.0f * 800.0f), dt);
 		
 		}
-		
 
 	}
 
@@ -53,18 +68,27 @@ bool Collision::CollisionCheck(SpaceObject* object1, SpaceObject* object2) {
 	// their radii, there's no way they can hit.
 	double dist = Physics::getDistance(object2->GetPosition(), object1->GetPosition());//B.center.distance(A.center);
 	double sumRadii = (object2->GetRadius() + object1->GetRadius());
+
+	if (dist <= sumRadii) {
+	
+		return true;
+
+	}
+
 	dist -= sumRadii;
 
 	Vector3 movevec;
 	movevec = object1->GetVelocity();
 
 	//float movevec = Physics::getDistance(object1->GetPosition(), object1->GetPosition() + object1->GetForwardVector());
-	if ( movevec.Length() < dist){
+	if (movevec.Length() < dist) {
+
 		return false;
+
 	}
 
 	// Normalize the movevec
-	Vector3 N = movevec;
+	Vector3 N = movevec; //This crashes when trying to normalise.
 	N.Normalize();
 
 	// Find C, the vector from the center of the moving

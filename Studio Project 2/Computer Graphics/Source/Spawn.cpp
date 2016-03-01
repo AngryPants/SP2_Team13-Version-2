@@ -124,7 +124,6 @@ void Spawn::SpawnObjects(Asteroid* object, float objectRadius, unsigned int numO
 
 }
 
-
 void Spawn::SpawnObjects(Ship* object, float objectRadius, unsigned int numObjects, SpawnZone &spawnZone, list<Ship> &ship, int seed) {
 
 	if (objectRadius > spawnZone.GetSpawnRadius()) {
@@ -212,78 +211,21 @@ void Spawn::SpawnObjects(Ship* object, float objectRadius, unsigned int numObjec
 
 }
 
+void Spawn::RespawnEnemies(SpawnZone &spawnZone, int seed) {
 
-void Spawn::UpdateObjects(Vector3 playerPos, Vector3 &zoneCenterValue)
-{
-	if (playerPos.x > 50) //(+, , )
-	{
-		if (playerPos.y > 50) //(+,+, )
-		{
-			if (playerPos.z > 50) //(+,+,+)
-			{
-				//HighEmptyZone
-				zoneCenterValue = Vector3(1025, 1025, 1025);
+	srand(seed);
 
-			}
-			else if (playerPos.z < -50) //(+,+,-)
-			{
-				//OmberZone
-				zoneCenterValue = Vector3(1025, 1025, -1025);
-			}
-		}
-		else if (playerPos.y < -50) //(+,-, )
-		{
+	for (list<Ship>::iterator iter = spawnZone.GetEnemyList()->begin(); iter != spawnZone.GetEnemyList()->end(); ++iter) {
+	
+		MS spawnStack;
+		spawnStack.Rotate(GenerateRange(0, 360), 1, 0, 0);
+		spawnStack.Rotate(GenerateRange(0, 360), 0, 1, 0);
+		spawnStack.Rotate(GenerateRange(0, 360), 0, 0, 1);
+		spawnStack.Translate(GenerateRange(spawnZone.GetPosition().x - spawnZone.GetSpawnRadius()/8.0f, spawnZone.GetPosition().x + spawnZone.GetSpawnRadius()/8.0f), GenerateRange(spawnZone.GetPosition().y - spawnZone.GetSpawnRadius()/8.0f, spawnZone.GetPosition().y + spawnZone.GetSpawnRadius()/8.0f), GenerateRange(spawnZone.GetPosition().z - spawnZone.GetSpawnRadius()/8.0f, spawnZone.GetPosition().z + spawnZone.GetSpawnRadius()/8.0f));
 
-			if (playerPos.z > 50) //(+,-,+)
-			{
-				//LowEmptyZone
-				zoneCenterValue = Vector3(1025, -1025, 1025);
-			}
-			else if (playerPos.z < -50) //(+,-,-)
-			{
-				//PirateZone
-				zoneCenterValue = Vector3(1025, -1025, -1025);
-			}
-		}
+		iter->SetPosition(spawnStack.Top().a[12], spawnStack.Top().a[13], spawnStack.Top().a[14]);
+
 	}
-	else if (playerPos.x < -50) //(-, , )
-	{
-		if (playerPos.y > 50) //(-,+, )
-		{
-			if (playerPos.z > 50) //(-,+,+)
-			{
-				//VeldsparZone
-				zoneCenterValue = Vector3(-1025, 1025, 1025);
-			}
-			else if (playerPos.z < -50) //(-,+,-)
-			{
-				//KerniteZone
-				zoneCenterValue = Vector3(-1025, 1025, -1025);
-			}
-		}
-		else if (playerPos.y < -50) //(-,-, )
-		{
-
-			if (playerPos.z > 50) //(-,-,+)
-			{
-				//DroneZone
-				zoneCenterValue = Vector3(-1025, -1025, 1025);
-			}
-			else if (playerPos.z < -50) //(-,-,-)
-			{
-				//AlienZone
-				zoneCenterValue = Vector3(-1025, -1025, -1025);
-			}
-		}
-	}
-}
-
-void Spawn::EnableObject(SpawnZone &spawnZone, GameObject* object, Vector3 playerPosition) {
-
-
-}
-
-void Spawn::DisableObject(SpawnZone &spawnZone, GameObject* object, Vector3 playerPosition) {
 
 }
 
@@ -314,3 +256,17 @@ void Spawn::CheckKill(Player &player) {
 	}
 }
 
+void Spawn::CheckZone(SpawnZone &spawnZone, Vector3 playerPosition) {
+
+	if (spawnZone.GetZoneState() == INACTIVE && Physics::getDistance(playerPosition, spawnZone.GetPosition()) <= spawnZone.GetActiveRadius()) {
+	
+		spawnZone.SetActive();
+		RespawnEnemies(spawnZone, (int)(playerPosition.x + playerPosition.z));
+
+	} else if (spawnZone.GetZoneState() == ACTIVE && Physics::getDistance(playerPosition, spawnZone.GetPosition()) > spawnZone.GetDespawnRadius()) {
+	
+		spawnZone.SetInactive();
+
+	}
+
+}

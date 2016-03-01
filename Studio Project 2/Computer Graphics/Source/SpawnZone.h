@@ -8,6 +8,15 @@
 
 using std::string;
 
+enum ZONE_STATE {
+
+	ACTIVE,
+	INACTIVE,
+
+	NUM_ZONE_STATE,
+
+};
+
 class SpawnZone {
 
 private:
@@ -15,44 +24,38 @@ private:
 	string name;
 	Vector3 position;
 	float spawnRadius;
-	float renderRadius;
+	float activeRadius;
 	float despawnRadius;
 	list<Asteroid> asteroids;
 	list<Ship> enemies;
-	bool renderable;
+	ZONE_STATE zoneState;
 
 public:
 	//Constructors & Destructor
 	SpawnZone();
-	SpawnZone(string name, Vector3 position, float spawnRadius, float renderRadius, float depawnRadius);
+	SpawnZone(string name, Vector3 position, float spawnRadius, float activeRadius, float depawnRadius);
 	~SpawnZone();
 
 	//Getters
 	Vector3 GetPosition();
 	float GetSpawnRadius();
-	float GetRenderRadius();
+	float GetActiveRadius();
 	float GetDespawnRadius();
 	string GetName();
 	list<Asteroid>* GetAsteroidList();
 	list<Ship>* GetEnemyList();
-	bool GetRenderable();
+	ZONE_STATE GetZoneState();
 
 	//Setters
 	void SetPosition(float x, float y, float z);
 	void SetPosition(Vector3 position);
 	void SetSpawnRadius(float radius);
-	void SetRenderRadius(float radius);
+	void SetActiveRadius(float radius);
 	void SetDespawnRadius(float radius);
 	void SetName(string name);
-	void SetAsteroidList(list<Asteroid> asteroidList);
-	void SetEnemyList(list<Ship> enemyList);
-	void SetRenderable(bool inArea);
+	void SetActive();
+	void SetInactive();
 
-	void GenerateAsteroidCoordinates(SpawnZone &spawnZone, Asteroid* object);
-	void GenerateShipCoordinates(SpawnZone &spawnZone, Ship* object);
-
-	//
-	static void CheckSpawn(SpawnZone &spawnZone, Vector3 &playerPos);
 };
 
 #endif

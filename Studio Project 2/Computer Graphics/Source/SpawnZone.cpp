@@ -7,9 +7,9 @@ SpawnZone::SpawnZone() {
 	SetName("<Zone Name>");
 	SetPosition(0.0f, 0.0f, 0.0f);
 	SetSpawnRadius(0.0f);
-	SetRenderRadius(0.0f);
+	SetActiveRadius(0.0f);
 	SetDespawnRadius(0.0f);
-	SetRenderable(false);
+	zoneState = ACTIVE;
 
 }
 
@@ -18,9 +18,9 @@ SpawnZone::SpawnZone(string name, Vector3 position, float spawnRadius, float ren
 	SetName(name);
 	SetPosition(position);
 	SetSpawnRadius(spawnRadius);
-	SetRenderRadius(renderRadius);
+	SetActiveRadius(renderRadius);
 	SetDespawnRadius(despawnRadius);
-	SetRenderable(false);
+	zoneState = ACTIVE;
 
 }
 
@@ -41,9 +41,9 @@ float SpawnZone::GetSpawnRadius() {
 
 }
 
-float SpawnZone::GetRenderRadius() {
+float SpawnZone::GetActiveRadius() {
 
-	return this->renderRadius;
+	return this->activeRadius;
 
 }
 
@@ -71,12 +71,11 @@ list<Ship>* SpawnZone::GetEnemyList() {
 
 }
 
-bool SpawnZone::GetRenderable() {
+ZONE_STATE SpawnZone::GetZoneState() {
 
-	return this->renderable;
+	return this->zoneState;
 
 }
-
 
 //Setters
 void SpawnZone::SetPosition(Vector3 position) {
@@ -105,15 +104,15 @@ void SpawnZone::SetSpawnRadius(float radius) {
 
 }
 
-void SpawnZone::SetRenderRadius(float radius) {
+void SpawnZone::SetActiveRadius(float radius) {
 
 	if (radius >= this->spawnRadius) {
 
-		this->renderRadius = radius;
+		this->activeRadius = radius;
 
 	} else {
 	
-		this->renderRadius = this->spawnRadius;
+		this->activeRadius = this->spawnRadius;
 
 	}
 
@@ -121,13 +120,13 @@ void SpawnZone::SetRenderRadius(float radius) {
 
 void SpawnZone::SetDespawnRadius(float radius) {
 
-	if (radius >= this->renderRadius) {
+	if (radius >= this->activeRadius) {
 
 		this->despawnRadius = radius;
 
 	} else {
 	
-		this->despawnRadius = this->renderRadius;
+		this->despawnRadius = this->activeRadius;
 
 	}
 
@@ -139,56 +138,38 @@ void SpawnZone::SetName(string name) {
 
 }
 
-void SpawnZone::SetAsteroidList(list<Asteroid> asteroidList) {
+void SpawnZone::SetActive() {
 
-	this->asteroids = asteroidList;
-
-}
-
-void SpawnZone::SetEnemyList(list<Ship> enemyList) {
-
-	this->enemies = enemyList;
-
-}
-
-void SpawnZone::SetRenderable(bool inArea) {
-
-	this->renderable = inArea;
-
-}
-
-void SpawnZone::GenerateAsteroidCoordinates(SpawnZone &spawnZone, Asteroid* object) {
-
-	list<Asteroid> generatedList;
-	/*Asteroid newAsteroid = *object;*/
-	Spawn::SpawnObjects(object, object->GetRadius(), 50, spawnZone, generatedList, 17);
-
-	SetAsteroidList(generatedList);
-
-}
-
-void SpawnZone::GenerateShipCoordinates(SpawnZone &spawnZone, Ship* object) {
-
-	list<Ship> generatedList;
-	/*Asteroid newAsteroid = *object;*/
-	Spawn::SpawnObjects(object, object->GetRadius(), 50, spawnZone, generatedList, 17);
-
-	SetEnemyList(generatedList);
-
-}
-
-void SpawnZone::CheckSpawn(SpawnZone &spawnZone, Vector3 &playerPos) {
-
-	if (Physics::getDistance(spawnZone.GetPosition(), playerPos) >= spawnZone.GetDespawnRadius()) {
-		
-		spawnZone.SetRenderable(false);
-
-	}
-	else if (Physics::getDistance(spawnZone.GetPosition(), playerPos) <= spawnZone.GetRenderRadius()) {
-
-		spawnZone.SetRenderable(true);
+	for (list<Asteroid>::iterator iter = asteroids.begin(); iter != asteroids.end(); ++iter) {
+	
+		iter->Spawn();
 
 	}
 
+	for (list<Ship>::iterator iter = enemies.begin(); iter != enemies.end(); ++iter) {
+	
+		iter->Spawn();
+
+	}
+
+	zoneState = ACTIVE;
+
+}
+
+void SpawnZone::SetInactive() {
+
+	for (list<Asteroid>::iterator iter = asteroids.begin(); iter != asteroids.end(); ++iter) {
+	
+		iter->Despawn();
+
+	}
+
+	for (list<Ship>::iterator iter = enemies.begin(); iter != enemies.end(); ++iter) {
+	
+		iter->Despawn();
+
+	}
+
+	zoneState = INACTIVE;
 
 }
