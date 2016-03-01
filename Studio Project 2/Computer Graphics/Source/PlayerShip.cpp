@@ -2,7 +2,7 @@
 
 //Constructor
 PlayerShip::PlayerShip()
-: Ship("Condor", 0, 8.0f, 5000.0f, "OBJ//Condor//Condor.obj", "Image//Condor//Condor.tga", MaterialList::GetInstance()->material[MaterialList::METAL], 6000.0f, 75.0f, 5, 400, YELLOW)
+: Ship("Condor", 0, 8.0f, 5000.0f, "OBJ//Condor//Condor.obj", "Image//Condor//Condor.tga", MaterialList::GetInstance()->material[MaterialList::METAL], 6000.0f, 75.0f, 8, 400, YELLOW)
 {
 
 	upgrades[Upgrade::WEAPON] = nullptr;

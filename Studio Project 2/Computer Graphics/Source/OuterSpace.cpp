@@ -183,30 +183,42 @@ void OuterSpace::Update(double dt) {
 			//Update Enemies
 			for (list<Ship>::iterator ship_iter = zone_iter->GetEnemyList()->begin(); ship_iter != zone_iter->GetEnemyList()->end(); ++ship_iter) {
 			
-				AI::FaceTarget(&(*ship_iter), player->GetShip(), 240 * dt, dt);
-				AI::MoveToTarget(&(*ship_iter), player->GetShip(), 9000.0f, dt);
-				AI::ShootAtTarget(&(*ship_iter), player->GetShip());
-				ship_iter->Update(dt);
+				if (ship_iter->IsDisabled() == false) {
+
+					AI::FaceTarget(&(*ship_iter), player->GetShip(), 240 * dt, dt);
+					AI::MoveToTarget(&(*ship_iter), player->GetShip(), 10000.0f, dt);
+					AI::ShootAtTarget(&(*ship_iter), player->GetShip());
+					ship_iter->Update(dt);
+					
+					SpaceObject* spaceObjectPointer1 = &(*ship_iter);
+					SpaceObject* spaceObjectPointer2 = player->GetShip();
+					Collision::MovingSpaceObjectToMovingSpaceObject(spaceObjectPointer1, spaceObjectPointer2, dt);
+					
+					RigidBody* rigidBodyPointer = &(*ship_iter);
+					RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
+					
+					for (list<Bullet>::iterator bullet_iter = player->GetShip()->GetBullets()->begin(); bullet_iter != player->GetShip()->GetBullets()->end(); ++bullet_iter) {
+					
+						Collision::BulletToSpaceObject(&(*bullet_iter), spaceObjectPointer1, dt);
+					
+					}
+					
+					Spawn::CheckKill(spaceObjectPointer1, *player);
+					
+					for (list<Bullet>::iterator bullet_iter = ship_iter->GetBullets()->begin(); bullet_iter != ship_iter->GetBullets()->end(); ++bullet_iter) {
+					
+						Collision::BulletToSpaceObject(&(*bullet_iter), spaceObjectPointer2, dt);
+					
+					}
 				
-				SpaceObject* spaceObjectPointer1 = &(*ship_iter);
-				SpaceObject* spaceObjectPointer2 = player->GetShip();
-				Collision::SpaceObjectToSpaceObject(spaceObjectPointer1, spaceObjectPointer2, dt);
+				} else {
 				
-				RigidBody* rigidBodyPointer = &(*ship_iter);
-				RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
-				
-				for (list<Bullet>::iterator bullet_iter = player->GetShip()->GetBullets()->begin(); bullet_iter != player->GetShip()->GetBullets()->end(); ++bullet_iter) {
-				
-					Collision::BulletToSpaceObject(&(*bullet_iter), spaceObjectPointer1);
-				
-				}
-				
-				Spawn::CheckKill(spaceObjectPointer1, *player);
-				
-				for (list<Bullet>::iterator bullet_iter = ship_iter->GetBullets()->begin(); bullet_iter != ship_iter->GetBullets()->end(); ++bullet_iter) {
-				
-					Collision::BulletToSpaceObject(&(*bullet_iter), spaceObjectPointer2);
-				
+					for (list<Bullet>::iterator bullet_iter = ship_iter->GetBullets()->begin(); bullet_iter != ship_iter->GetBullets()->end();) {
+
+						bullet_iter = ship_iter->GetBullets()->erase(bullet_iter);
+
+					}
+
 				}
 
 			}

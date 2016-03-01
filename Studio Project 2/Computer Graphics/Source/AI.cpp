@@ -8,7 +8,13 @@ AI::~AI() {
 
 void AI::FaceTarget(GameObject* object, GameObject* target, float maxTurnAngle, double &dt) {
 	
-	if (Physics::getDistance(object->GetPosition(), target->GetPosition()) < 0.5f) {
+	float distance = Physics::getDistance(object->GetPosition(), target->GetPosition());
+
+	if (distance < 0.5f) {
+	
+		return;
+
+	} else if (distance < 50.0f && object->GetForwardVector().AngleBetween(target->GetPosition() - object->GetPosition()) <= 90.0f) {
 	
 		return;
 
@@ -103,7 +109,7 @@ void AI::ShootAtTarget(Ship* ship, GameObject* target) {
 
 	Vector3 targetVector = target->GetPosition() - ship->GetPosition();
 
-	if (targetVector.Length() > 0.1f && Physics::getDistance(ship->GetPosition(), target->GetPosition()) <= 350.0f) {
+	if (targetVector.Length() > 0.1f && Physics::getDistance(ship->GetPosition(), target->GetPosition()) <= 250.0f) {
 	
 		if (ship->GetForwardVector().AngleBetween(targetVector) <= 25.0f) {
 		
