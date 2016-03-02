@@ -11,35 +11,41 @@ void AI::FaceTarget(GameObject* object, GameObject* target, float maxTurnAngle, 
 	float distance = Physics::getDistance(object->GetPosition(), target->GetPosition());
 	float yRotation = 0.0f;
 	float xRotation = 0.0f;
+	Mtx44 rotate;
+	rotate.SetToIdentity();
 
 	if (distance < 0.1f) {
 	
 		return;
 
-	} else if (distance < 30.0f && object->GetForwardVector().AngleBetween(target->GetPosition() - object->GetPosition()) <= 90) {
+	} else if (distance < 30.0f && object->GetForwardVector().AngleBetween(target->GetPosition() - object->GetPosition()) < 80) {
 	
-		yRotation = GenerateRange(-maxTurnAngle, maxTurnAngle);
-		xRotation = GenerateRange(-maxTurnAngle, maxTurnAngle);
+		yRotation = GenerateRange(maxTurnAngle/2.0f, maxTurnAngle);
+		xRotation = GenerateRange(-maxTurnAngle/2.0f, -maxTurnAngle);
 		Mtx44 rotate;
 		rotate.SetToRotation(yRotation, 0, 1, 0);
 		rotate.SetToRotation(xRotation, 1, 0, 0);
 		object->Rotate(rotate);
 
-	} else if (distance > 30.f && distance < 180.0f && object->GetForwardVector().AngleBetween(target->GetPosition() - object->GetPosition()) >= 90) {
+	} else if (distance > 30.f && distance < 100.0f && object->GetForwardVector().AngleBetween(target->GetPosition() - object->GetPosition()) >= 90) {
 	
-		/*xRotation = GenerateRange(-maxTurnAngle, maxTurnAngle);
-		if (xRotation > 15.0f) {
-			xRotation = 15.0f;
-		} else if (xRotation < -15.0f) {
-			xRotation = -15.0f;
+		if (GenerateRange(0, 20) <= 4) {
+
+			xRotation = GenerateRange(-maxTurnAngle, maxTurnAngle);
+			
+			if (xRotation > 70.0f) {
+				xRotation = 70.0f;
+			} else if (xRotation < -70.0f) {
+				xRotation = -70.0f;
+			}
+			
+			rotate.SetToRotation(xRotation, 1, 0, 0);
+			rotate.SetToRotation(-maxTurnAngle/5, 0, 1, 0);
+			object->Rotate(rotate);
+
 		}
-		Mtx44 rotate;
-		rotate.SetToRotation(xRotation, 1, 0, 0);
-		object->Rotate(rotate);*/
 
-		return;
-
-	} else if (distance > 150.f && object->GetForwardVector().AngleBetween(target->GetPosition() - object->GetPosition()) <= 90) {
+	} else if (distance >= 30.f) {
 
 		//Rotating on the Y-Axis.
 		Vector3 targetVector = (target->GetPosition() - object->GetPosition()).Normalized();
@@ -57,9 +63,7 @@ void AI::FaceTarget(GameObject* object, GameObject* target, float maxTurnAngle, 
 			}
 
 			if (yRotationForwardVector.AngleBetween(yRotationTargetVector) > Math::EPSILON) {
-				
-				Mtx44 rotate;
-				//I think I fixed the crash. Will have to test further to confirm. 24-2-2016.
+
 				if (yRotationForwardVector.AngleBetween(yRotationTargetVector) < 180.0f - Math::EPSILON && yRotationForwardVector.Cross(yRotationTargetVector).Length() > Math::EPSILON && yRotationForwardVector.Cross(yRotationTargetVector).Normalized().y > 0.0f) {
 			
 					rotate.SetToRotation(yRotation, 0, 1, 0);
@@ -85,8 +89,6 @@ void AI::FaceTarget(GameObject* object, GameObject* target, float maxTurnAngle, 
 			if (xRotation > maxTurnAngle) {
 				xRotation = maxTurnAngle;
 			}
-
-			Mtx44 rotate;
 
 			if (xRotationForwardVector.y > targetVector.y) {
 		
