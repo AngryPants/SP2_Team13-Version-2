@@ -136,8 +136,8 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	player = new Player("Malcolm", "", "", "");
 	warning = false;
-	//player->GetShip()->SetPosition(150,50,100);
-	player->GetShip()->SetPosition(1250, -1250, -1250);
+	Load::LoadFile("Text/PlayerStat.txt", *player, *player->GetInventory(), *player->GetShip());
+	player->GetShip()->SetPosition(150,50,100);
 	player->SetState(PLAYING);
 	menuOption = RESTART;
 }
@@ -277,6 +277,7 @@ void OuterSpace::UpdateDeathScreen()
 		if (menuOption == RESTART) {
 
 			player->GetShip()->SetRotation(0, 0, 0);
+			Load::SaveFile("Text/PlayerStat.txt", *player);
 			SharedData::GetInstance()->sceneNumber = 1;
 
 		}
@@ -296,6 +297,8 @@ void OuterSpace::UpdateDeathScreen()
 		}
 		else if (menuOption == QUIT) {
 
+			player->SetState(MAIN_MENU);
+			Load::SaveFile("Text/PlayerStat.txt", *player);
 			SharedData::GetInstance()->quitGame = true;
 
 		}
@@ -305,10 +308,10 @@ void OuterSpace::UpdateDeathScreen()
 
 void OuterSpace::DeathCheck()
 {
-	/*if (player->GetShip()->GetHealth() <= 0)
+	if (player->GetShip()->GetHealth() <= 0)
 	{
 		player->SetState(DEAD);
-	}*/
+	}
 }
 
 void OuterSpace::UpdateSpaceInteractable(double &dt)

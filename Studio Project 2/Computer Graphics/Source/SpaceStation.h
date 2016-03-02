@@ -2,7 +2,7 @@
 #define _SPACESTATION_H
 
 #include"Interactable.h"
-
+#include "Load.h"
 class SpaceStation : public Interactable {
 
 private:

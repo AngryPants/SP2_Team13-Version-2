@@ -117,8 +117,7 @@ void Hangar::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	spinObj = 0;
 	srand(time(0));
 	random = rand() % 100;
-	randHand = rand() % 60 - 30;
-	randLeg = rand() % 40 - 30;
+
 }
 
 void Hangar::Update(double dt) {
@@ -328,25 +327,21 @@ void Hangar::RenderNPC()
 
 	modelStack.PushMatrix();
 	modelStack.Translate(-0.1,0, 0);
-	modelStack.Rotate(randLeg,1,0,0);
 	RenderMesh(mesh[NPC_LEFT_LEG], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0.1, 0, 0);
-	modelStack.Rotate(randLeg, 1, 0, 0);
 	RenderMesh(mesh[NPC_RIGHT_LEG], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0.2, 0.4, 0);
-	modelStack.Rotate(randHand, 1, 0, 0);
 	RenderMesh(mesh[NPC_LEFT_HAND], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(-0.2, 0.4, 0);
-	modelStack.Rotate(randHand, 1, 0, 0);
 	RenderMesh(mesh[NPC_RIGHT_HAND], true);
 	modelStack.PopMatrix();
 
@@ -360,9 +355,9 @@ void Hangar::RenderUI()
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "PRESS S TO CLOSE CODEX", Colour(1, 0, 0), 70, 2, 1);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Ship Health : "+ std::to_string(((int)player->GetShip()->GetMaxHealth())), Colour(1, 0, 0), 100, 1.5, 9);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Gold : " + std::to_string(((int)player->GetInventory()->GetGold())), Colour(1, 1, 0.1), 100, 1.5, 8);
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], "veldspar : ", Colour(0.5, 0.5, 0.5), 100, 1.5, 7);
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], "omber : ", Colour(0.5, 0.35, 0.05), 100, 1.5, 6);
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], "kernite : ", Colour(0, 1, 1), 100, 1.5, 5);
+		//RenderTextOnScreen(mesh[FONT_CONSOLAS], "veldspar : ", Colour(0.5, 0.5, 0.5), 100, 1.5, 7);
+		//RenderTextOnScreen(mesh[FONT_CONSOLAS], "omber : ", Colour(0.5, 0.35, 0.05), 100, 1.5, 6);
+		//RenderTextOnScreen(mesh[FONT_CONSOLAS], "kernite : ", Colour(0, 1, 1), 100, 1.5, 5);
 		
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Name : Drone ", Colour(1, 1, 0.4), 80, 18, 12);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Health : Low", Colour(1, 1, 0.4), 80, 18, 11.5);
@@ -382,6 +377,14 @@ void Hangar::RenderUI()
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Fire Rate: Medium", Colour(0.5, 0.5, 0.25), 80, 18, 1);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Mobility : Medium", Colour(0.5,0.5,0.25), 80, 18, 0.5);
 
+		int posY = 7;
+
+		for (map<Item, int>::iterator iter = player->GetInventory()->GetItems()->begin(); iter != player->GetInventory()->GetItems()->end(); ++iter) {
+
+			RenderTextOnScreen(mesh[FONT_CONSOLAS], (iter->first).GetName() + ": " + std::to_string(iter->second), Colour(0.5, 0.5, 1), 100, 1.5, posY);
+			--posY;
+		}
+
 		RenderObjectOnScreen(mesh[VELDSPAR], 0.5, 0.5, 0.5, 100, 720, 5000,spinObj, 0, 1, 0);
 		RenderObjectOnScreen(mesh[OMBER], 0.5, 0.5, 0.5, 100, 620, 5000, spinObj, 0,1,0);
 		RenderObjectOnScreen(mesh[KERNITE], 0.5, 0.5, 0.5, 100, 520, 5000,spinObj, 0, 1, 0);
@@ -394,6 +397,7 @@ void Hangar::RenderUI()
 	{
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "PRESS E TO TAKE OFF", Colour(0, 1, 0), 70, 11, 14.8);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "PRESS S TO VIEW CODEX", Colour(1, 0, 0), 70, 11, 1);
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "PRESS ESC FOR MAIN MENU", Colour(1, 0, 0), 70, 2, 1);
 	}
 }
 

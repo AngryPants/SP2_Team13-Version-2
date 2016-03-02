@@ -112,14 +112,12 @@ void Application::Run() {
 	while (!glfwWindowShouldClose(m_window) && !SharedData::GetInstance()->quitGame) {
 
 		if (SharedData::GetInstance()->sceneNumber == 1) {
-			//Save("Text//Inventory.txt", "Text//Quests.txt", "Text//EquipUpgrades.txt", "Text//EquipUpgradesTest.txt");
 			scene = hangar;
 			scene->Init();
 			SharedData::GetInstance()->sceneNumber = 0;
 		}
 
 		if (SharedData::GetInstance()->sceneNumber == 2) {
-			//Save("Text//Inventory.txt", "Text//Quests.txt", "Text//EquipUpgrades.txt", "Text//EquipUpgradesTest.txt");
 			scene = outerSpace;
 			scene->Init();
 			SharedData::GetInstance()->sceneNumber = 0;

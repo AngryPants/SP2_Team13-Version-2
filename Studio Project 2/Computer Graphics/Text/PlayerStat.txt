@@ -1,8 +1,5 @@
 Name Malcolm
 State 1
-Gold 1000
-Armour 1000.000000
-Veldspar 0
-Omber 0
-Kernite 0
+Gold 36000
+Armour 5000.000000
 End

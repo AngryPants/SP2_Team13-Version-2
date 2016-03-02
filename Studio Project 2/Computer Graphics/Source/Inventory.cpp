@@ -84,8 +84,6 @@ int Inventory::GetGold() {
 
 int Inventory::GetNumberOf(Item item) {
 
-	return 0;
-
 	map<Item, int>::iterator mapIter = items.find(item);
 
 	if (mapIter == items.end()) {

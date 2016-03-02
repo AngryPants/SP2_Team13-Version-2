@@ -237,13 +237,6 @@ void Spawn::CheckKill(SpaceObject* object, Player &player) {
 	if (object->IsDead() && !object->IsDisabled()) {
 	
 		player.GetInventory()->AddGold(object->GetRewardGold());
-		player.GetShip()->AddHealth(object->GetMaxHealth()/3.0f);
-		
-		if (player.GetShip()->GetHealth() > player.GetShip()->GetMaxHealth()) {
-		
-			player.GetShip()->SetHealth(player.GetShip()->GetMaxHealth());
-
-		}
 
 		if (object->GetRewardItem().GetID() != 0) {
 		

@@ -35,17 +35,18 @@ void Load::SaveFile(string filePath, Player &player)
 	state = "State " + (std::to_string(player.GetState()));
 	gold = "Gold " + (std::to_string(player.GetInventory()->GetGold()));
 	armour = "Armour " + (std::to_string(player.GetShip()->GetMaxHealth()));
-	veldspar = "Veldspar " + (std::to_string(player.GetInventory()->GetNumberOf(Item("Copper", 3, 1))));
-	omber = "Omber " + (std::to_string(player.GetInventory()->GetNumberOf(Item("Silver", 8, 2))));
-	kernite = "Kernite " + (std::to_string(player.GetInventory()->GetNumberOf(Item("Tin", 20, 3))));
 
 	fileStream << name << endl;
 	fileStream << state << endl;
 	fileStream << gold << endl;
 	fileStream << armour << endl;
-	fileStream << veldspar << endl;
-	fileStream << omber << endl;
-	fileStream << kernite << endl;
+
+	for (map<Item, int>::iterator iter = player.GetInventory()->GetItems()->begin(); iter != player.GetInventory()->GetItems()->end(); ++iter) {
+
+		fileStream << iter->first.GetName() + " " + std::to_string(iter->second) << endl;
+
+	}
+
 	fileStream << "End";
 
 	fileStream.close();

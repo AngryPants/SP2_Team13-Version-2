@@ -40,7 +40,8 @@ void SpaceStation::Interact(Player &player, double &dt)
 	}
 	else
 	{
-	SharedData::GetInstance()->sceneNumber = 1;
+		Load::SaveFile("Text/PlayerStat.txt", player);
+		SharedData::GetInstance()->sceneNumber = 1;
 	}
 
 }

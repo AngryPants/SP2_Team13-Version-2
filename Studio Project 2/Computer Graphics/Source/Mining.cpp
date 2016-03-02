@@ -23,6 +23,14 @@ void Mining::Mine(PlayerShip* playerShip, Asteroid* asteroid, double &dt) {
 
 				}
 
+				playerShip->AddHealth((miningLaser->GetExtractRate()/5.0f) * dt);
+
+				if (playerShip->GetHealth() > playerShip->GetMaxHealth()) {
+
+					playerShip->SetHealth(playerShip->GetMaxHealth());
+
+				}
+
 			}
 
 		} 

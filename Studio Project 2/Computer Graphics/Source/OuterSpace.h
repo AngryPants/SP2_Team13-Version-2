@@ -13,7 +13,7 @@
 #include "WarpGate.h"
 #include "Spawn.h"
 #include "Interaction.h"
-
+#include "Load.h"
 class OuterSpace : public GameScene {
 
 private:

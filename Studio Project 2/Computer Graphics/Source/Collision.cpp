@@ -19,45 +19,44 @@ void Collision::BulletToSpaceObject(Bullet* bullet, SpaceObject* object, double&
 
 }
 
-void Collision::SpaceObjectToSpaceObject(SpaceObject* object1, SpaceObject* object2, double &dt)
+void Collision::SpaceObjectToSpaceObject(SpaceObject* object, SpaceObject* playerShip, double &dt)
 {
 
-	if (Physics::getDistance(object1->GetPosition(), object2->GetPosition()) < 0.1f) {
+	if (Physics::getDistance(object->GetPosition(), playerShip->GetPosition()) < 0.1f) {
 	
 		return;
 
 	}
 
-	if (SphereSphereCollision(object1, object2)) {
+	if (SphereSphereCollision(object, playerShip)) {
 	
-		object1->DecreaseHealth(((object2->GetVelocity().Length() + object1->GetVelocity().Length()) * dt));
-		object2->DecreaseHealth(((object2->GetVelocity().Length() + object1->GetVelocity().Length()) * dt));
+		playerShip->DecreaseHealth(((playerShip->GetVelocity().Length() + object->GetVelocity().Length()) * dt * 30.0f));
 
-		if (object1->GetMass() > object2->GetMass()) {
+		if (object->GetMass() > playerShip->GetMass()) {
 		
-			object2->SetPosition(object1->GetPosition() + (object2->GetPosition() - object1->GetPosition()).Normalized() * (object2->GetRadius() + object1->GetRadius()));
+			playerShip->SetPosition(object->GetPosition() + (playerShip->GetPosition() - object->GetPosition()).Normalized() * (playerShip->GetRadius() + object->GetRadius()));
 
-		} else if (object1->GetMass() < object2->GetMass()) {
+		} else if (object->GetMass() < playerShip->GetMass()) {
 		
-			object1->SetPosition(object2->GetPosition() + (object1->GetPosition() - object2->GetPosition()).Normalized() * (object2->GetRadius() + object1->GetRadius()));
+			object->SetPosition(playerShip->GetPosition() + (object->GetPosition() - playerShip->GetPosition()).Normalized() * (playerShip->GetRadius() + object->GetRadius()));
 
 		} else {
 		
-			Vector3 object1Position = object1->GetPosition();
-			object1->SetPosition(object2->GetPosition() + (object1->GetPosition() - object2->GetPosition()).Normalized() * ((object2->GetRadius() + object1->GetRadius())/1.0f));
-			object2->SetPosition(object1Position + (object2->GetPosition() - object1Position).Normalized() * ((object2->GetRadius() + object1->GetRadius())/1.0f));
+			Vector3 objectPosition = object->GetPosition();
+			object->SetPosition(playerShip->GetPosition() + (object->GetPosition() - playerShip->GetPosition()).Normalized() * ((playerShip->GetRadius() + object->GetRadius())/1.0f));
+			playerShip->SetPosition(objectPosition + (playerShip->GetPosition() - objectPosition).Normalized() * ((playerShip->GetRadius() + object->GetRadius())/1.0f));
 
 		}
 
-		if ((object1->GetVelocity().Length() + object2->GetVelocity().Length()) > 20.0f) {
+		if ((object->GetVelocity().Length() + playerShip->GetVelocity().Length()) > 20.0f) {
 		
-			object1->AddForce((object1->GetPosition() - object2->GetPosition()).Normalized() * ((object1->GetVelocity().Length() + object2->GetVelocity().Length()) * 800.0f), dt);
-			object2->AddForce((object2->GetPosition() - object1->GetPosition()).Normalized() * ((object1->GetVelocity().Length() + object2->GetVelocity().Length()) * 800.0f), dt);
+			object->AddForce((object->GetPosition() - playerShip->GetPosition()).Normalized() * ((object->GetVelocity().Length() + playerShip->GetVelocity().Length()) * 800.0f), dt);
+			playerShip->AddForce((playerShip->GetPosition() - object->GetPosition()).Normalized() * ((object->GetVelocity().Length() + playerShip->GetVelocity().Length()) * 800.0f), dt);
 
 		} else {
 		
-			object1->AddForce((object1->GetPosition() - object2->GetPosition()).Normalized() * (20.0f * 800.0f), dt);
-			object2->AddForce((object2->GetPosition() - object1->GetPosition()).Normalized() * (20.0f * 800.0f), dt);
+			object->AddForce((object->GetPosition() - playerShip->GetPosition()).Normalized() * (20.0f * 800.0f), dt);
+			playerShip->AddForce((playerShip->GetPosition() - object->GetPosition()).Normalized() * (20.0f * 800.0f), dt);
 		
 		}
 
