@@ -186,6 +186,7 @@ protected:
 		RETURN,
 		E,
 		S,
+		ESC,
 		NONE,
 	};
 

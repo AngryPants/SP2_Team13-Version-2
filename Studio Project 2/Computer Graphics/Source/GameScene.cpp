@@ -145,7 +145,11 @@ void GameScene::CheckKeyPress() {
 		isPressed[E] = false;
 
 	}
+	if (!Application::IsKeyPressed(VK_ESCAPE)) {
 
+		isPressed[ESC] = false;
+
+	}
 }
 
 void GameScene::RenderMesh(Mesh *mesh, bool enableLight) {

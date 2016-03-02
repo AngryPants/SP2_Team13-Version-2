@@ -139,7 +139,6 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	player->GetShip()->SetPosition(150,50,100);
 	player->SetState(PLAYING);
 	menuOption = RESTART;
-
 }
 
 void OuterSpace::Update(double dt) {

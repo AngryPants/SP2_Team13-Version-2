@@ -1,7 +1,7 @@
 Name Malcolm
-State 0
-Gold 0
-Armour 1000
+State 1
+Gold 1000
+Armour 1000.000000
 Veldspar 0
 Omber 0
 Kernite 0

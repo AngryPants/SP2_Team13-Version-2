@@ -4,6 +4,7 @@
 #include "GameScene.h";
 #include "Player.h"
 #include "SharedData.h"
+#include "Load.h"
 
 class Hangar : public GameScene {
 

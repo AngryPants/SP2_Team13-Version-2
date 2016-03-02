@@ -5,10 +5,6 @@ Player::Player(string name, string questFile, string inventoryFile, string shipF
 : human(name) {
 
 	this->name = name;
-	//Load::LoadQuest(quests, questFile);
-	//Load::LoadInventory(inventory, inventoryFile);
-	//Load::LoadShip(ship, shipFile);
-
 }
 
 //Destructor

@@ -52,19 +52,21 @@ void Load::SaveFile(string filePath, Player &player)
 
 }
 
-void Load::LoadFile(string filePath, Player &player)
+void Load::LoadFile(string filePath, Player &player, Inventory &inventory, PlayerShip &playerShip)
 {
 
 	std::fstream fileStream;
 	fileStream.open(filePath, std::fstream::in | std::fstream::out);
 
-	PLAYER_STATE state;
-	int gold;
+	//PLAYER_STATE state;
+	int state = 0 ;
+	int gold = 0;
+	//int *test = &gold;
 	int armour;
 	int veldspar;
 	int omber;
 	int kernite;
-
+	
 	while (!fileStream.eof()) {
 
 		char buf[256];
@@ -73,42 +75,57 @@ void Load::LoadFile(string filePath, Player &player)
 
 		if (strncmp("Name ", buf, 5) == 0) { //process vertex position
 
-			sscanf_s((buf + 5), "%d", player.GetName());
+			sscanf_s((buf + 5), "%d", (&player.GetName()));
 
 		}
 		else if (strncmp("State ", buf, 6) == 0) {
 
-			sscanf_s((buf + 5), "%d", state);
-			player.SetState(state);
+			sscanf_s((buf + 6), "%d", &state);
+			if (state == 0)
+			{
+				player.SetState(MAIN_MENU);
+			}
+			if (state == 1)
+			{
+				player.SetState(ANIMATING);
+			}
+			if (state == 2)
+			{
+				player.SetState(PLAYING);
+			}
+			if (state == 3)
+			{
+				player.SetState(DEAD);
+			}
 
 		}
 		else if (strncmp("Gold ", buf, 5) == 0) {
 
-			sscanf_s((buf + 5), "%d", gold);
+			sscanf_s((buf + 5), "%d", &gold);
 			player.GetInventory()->SetGold(gold);
 
 		}
 		else if (strncmp("Armour ", buf, 7) == 0) {
 
-			sscanf_s((buf + 7), "%d", armour);
+			sscanf_s((buf + 7), "%d", &armour);
 			player.GetShip()->SetMaxHealth(armour);
-
+			
 		}
 		else if (strncmp("Veldspar ", buf, 9) == 0) {
 
-			sscanf_s((buf + 9), "%d", veldspar);
+			sscanf_s((buf + 9), "%d", &veldspar);
 			player.GetInventory()->AddItem(Item("Copper", 3, 1), veldspar);
 
 		}
 		else if (strncmp("Omber ", buf, 6) == 0) {
 
-			sscanf_s((buf + 6), "%d", omber);
+			sscanf_s((buf + 6), "%d", &omber);
 			player.GetInventory()->AddItem(Item("Steel", 8, 2), omber);
 
 		}
 		else if (strncmp("Kernite ", buf, 8) == 0) {
 
-			sscanf_s((buf + 8), "%d", kernite);
+			sscanf_s((buf + 8), "%d", &kernite);
 			player.GetInventory()->AddItem(Item("Tin", 20, 3), kernite);
 
 		}

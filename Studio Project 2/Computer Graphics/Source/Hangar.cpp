@@ -102,12 +102,15 @@ void Hangar::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	player = new Player("Malcolm", "", "", "");
 
 	player->GetShip()->SetPosition(0,3,0);
-	//Load::Load("Text/PlayStat", player);
-	if (player->GetState() != PLAYING)
+	Load::LoadFile("Text/PlayerStat.txt", *player, *player->GetInventory(), *player->GetShip());
+	if (player->GetState() != MAIN_MENU)
+	{
+		player->SetState(PLAYING);
+	}
+	else
 	{
 		player->SetState(MAIN_MENU);
 	}
-	
 	Leave = false;
 	codex = false;
 	menuOption = START;
@@ -147,6 +150,11 @@ void Hangar::Update(double dt) {
 			Leave = true;
 			player->SetState(ANIMATING);
 		}
+		else if (!isPressed[ESC] && Application::IsKeyPressed(VK_ESCAPE) && !isPressed[E] && !isPressed[S])
+		{
+			player->GetShip()->SetRotation(0, 0, 0);
+			player->SetState(MAIN_MENU);
+		}
 
 	}
 	else if (player->GetState() == ANIMATING)
@@ -168,7 +176,7 @@ void Hangar::LeavingAnimation(double &dt)
 		{
 			player->GetShip()->AddForce(0,5000,0,dt);
 		}
-		else if (player->GetShip()->GetPosition().z < 20.0f)
+		else if (player->GetShip()->GetPosition().z < 15.0f)
 		{
 			player->GetShip()->AddForce(0,0,10000,dt);
 			if(player->GetShip()->GetPosition().y>5.0f)
@@ -178,6 +186,7 @@ void Hangar::LeavingAnimation(double &dt)
 		}
 		else
 		{
+			Load::SaveFile("Text/PlayerStat.txt", *player);
 			SharedData::GetInstance()->sceneNumber = 2;
 		}
 	}
@@ -234,7 +243,8 @@ void Hangar::UpdateStartMenu()
 
 		}
 		else if (menuOption == QUIT) {
-
+			player->SetState(MAIN_MENU);
+			Load::SaveFile("Text/PlayerStat.txt", *player);
 			SharedData::GetInstance()->quitGame = true;
 
 		}
