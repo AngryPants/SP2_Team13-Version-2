@@ -44,6 +44,9 @@ private:
 		CURRHEALTH,
 		DISPLAY,
 		TAB,
+		VELDSPAR,
+		KERNITE,
+		OMBER,
 		END,
 	};
 

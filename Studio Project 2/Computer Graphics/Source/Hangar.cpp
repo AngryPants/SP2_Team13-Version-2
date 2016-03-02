@@ -103,6 +103,57 @@ void Hangar::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	meshList[HANGAR]->textureID = LoadTGA("Image//Space_Station//Hangar.tga");
 	meshList[HANGAR]->material = MaterialList::GetInstance()->material[MaterialList::METAL];
 
+	meshList[DECO_SHIP_RED] = MeshBuilder::GenerateOBJ("Freighter", "OBJ//Freighter//Freighter.obj");
+	meshList[DECO_SHIP_RED]->textureID = LoadTGA("Image//Freighter//Freighter_Red.tga");
+	meshList[DECO_SHIP_RED]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
+
+	meshList[DECO_SHIP_BLUE] = MeshBuilder::GenerateOBJ("Freighter", "OBJ//Freighter//Freighter.obj");
+	meshList[DECO_SHIP_BLUE]->textureID = LoadTGA("Image//Freighter//Freighter_Blue.tga");
+	meshList[DECO_SHIP_BLUE]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
+
+	meshList[DECO_TRUCK] = MeshBuilder::GenerateOBJ("Avalanche", "OBJ//Avalanche//Avalanche.obj");
+	meshList[DECO_TRUCK]->textureID = LoadTGA("Image//Avalanche//Avalanche.tga");
+	meshList[DECO_TRUCK]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
+	
+	meshList[VELDSPAR] = MeshBuilder::GenerateOBJ("VELDSPAR", "OBJ//Asteroid//Asteroid.obj");
+	meshList[VELDSPAR]->textureID = LoadTGA("Image//Asteroid//Veldspar.tga");
+	meshList[VELDSPAR]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
+
+	meshList[OMBER] = MeshBuilder::GenerateOBJ("OMBER", "OBJ//Asteroid//Asteroid.obj");
+	meshList[OMBER]->textureID = LoadTGA("Image//Asteroid//Omber.tga");
+	meshList[OMBER]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
+
+	meshList[KERNITE] = MeshBuilder::GenerateOBJ("KERNITE", "OBJ//Asteroid//Asteroid.obj");
+	meshList[KERNITE]->textureID = LoadTGA("Image//Asteroid//Kernite.tga");
+	meshList[KERNITE]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
+
+
+	//NPC
+	meshList[NPC_HEAD] = MeshBuilder::GenerateOBJ("KERNITE", "OBJ//Asteroid//Asteroid.obj");
+	meshList[NPC_HEAD]->textureID = LoadTGA("Image//Asteroid//Kernite.tga");
+	meshList[NPC_HEAD]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
+
+	meshList[NPC_LEFT_HAND] = MeshBuilder::GenerateOBJ("KERNITE", "OBJ//Asteroid//Asteroid.obj");
+	meshList[NPC_LEFT_HAND]->textureID = LoadTGA("Image//Asteroid//Kernite.tga");
+	meshList[NPC_LEFT_HAND]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
+
+	meshList[NPC_RIGHT_HAND] = MeshBuilder::GenerateOBJ("KERNITE", "OBJ//Asteroid//Asteroid.obj");
+	meshList[NPC_RIGHT_HAND]->textureID = LoadTGA("Image//Asteroid//Kernite.tga");
+	meshList[NPC_RIGHT_HAND]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
+
+	meshList[NPC_BODY] = MeshBuilder::GenerateOBJ("KERNITE", "OBJ//Asteroid//Asteroid.obj");
+	meshList[NPC_BODY]->textureID = LoadTGA("Image//Asteroid//Kernite.tga");
+	meshList[NPC_BODY]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
+
+	meshList[NPC_LEFT_LEG] = MeshBuilder::GenerateOBJ("KERNITE", "OBJ//Asteroid//Asteroid.obj");
+	meshList[NPC_LEFT_LEG]->textureID = LoadTGA("Image//Asteroid//Kernite.tga");
+	meshList[NPC_LEFT_LEG]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
+
+	meshList[NPC_RIGHT_LEG] = MeshBuilder::GenerateOBJ("KERNITE", "OBJ//Asteroid//Asteroid.obj");
+	meshList[NPC_RIGHT_LEG]->textureID = LoadTGA("Image//Asteroid//Kernite.tga");
+	meshList[NPC_RIGHT_LEG]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
+
+
 	player = new Player("Malcolm", "", "", "");
 
 	player->GetShip()->SetPosition(0,2,0);
@@ -125,6 +176,11 @@ void Hangar::Update(double dt) {
 	else if (player->GetState() == PLAYING)
 	{
 		//Player Update
+		spinObj += dt;
+		if (spinObj > 360)
+		{
+			spinObj -= 360;
+		}
 		PlayerControl::RotateShip(player->GetShip(), 160.0f * dt, dt);
 		if (!isPressed[S] && Application::IsKeyPressed('S'))
 		{
@@ -162,14 +218,14 @@ void Hangar::LeavingAnimation(double &dt)
 	{
 		if (player->GetShip()->GetPosition().y<5.0f)
 		{
-			player->GetShip()->AddForce(0,1000,0,dt);
+			player->GetShip()->AddForce(0,5000,0,dt);
 		}
 		else if (player->GetShip()->GetPosition().z < 20.0f)
 		{
 			player->GetShip()->AddForce(0,0,10000,dt);
 			if(player->GetShip()->GetPosition().y>5.0f)
 			{
-				player->GetShip()->AddForce(0, -1000, 0, dt);
+				player->GetShip()->AddForce(0, -5000, 0, dt);
 			}
 		}
 		else
@@ -182,7 +238,6 @@ void Hangar::LeavingAnimation(double &dt)
 
 void Hangar::BoundsCheck(Vector3 position)
 {
-
 	int xLimit = 39;
 	int zLimit = 19;
 
@@ -384,7 +439,9 @@ void Hangar::RenderUI()
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "veldspar : " + std::to_string(((int)player)), Colour(0.5, 0.5, 0.5), 100, 1, 6);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "omber : " + std::to_string(((int)player->GetShip()->GetHealth())), Colour(0.5, 0.35, 0.05), 100, 1, 5);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "kernite : " + std::to_string(((int)player->GetInventory()->GetGold())), Colour(0, 1, 1), 100, 1, 4);
-		
+		RenderObjectOnScreen(meshList[VELDSPAR], 0.5, 0.5, 0.5, 50, 620, 5000, 180+ 1*spinObj, 0, 1, 0);
+		RenderObjectOnScreen(meshList[OMBER], 0.5, 0.5, 0.5, 50, 520, 5000, 180 + 1 * spinObj, 0, 0, 1);
+		RenderObjectOnScreen(meshList[KERNITE], 0.5, 0.5, 0.5, 50, 420, 5000, 180 + 1 * spinObj, 0, 1, 0);
 	}
 	else
 	{
@@ -399,6 +456,36 @@ void Hangar::RenderObjects()
 	modelStack.Scale(4,4,4);
 	RenderMesh(meshList[HANGAR],true);
 	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(10, 6, 0);
+	RenderMesh(meshList[DECO_SHIP_BLUE], true);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(-30, 6, 5);
+	RenderMesh(meshList[DECO_SHIP_BLUE], true);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(-10, 6, 0);
+	RenderMesh(meshList[DECO_SHIP_RED], true);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(30, 6, 5);
+	RenderMesh(meshList[DECO_SHIP_RED], true);
+	modelStack.PopMatrix();
+
+	for (int i = -30; i < 30; i += 5)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(i, 1, -13);
+		modelStack.Rotate(270,0,1,0);
+		RenderMesh(meshList[DECO_TRUCK], true);
+		modelStack.PopMatrix();
+	}
+
 }
 
 void Hangar::Exit() {

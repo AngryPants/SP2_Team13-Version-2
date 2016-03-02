@@ -26,6 +26,7 @@ public:
 
 	//Getters
 	string GetName();
+	string GetName() const;
 	int GetID();
 	int GetID() const;
 	int GetValue();

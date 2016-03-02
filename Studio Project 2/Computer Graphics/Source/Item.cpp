@@ -83,6 +83,12 @@ string Item::GetName() {
 
 }
 
+string Item::GetName() const {
+
+	return this->name;
+
+}
+
 int Item::GetValue() {
 
 	return this->value;

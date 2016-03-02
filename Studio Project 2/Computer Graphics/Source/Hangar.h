@@ -39,10 +39,22 @@ private:
 
 	enum GEOMETRY
 	{
-		CROSSHAIR,
 		HANGAR,
-		MAXHEALTH,
-		CURRHEALTH,
+		DECO_SHIP_RED,
+		DECO_SHIP_BLUE,
+		DECO_TRUCK,
+		
+		NPC_HEAD,
+		NPC_LEFT_HAND,
+		NPC_RIGHT_HAND,
+		NPC_BODY,
+		NPC_LEFT_LEG,
+		NPC_RIGHT_LEG,
+
+		VELDSPAR,
+		OMBER,
+		KERNITE,
+
 		END,
 	};
 
@@ -54,7 +66,7 @@ private:
 	MENU menuOption;
 	bool isPressed[NONE];
 	bool pause,Leave,Shop;
-
+	int spinObj;
 	//GameObjects
 	list<Ship> enemies;
 	list<Interactable*> iSpaceObjects;
