@@ -220,10 +220,11 @@ void Spawn::RespawnEnemies(SpawnZone &spawnZone, int seed) {
 	for (list<Ship>::iterator iter = spawnZone.GetEnemyList()->begin(); iter != spawnZone.GetEnemyList()->end(); ++iter) {
 	
 		MS spawnStack;
-		spawnStack.Rotate(GenerateRange(0, 360), 1, 0, 0);
-		spawnStack.Rotate(GenerateRange(0, 360), 0, 1, 0);
-		spawnStack.Rotate(GenerateRange(0, 360), 0, 0, 1);
-		spawnStack.Translate(GenerateRange(spawnZone.GetPosition().x - spawnZone.GetSpawnRadius()/8.0f, spawnZone.GetPosition().x + spawnZone.GetSpawnRadius()/8.0f), GenerateRange(spawnZone.GetPosition().y - spawnZone.GetSpawnRadius()/8.0f, spawnZone.GetPosition().y + spawnZone.GetSpawnRadius()/8.0f), GenerateRange(spawnZone.GetPosition().z - spawnZone.GetSpawnRadius()/8.0f, spawnZone.GetPosition().z + spawnZone.GetSpawnRadius()/8.0f));
+		spawnStack.Translate(spawnZone.GetPosition().x, spawnZone.GetPosition().y, spawnZone.GetPosition().z);
+			spawnStack.Rotate(GenerateRange(0, 360), 1, 0, 0);
+			spawnStack.Rotate(GenerateRange(0, 360), 0, 1, 0);
+			spawnStack.Rotate(GenerateRange(0, 360), 0, 0, 1);
+			spawnStack.Translate(GenerateRange(-spawnZone.GetSpawnRadius() + iter->GetRadius(), spawnZone.GetSpawnRadius() - iter->GetRadius()), GenerateRange(-spawnZone.GetSpawnRadius() + iter->GetRadius(), spawnZone.GetSpawnRadius() - iter->GetRadius()), GenerateRange(-spawnZone.GetSpawnRadius() + iter->GetRadius(), spawnZone.GetSpawnRadius() - iter->GetRadius()));
 
 		iter->SetPosition(spawnStack.Top().a[12], spawnStack.Top().a[13], spawnStack.Top().a[14]);
 

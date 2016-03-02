@@ -23,7 +23,7 @@ Item::Item(string name, int value, int itemID) {
 
 	}
 
-	if (itemID <= 0) {
+	if (itemID >= 0) {
 	
 		this->itemID = itemID;
 
@@ -103,6 +103,6 @@ int Item::GetID() {
 
 int Item::GetID() const {
 
-	return GetID();
+	return this->itemID;
 
 }

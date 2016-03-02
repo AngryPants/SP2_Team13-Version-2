@@ -143,6 +143,7 @@ void SpawnZone::SetActive() {
 	for (list<Asteroid>::iterator iter = asteroids.begin(); iter != asteroids.end(); ++iter) {
 	
 		iter->Spawn();
+		iter->SetRadius(iter->GetMaxRadius());
 
 	}
 

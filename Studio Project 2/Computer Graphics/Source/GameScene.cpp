@@ -345,6 +345,31 @@ void GameScene::RenderObject(GameObject* object, bool enableLight) {
 
 }
 
+void GameScene::RenderPlayerShip() {
+
+	RenderObject(player->GetShip(), true);
+
+	if (player->GetShip()->IsMining()) {
+	
+		modelStack.PushMatrix();
+
+			modelStack.Translate(player->GetShip()->GetMiningLaser()->GetPosition().x, player->GetShip()->GetMiningLaser()->GetPosition().y, player->GetShip()->GetMiningLaser()->GetPosition().z);
+			modelStack.MultMatrix(player->GetShip()->GetMiningLaser()->GetRotationMatrix());
+			modelStack.Scale(1, 1, player->GetShip()->GetMiningLaser()->GetLength() + 30.0f);
+			RenderMesh(player->GetShip()->GetMiningLaser()->GetMesh(), false);
+
+		modelStack.PopMatrix();
+
+	}
+
+	for (list<Bullet>::iterator bullet_iter = (*player->GetShip()->GetBullets()).begin(); bullet_iter != (*player->GetShip()->GetBullets()).end(); ++bullet_iter) {
+	
+		RenderObject(&(*bullet_iter), false);
+
+	}
+
+}
+
 void GameScene::RenderSpawnZones() {
 
 	for (vector<SpawnZone>::iterator zone_iter = spawnZones.begin(); zone_iter != spawnZones.end(); ++zone_iter) {
