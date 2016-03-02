@@ -15,12 +15,9 @@ using std::string;
 enum PLAYER_STATE {
 
 	MAIN_MENU = 0,
-	SHOP_MENU,
-	QUEST_MENU,
 	ANIMATING,
 	PLAYING,
 	DEAD,
-
 	NUM_PLAYER_STATE,
 
 };

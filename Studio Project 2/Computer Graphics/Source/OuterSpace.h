@@ -18,20 +18,17 @@
 class OuterSpace : public GameScene {
 
 private:
-
 	enum KEYPRESS
 	{
 		UP,
 		DOWN,
-		BACK,
 		RETURN,
-		E,
 		NONE,
 	};
 
 	enum MENU
 	{
-		START,
+		RESTART,
 		SOUND,
 		QUIT,
 		THE_END,
@@ -44,9 +41,9 @@ private:
 		CURRHEALTH,
 		DISPLAY,
 		TAB,
-		VELDSPAR,
+	/*	VELDSPAR,
 		KERNITE,
-		OMBER,
+		OMBER,*/
 		END,
 	};
 
@@ -80,6 +77,9 @@ private:
 	void UpdateStartMenu();
 	void CheckKeyPress();
 	void RenderStartMenu();
+	void DeathCheck();
+	void UpdateDeathScreen();
+	void RenderDeathScreen();
 
 public:
 	//Constructor & Destructor

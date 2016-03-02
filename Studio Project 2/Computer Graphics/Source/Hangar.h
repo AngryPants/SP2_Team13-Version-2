@@ -43,7 +43,12 @@ private:
 		DECO_SHIP_RED,
 		DECO_SHIP_BLUE,
 		DECO_TRUCK,
+		PIRATE,
+		ALIEN,
+		DRONE,
+		PLAYER_SHIP,
 		
+	
 		NPC_HEAD,
 		NPC_LEFT_HAND,
 		NPC_RIGHT_HAND,
@@ -54,9 +59,12 @@ private:
 		VELDSPAR,
 		OMBER,
 		KERNITE,
+		SCREEN,
 
 		END,
 	};
+
+
 
 	//Variables
 	bool warning;
@@ -65,8 +73,10 @@ private:
 	Mesh*meshList[END];
 	MENU menuOption;
 	bool isPressed[NONE];
-	bool pause,Leave,Shop;
-	int spinObj;
+	bool Leave,codex;
+	float spinObj;
+	int random;
+
 	//GameObjects
 	list<Ship> enemies;
 	list<Interactable*> iSpaceObjects;
@@ -82,6 +92,8 @@ private:
 	void RenderStartMenu();
 	void LeavingAnimation(double &dt);
 	void RenderUI();
+	void RenderNPC();
+
 public:
 	//Constructor & Destructor
 	Hangar();

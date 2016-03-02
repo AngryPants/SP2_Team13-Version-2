@@ -2,7 +2,7 @@
 
 //Constructor
 WarpGate::WarpGate(string name, Vector3 position, Vector3 exitPosition)
-: Interactable(name, 80.0f, 40.f, "You are approaching " + name, "Press E to use the warp gate.", "OBJ//Warp_Gate//Warp_Gate.obj", "Image//Warp_Gate//Warp_Gate.tga", MaterialList::GetInstance()->material[MaterialList::PLASTIC])
+: Interactable(name, 80.0f, 40.f, "You are approaching " + name, "Press E to use the warp " + name, "OBJ//Warp_Gate//Warp_Gate.obj", "Image//Warp_Gate//Warp_Gate.tga", MaterialList::GetInstance()->material[MaterialList::PLASTIC])
 {
 	SetPosition(position);
 	SetExitPosition(exitPosition);
