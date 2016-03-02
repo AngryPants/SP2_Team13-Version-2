@@ -114,6 +114,8 @@ void Hangar::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	spinObj = 0;
 	srand(time(0));
 	random = rand() % 100;
+	randHand = rand() % 60 - 30;
+	randLeg = rand() % 40 - 30;
 }
 
 void Hangar::Update(double dt) {
@@ -305,6 +307,7 @@ void Hangar::RenderStartMenu()
 
 void Hangar::RenderNPC()
 {
+
 	modelStack.PushMatrix();
 	modelStack.Translate(0,0.4,0);
 	RenderMesh(mesh[NPC_HEAD], true);
@@ -316,21 +319,25 @@ void Hangar::RenderNPC()
 
 	modelStack.PushMatrix();
 	modelStack.Translate(-0.1,0, 0);
+	modelStack.Rotate(randLeg,1,0,0);
 	RenderMesh(mesh[NPC_LEFT_LEG], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0.1, 0, 0);
+	modelStack.Rotate(randLeg, 1, 0, 0);
 	RenderMesh(mesh[NPC_RIGHT_LEG], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0.2, 0.4, 0);
+	modelStack.Rotate(randHand, 1, 0, 0);
 	RenderMesh(mesh[NPC_LEFT_HAND], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(-0.2,0.4, 0);
+	modelStack.Translate(-0.2, 0.4, 0);
+	modelStack.Rotate(randHand, 1, 0, 0);
 	RenderMesh(mesh[NPC_RIGHT_HAND], true);
 	modelStack.PopMatrix();
 
@@ -425,8 +432,6 @@ void Hangar::RenderObjects()
 		RenderMesh(mesh[DECO_TRUCK], true);
 		modelStack.PopMatrix();
 	}
-
-
 
 }
 

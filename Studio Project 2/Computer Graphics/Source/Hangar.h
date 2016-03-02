@@ -20,7 +20,7 @@ private:
 	MENU menuOption;
 	bool Leave,codex;
 	float spinObj;
-	int random;
+	int random,randHand,randLeg;
 
 	//GameObjects
 	Player* player;
