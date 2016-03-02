@@ -5,6 +5,7 @@ Asteroid::Asteroid(string name, float mass, int minimumDamage, const char* textu
 {
 
 	SetMinimumDamage(minimumDamage);
+	maxRadius = 60.0f;
 
 }
 
@@ -15,6 +16,12 @@ Asteroid::~Asteroid() {
 int Asteroid::GetMinimumDamage() {
 
 	return minimumDamage;
+
+}
+
+float Asteroid::GetMaxRadius() {
+
+	return this->maxRadius;
 
 }
 

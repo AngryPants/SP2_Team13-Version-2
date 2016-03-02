@@ -9,6 +9,7 @@ PlayerShip::PlayerShip()
 	upgrades[Upgrade::ARMOUR] = nullptr;
 	upgrades[Upgrade::ENGINE] = nullptr;
 
+	isMining = false;
 	speed = 0.0f;
 
 }
@@ -49,10 +50,32 @@ void PlayerShip::DecreaseSpeed(float decreaseAmount) {
 
 }
 
+void PlayerShip::Update(double &dt) {
+
+	UpdateTimeToFire(dt);
+	UpdateBullets(dt);
+	miningLaser.SetRotation(GetRotationMatrix());
+	miningLaser.SetPosition(GetPosition() + GetForwardVector() * GetRadius());
+
+}
+
+//Is-ters
+bool PlayerShip::IsMining() {
+
+	return this->isMining;
+
+}
+
 //Getters
 float PlayerShip::GetSpeed() {
 
 	return this->speed;
+
+}
+
+MiningLaser* PlayerShip::GetMiningLaser() {
+
+	return &(this->miningLaser);	
 
 }
 
@@ -73,4 +96,10 @@ void PlayerShip::SetSpeed(float newSpeed) {
 
 	}
 
+}
+
+void PlayerShip::SetMining(bool isMining) {
+
+	this->isMining = isMining;
+	
 }

@@ -186,7 +186,7 @@ bool Collision::CollisionCheck(SpaceObject* object1, SpaceObject* object2) {
 
 bool Collision::CollisionCheck(SpaceObject* object, Bullet &bullet, double &dt) {
 
-	//Holy shit this took forever to understand!
+	//Holy sh*t this took forever to understand!
 	if (bullet.GetSpeed() <= 0.1f || object->GetRadius() <= 0.1f) {
 	
 		return false;
@@ -210,6 +210,34 @@ bool Collision::CollisionCheck(SpaceObject* object, Bullet &bullet, double &dt) 
 	float d2 = -b - sqrt(b*b - 4*c);
 
 	if (d1 <= bullet.GetSpeed()*dt || d2<= bullet.GetSpeed()*dt) {
+	
+		return true;
+
+	}
+
+	return false;
+
+}
+
+bool Collision::CollisionCheck(Vector3 lineOrigin, Vector3 lineForward, float lineLength, SpaceObject* object) {
+
+	//Discriminant
+	float b = 2 * ((lineForward.x * (lineOrigin.x - object->GetPosition().x)) + (lineForward.y * (lineOrigin.y - object->GetPosition().y)) + (lineForward.z * (lineOrigin.z - object->GetPosition().z)));
+	float c = (lineOrigin.x - object->GetPosition().x) * (lineOrigin.x - object->GetPosition().x) +
+			  (lineOrigin.y - object->GetPosition().y) * (lineOrigin.y - object->GetPosition().y) +
+			  (lineOrigin.z - object->GetPosition().z) * (lineOrigin.z - object->GetPosition().z) -
+			  (object->GetRadius() * object->GetRadius());
+
+	if ((b*b - 4*c) < 0.0f) {
+	
+		return false;
+
+	}
+
+	float d1 = -b + sqrt(b*b - 4*c);
+	float d2 = -b - sqrt(b*b - 4*c);
+
+	if (d1 <= lineLength || d2<= lineLength) {
 	
 		return true;
 

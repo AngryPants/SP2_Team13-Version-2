@@ -153,7 +153,7 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	player = new Player("Malcolm", "", "", "");
 
 	warning = false;
-	player->GetShip()->SetPosition(1250, -1250, -1250);
+	player->GetShip()->SetPosition(-1250, 1250, 1250);
 
 }
 
@@ -230,6 +230,7 @@ void OuterSpace::Update(double dt) {
 				SpaceObject* spaceObjectPointer2 = player->GetShip();
 				Collision::SpaceObjectToSpaceObject(spaceObjectPointer1, spaceObjectPointer2, dt);
 
+				Mining::Mine(player->GetShip(), &(*asteroid_iter), dt);
 				Spawn::CheckKill(spaceObjectPointer1, *player);
 
 				RigidBody* rigidBodyPointer = &(*asteroid_iter);
@@ -316,6 +317,19 @@ void OuterSpace::Render() { //Render VBO here.
 	RenderObjects();
 	RenderObject(player->GetShip(), true);
 
+	if (player->GetShip()->IsMining()) {
+	
+		modelStack.PushMatrix();
+
+			modelStack.Translate(player->GetShip()->GetMiningLaser()->GetPosition().x, player->GetShip()->GetMiningLaser()->GetPosition().y, player->GetShip()->GetMiningLaser()->GetPosition().z);
+			modelStack.MultMatrix(player->GetShip()->GetMiningLaser()->GetRotationMatrix());
+			modelStack.Scale(1, 1, player->GetShip()->GetMiningLaser()->GetLength() + 30.0f);
+			RenderMesh(player->GetShip()->GetMiningLaser()->GetMesh(), false);
+
+		modelStack.PopMatrix();
+
+	}
+
 	for (list<Bullet>::iterator bullet_iter = (*player->GetShip()->GetBullets()).begin(); bullet_iter != (*player->GetShip()->GetBullets()).end(); ++bullet_iter) {
 		
 		RenderObject(&(*bullet_iter), false);
@@ -342,7 +356,19 @@ void OuterSpace::Render() { //Render VBO here.
 			//Render Asteroids
 			for (list<Asteroid>::iterator asteroid_iter = zone_iter->GetAsteroidList()->begin(); asteroid_iter != zone_iter->GetAsteroidList()->end(); ++asteroid_iter) {
 				
-				RenderObject(&(*asteroid_iter), true);
+				if (!asteroid_iter->IsDisabled()) {
+
+					modelStack.PushMatrix();
+
+						modelStack.Translate(asteroid_iter->GetPosition().x, asteroid_iter->GetPosition().y, asteroid_iter->GetPosition().z);
+						modelStack.MultMatrix(asteroid_iter->GetRotationMatrix());
+						float scale = asteroid_iter->GetRadius()/asteroid_iter->GetMaxRadius() + 0.001f;
+						modelStack.Scale(scale, scale, scale);
+						RenderMesh(asteroid_iter->GetMesh(), true);
+
+					modelStack.PopMatrix();
+
+				}
 
 			}
 

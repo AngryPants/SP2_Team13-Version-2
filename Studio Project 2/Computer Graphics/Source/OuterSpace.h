@@ -9,6 +9,7 @@
 #include "Asteroid.h"
 #include "AI.h"
 #include "Interactable.h"
+#include "Mining.h"
 #include "CarrickStation.h"
 #include "WarpGate.h"
 #include "Spawn.h"

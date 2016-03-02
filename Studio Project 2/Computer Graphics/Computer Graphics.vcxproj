@@ -108,6 +108,8 @@
     <ClCompile Include="Source\MaterialList.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
+    <ClCompile Include="Source\Mining.cpp" />
+    <ClCompile Include="Source\MiningLaser.cpp" />
     <ClCompile Include="Source\Omber.cpp" />
     <ClCompile Include="Source\OuterSpace.cpp" />
     <ClCompile Include="Source\SpaceStation.cpp" />
@@ -146,6 +148,8 @@
     <ClInclude Include="Source\Interactable.h" />
     <ClInclude Include="Source\Interaction.h" />
     <ClInclude Include="Source\Item.h" />
+    <ClInclude Include="Source\Mining.h" />
+    <ClInclude Include="Source\MiningLaser.h" />
     <ClInclude Include="Source\SpaceStation.h" />
     <ClInclude Include="Source\PlayerControl.h" />
     <ClInclude Include="Source\Drone.h" />
