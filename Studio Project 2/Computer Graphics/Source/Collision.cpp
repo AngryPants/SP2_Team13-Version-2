@@ -3,8 +3,14 @@
 
 
 void Collision::BulletToSpaceObject(Bullet* bullet, SpaceObject* object, double& dt) {
+	
+	if (bullet->GetSpeed() <= 0.1f || object->GetRadius() <= 0.1f) {
+	
+		return;
 
-	if (CollisionCheck(object, *bullet, dt)) {
+	}
+
+	if (LineSphereCollision(bullet->GetPosition(), bullet->GetForwardVector(), bullet->GetSpeed() * dt, object)) {
 	
 		object->DecreaseHealth(bullet->GetDamage());
 		bullet->Despawn();
@@ -22,7 +28,7 @@ void Collision::SpaceObjectToSpaceObject(SpaceObject* object1, SpaceObject* obje
 
 	}
 
-	if (CollisionCheck(object1, object2)) {
+	if (SphereSphereCollision(object1, object2)) {
 	
 		object1->DecreaseHealth(((object2->GetVelocity().Length() + object1->GetVelocity().Length()) * dt));
 		object2->DecreaseHealth(((object2->GetVelocity().Length() + object1->GetVelocity().Length()) * dt));
@@ -68,7 +74,7 @@ void Collision::MovingSpaceObjectToMovingSpaceObject(SpaceObject* object1, Space
 
 	}
 
-	if (CollisionCheck(object1, object2)) {
+	if (SphereSphereCollision(object1, object2)) {
 	
 		object1->DecreaseHealth(((object2->GetVelocity().Length() + object1->GetVelocity().Length()) * dt));
 		object2->DecreaseHealth(((object2->GetVelocity().Length() + object1->GetVelocity().Length()) * dt));
@@ -92,7 +98,7 @@ void Collision::MovingSpaceObjectToMovingSpaceObject(SpaceObject* object1, Space
 void Collision::GameObjectToStaticObject(GameObject* object, StaticObject* object2) {
 }
 
-bool Collision::CollisionCheck(SpaceObject* object1, SpaceObject* object2) {
+bool Collision::SphereSphereCollision(SpaceObject* object1, SpaceObject* object2) {
 	// Early Escape test: if the length of the movevec is less
 	// than distance between the centers of these circles minus
 	// their radii, there's no way they can hit.
@@ -184,42 +190,7 @@ bool Collision::CollisionCheck(SpaceObject* object1, SpaceObject* object2) {
 
 }
 
-bool Collision::CollisionCheck(SpaceObject* object, Bullet &bullet, double &dt) {
-
-	//Holy sh*t this took forever to understand!
-	if (bullet.GetSpeed() <= 0.1f || object->GetRadius() <= 0.1f) {
-	
-		return false;
-
-	}
-
-	//Discriminant
-	float b = 2 * ((bullet.GetForwardVector().x * (bullet.GetPosition().x - object->GetPosition().x)) + (bullet.GetForwardVector().y * (bullet.GetPosition().y - object->GetPosition().y)) + (bullet.GetForwardVector().z * (bullet.GetPosition().z - object->GetPosition().z)));
-	float c = (bullet.GetPosition().x - object->GetPosition().x) * (bullet.GetPosition().x - object->GetPosition().x) +
-			  (bullet.GetPosition().y - object->GetPosition().y) * (bullet.GetPosition().y - object->GetPosition().y) +
-			  (bullet.GetPosition().z - object->GetPosition().z) * (bullet.GetPosition().z - object->GetPosition().z) -
-			  (object->GetRadius() * object->GetRadius());
-
-	if ((b*b - 4*c) < 0.0f) {
-	
-		return false;
-
-	}
-
-	float d1 = -b + sqrt(b*b - 4*c);
-	float d2 = -b - sqrt(b*b - 4*c);
-
-	if (d1 <= bullet.GetSpeed()*dt || d2<= bullet.GetSpeed()*dt) {
-	
-		return true;
-
-	}
-
-	return false;
-
-}
-
-bool Collision::CollisionCheck(Vector3 lineOrigin, Vector3 lineForward, float lineLength, SpaceObject* object) {
+bool Collision::LineSphereCollision(Vector3 lineOrigin, Vector3 lineForward, float lineLength, SpaceObject* object) {
 
 	//Discriminant
 	float b = 2 * ((lineForward.x * (lineOrigin.x - object->GetPosition().x)) + (lineForward.y * (lineOrigin.y - object->GetPosition().y)) + (lineForward.z * (lineOrigin.z - object->GetPosition().z)));

@@ -370,15 +370,14 @@ void OuterSpace::Render() { //Render VBO here.
 	glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightDirection_cameraspace.x);
 
 	modelStack.LoadIdentity();
-	
 	RenderSkybox();
-	if (player->GetState() == PLAYING)
-	{
-		RenderObjects();
+
+	if (player->GetState() == PLAYING) {
+		
+		RenderInteractables();
 		RenderObject(player->GetShip(), true);
 
-		if (player->GetShip()->IsMining()) 
-		{
+		if (player->GetShip()->IsMining()) {
 	
 			modelStack.PushMatrix();
 
@@ -391,60 +390,20 @@ void OuterSpace::Render() { //Render VBO here.
 
 		}
 
-		for (list<Bullet>::iterator bullet_iter = (*player->GetShip()->GetBullets()).begin(); bullet_iter != (*player->GetShip()->GetBullets()).end(); ++bullet_iter) 
-		{
+		for (list<Bullet>::iterator bullet_iter = (*player->GetShip()->GetBullets()).begin(); bullet_iter != (*player->GetShip()->GetBullets()).end(); ++bullet_iter) {
 		
 			RenderObject(&(*bullet_iter), false);
 
 		}
 
-		for (vector<SpawnZone>::iterator zone_iter = spawnZones.begin(); zone_iter != spawnZones.end(); ++zone_iter)
-		{
+		RenderSpawnZones();
+		RenderObjects();
+		RenderFlightHUD();
 
-			if (zone_iter->GetZoneState() != INACTIVE) {
-
-				//Render Enemies
-				for (list<Ship>::iterator ship_iter = zone_iter->GetEnemyList()->begin(); ship_iter != zone_iter->GetEnemyList()->end(); ++ship_iter)
-				{
-
-					RenderObject(&(*ship_iter), true);
-
-					for (list<Bullet>::iterator bullet_iter = ship_iter->GetBullets()->begin(); bullet_iter != ship_iter->GetBullets()->end(); ++bullet_iter)
-					{
-
-						RenderObject(&(*bullet_iter), false);
-
-					}
-
-				}
-
-				//Render Asteroids
-				for (list<Asteroid>::iterator asteroid_iter = zone_iter->GetAsteroidList()->begin(); asteroid_iter != zone_iter->GetAsteroidList()->end(); ++asteroid_iter) {
-
-					if (!asteroid_iter->IsDisabled()) {
-
-						modelStack.PushMatrix();
-
-						modelStack.Translate(asteroid_iter->GetPosition().x, asteroid_iter->GetPosition().y, asteroid_iter->GetPosition().z);
-						modelStack.MultMatrix(asteroid_iter->GetRotationMatrix());
-						float scale = asteroid_iter->GetRadius() / asteroid_iter->GetMaxRadius() + 0.001f;
-						modelStack.Scale(scale, scale, scale);
-						RenderMesh(asteroid_iter->GetMesh(), true);
-
-						modelStack.PopMatrix();
-
-					}
-
-				}
-
-			}
-
-		}
-		UserInterFace();
-	}
-	else if (player->GetState() == DEAD)
-	{
+	} else if (player->GetState() == DEAD) {
+		
 		RenderDeathScreen();
+
 	}
 
 }
@@ -484,16 +443,17 @@ void OuterSpace::RenderDeathScreen()
 	}
 }
 
-void OuterSpace::UserInterFace()
+void OuterSpace::RenderFlightHUD()
 {
 	//Debug Info
 	RenderTextOnScreen(mesh[FONT_CONSOLAS], "X: " + std::to_string((int)(player->GetShip()->GetPosition().x)) + " Y: " + std::to_string((int)(player->GetShip()->GetPosition().y)) + " Z: " + std::to_string((int)(player->GetShip()->GetPosition().z)), Colour(0, 1, 0), 70, 11, 14.8);
 
-	if (Interaction::GetRenderMessage() != "")
+	if (Interaction::GetRenderMessage().size() != 0)
 	{
 		RenderObjectOnScreen(mesh[DISPLAY], 1200 , 100, 100, 1000, 825,0, 180, 1, 0, 0);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], Interaction::GetRenderMessage(), Colour(0, 1, 0), 100, 5, 8);
 	}
+
 	if (warning)
 	{
 		RenderObjectOnScreen(mesh[DISPLAY], 1200, 100, 100, 1070, 825,0, 180, 1, 0, 0);

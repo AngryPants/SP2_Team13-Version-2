@@ -8,7 +8,6 @@
 #include "Alien.h"
 #include "Asteroid.h"
 #include "AI.h"
-#include "Interactable.h"
 #include "Mining.h"
 #include "CarrickStation.h"
 #include "WarpGate.h"
@@ -41,12 +40,14 @@ private:
 	
 	//Functions
 	void BoundsCheck();
-	void RenderObjects();
 	void RenderAsteroids(SpawnZone spawnZone);
 	void RenderEnemy(SpawnZone spawnZone);
 	void UpdateSpaceInteractable(double &dt);
 	void UpdateUserInterFace(double&dt);
-	void UserInterFace();
+	void RenderFlightHUD();
+	void UpdateStartMenu();
+	void RenderObjects();
+	void RenderStartMenu();
 	void DeathCheck();
 	void UpdateDeathScreen();
 	void RenderDeathScreen();

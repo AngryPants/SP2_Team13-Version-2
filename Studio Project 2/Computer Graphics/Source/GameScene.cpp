@@ -341,6 +341,63 @@ void GameScene::RenderObject(GameObject* object, bool enableLight) {
 
 }
 
+void GameScene::RenderSpawnZones() {
+
+	for (vector<SpawnZone>::iterator zone_iter = spawnZones.begin(); zone_iter != spawnZones.end(); ++zone_iter) {
+
+		if (zone_iter->GetZoneState() != INACTIVE) {
+
+			//Render Enemies
+			for (list<Ship>::iterator ship_iter = zone_iter->GetEnemyList()->begin(); ship_iter != zone_iter->GetEnemyList()->end(); ++ship_iter) {
+
+				RenderObject(&(*ship_iter), true);
+
+				for (list<Bullet>::iterator bullet_iter = ship_iter->GetBullets()->begin(); bullet_iter != ship_iter->GetBullets()->end(); ++bullet_iter) {
+
+					RenderObject(&(*bullet_iter), false);
+
+				}
+
+			}
+
+			//Render Asteroids
+			for (list<Asteroid>::iterator asteroid_iter = zone_iter->GetAsteroidList()->begin(); asteroid_iter != zone_iter->GetAsteroidList()->end(); ++asteroid_iter) {
+
+				if (!asteroid_iter->IsDisabled()) {
+
+					modelStack.PushMatrix();
+
+					modelStack.Translate(asteroid_iter->GetPosition().x, asteroid_iter->GetPosition().y, asteroid_iter->GetPosition().z);
+					modelStack.MultMatrix(asteroid_iter->GetRotationMatrix());
+					float scale = asteroid_iter->GetRadius()/asteroid_iter->GetMaxRadius();
+					modelStack.Scale(scale, scale, scale);
+					RenderMesh(asteroid_iter->GetMesh(), true);
+
+					modelStack.PopMatrix();
+
+				}
+
+			}
+
+		}
+
+	}
+
+}
+
+void GameScene::RenderInteractables() {
+
+	for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); ++it) {
+		
+		modelStack.PushMatrix();
+		modelStack.Translate((*it)->GetPosition().x, (*it)->GetPosition().y, (*it)->GetPosition().z);
+		RenderMesh((*it)->GetMesh(), true);
+		modelStack.PopMatrix();
+
+	}
+
+}
+
 void GameScene::RenderSkybox() {
 
 	modelStack.PushMatrix();
