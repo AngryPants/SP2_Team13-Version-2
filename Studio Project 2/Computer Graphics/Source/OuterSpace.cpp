@@ -377,7 +377,7 @@ void OuterSpace::Render() { //Render VBO here.
 
 						modelStack.Translate(asteroid_iter->GetPosition().x, asteroid_iter->GetPosition().y, asteroid_iter->GetPosition().z);
 						modelStack.MultMatrix(asteroid_iter->GetRotationMatrix());
-						float scale = asteroid_iter->GetRadius()/asteroid_iter->GetMaxRadius() + 0.001f;
+						float scale = asteroid_iter->GetRadius()/asteroid_iter->GetMaxRadius();
 						modelStack.Scale(scale, scale, scale);
 						RenderMesh(asteroid_iter->GetMesh(), true);
 
