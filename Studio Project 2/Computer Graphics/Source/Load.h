@@ -10,6 +10,7 @@
 #include "Inventory.h"
 #include "PlayerShip.h"
 #include "Quest.h"
+#include "Player.h"
 
 using std::list;
 using std::vector;
@@ -23,9 +24,8 @@ public:
 	Load();
 	~Load();
 
-	static void LoadInventory(Inventory &inventory, string filePath);
-	static void LoadShip(PlayerShip &ship, string filePath);
-	static void LoadQuest(list<Quest> &quest, string filePath);
+	static void LoadFile(string FilePath, Player &player);
+	static void SaveFile(string FilePath, Player &player);
 
 };
 

@@ -7,7 +7,6 @@
 #include <list>
 #include "PlayerShip.h"
 #include "PlayerHuman.h"
-#include "Load.h"
 
 using std::list;
 using std::string;
