@@ -8,7 +8,7 @@ void Mining::Mine(PlayerShip* playerShip, Asteroid* asteroid, double &dt) {
 
 		if (Physics::getDistance(playerShip->GetPosition(), asteroid->GetPosition()) <= (350.0f + playerShip->GetRadius() + asteroid->GetRadius())) {
 
-			if (Collision::CollisionCheck(playerShip->GetPosition(), playerShip->GetForwardVector(), 350.0f + playerShip->GetRadius() + asteroid->GetRadius(), asteroid)) {
+			if (Collision::LineSphereCollision(playerShip->GetPosition(), playerShip->GetForwardVector(), 350.0f + playerShip->GetRadius() + asteroid->GetRadius(), asteroid)) {
 			
 				MiningLaser* miningLaser = playerShip->GetMiningLaser();
 				miningLaser->AddZRotation(360 * dt);

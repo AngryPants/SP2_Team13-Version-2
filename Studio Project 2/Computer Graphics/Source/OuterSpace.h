@@ -8,7 +8,6 @@
 #include "Alien.h"
 #include "Asteroid.h"
 #include "AI.h"
-#include "Interactable.h"
 #include "Mining.h"
 #include "CarrickStation.h"
 #include "WarpGate.h"
@@ -41,9 +40,6 @@ private:
 		CURRHEALTH,
 		DISPLAY,
 		TAB,
-	/*	VELDSPAR,
-		KERNITE,
-		OMBER,*/
 		END,
 	};
 
@@ -55,25 +51,14 @@ private:
 	MENU menuOption;
 	bool isPressed[NONE];
 	bool pause;
-
-	//GameObjects
-	//list<Asteroid> asteroids;
-	//list<Ship> enemies;
-	list<Interactable*> iSpaceObjects;
-	
-	//Zones
-	vector<SpawnZone> spawnZones;
-
-	Player* player;
 	
 	//Functions
 	void BoundsCheck();
-	void RenderObjects();
 	void RenderAsteroids(SpawnZone spawnZone);
 	void RenderEnemy(SpawnZone spawnZone);
 	void UpdateSpaceInteractable(double &dt);
 	void UpdateUserInterFace(double&dt);
-	void UserInterFace();
+	void RenderFlightHUD();
 	void UpdateStartMenu();
 	void CheckKeyPress();
 	void RenderStartMenu();

@@ -11,6 +11,8 @@
 #include "Utility.h"
 #include "PlayerControl.h"
 #include "Collision.h"
+#include "SpawnZone.h"
+#include "Interactable.h"
 
 using std::list;
 
@@ -145,6 +147,15 @@ protected:
 	unsigned int m_parameters[U_TOTAL];
 	unsigned int m_vertexArrayID;
 
+	//Player
+	Player* player;
+
+	//Zones
+	vector<SpawnZone> spawnZones;
+	
+	//Interactables
+	list<Interactable*> iSpaceObjects;
+
 	//Render Functions
 	void RenderMesh(Mesh *mesh, bool enableLight);
 	void RenderText(Mesh* mesh, std::string text, Colour colour);
@@ -152,6 +163,8 @@ protected:
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Colour colour, float size, float x, float y);
 	void RenderObjectOnScreen(Mesh* mesh, float sizex, float sizey, float sizez, float x, float y, float z,float rotate, float rx, float ry, float rz);
 	void RenderObject(GameObject* object, bool enableLight);
+	void RenderSpawnZones();
+	void RenderInteractables();
 	void RenderSkybox();
 
 	//Functions

@@ -115,22 +115,6 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	meshList[TAB] = MeshBuilder::GenerateQuad("Tab", Colour(0, 1, 0), 1, 1);
 	meshList[TAB]->textureID = LoadTGA("Image//UI//Overlay//QuestScreen.tga");
 
-	//meshList[VELDSPAR] = MeshBuilder::GenerateOBJ("VELDSPAR", "OBJ//Asteroid//Asteroid.obj");
-	//meshList[VELDSPAR]->textureID = LoadTGA("Image//Asteroid//Veldspar.tga");
-	//meshList[VELDSPAR]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
-
-	//meshList[OMBER] = MeshBuilder::GenerateOBJ("OMBER", "OBJ//Asteroid//Asteroid.obj");
-	//meshList[OMBER]->textureID = LoadTGA("Image//Asteroid//Omber.tga");
-	//meshList[OMBER]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
-
-	//meshList[KERNITE] = MeshBuilder::GenerateOBJ("KERNITE", "OBJ//Asteroid//Asteroid.obj");
-	//meshList[KERNITE]->textureID = LoadTGA("Image//Asteroid//Kernite.tga");
-	//meshList[KERNITE]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
-
-
-
-	player = new Player("Malcolm", "", "", "");
-
 	iSpaceObjects.push_back(new CarrickStation());
 
 	iSpaceObjects.push_back(new WarpGate("Gate Omber 2", Vector3(1525, 1525, 1525), Vector3(190, 190, 190)));
@@ -164,8 +148,7 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	spawnZones.push_back(SpawnZone("Alien Zone", Vector3(1250, -1250, -1250), 150.0f, 500.0f, 800.0f));
 	Spawn::SpawnObjects(new Alien(), Alien().GetRadius(), 4, spawnZones[5], (*spawnZones[5].GetEnemyList()), 153);
 
-	player = new Player("Malcolm", "", "", "");
-	player->GetInventory()->AddItem(Item("Test Item", 123, 5), 12);
+	player = new Player("Morty", "", "", "");
 	warning = false;
 	player->GetShip()->SetPosition(100, 50, 150);
 	player->SetState(PLAYING);
@@ -423,15 +406,14 @@ void OuterSpace::Render() { //Render VBO here.
 	glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightDirection_cameraspace.x);
 
 	modelStack.LoadIdentity();
-	
 	RenderSkybox();
-	if (player->GetState() == PLAYING)
-	{
-		RenderObjects();
+
+	if (player->GetState() == PLAYING) {
+		
+		RenderInteractables();
 		RenderObject(player->GetShip(), true);
 
-		if (player->GetShip()->IsMining()) 
-		{
+		if (player->GetShip()->IsMining()) {
 	
 			modelStack.PushMatrix();
 
@@ -444,60 +426,19 @@ void OuterSpace::Render() { //Render VBO here.
 
 		}
 
-		for (list<Bullet>::iterator bullet_iter = (*player->GetShip()->GetBullets()).begin(); bullet_iter != (*player->GetShip()->GetBullets()).end(); ++bullet_iter) 
-		{
+		for (list<Bullet>::iterator bullet_iter = (*player->GetShip()->GetBullets()).begin(); bullet_iter != (*player->GetShip()->GetBullets()).end(); ++bullet_iter) {
 		
 			RenderObject(&(*bullet_iter), false);
 
 		}
 
-		for (vector<SpawnZone>::iterator zone_iter = spawnZones.begin(); zone_iter != spawnZones.end(); ++zone_iter)
-		{
+		RenderSpawnZones();
+		RenderFlightHUD();
 
-			if (zone_iter->GetZoneState() != INACTIVE) {
-
-				//Render Enemies
-				for (list<Ship>::iterator ship_iter = zone_iter->GetEnemyList()->begin(); ship_iter != zone_iter->GetEnemyList()->end(); ++ship_iter)
-				{
-
-					RenderObject(&(*ship_iter), true);
-
-					for (list<Bullet>::iterator bullet_iter = ship_iter->GetBullets()->begin(); bullet_iter != ship_iter->GetBullets()->end(); ++bullet_iter)
-					{
-
-						RenderObject(&(*bullet_iter), false);
-
-					}
-
-				}
-
-				//Render Asteroids
-				for (list<Asteroid>::iterator asteroid_iter = zone_iter->GetAsteroidList()->begin(); asteroid_iter != zone_iter->GetAsteroidList()->end(); ++asteroid_iter) {
-
-					if (!asteroid_iter->IsDisabled()) {
-
-						modelStack.PushMatrix();
-
-						modelStack.Translate(asteroid_iter->GetPosition().x, asteroid_iter->GetPosition().y, asteroid_iter->GetPosition().z);
-						modelStack.MultMatrix(asteroid_iter->GetRotationMatrix());
-						float scale = asteroid_iter->GetRadius()/asteroid_iter->GetMaxRadius();
-						modelStack.Scale(scale, scale, scale);
-						RenderMesh(asteroid_iter->GetMesh(), true);
-
-						modelStack.PopMatrix();
-
-					}
-
-				}
-
-			}
-
-		}
-		UserInterFace();
-	}
-	else if (player->GetState() == DEAD)
-	{
+	} else if (player->GetState() == DEAD) {
+		
 		RenderDeathScreen();
+
 	}
 
 }
@@ -537,16 +478,17 @@ void OuterSpace::RenderDeathScreen()
 	}
 }
 
-void OuterSpace::UserInterFace()
+void OuterSpace::RenderFlightHUD()
 {
 	//Debug Info
 	RenderTextOnScreen(mesh[FONT_CONSOLAS], "X: " + std::to_string((int)(player->GetShip()->GetPosition().x)) + " Y: " + std::to_string((int)(player->GetShip()->GetPosition().y)) + " Z: " + std::to_string((int)(player->GetShip()->GetPosition().z)), Colour(0, 1, 0), 70, 11, 14.8);
 
-	if (Interaction::GetRenderMessage() != "")
+	if (Interaction::GetRenderMessage().size() != 0)
 	{
 		RenderObjectOnScreen(meshList[DISPLAY], 1200 , 100, 100, 1000, 825,0, 180, 1, 0, 0);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], Interaction::GetRenderMessage(), Colour(0, 1, 0), 100, 5, 8);
 	}
+
 	if (warning)
 	{
 		RenderObjectOnScreen(meshList[DISPLAY], 1200, 100, 100, 1070, 825,0, 180, 1, 0, 0);
@@ -573,18 +515,6 @@ void OuterSpace::UserInterFace()
 
 		}
 
-	}
-
-}
-
-void OuterSpace::RenderObjects()
-{
-	for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); ++it)
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate((*it)->GetPosition().x, (*it)->GetPosition().y, (*it)->GetPosition().z);
-		RenderMesh((*it)->GetMesh(), true);
-		modelStack.PopMatrix();
 	}
 
 }
