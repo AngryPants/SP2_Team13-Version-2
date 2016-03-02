@@ -17,13 +17,6 @@
 class OuterSpace : public GameScene {
 
 private:
-	enum KEYPRESS
-	{
-		UP,
-		DOWN,
-		RETURN,
-		NONE,
-	};
 
 	enum MENU
 	{
@@ -33,24 +26,17 @@ private:
 		THE_END,
 	};
 
-	enum GEOMETRY
-	{
-		CROSSHAIR,
-		MAXHEALTH,
-		CURRHEALTH,
-		DISPLAY,
-		TAB,
-		END,
-	};
-
 	//Variables
 	bool warning;
-	string nameCheck;
-	string message1;
-	Mesh*meshList[END];
 	MENU menuOption;
-	bool isPressed[NONE];
-	bool pause;
+
+	//GameObjects
+	list<Interactable*> iSpaceObjects;
+	
+	//Zones
+	vector<SpawnZone> spawnZones;
+
+	Player* player;
 	
 	//Functions
 	void BoundsCheck();
