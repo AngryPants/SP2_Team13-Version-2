@@ -397,6 +397,7 @@ void OuterSpace::Render() { //Render VBO here.
 		}
 
 		RenderSpawnZones();
+		RenderObjects();
 		RenderFlightHUD();
 
 	} else if (player->GetState() == DEAD) {

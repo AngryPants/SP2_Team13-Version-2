@@ -264,7 +264,6 @@ void Hangar::Render() { //Render VBO here.
 	{
 		RenderObjects();	
 		RenderObject(player->GetShip(), true);
-		RenderNPC();
 		RenderUI();
 	}
 }

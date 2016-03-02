@@ -46,7 +46,7 @@ private:
 	void UpdateUserInterFace(double&dt);
 	void RenderFlightHUD();
 	void UpdateStartMenu();
-	void CheckKeyPress();
+	void RenderObjects();
 	void RenderStartMenu();
 	void DeathCheck();
 	void UpdateDeathScreen();
