@@ -99,57 +99,27 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	SetSkybox("Image//Skybox//Top.tga", "Image//Skybox//Bottom.tga", "Image//Skybox//Front.tga", "Image//Skybox//Left.tga", "Image//Skybox//Back.tga", "Image//Skybox//Right.tga");
-
-	meshList[CROSSHAIR] = MeshBuilder::GenerateQuad("Crosshair", Colour(1, 0, 0), 1, 1);
-	meshList[CROSSHAIR]->textureID = LoadTGA("Image//UI//Crosshair.tga");
-
-	meshList[MAXHEALTH] = MeshBuilder::GenerateQuad("MAX HP", Colour(1, 0, 0), 1, 1);
-	meshList[MAXHEALTH]->textureID = LoadTGA("Image//UI//Life//MaxLife.tga");
-
-	meshList[CURRHEALTH] = MeshBuilder::GenerateQuad("Current HP", Colour(0, 1, 0), 1, 1);
-	meshList[CURRHEALTH]->textureID = LoadTGA("Image//UI//Life//CurrentLife.tga");
-
-	meshList[DISPLAY] = MeshBuilder::GenerateQuad("Display", Colour(0, 1, 0), 1, 1);
-	meshList[DISPLAY]->textureID = LoadTGA("Image//UI//Overlay//TextDisplay.tga");
-
-	meshList[TAB] = MeshBuilder::GenerateQuad("Tab", Colour(0, 1, 0), 1, 1);
-	meshList[TAB]->textureID = LoadTGA("Image//UI//Overlay//QuestScreen.tga");
-
-	//meshList[VELDSPAR] = MeshBuilder::GenerateOBJ("VELDSPAR", "OBJ//Asteroid//Asteroid.obj");
-	//meshList[VELDSPAR]->textureID = LoadTGA("Image//Asteroid//Veldspar.tga");
-	//meshList[VELDSPAR]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
-
-	//meshList[OMBER] = MeshBuilder::GenerateOBJ("OMBER", "OBJ//Asteroid//Asteroid.obj");
-	//meshList[OMBER]->textureID = LoadTGA("Image//Asteroid//Omber.tga");
-	//meshList[OMBER]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
-
-	//meshList[KERNITE] = MeshBuilder::GenerateOBJ("KERNITE", "OBJ//Asteroid//Asteroid.obj");
-	//meshList[KERNITE]->textureID = LoadTGA("Image//Asteroid//Kernite.tga");
-	//meshList[KERNITE]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
-
-
-
 	player = new Player("Malcolm", "", "", "");
 
 	iSpaceObjects.push_back(new CarrickStation());
 
-	iSpaceObjects.push_back(new WarpGate("Gate Omber 2", Vector3(1525, 1525, 1525), Vector3(190, 190, 190)));
-	iSpaceObjects.push_back(new WarpGate("Gate Kernite 2", Vector3(-1525, 1525, 1525), Vector3(-190, 190, 190)));
-	iSpaceObjects.push_back(new WarpGate("Gate Drone 2", Vector3(1525, -1525, 1525), Vector3(190, -190, 190)));
-	iSpaceObjects.push_back(new WarpGate("Gate Dmitri 2", Vector3(1525, 1525, -1525), Vector3(190, 190, -190)));
-	iSpaceObjects.push_back(new WarpGate("Gate Elena 2", Vector3(-1525, -1525, 1525), Vector3(-190, -190, 190)));
-	iSpaceObjects.push_back(new WarpGate("Gate Veldspar 2", Vector3(-1525, 1525, -1525), Vector3(-190, 190, -190)));
-	iSpaceObjects.push_back(new WarpGate("Gate Alien 2", Vector3(1525, -1525, -1525), Vector3(190, -190, -190)));
-	iSpaceObjects.push_back(new WarpGate("Gate Pirate 2", Vector3(-1525, -1525, -1525), Vector3(-190, -190, -190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Omber 2", Vector3(1250, 1250, 1250), Vector3(190, 190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Kernite 2", Vector3(-1250, 1250, 1250), Vector3(-190, 190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Drone 2", Vector3(1250, -1250, 1250), Vector3(190, -190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Dmitri 2", Vector3(1250, 1250, -1250), Vector3(190, 190, -190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Elena 2", Vector3(-1250, -1250, 1250), Vector3(-190, -190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Veldspar 2", Vector3(-1250, 1250, -1250), Vector3(-190, 190, -190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Alien 2", Vector3(1250, -1250, -1250), Vector3(190, -190, -190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Pirate 2", Vector3(-1250, -1250, -1250), Vector3(-190, -190, -190)));
 
-	iSpaceObjects.push_back(new WarpGate("Gate Omber 1", Vector3(150, 150, 150), Vector3(1600, 1600, 1600)));
-	iSpaceObjects.push_back(new WarpGate("Gate Kernite 1", Vector3(-150, 150, 150), Vector3(-1600, 1600, 1600)));
-	iSpaceObjects.push_back(new WarpGate("Gate Drone 1", Vector3(150, -150, 150), Vector3(1525, -1525, 1525)));
-	iSpaceObjects.push_back(new WarpGate("Gate Dmitri 1", Vector3(150, 150, -150), Vector3(1600, 1600, -1600)));
-	iSpaceObjects.push_back(new WarpGate("Gate Elena 1", Vector3(-150, -150, 150), Vector3(-1525, -1525, 1525)));
-	iSpaceObjects.push_back(new WarpGate("Gate Veldspar 1", Vector3(-150, 150, -150), Vector3(-1600, 1600, -1600)));
-	iSpaceObjects.push_back(new WarpGate("Gate Alien 1", Vector3(150, -150, -150), Vector3(1525, -1525, -1525)));
-	iSpaceObjects.push_back(new WarpGate("Gate Pirate 1", Vector3(-150, -150, -150), Vector3(-1525, -1525, -1525)));
+	iSpaceObjects.push_back(new WarpGate("Gate Omber 1", Vector3(150, 150, 150), Vector3(1400, 1400, 1400)));
+	iSpaceObjects.push_back(new WarpGate("Gate Kernite 1", Vector3(-150, 150, 150), Vector3(-1400, 1400, 1400)));
+	iSpaceObjects.push_back(new WarpGate("Gate Drone 1", Vector3(150, -150, 150), Vector3(1425, -1425, 1425)));
+	iSpaceObjects.push_back(new WarpGate("Gate Dmitri 1", Vector3(150, 150, -150), Vector3(1400, 1400, -1400)));
+	iSpaceObjects.push_back(new WarpGate("Gate Elena 1", Vector3(-150, -150, 150), Vector3(-1425, -1425, 1425)));
+	iSpaceObjects.push_back(new WarpGate("Gate Veldspar 1", Vector3(-150, 150, -150), Vector3(-1400, 1400, -1400)));
+	iSpaceObjects.push_back(new WarpGate("Gate Alien 1", Vector3(150, -150, -150), Vector3(1425, -1425, -1425)));
+	iSpaceObjects.push_back(new WarpGate("Gate Pirate 1", Vector3(-150, -150, -150), Vector3(-1425, -1425, -1425)));
 
 	spawnZones.push_back(SpawnZone("Veldspar Zone", Vector3(-1250, 1250, -1250), 600.0f, 900.0f, 1200.0f));
 	Spawn::SpawnObjects(new Veldspar(), Veldspar().GetRadius(), 25, spawnZones[0], (*spawnZones[0].GetAsteroidList()), 7990);
@@ -165,9 +135,8 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	Spawn::SpawnObjects(new Alien(), Alien().GetRadius(), 4, spawnZones[5], (*spawnZones[5].GetEnemyList()), 153);
 
 	player = new Player("Malcolm", "", "", "");
-	player->GetInventory()->AddItem(Item("Test Item", 123, 5), 12);
 	warning = false;
-	player->GetShip()->SetPosition(100, 50, 150);
+	player->GetShip()->SetPosition(150,50,100);
 	player->SetState(PLAYING);
 	menuOption = RESTART;
 
@@ -272,28 +241,6 @@ void OuterSpace::Update(double dt) {
 	RigidBody* rigidBodyPointer = player->GetShip();
 	RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
 	camera.FollowObject(player->GetShip(), Vector3(0.0f, 3.0f, - 15.0f));
-
-}
-
-void OuterSpace::CheckKeyPress() {
-
-	if (!Application::IsKeyPressed(VK_UP)) {
-
-		isPressed[UP] = false;
-
-	}
-
-	if (!Application::IsKeyPressed(VK_DOWN)) {
-
-		isPressed[DOWN] = false;
-
-	}
-
-	if (!Application::IsKeyPressed(VK_RETURN)) {
-
-		isPressed[RETURN] = false;
-
-	}
 
 }
 
@@ -544,22 +491,22 @@ void OuterSpace::UserInterFace()
 
 	if (Interaction::GetRenderMessage() != "")
 	{
-		RenderObjectOnScreen(meshList[DISPLAY], 1200 , 100, 100, 1000, 825,0, 180, 1, 0, 0);
+		RenderObjectOnScreen(mesh[DISPLAY], 1200 , 100, 100, 1000, 825,0, 180, 1, 0, 0);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], Interaction::GetRenderMessage(), Colour(0, 1, 0), 100, 5, 8);
 	}
 	if (warning)
 	{
-		RenderObjectOnScreen(meshList[DISPLAY], 1200, 100, 100, 1070, 825,0, 180, 1, 0, 0);
+		RenderObjectOnScreen(mesh[DISPLAY], 1200, 100, 100, 1070, 825,0, 180, 1, 0, 0);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "You Are leaving Area, please turn back", Colour(0, 1, 0), 100, 5, 8);
 	}
 
-	RenderObjectOnScreen(meshList[CROSSHAIR], 50, 50, 50, 957.5, 542,0, 180, 1, 0, 0);
-	RenderObjectOnScreen(meshList[MAXHEALTH], 600.0f, 30, 40, 955, 1000,0, 180, 1, 0, 0);
-	RenderObjectOnScreen(meshList[CURRHEALTH], player->GetShip()->GetHealth() / player->GetShip()->GetMaxHealth() * 600.0f, 30, 40, 955, 1000,0, 180, 1, 0, 0);
+	RenderObjectOnScreen(mesh[CROSSHAIR], 50, 50, 50, 957.5, 542,0, 180, 1, 0, 0);
+	RenderObjectOnScreen(mesh[MAXHEALTH], 600.0f, 30, 40, 955, 1000,0, 180, 1, 0, 0);
+	RenderObjectOnScreen(mesh[CURRHEALTH], player->GetShip()->GetHealth() / player->GetShip()->GetMaxHealth() * 600.0f, 30, 40, 955, 1000,0, 180, 1, 0, 0);
 	
 	if (Application::IsKeyPressed(VK_TAB)) // UI 2
 	{
-		RenderObjectOnScreen(meshList[TAB], 1000, 1100, 100, 500, 550,0, 180, 0, 1, 0);
+		RenderObjectOnScreen(mesh[TAB], 1000, 1100, 100, 500, 550,0, 180, 0, 1, 0);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "STATUS", Colour(1, 0, 0), 300, 0.8, 3);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Current Health : " + std::to_string(((int)player->GetShip()->GetHealth())) + "/" + std::to_string(((int)player->GetShip()->GetMaxHealth())), Colour(1, 0, 0), 100, 1, 8);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Gold : " + std::to_string(player->GetInventory()->GetGold()), Colour(1, 1, 0.1), 100, 1, 7);
@@ -568,9 +515,9 @@ void OuterSpace::UserInterFace()
 
 		for (map<Item, int>::iterator iter = player->GetInventory()->GetItems()->begin(); iter != player->GetInventory()->GetItems()->end(); ++iter) {
 
+			std::cout << (iter->first).GetName();
 			RenderTextOnScreen(mesh[FONT_CONSOLAS], (iter->first).GetName() + ": " + std::to_string(iter->second), Colour(0.5, 0.5, 1), 100, 1, posY);
 			--posY;
-
 		}
 
 	}
@@ -586,7 +533,6 @@ void OuterSpace::RenderObjects()
 		RenderMesh((*it)->GetMesh(), true);
 		modelStack.PopMatrix();
 	}
-
 }
 
 void OuterSpace::Exit() {

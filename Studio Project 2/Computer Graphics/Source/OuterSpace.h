@@ -18,13 +18,6 @@
 class OuterSpace : public GameScene {
 
 private:
-	enum KEYPRESS
-	{
-		UP,
-		DOWN,
-		RETURN,
-		NONE,
-	};
 
 	enum MENU
 	{
@@ -34,31 +27,11 @@ private:
 		THE_END,
 	};
 
-	enum GEOMETRY
-	{
-		CROSSHAIR,
-		MAXHEALTH,
-		CURRHEALTH,
-		DISPLAY,
-		TAB,
-	/*	VELDSPAR,
-		KERNITE,
-		OMBER,*/
-		END,
-	};
-
 	//Variables
 	bool warning;
-	string nameCheck;
-	string message1;
-	Mesh*meshList[END];
 	MENU menuOption;
-	bool isPressed[NONE];
-	bool pause;
 
 	//GameObjects
-	//list<Asteroid> asteroids;
-	//list<Ship> enemies;
 	list<Interactable*> iSpaceObjects;
 	
 	//Zones
@@ -74,9 +47,6 @@ private:
 	void UpdateSpaceInteractable(double &dt);
 	void UpdateUserInterFace(double&dt);
 	void UserInterFace();
-	void UpdateStartMenu();
-	void CheckKeyPress();
-	void RenderStartMenu();
 	void DeathCheck();
 	void UpdateDeathScreen();
 	void RenderDeathScreen();

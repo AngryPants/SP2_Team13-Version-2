@@ -6,6 +6,95 @@ GameScene::GameScene() {
 	mesh[FONT_CONSOLAS] = MeshBuilder::GenerateText("Text", 16, 16);
 	mesh[FONT_CONSOLAS]->textureID = LoadTGA("Image//Fonts//Consolas.tga");
 
+	mesh[HANGAR] = MeshBuilder::GenerateOBJ("Hangar", "OBJ//Space_Station//Hangar.obj");
+	mesh[HANGAR]->textureID = LoadTGA("Image//Space_Station//Hangar.tga");
+	mesh[HANGAR]->material = MaterialList::GetInstance()->material[MaterialList::METAL];
+
+	mesh[DECO_SHIP_RED] = MeshBuilder::GenerateOBJ("Freighter", "OBJ//Freighter//Freighter.obj");
+	mesh[DECO_SHIP_RED]->textureID = LoadTGA("Image//Freighter//Freighter_Red.tga");
+	mesh[DECO_SHIP_RED]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
+
+	mesh[DECO_SHIP_BLUE] = MeshBuilder::GenerateOBJ("Freighter", "OBJ//Freighter//Freighter.obj");
+	mesh[DECO_SHIP_BLUE]->textureID = LoadTGA("Image//Freighter//Freighter_Blue.tga");
+	mesh[DECO_SHIP_BLUE]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
+
+	mesh[DECO_TRUCK] = MeshBuilder::GenerateOBJ("Avalanche", "OBJ//Avalanche//Avalanche.obj");
+	mesh[DECO_TRUCK]->textureID = LoadTGA("Image//Avalanche//Avalanche.tga");
+	mesh[DECO_TRUCK]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
+
+	mesh[VELDSPAR] = MeshBuilder::GenerateOBJ("VELDSPAR", "OBJ//Asteroid//Asteroid.obj");
+	mesh[VELDSPAR]->textureID = LoadTGA("Image//Asteroid//Veldspar.tga");
+	mesh[VELDSPAR]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
+
+	mesh[OMBER] = MeshBuilder::GenerateOBJ("OMBER", "OBJ//Asteroid//Asteroid.obj");
+	mesh[OMBER]->textureID = LoadTGA("Image//Asteroid//Omber.tga");
+	mesh[OMBER]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
+
+	mesh[KERNITE] = MeshBuilder::GenerateOBJ("KERNITE", "OBJ//Asteroid//Asteroid.obj");
+	mesh[KERNITE]->textureID = LoadTGA("Image//Asteroid//Kernite.tga");
+	mesh[KERNITE]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
+
+	mesh[PLAYER_SHIP] = MeshBuilder::GenerateOBJ("PlayerShip", "OBJ//Condor//Condor.obj");
+	mesh[PLAYER_SHIP]->textureID = LoadTGA("Image//Condor//Condor.tga");
+	mesh[PLAYER_SHIP]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
+
+	mesh[DRONE] = MeshBuilder::GenerateOBJ("Drone", "OBJ//Enemies//Drone.obj");
+	mesh[DRONE]->textureID = LoadTGA("Image//Enemies//Drone.tga");
+	mesh[DRONE]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
+
+	mesh[PIRATE] = MeshBuilder::GenerateOBJ("pirate", "OBJ//Enemies//Pirate.obj");
+	mesh[PIRATE]->textureID = LoadTGA("Image//Enemies//Pirate.tga");
+	mesh[PIRATE]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
+
+	mesh[ALIEN] = MeshBuilder::GenerateOBJ("Alien", "OBJ//Enemies//Alien.obj");
+	mesh[ALIEN]->textureID = LoadTGA("Image//Enemies//Alien.tga");
+	mesh[ALIEN]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
+
+	mesh[SCREEN] = MeshBuilder::GenerateQuad("Screen", Colour(1, 0, 0), 1, 1);
+	mesh[SCREEN]->textureID = LoadTGA("Image//UI//BackgroundScreen.tga");
+	mesh[SCREEN]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
+
+
+	//NPC
+	mesh[NPC_HEAD] = MeshBuilder::GenerateOBJ("NPC_HEAD", "OBJ//NPC//Head.obj");
+	mesh[NPC_HEAD]->textureID = LoadTGA("Image//NPC//Benny.tga");
+	mesh[NPC_HEAD]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->PLASTIC];
+
+	mesh[NPC_LEFT_HAND] = MeshBuilder::GenerateOBJ("NPC_LEFT_HAND", "OBJ//NPC//Left_Arm.obj");
+	mesh[NPC_LEFT_HAND]->textureID = LoadTGA("Image//NPC//Benny.tga");
+	mesh[NPC_LEFT_HAND]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->PLASTIC];
+
+	mesh[NPC_RIGHT_HAND] = MeshBuilder::GenerateOBJ("NPC_RIGHT_HAND", "OBJ//NPC//Right_Arm.obj");
+	mesh[NPC_RIGHT_HAND]->textureID = LoadTGA("Image//NPC//Benny.tga");
+	mesh[NPC_RIGHT_HAND]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->PLASTIC];
+
+	mesh[NPC_BODY] = MeshBuilder::GenerateOBJ("NPC_BODY", "OBJ//NPC//Body.obj");
+	mesh[NPC_BODY]->textureID = LoadTGA("Image//NPC//Benny.tga");
+	mesh[NPC_BODY]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->PLASTIC];
+
+	mesh[NPC_LEFT_LEG] = MeshBuilder::GenerateOBJ("NPC_LEFT_LEG", "OBJ//NPC//Left_Leg.obj");
+	mesh[NPC_LEFT_LEG]->textureID = LoadTGA("Image//NPC//Benny.tga");
+	mesh[NPC_LEFT_LEG]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->PLASTIC];
+
+	mesh[NPC_RIGHT_LEG] = MeshBuilder::GenerateOBJ("NPC_RIGHT_LEG", "OBJ//NPC//Right_Leg.obj");
+	mesh[NPC_RIGHT_LEG]->textureID = LoadTGA("Image//NPC//Benny.tga");
+	mesh[NPC_RIGHT_LEG]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->PLASTIC];
+
+	mesh[CROSSHAIR] = MeshBuilder::GenerateQuad("Crosshair", Colour(1, 0, 0), 1, 1);
+	mesh[CROSSHAIR]->textureID = LoadTGA("Image//UI//Crosshair.tga");
+
+	mesh[MAXHEALTH] = MeshBuilder::GenerateQuad("MAX HP", Colour(1, 0, 0), 1, 1);
+	mesh[MAXHEALTH]->textureID = LoadTGA("Image//UI//Life//MaxLife.tga");
+
+	mesh[CURRHEALTH] = MeshBuilder::GenerateQuad("Current HP", Colour(0, 1, 0), 1, 1);
+	mesh[CURRHEALTH]->textureID = LoadTGA("Image//UI//Life//CurrentLife.tga");
+
+	mesh[DISPLAY] = MeshBuilder::GenerateQuad("Display", Colour(0, 1, 0), 1, 1);
+	mesh[DISPLAY]->textureID = LoadTGA("Image//UI//Overlay//TextDisplay.tga");
+
+	mesh[TAB] = MeshBuilder::GenerateQuad("Tab", Colour(0, 1, 0), 1, 1);
+	mesh[TAB]->textureID = LoadTGA("Image//UI//Overlay//QuestScreen.tga");
+
 	for (GEOMETRY_TYPE i = SKYBOX_TOP; i <= SKYBOX_RIGHT; i = static_cast<GEOMETRY_TYPE>(i + 1)) {
 	
 		mesh[i] = MeshBuilder::GenerateQuad("Skybox", Colour(1, 1, 1), 1.0f);
@@ -17,6 +106,46 @@ GameScene::GameScene() {
 
 //Destructor
 GameScene::~GameScene() {
+}
+
+void GameScene::CheckKeyPress() {
+
+	if (!Application::IsKeyPressed('S')) {
+
+		isPressed[S] = false;
+
+	}
+
+	if (!Application::IsKeyPressed(VK_UP)) {
+
+		isPressed[UP] = false;
+
+	}
+
+	if (!Application::IsKeyPressed(VK_DOWN)) {
+
+		isPressed[DOWN] = false;
+
+	}
+
+	if (!Application::IsKeyPressed(VK_RETURN)) {
+
+		isPressed[RETURN] = false;
+
+	}
+
+	if (!Application::IsKeyPressed(VK_BACK)) {
+
+		isPressed[BACK] = false;
+
+	}
+
+	if (!Application::IsKeyPressed('E')) {
+
+		isPressed[E] = false;
+
+	}
+
 }
 
 void GameScene::RenderMesh(Mesh *mesh, bool enableLight) {
@@ -312,7 +441,6 @@ void GameScene::BoundsChecking(GameObject* object, float radius) {
 	}
 
 }
-
 //Setters
 void GameScene::SetSkybox(const char* topTexture, const char* bottomTexture, const char* frontTexture, const char* leftTexture, const char* backTexture, const char* rightTexture) {
 

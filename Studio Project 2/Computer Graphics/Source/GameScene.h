@@ -17,6 +17,7 @@ using std::list;
 class GameScene : public Scene {
 
 protected:
+
 	enum GEOMETRY_TYPE {
 	
 		//Skybox
@@ -27,8 +28,43 @@ protected:
 		SKYBOX_BACK,
 		SKYBOX_RIGHT,
 
+	
+
 		//Text
 		FONT_CONSOLAS,
+
+		//Scene2
+		CROSSHAIR,
+		MAXHEALTH,
+		CURRHEALTH,
+		DISPLAY,
+		TAB,
+
+		//Scene1
+		HANGAR,
+		DECO_SHIP_RED,
+		DECO_SHIP_BLUE,
+		DECO_TRUCK,
+		PIRATE,
+		ALIEN,
+		DRONE,
+		PLAYER_SHIP,
+
+		//NPC
+		NPC_HEAD,
+		NPC_LEFT_HAND,
+		NPC_RIGHT_HAND,
+		NPC_BODY,
+		NPC_LEFT_LEG,
+		NPC_RIGHT_LEG,
+
+		//ASTERIODS
+		VELDSPAR,
+		OMBER,
+		KERNITE,
+
+		//SCREEN
+		SCREEN,
 
 		NUM_GEOMETRY,
 
@@ -140,6 +176,19 @@ protected:
 	//Light
 	Light light[6];
 
+	enum KEYPRESS
+	{
+		UP,
+		DOWN,
+		BACK,
+		RETURN,
+		E,
+		S,
+		NONE,
+	};
+
+	bool isPressed[NONE];
+
 	//OpenGL Things
 	unsigned int m_programID;
 	unsigned int m_parameters[U_TOTAL];
@@ -157,6 +206,7 @@ protected:
 	//Functions
 	void BoundsChecking(GameObject* object, Vector3 boundarySize);
 	void BoundsChecking(GameObject* object, float radius);
+	void CheckKeyPress();
 
 	//Setters
 	void SetSkybox(const char* topTexture, const char* bottomTexture, const char* frontTexture, const char* leftTexture, const char* backTexture, const char* rightTexture);

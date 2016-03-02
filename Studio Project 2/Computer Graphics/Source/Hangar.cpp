@@ -99,85 +99,15 @@ void Hangar::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	SetSkybox("Image//Skybox//Top.tga", "Image//Skybox//Bottom.tga", "Image//Skybox//Front.tga", "Image//Skybox//Left.tga", "Image//Skybox//Back.tga", "Image//Skybox//Right.tga");
 
-	meshList[HANGAR] = MeshBuilder::GenerateOBJ("Hangar", "OBJ//Space_Station//Hangar.obj");
-	meshList[HANGAR]->textureID = LoadTGA("Image//Space_Station//Hangar.tga");
-	meshList[HANGAR]->material = MaterialList::GetInstance()->material[MaterialList::METAL];
-
-	meshList[DECO_SHIP_RED] = MeshBuilder::GenerateOBJ("Freighter", "OBJ//Freighter//Freighter.obj");
-	meshList[DECO_SHIP_RED]->textureID = LoadTGA("Image//Freighter//Freighter_Red.tga");
-	meshList[DECO_SHIP_RED]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
-
-	meshList[DECO_SHIP_BLUE] = MeshBuilder::GenerateOBJ("Freighter", "OBJ//Freighter//Freighter.obj");
-	meshList[DECO_SHIP_BLUE]->textureID = LoadTGA("Image//Freighter//Freighter_Blue.tga");
-	meshList[DECO_SHIP_BLUE]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
-
-	meshList[DECO_TRUCK] = MeshBuilder::GenerateOBJ("Avalanche", "OBJ//Avalanche//Avalanche.obj");
-	meshList[DECO_TRUCK]->textureID = LoadTGA("Image//Avalanche//Avalanche.tga");
-	meshList[DECO_TRUCK]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
-	
-	meshList[VELDSPAR] = MeshBuilder::GenerateOBJ("VELDSPAR", "OBJ//Asteroid//Asteroid.obj");
-	meshList[VELDSPAR]->textureID = LoadTGA("Image//Asteroid//Veldspar.tga");
-	meshList[VELDSPAR]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
-
-	meshList[OMBER] = MeshBuilder::GenerateOBJ("OMBER", "OBJ//Asteroid//Asteroid.obj");
-	meshList[OMBER]->textureID = LoadTGA("Image//Asteroid//Omber.tga");
-	meshList[OMBER]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
-
-	meshList[KERNITE] = MeshBuilder::GenerateOBJ("KERNITE", "OBJ//Asteroid//Asteroid.obj");
-	meshList[KERNITE]->textureID = LoadTGA("Image//Asteroid//Kernite.tga");
-	meshList[KERNITE]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
-
-	meshList[PLAYER_SHIP] = MeshBuilder::GenerateOBJ("PlayerShip", "OBJ//Condor//Condor.obj");
-	meshList[PLAYER_SHIP]->textureID = LoadTGA("Image//Condor//Condor.tga");
-	meshList[PLAYER_SHIP]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
-
-	meshList[DRONE] = MeshBuilder::GenerateOBJ("Drone", "OBJ//Enemies//Drone.obj");
-	meshList[DRONE]->textureID = LoadTGA("Image//Enemies//Drone.tga");
-	meshList[DRONE]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
-
-	meshList[PIRATE] = MeshBuilder::GenerateOBJ("pirate", "OBJ//Enemies//Pirate.obj");
-	meshList[PIRATE]->textureID = LoadTGA("Image//Enemies//Pirate.tga");
-	meshList[PIRATE]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
-
-	meshList[ALIEN] = MeshBuilder::GenerateOBJ("Alien", "OBJ//Enemies//Alien.obj");
-	meshList[ALIEN]->textureID = LoadTGA("Image//Enemies//Alien.tga");
-	meshList[ALIEN]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
-
-	meshList[SCREEN] = MeshBuilder::GenerateQuad("Screen",Colour(1,0,0),1,1);
-	meshList[SCREEN]->textureID = LoadTGA("Image//UI//BackgroundScreen.tga");
-	meshList[SCREEN]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->METAL];
-
-
-	//NPC
-	meshList[NPC_HEAD] = MeshBuilder::GenerateOBJ("NPC_HEAD", "OBJ//NPC//Head.obj");
-	meshList[NPC_HEAD]->textureID = LoadTGA("Image//NPC//Benny.tga");
-	meshList[NPC_HEAD]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->PLASTIC];
-
-	meshList[NPC_LEFT_HAND] = MeshBuilder::GenerateOBJ("NPC_LEFT_HAND", "OBJ//NPC//Left_Arm.obj");
-	meshList[NPC_LEFT_HAND]->textureID = LoadTGA("Image//NPC//Benny.tga");
-	meshList[NPC_LEFT_HAND]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->PLASTIC];
-
-	meshList[NPC_RIGHT_HAND] = MeshBuilder::GenerateOBJ("NPC_RIGHT_HAND", "OBJ//NPC//Right_Arm.obj");
-	meshList[NPC_RIGHT_HAND]->textureID = LoadTGA("Image//NPC//Benny.tga");
-	meshList[NPC_RIGHT_HAND]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->PLASTIC];
-
-	meshList[NPC_BODY] = MeshBuilder::GenerateOBJ("NPC_BODY", "OBJ//NPC//Body.obj");
-	meshList[NPC_BODY]->textureID = LoadTGA("Image//NPC//Benny.tga");
-	meshList[NPC_BODY]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->PLASTIC];
-
-	meshList[NPC_LEFT_LEG] = MeshBuilder::GenerateOBJ("NPC_LEFT_LEG", "OBJ//NPC//Left_Leg.obj");
-	meshList[NPC_LEFT_LEG]->textureID = LoadTGA("Image//NPC//Benny.tga");
-	meshList[NPC_LEFT_LEG]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->PLASTIC];
-
-	meshList[NPC_RIGHT_LEG] = MeshBuilder::GenerateOBJ("NPC_RIGHT_LEG", "OBJ//NPC//Right_Leg.obj");
-	meshList[NPC_RIGHT_LEG]->textureID = LoadTGA("Image//NPC//Benny.tga");
-	meshList[NPC_RIGHT_LEG]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->PLASTIC];
-
 	player = new Player("Malcolm", "", "", "");
 
 	player->GetShip()->SetPosition(0,3,0);
-
-	player->SetState(MAIN_MENU);
+	//Load::Load("Text/PlayStat", player);
+	if (player->GetState() != PLAYING)
+	{
+		player->SetState(MAIN_MENU);
+	}
+	
 	Leave = false;
 	codex = false;
 	menuOption = START;
@@ -189,7 +119,6 @@ void Hangar::Init() { //Initialise Vertex Buffer Object (VBO) here.
 void Hangar::Update(double dt) {
 
 	CheckKeyPress();
-	BoundsCheck(player->GetShip()->GetPosition());
 	if (player->GetState() == MAIN_MENU)
 	{
 		UpdateStartMenu();
@@ -253,35 +182,6 @@ void Hangar::LeavingAnimation(double &dt)
 	
 }
 
-void Hangar::BoundsCheck(Vector3 position)
-{
-	int xLimit = 39;
-	int zLimit = 19;
-
-	if (position.x > xLimit) {
-
-		position.x = xLimit;
-
-	}
-	else if (position.x < -xLimit) {
-
-		position.x = -xLimit;
-
-	}
-
-	if (position.z > zLimit) {
-
-		position.z = zLimit;
-
-	}
-	else if (position.z < -zLimit) {
-
-		position.z = -zLimit;
-
-	}
-
-}
-
 void Hangar::UpdateStartMenu()
 {
 	if (!isPressed[UP] && Application::IsKeyPressed(VK_UP)) {
@@ -338,46 +238,6 @@ void Hangar::UpdateStartMenu()
 		}
 
 	}
-}
-
-void Hangar::CheckKeyPress() {
-
-	if (!Application::IsKeyPressed('S')) {
-
-		isPressed[S] = false;
-
-	}
-
-	if (!Application::IsKeyPressed(VK_UP)) {
-
-		isPressed[UP] = false;
-
-	}
-
-	if (!Application::IsKeyPressed(VK_DOWN)) {
-
-		isPressed[DOWN] = false;
-
-	}
-
-	if (!Application::IsKeyPressed(VK_RETURN)) {
-
-		isPressed[RETURN] = false;
-
-	}
-
-	if (!Application::IsKeyPressed(VK_BACK)) {
-
-		isPressed[BACK] = false;
-
-	}
-
-	if (!Application::IsKeyPressed('E')) {
-
-		isPressed[E] = false;
-
-	}
-
 }
 
 void Hangar::Render() { //Render VBO here.
@@ -447,31 +307,31 @@ void Hangar::RenderNPC()
 {
 	modelStack.PushMatrix();
 	modelStack.Translate(0,0.4,0);
-	RenderMesh(meshList[NPC_HEAD], true);
+	RenderMesh(mesh[NPC_HEAD], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	RenderMesh(meshList[NPC_BODY], true);
+	RenderMesh(mesh[NPC_BODY], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(-0.1,0, 0);
-	RenderMesh(meshList[NPC_LEFT_LEG], true);
+	RenderMesh(mesh[NPC_LEFT_LEG], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0.1, 0, 0);
-	RenderMesh(meshList[NPC_RIGHT_LEG], true);
+	RenderMesh(mesh[NPC_RIGHT_LEG], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(0.2, 0.4, 0);
-	RenderMesh(meshList[NPC_LEFT_HAND], true);
+	RenderMesh(mesh[NPC_LEFT_HAND], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(-0.2,0.4, 0);
-	RenderMesh(meshList[NPC_RIGHT_HAND], true);
+	RenderMesh(mesh[NPC_RIGHT_HAND], true);
 	modelStack.PopMatrix();
 
 }
@@ -480,7 +340,7 @@ void Hangar::RenderUI()
 {
 	if (codex)
 	{
-		RenderObjectOnScreen(meshList[SCREEN], 1940, 1150, 2200, 950, 550, 5000, 180, 0, 1, 0);
+		RenderObjectOnScreen(mesh[SCREEN], 1940, 1150, 2200, 950, 550, 5000, 180, 0, 1, 0);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "PRESS S TO CLOSE CODEX", Colour(1, 0, 0), 70, 2, 1);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Ship Health : "+ std::to_string(((int)player->GetShip()->GetMaxHealth())), Colour(1, 0, 0), 100, 1.5, 9);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Gold : " + std::to_string(((int)player->GetInventory()->GetGold())), Colour(1, 1, 0.1), 100, 1.5, 8);
@@ -506,13 +366,13 @@ void Hangar::RenderUI()
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Fire Rate: Medium", Colour(0.5, 0.5, 0.25), 80, 18, 1);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Mobility : Medium", Colour(0.5,0.5,0.25), 80, 18, 0.5);
 
-		RenderObjectOnScreen(meshList[VELDSPAR], 0.5, 0.5, 0.5, 100, 720, 5000,spinObj, 0, 1, 0);
-		RenderObjectOnScreen(meshList[OMBER], 0.5, 0.5, 0.5, 100, 620, 5000, spinObj, 0,1,0);
-		RenderObjectOnScreen(meshList[KERNITE], 0.5, 0.5, 0.5, 100, 520, 5000,spinObj, 0, 1, 0);
-		RenderObjectOnScreen(meshList[DRONE], 50, 50, 50, 1050, 900, 5000,spinObj, 0, 1, 0);
-		RenderObjectOnScreen(meshList[PIRATE], 50, 50, 50, 1050, 500, 5000,spinObj, 0, 1, 1);
-		RenderObjectOnScreen(meshList[ALIEN], 50, 50, 50, 1050, 100, 5000, spinObj, 0, 1, 0);
-		RenderObjectOnScreen(meshList[PLAYER_SHIP], 50, 50, 50, 400, 300, 5000, spinObj, 0, 1, 0);
+		RenderObjectOnScreen(mesh[VELDSPAR], 0.5, 0.5, 0.5, 100, 720, 5000,spinObj, 0, 1, 0);
+		RenderObjectOnScreen(mesh[OMBER], 0.5, 0.5, 0.5, 100, 620, 5000, spinObj, 0,1,0);
+		RenderObjectOnScreen(mesh[KERNITE], 0.5, 0.5, 0.5, 100, 520, 5000,spinObj, 0, 1, 0);
+		RenderObjectOnScreen(mesh[DRONE], 50, 50, 50, 1050, 900, 5000,spinObj, 0, 1, 0);
+		RenderObjectOnScreen(mesh[PIRATE], 50, 50, 50, 1050, 500, 5000,spinObj, 0, 1, 1);
+		RenderObjectOnScreen(mesh[ALIEN], 50, 50, 50, 1050, 100, 5000, spinObj, 0, 1, 0);
+		RenderObjectOnScreen(mesh[PLAYER_SHIP], 40, 40, 40, 500, 300, 5000, spinObj, 0, 1, 0);
 	}
 	else
 	{
@@ -525,7 +385,7 @@ void Hangar::RenderObjects()
 {
 	modelStack.PushMatrix();
 	modelStack.Scale(4,4,4);
-	RenderMesh(meshList[HANGAR],true);
+	RenderMesh(mesh[HANGAR],true);
 	modelStack.PopMatrix();
 
 	for (int i = -35, a = 1; i < 35; i+=5, a = -a)
@@ -539,22 +399,22 @@ void Hangar::RenderObjects()
 
 	modelStack.PushMatrix();
 	modelStack.Translate(10, 6, 0);
-	RenderMesh(meshList[DECO_SHIP_BLUE], true);
+	RenderMesh(mesh[DECO_SHIP_BLUE], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(-30, 6, 5);
-	RenderMesh(meshList[DECO_SHIP_BLUE], true);
+	RenderMesh(mesh[DECO_SHIP_BLUE], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(-10, 6, 0);
-	RenderMesh(meshList[DECO_SHIP_RED], true);
+	RenderMesh(mesh[DECO_SHIP_RED], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(30, 6, 5);
-	RenderMesh(meshList[DECO_SHIP_RED], true);
+	RenderMesh(mesh[DECO_SHIP_RED], true);
 	modelStack.PopMatrix();
 
 	for (int i = -30; i < 30; i += 5)
@@ -562,14 +422,9 @@ void Hangar::RenderObjects()
 		modelStack.PushMatrix();
 		modelStack.Translate(i, 1, -13);
 		modelStack.Rotate(270,0,1,0);
-		RenderMesh(meshList[DECO_TRUCK], true);
+		RenderMesh(mesh[DECO_TRUCK], true);
 		modelStack.PopMatrix();
 	}
-
-	modelStack.PushMatrix();
-	modelStack.Translate(0,2,4);
-	RenderNPC();
-	modelStack.PopMatrix();
 
 
 
