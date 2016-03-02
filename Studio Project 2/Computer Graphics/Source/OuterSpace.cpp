@@ -14,8 +14,8 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	glClearColor(0.2f, 0.0f, 0.25f, 0.0f);
 
 	Mtx44 projection;
-	
-	projection.SetToPerspective(75.0f, (float)(glfwGetVideoMode(glfwGetPrimaryMonitor())->width)/(glfwGetVideoMode(glfwGetPrimaryMonitor())->height), 0.1f, 6000.0f); //FOV, Aspect Ratio, Near Plane, Far Plane.
+
+	projection.SetToPerspective(75.0f, (float)(glfwGetVideoMode(glfwGetPrimaryMonitor())->width) / (glfwGetVideoMode(glfwGetPrimaryMonitor())->height), 0.1f, 6000.0f); //FOV, Aspect Ratio, Near Plane, Far Plane.
 	projectionStack.LoadMatrix(projection);
 
 	glEnable(GL_DEPTH_TEST);
@@ -26,7 +26,7 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	glGenVertexArrays(1, &m_vertexArrayID);
 	glBindVertexArray(m_vertexArrayID);
-	
+
 	light[0].type = Light::LIGHT_DIRECTIONAL;
 	light[0].position.Set(-20, 120, -15);
 	light[0].colour.Set(1, 1, 1);
@@ -74,7 +74,7 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	//Make sure you pass uniform parameters after glUseProgram().
 	glUniform1i(m_parameters[U_NUMLIGHTS], 1);
-	
+
 	//Light 0 (Directional)
 	glUniform1i(m_parameters[U_LIGHT0_TYPE], light[0].type);
 	glUniform3fv(m_parameters[U_LIGHT0_COLOR], 1, &light[0].colour.r);
@@ -85,12 +85,12 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	glUniform1f(m_parameters[U_LIGHT0_COSCUTOFF], light[0].cosCutoff);
 	glUniform1f(m_parameters[U_LIGHT0_COSINNER], light[0].cosInner);
 	glUniform1f(m_parameters[U_LIGHT0_EXPONENT], light[0].exponent);
-	
+
 	//Directional Light
 	Vector3 lightDir(light[0].position.x, light[0].position.y, light[0].position.z);
 	Vector3 lightDirection_cameraspace = viewStack.Top() * lightDir;
 	glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightDirection_cameraspace.x);
-	
+
 	//Get a handle for our "MVP" uniform
 	m_parameters[U_MVP] = glGetUniformLocation(m_programID, "MVP");
 
@@ -100,16 +100,16 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	SetSkybox("Image//Skybox//Top.tga", "Image//Skybox//Bottom.tga", "Image//Skybox//Front.tga", "Image//Skybox//Left.tga", "Image//Skybox//Back.tga", "Image//Skybox//Right.tga");
 
-	meshList[CROSSHAIR] = MeshBuilder::GenerateQuad("Crosshair", Colour(1, 0, 0), 1,1);
+	meshList[CROSSHAIR] = MeshBuilder::GenerateQuad("Crosshair", Colour(1, 0, 0), 1, 1);
 	meshList[CROSSHAIR]->textureID = LoadTGA("Image//UI//Crosshair.tga");
 
 	meshList[MAXHEALTH] = MeshBuilder::GenerateQuad("MAX HP", Colour(1, 0, 0), 1, 1);
 	meshList[MAXHEALTH]->textureID = LoadTGA("Image//UI//Life//MaxLife.tga");
 
-	meshList[CURRHEALTH] = MeshBuilder::GenerateQuad("Current HP", Colour(0, 1, 0), 1,1);
+	meshList[CURRHEALTH] = MeshBuilder::GenerateQuad("Current HP", Colour(0, 1, 0), 1, 1);
 	meshList[CURRHEALTH]->textureID = LoadTGA("Image//UI//Life//CurrentLife.tga");
 
-	meshList[DISPLAY] = MeshBuilder::GenerateQuad("Display",Colour(0,1,0),1,1);
+	meshList[DISPLAY] = MeshBuilder::GenerateQuad("Display", Colour(0, 1, 0), 1, 1);
 	meshList[DISPLAY]->textureID = LoadTGA("Image//UI//Overlay//TextDisplay.tga");
 
 	meshList[TAB] = MeshBuilder::GenerateQuad("Tab", Colour(0, 1, 0), 1, 1);
@@ -144,12 +144,12 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	iSpaceObjects.push_back(new WarpGate("Gate Omber 1", Vector3(150, 150, 150), Vector3(1600, 1600, 1600)));
 	iSpaceObjects.push_back(new WarpGate("Gate Kernite 1", Vector3(-150, 150, 150), Vector3(-1600, 1600, 1600)));
-	iSpaceObjects.push_back(new WarpGate("Gate Drone 1", Vector3(150,-150,150), Vector3(1525, -1525, 1525)));
+	iSpaceObjects.push_back(new WarpGate("Gate Drone 1", Vector3(150, -150, 150), Vector3(1525, -1525, 1525)));
 	iSpaceObjects.push_back(new WarpGate("Gate Dmitri 1", Vector3(150, 150, -150), Vector3(1600, 1600, -1600)));
-	iSpaceObjects.push_back(new WarpGate("Gate Elena 1", Vector3(-150,-150,150), Vector3(-1525, -1525, 1525)));
+	iSpaceObjects.push_back(new WarpGate("Gate Elena 1", Vector3(-150, -150, 150), Vector3(-1525, -1525, 1525)));
 	iSpaceObjects.push_back(new WarpGate("Gate Veldspar 1", Vector3(-150, 150, -150), Vector3(-1600, 1600, -1600)));
-	iSpaceObjects.push_back(new WarpGate("Gate Alien 1", Vector3(150,-150,-150), Vector3(1525, -1525, -1525)));
-	iSpaceObjects.push_back(new WarpGate("Gate Pirate 1", Vector3(-150,-150,-150), Vector3(-1525, -1525, -1525)));
+	iSpaceObjects.push_back(new WarpGate("Gate Alien 1", Vector3(150, -150, -150), Vector3(1525, -1525, -1525)));
+	iSpaceObjects.push_back(new WarpGate("Gate Pirate 1", Vector3(-150, -150, -150), Vector3(-1525, -1525, -1525)));
 
 	spawnZones.push_back(SpawnZone("Veldspar Zone", Vector3(-1250, 1250, -1250), 600.0f, 900.0f, 1200.0f));
 	Spawn::SpawnObjects(new Veldspar(), Veldspar().GetRadius(), 25, spawnZones[0], (*spawnZones[0].GetAsteroidList()), 7990);
@@ -170,6 +170,7 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	player->GetShip()->SetPosition(100, 50, 150);
 	player->SetState(PLAYING);
 	menuOption = RESTART;
+
 }
 
 void OuterSpace::Update(double dt) {
@@ -248,6 +249,7 @@ void OuterSpace::Update(double dt) {
 				SpaceObject* spaceObjectPointer2 = player->GetShip();
 				Collision::SpaceObjectToSpaceObject(spaceObjectPointer1, spaceObjectPointer2, dt);
 
+				Mining::Mine(player->GetShip(), &(*asteroid_iter), dt);
 				Spawn::CheckKill(spaceObjectPointer1, *player);
 
 				RigidBody* rigidBodyPointer = &(*asteroid_iter);
@@ -428,22 +430,40 @@ void OuterSpace::Render() { //Render VBO here.
 		RenderObjects();
 		RenderObject(player->GetShip(), true);
 
-		for (list<Bullet>::iterator bullet_iter = (*player->GetShip()->GetBullets()).begin(); bullet_iter != (*player->GetShip()->GetBullets()).end(); ++bullet_iter) {
+		if (player->GetShip()->IsMining()) 
+		{
+	
+			modelStack.PushMatrix();
 
+				modelStack.Translate(player->GetShip()->GetMiningLaser()->GetPosition().x, player->GetShip()->GetMiningLaser()->GetPosition().y, player->GetShip()->GetMiningLaser()->GetPosition().z);
+				modelStack.MultMatrix(player->GetShip()->GetMiningLaser()->GetRotationMatrix());
+				modelStack.Scale(1, 1, player->GetShip()->GetMiningLaser()->GetLength() + 30.0f);
+				RenderMesh(player->GetShip()->GetMiningLaser()->GetMesh(), false);
+
+			modelStack.PopMatrix();
+
+		}
+
+		for (list<Bullet>::iterator bullet_iter = (*player->GetShip()->GetBullets()).begin(); bullet_iter != (*player->GetShip()->GetBullets()).end(); ++bullet_iter) 
+		{
+		
 			RenderObject(&(*bullet_iter), false);
 
 		}
 
-		for (vector<SpawnZone>::iterator zone_iter = spawnZones.begin(); zone_iter != spawnZones.end(); ++zone_iter) {
+		for (vector<SpawnZone>::iterator zone_iter = spawnZones.begin(); zone_iter != spawnZones.end(); ++zone_iter)
+		{
 
 			if (zone_iter->GetZoneState() != INACTIVE) {
 
 				//Render Enemies
-				for (list<Ship>::iterator ship_iter = zone_iter->GetEnemyList()->begin(); ship_iter != zone_iter->GetEnemyList()->end(); ++ship_iter) {
+				for (list<Ship>::iterator ship_iter = zone_iter->GetEnemyList()->begin(); ship_iter != zone_iter->GetEnemyList()->end(); ++ship_iter)
+				{
 
 					RenderObject(&(*ship_iter), true);
 
-					for (list<Bullet>::iterator bullet_iter = ship_iter->GetBullets()->begin(); bullet_iter != ship_iter->GetBullets()->end(); ++bullet_iter) {
+					for (list<Bullet>::iterator bullet_iter = ship_iter->GetBullets()->begin(); bullet_iter != ship_iter->GetBullets()->end(); ++bullet_iter)
+					{
 
 						RenderObject(&(*bullet_iter), false);
 
@@ -454,14 +474,25 @@ void OuterSpace::Render() { //Render VBO here.
 				//Render Asteroids
 				for (list<Asteroid>::iterator asteroid_iter = zone_iter->GetAsteroidList()->begin(); asteroid_iter != zone_iter->GetAsteroidList()->end(); ++asteroid_iter) {
 
-					RenderObject(&(*asteroid_iter), true);
+					if (!asteroid_iter->IsDisabled()) {
+
+						modelStack.PushMatrix();
+
+						modelStack.Translate(asteroid_iter->GetPosition().x, asteroid_iter->GetPosition().y, asteroid_iter->GetPosition().z);
+						modelStack.MultMatrix(asteroid_iter->GetRotationMatrix());
+						float scale = asteroid_iter->GetRadius() / asteroid_iter->GetMaxRadius() + 0.001f;
+						modelStack.Scale(scale, scale, scale);
+						RenderMesh(asteroid_iter->GetMesh(), true);
+
+						modelStack.PopMatrix();
+
+					}
 
 				}
 
 			}
 
 		}
-
 		UserInterFace();
 	}
 	else if (player->GetState() == DEAD)

@@ -7,6 +7,7 @@ class Asteroid : public SpaceObject {
 
 private:
 	int minimumDamage;
+	float maxRadius;
 
 public:
 	//Constructor & Destructor
@@ -15,6 +16,7 @@ public:
 
 	//Getters
 	int GetMinimumDamage();
+	float GetMaxRadius();
 
 	//Setters
 	void SetMinimumDamage(int minimumDamage);
