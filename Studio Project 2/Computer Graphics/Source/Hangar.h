@@ -3,17 +3,7 @@
 
 #include "GameScene.h";
 #include "Player.h"
-#include "Drone.h"
-#include "Pirate.h"
-#include "Alien.h"
-#include "Asteroid.h"
-#include "AI.h"
-#include "Interactable.h"
-#include "CarrickStation.h"
-#include "WarpGate.h"
-#include "Spawn.h"
-#include "Interaction.h"
-#include "Upgrade.h"
+#include "SharedData.h"
 
 class Hangar : public GameScene {
 
