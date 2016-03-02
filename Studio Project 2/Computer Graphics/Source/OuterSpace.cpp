@@ -115,18 +115,17 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	meshList[TAB] = MeshBuilder::GenerateQuad("Tab", Colour(0, 1, 0), 1, 1);
 	meshList[TAB]->textureID = LoadTGA("Image//UI//Overlay//QuestScreen.tga");
 
+	//meshList[VELDSPAR] = MeshBuilder::GenerateOBJ("VELDSPAR", "OBJ//Asteroid//Asteroid.obj");
+	//meshList[VELDSPAR]->textureID = LoadTGA("Image//Asteroid//Veldspar.tga");
+	//meshList[VELDSPAR]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
 
-	meshList[VELDSPAR] = MeshBuilder::GenerateOBJ("VELDSPAR", "OBJ//Asteroid//Asteroid.obj");
-	meshList[VELDSPAR]->textureID = LoadTGA("Image//Asteroid//Veldspar.tga");
-	meshList[VELDSPAR]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
+	//meshList[OMBER] = MeshBuilder::GenerateOBJ("OMBER", "OBJ//Asteroid//Asteroid.obj");
+	//meshList[OMBER]->textureID = LoadTGA("Image//Asteroid//Omber.tga");
+	//meshList[OMBER]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
 
-	meshList[OMBER] = MeshBuilder::GenerateOBJ("OMBER", "OBJ//Asteroid//Asteroid.obj");
-	meshList[OMBER]->textureID = LoadTGA("Image//Asteroid//Omber.tga");
-	meshList[OMBER]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
-
-	meshList[KERNITE] = MeshBuilder::GenerateOBJ("KERNITE", "OBJ//Asteroid//Asteroid.obj");
-	meshList[KERNITE]->textureID = LoadTGA("Image//Asteroid//Kernite.tga");
-	meshList[KERNITE]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
+	//meshList[KERNITE] = MeshBuilder::GenerateOBJ("KERNITE", "OBJ//Asteroid//Asteroid.obj");
+	//meshList[KERNITE]->textureID = LoadTGA("Image//Asteroid//Kernite.tga");
+	//meshList[KERNITE]->material = MaterialList::GetInstance()->material[MaterialList::GetInstance()->CEMENT];
 
 
 
@@ -134,23 +133,23 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	iSpaceObjects.push_back(new CarrickStation());
 
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Omber 2", Vector3(1750, 1750, 1750), Vector3(190, 190, 190)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Kernite 2", Vector3(-1750, 1750, 1750), Vector3(-190, 190, 190)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Drone 2", Vector3(1750, -1750, 1750), Vector3(190, -190, 190)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Dmitri 2", Vector3(1750, 1750, -1750), Vector3(190, 190, -190)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Elena 2", Vector3(-1750, -1750, 1750), Vector3(-190, -190, 190)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Veldspar 2", Vector3(-1750, 1750, -1750), Vector3(-190, 190, -190)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Alien 2", Vector3(1750, -1750, -1750), Vector3(190, -190, -190)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Pirate 2", Vector3(-1750, -1750, -1750), Vector3(-190, -190, -190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Omber 2", Vector3(1525, 1525, 1525), Vector3(190, 190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Kernite 2", Vector3(-1525, 1525, 1525), Vector3(-190, 190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Drone 2", Vector3(1525, -1525, 1525), Vector3(190, -190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Dmitri 2", Vector3(1525, 1525, -1525), Vector3(190, 190, -190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Elena 2", Vector3(-1525, -1525, 1525), Vector3(-190, -190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Veldspar 2", Vector3(-1525, 1525, -1525), Vector3(-190, 190, -190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Alien 2", Vector3(1525, -1525, -1525), Vector3(190, -190, -190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Pirate 2", Vector3(-1525, -1525, -1525), Vector3(-190, -190, -190)));
 
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Omber 1", Vector3(150, 150, 150), Vector3(1600, 1600, 1600)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Kernite 1", Vector3(-150, 150, 150), Vector3(-1600, 1600, 1600)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Drone 1", Vector3(150,-150,150), Vector3(1525, -1525, 1525)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Dmitri 1", Vector3(150, 150, -150), Vector3(1600, 1600, -1600)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Elena 1", Vector3(-150,-150,150), Vector3(-1525, -1525, 1525)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Veldspar 1", Vector3(-150, 150, -150), Vector3(-1600, 1600, -1600)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Alien 1", Vector3(150,-150,-150), Vector3(1525, -1525, -1525)));
-	iSpaceObjects.push_back(new WarpGate("Warp Gate Pirate 1", Vector3(-150,-150,-150), Vector3(-1525, -1525, -1525)));
+	iSpaceObjects.push_back(new WarpGate("Gate Omber 1", Vector3(150, 150, 150), Vector3(1600, 1600, 1600)));
+	iSpaceObjects.push_back(new WarpGate("Gate Kernite 1", Vector3(-150, 150, 150), Vector3(-1600, 1600, 1600)));
+	iSpaceObjects.push_back(new WarpGate("Gate Drone 1", Vector3(150,-150,150), Vector3(1525, -1525, 1525)));
+	iSpaceObjects.push_back(new WarpGate("Gate Dmitri 1", Vector3(150, 150, -150), Vector3(1600, 1600, -1600)));
+	iSpaceObjects.push_back(new WarpGate("Gate Elena 1", Vector3(-150,-150,150), Vector3(-1525, -1525, 1525)));
+	iSpaceObjects.push_back(new WarpGate("Gate Veldspar 1", Vector3(-150, 150, -150), Vector3(-1600, 1600, -1600)));
+	iSpaceObjects.push_back(new WarpGate("Gate Alien 1", Vector3(150,-150,-150), Vector3(1525, -1525, -1525)));
+	iSpaceObjects.push_back(new WarpGate("Gate Pirate 1", Vector3(-150,-150,-150), Vector3(-1525, -1525, -1525)));
 
 	spawnZones.push_back(SpawnZone("Veldspar Zone", Vector3(-1250, 1250, -1250), 600.0f, 900.0f, 1200.0f));
 	Spawn::SpawnObjects(new Veldspar(), Veldspar().GetRadius(), 25, spawnZones[0], (*spawnZones[0].GetAsteroidList()), 7990);
@@ -168,8 +167,9 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	player = new Player("Malcolm", "", "", "");
 	player->GetInventory()->AddItem(Item("Test Item", 123, 5), 12);
 	warning = false;
-	player->GetShip()->SetPosition(1250, -1250, -1250);
-
+	player->GetShip()->SetPosition(100, 50, 150);
+	player->SetState(PLAYING);
+	menuOption = RESTART;
 }
 
 void OuterSpace::Update(double dt) {
@@ -180,8 +180,11 @@ void OuterSpace::Update(double dt) {
 	else if (Application::IsKeyPressed('2')) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
-
-	//BoundsCheck();
+	CheckKeyPress();
+	BoundsCheck();
+	DeathCheck();
+	if (player->GetState() == PLAYING)
+	{
 	//Player Update
 	PlayerControl::RotateShip(player->GetShip(), 160.0f * dt, dt);
 	PlayerControl::MoveShip(player->GetShip(), 400000.0f, dt);
@@ -259,11 +262,104 @@ void OuterSpace::Update(double dt) {
 	//Interactables Update
 	UpdateSpaceInteractable(dt);
 		
-	//}
+	}
+	else if (player->GetState() == DEAD)
+	{
+		UpdateDeathScreen();
+	}
 	RigidBody* rigidBodyPointer = player->GetShip();
 	RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
 	camera.FollowObject(player->GetShip(), Vector3(0.0f, 3.0f, - 15.0f));
 
+}
+
+void OuterSpace::CheckKeyPress() {
+
+	if (!Application::IsKeyPressed(VK_UP)) {
+
+		isPressed[UP] = false;
+
+	}
+
+	if (!Application::IsKeyPressed(VK_DOWN)) {
+
+		isPressed[DOWN] = false;
+
+	}
+
+	if (!Application::IsKeyPressed(VK_RETURN)) {
+
+		isPressed[RETURN] = false;
+
+	}
+
+}
+
+void OuterSpace::UpdateDeathScreen()
+{
+	if (!isPressed[UP] && Application::IsKeyPressed(VK_UP)) {
+
+		isPressed[UP] = true;
+
+		if (menuOption != RESTART) {
+
+			menuOption = static_cast<MENU>(menuOption - 1);
+
+		}
+
+	}
+
+	if (!isPressed[DOWN] && Application::IsKeyPressed(VK_DOWN)) {
+
+		isPressed[DOWN] = true;
+
+		if (menuOption != QUIT) {
+
+			menuOption = static_cast<MENU>(menuOption + 1);
+
+		}
+
+	}
+
+	if (Application::IsKeyPressed(VK_RETURN) && !isPressed[RETURN]) {
+
+		isPressed[RETURN] = true;
+
+		if (menuOption == RESTART) {
+
+			player->GetShip()->SetRotation(0, 0, 0);
+			SharedData::GetInstance()->sceneNumber = 1;
+
+		}
+		else if (menuOption == SOUND) {
+
+			if (SharedData::GetInstance()->soundOn == true) {
+
+				SharedData::GetInstance()->soundOn = false;
+
+			}
+			else if (SharedData::GetInstance()->soundOn == false) {
+
+				SharedData::GetInstance()->soundOn = true;
+
+			}
+
+		}
+		else if (menuOption == QUIT) {
+
+			SharedData::GetInstance()->quitGame = true;
+
+		}
+
+	}
+}
+
+void OuterSpace::DeathCheck()
+{
+	if (player->GetShip()->GetHealth() <= 0)
+	{
+		player->SetState(DEAD);
+	}
 }
 
 void OuterSpace::UpdateSpaceInteractable(double &dt)
@@ -278,7 +374,7 @@ void OuterSpace::UpdateSpaceInteractable(double &dt)
 
 void OuterSpace::BoundsCheck()
 {
-	if (player->GetShip()->GetPosition().x>2000 || player->GetShip()->GetPosition().x<-2000 || player->GetShip()->GetPosition().y>2000 || player->GetShip()->GetPosition().y<-2000 || player->GetShip()->GetPosition().z>2000 || player->GetShip()->GetPosition().z<-2000)
+	if (player->GetShip()->GetPosition().x>1900 || player->GetShip()->GetPosition().x<-1900 || player->GetShip()->GetPosition().y>1900 || player->GetShip()->GetPosition().y<-1900 || player->GetShip()->GetPosition().z>1900 || player->GetShip()->GetPosition().z<-1900)
 	{
 		warning = true;
 	}
@@ -287,7 +383,7 @@ void OuterSpace::BoundsCheck()
 		warning = false;
 	}
 
-	if (player->GetShip()->GetPosition().x>2200 || player->GetShip()->GetPosition().x<-2200 || player->GetShip()->GetPosition().y>2200 || player->GetShip()->GetPosition().y<-2200 || player->GetShip()->GetPosition().z>2200 || player->GetShip()->GetPosition().z<-2200)
+	if (player->GetShip()->GetPosition().x>2000 || player->GetShip()->GetPosition().x<-2000 || player->GetShip()->GetPosition().y>2000 || player->GetShip()->GetPosition().y<-2000 || player->GetShip()->GetPosition().z>2000 || player->GetShip()->GetPosition().z<-2000)
 	{
 		int shortestDist = 10000;
 		Vector3 location;
@@ -327,46 +423,87 @@ void OuterSpace::Render() { //Render VBO here.
 	modelStack.LoadIdentity();
 	
 	RenderSkybox();
+	if (player->GetState() == PLAYING)
+	{
+		RenderObjects();
+		RenderObject(player->GetShip(), true);
 
-	RenderObjects();
-	RenderObject(player->GetShip(), true);
+		for (list<Bullet>::iterator bullet_iter = (*player->GetShip()->GetBullets()).begin(); bullet_iter != (*player->GetShip()->GetBullets()).end(); ++bullet_iter) {
 
-	for (list<Bullet>::iterator bullet_iter = (*player->GetShip()->GetBullets()).begin(); bullet_iter != (*player->GetShip()->GetBullets()).end(); ++bullet_iter) {
-		
-		RenderObject(&(*bullet_iter), false);
+			RenderObject(&(*bullet_iter), false);
 
-	}
+		}
 
-	for (vector<SpawnZone>::iterator zone_iter = spawnZones.begin(); zone_iter != spawnZones.end(); ++zone_iter) {
+		for (vector<SpawnZone>::iterator zone_iter = spawnZones.begin(); zone_iter != spawnZones.end(); ++zone_iter) {
 
-		if (zone_iter->GetZoneState() != INACTIVE) {
-		
-			//Render Enemies
-			for (list<Ship>::iterator ship_iter = zone_iter->GetEnemyList()->begin(); ship_iter != zone_iter->GetEnemyList()->end(); ++ship_iter) {
+			if (zone_iter->GetZoneState() != INACTIVE) {
 
-				RenderObject(&(*ship_iter), true);
+				//Render Enemies
+				for (list<Ship>::iterator ship_iter = zone_iter->GetEnemyList()->begin(); ship_iter != zone_iter->GetEnemyList()->end(); ++ship_iter) {
 
-				for (list<Bullet>::iterator bullet_iter = ship_iter->GetBullets()->begin(); bullet_iter != ship_iter->GetBullets()->end(); ++bullet_iter) {
-				
-					RenderObject(&(*bullet_iter), false);
+					RenderObject(&(*ship_iter), true);
+
+					for (list<Bullet>::iterator bullet_iter = ship_iter->GetBullets()->begin(); bullet_iter != ship_iter->GetBullets()->end(); ++bullet_iter) {
+
+						RenderObject(&(*bullet_iter), false);
+
+					}
+
+				}
+
+				//Render Asteroids
+				for (list<Asteroid>::iterator asteroid_iter = zone_iter->GetAsteroidList()->begin(); asteroid_iter != zone_iter->GetAsteroidList()->end(); ++asteroid_iter) {
+
+					RenderObject(&(*asteroid_iter), true);
 
 				}
 
 			}
 
-			//Render Asteroids
-			for (list<Asteroid>::iterator asteroid_iter = zone_iter->GetAsteroidList()->begin(); asteroid_iter != zone_iter->GetAsteroidList()->end(); ++asteroid_iter) {
-				
-				RenderObject(&(*asteroid_iter), true);
-
-			}
-
 		}
 
+		UserInterFace();
+	}
+	else if (player->GetState() == DEAD)
+	{
+		RenderDeathScreen();
 	}
 
-	UserInterFace();
+}
 
+void OuterSpace::RenderDeathScreen()
+{
+	Colour textColour = Colour(1.0f, 0.0f, 0.0f);
+	float textSize = 100.0f;
+	float posX = 8.7f;
+	float posY = 6.0f;
+
+	if (menuOption == RESTART)
+	{
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], ">", textColour, textSize, posX - 1.0f, posY);
+	}
+	else if (menuOption == SOUND)
+	{
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], ">", textColour, textSize, posX - 1.0f, posY - 1.0f);
+	}
+	else if (menuOption == QUIT)
+	{
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], ">", textColour, textSize, posX - 1.0f, posY - 2.0f);
+	}
+
+	if (player->GetState() == DEAD)
+	{
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "YOU DIED", textColour, 200,3.5,4);
+
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "RESTART", textColour, textSize, posX, posY);
+
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "SOUND", textColour, textSize, posX, posY - 1.0f);
+
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "QUIT", textColour, textSize, posX, posY - 2.0f);
+
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Press Enter to select.", textColour, textSize, 6.5f, posY - 4.0f);
+
+	}
 }
 
 void OuterSpace::UserInterFace()
@@ -400,7 +537,7 @@ void OuterSpace::UserInterFace()
 
 		for (map<Item, int>::iterator iter = player->GetInventory()->GetItems()->begin(); iter != player->GetInventory()->GetItems()->end(); ++iter) {
 
-			RenderTextOnScreen(mesh[FONT_CONSOLAS], (iter->first).GetName() + ": " + std::to_string(iter->second), Colour(0, 1, 1), 100, 1, posY);
+			RenderTextOnScreen(mesh[FONT_CONSOLAS], (iter->first).GetName() + ": " + std::to_string(iter->second), Colour(0.5, 0.5, 1), 100, 1, posY);
 			--posY;
 
 		}
