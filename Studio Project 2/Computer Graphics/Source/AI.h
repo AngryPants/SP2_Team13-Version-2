@@ -1,6 +1,7 @@
 #ifndef _AI_H
 #define _AI_H
 #include "Ship.h"
+#include "GenerateRange.h"
 
 struct AI {
 

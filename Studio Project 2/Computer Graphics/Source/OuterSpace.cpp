@@ -127,16 +127,17 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	Spawn::SpawnObjects(new Omber(), Omber().GetRadius(), 25, spawnZones[1], (*spawnZones[1].GetAsteroidList()), 12);
 	spawnZones.push_back(SpawnZone("Kernite Zone", Vector3(-1250, 1250, 1250), 600.0f, 900.0f, 1200.0f));
 	Spawn::SpawnObjects(new Kernite(), Kernite().GetRadius(), 25, spawnZones[2], (*spawnZones[2].GetAsteroidList()), 489);
-	spawnZones.push_back(SpawnZone("Drone Zone", Vector3(1250, -1250, 1250), 150.0f, 500.0f, 800.0f));
+	spawnZones.push_back(SpawnZone("Drone Zone", Vector3(1250, -1250, 1250), 50.0f, 500.0f, 800.0f));
 	Spawn::SpawnObjects(new Drone(), Drone().GetRadius(), 8, spawnZones[3], (*spawnZones[3].GetEnemyList()), 42);
-	spawnZones.push_back(SpawnZone("Pirate Zone", Vector3(-1250, -1250, -1250), 150.0f, 500.0f, 800.0f));
+	spawnZones.push_back(SpawnZone("Pirate Zone", Vector3(-1250, -1250, -1250), 50.0f, 500.0f, 800.0f));
 	Spawn::SpawnObjects(new Pirate(), Pirate().GetRadius(), 6, spawnZones[4], (*spawnZones[4].GetEnemyList()), 234);
-	spawnZones.push_back(SpawnZone("Alien Zone", Vector3(1250, -1250, -1250), 150.0f, 500.0f, 800.0f));
+	spawnZones.push_back(SpawnZone("Alien Zone", Vector3(1250, -1250, -1250), 50.0f, 500.0f, 800.0f));
 	Spawn::SpawnObjects(new Alien(), Alien().GetRadius(), 4, spawnZones[5], (*spawnZones[5].GetEnemyList()), 153);
 
 	player = new Player("Malcolm", "", "", "");
 	warning = false;
-	player->GetShip()->SetPosition(150,50,100);
+	//player->GetShip()->SetPosition(150,50,100);
+	player->GetShip()->SetPosition(1250, -1250, -1250);
 	player->SetState(PLAYING);
 	menuOption = RESTART;
 
@@ -155,83 +156,83 @@ void OuterSpace::Update(double dt) {
 	DeathCheck();
 	if (player->GetState() == PLAYING)
 	{
-	//Player Update
-	PlayerControl::RotateShip(player->GetShip(), 160.0f * dt, dt);
-	PlayerControl::MoveShip(player->GetShip(), 400000.0f, dt);
-	PlayerControl::Shoot(player->GetShip(), camera.GetPosition() + player->GetShip()->GetForwardVector());
-	player->GetShip()->Update(dt);
+		//Player Update
+		PlayerControl::RotateShip(player->GetShip(), 160.0f * dt, dt);
+		PlayerControl::MoveShip(player->GetShip(), 400000.0f, dt);
+		PlayerControl::Shoot(player->GetShip(), camera.GetPosition() + player->GetShip()->GetForwardVector());
+		player->GetShip()->Update(dt);
 
-	//Update Zones
-	for (vector<SpawnZone>::iterator zone_iter = spawnZones.begin(); zone_iter != spawnZones.end(); ++zone_iter) {
+		//Update Zones
+		for (vector<SpawnZone>::iterator zone_iter = spawnZones.begin(); zone_iter != spawnZones.end(); ++zone_iter) {
 
-		Spawn::CheckZone((*zone_iter), player->GetShip()->GetPosition());
+			Spawn::CheckZone((*zone_iter), player->GetShip()->GetPosition());
 
-		if (zone_iter->GetZoneState() != INACTIVE) {
+			if (zone_iter->GetZoneState() == ACTIVE) {
 
-			//Update Enemies
-			for (list<Ship>::iterator ship_iter = zone_iter->GetEnemyList()->begin(); ship_iter != zone_iter->GetEnemyList()->end(); ++ship_iter) {
-			
-				if (ship_iter->IsDisabled() == false) {
-
-					AI::FaceTarget(&(*ship_iter), player->GetShip(), 240 * dt, dt);
-					AI::MoveToTarget(&(*ship_iter), player->GetShip(), 10000.0f, dt);
-					AI::ShootAtTarget(&(*ship_iter), player->GetShip());
-					ship_iter->Update(dt);
-					
-					SpaceObject* spaceObjectPointer1 = &(*ship_iter);
-					SpaceObject* spaceObjectPointer2 = player->GetShip();
-					Collision::MovingSpaceObjectToMovingSpaceObject(spaceObjectPointer1, spaceObjectPointer2, dt);
-					
-					RigidBody* rigidBodyPointer = &(*ship_iter);
-					RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
-					
-					for (list<Bullet>::iterator bullet_iter = player->GetShip()->GetBullets()->begin(); bullet_iter != player->GetShip()->GetBullets()->end(); ++bullet_iter) {
-					
-						Collision::BulletToSpaceObject(&(*bullet_iter), spaceObjectPointer1, dt);
-					
-					}
-					
-					Spawn::CheckKill(spaceObjectPointer1, *player);
-					
-					for (list<Bullet>::iterator bullet_iter = ship_iter->GetBullets()->begin(); bullet_iter != ship_iter->GetBullets()->end(); ++bullet_iter) {
-					
-						Collision::BulletToSpaceObject(&(*bullet_iter), spaceObjectPointer2, dt);
-					
-					}
+				//Update Enemies
+				for (list<Ship>::iterator ship_iter = zone_iter->GetEnemyList()->begin(); ship_iter != zone_iter->GetEnemyList()->end(); ++ship_iter) {
 				
-				} else {
-				
-					for (list<Bullet>::iterator bullet_iter = ship_iter->GetBullets()->begin(); bullet_iter != ship_iter->GetBullets()->end();) {
+					if (!ship_iter->IsDisabled()) {
 
-						bullet_iter = ship_iter->GetBullets()->erase(bullet_iter);
+						AI::FaceTarget(&(*ship_iter), player->GetShip(), 200 * dt, dt);
+						AI::MoveToTarget(&(*ship_iter), player->GetShip(), 10000.0f, dt);
+						AI::ShootAtTarget(&(*ship_iter), player->GetShip());
+						ship_iter->Update(dt);
+						
+						SpaceObject* spaceObjectPointer1 = &(*ship_iter);
+						SpaceObject* spaceObjectPointer2 = player->GetShip();
+						Collision::MovingSpaceObjectToMovingSpaceObject(spaceObjectPointer1, spaceObjectPointer2, dt);
+						
+						RigidBody* rigidBodyPointer = &(*ship_iter);
+						RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
+						
+						for (list<Bullet>::iterator bullet_iter = player->GetShip()->GetBullets()->begin(); bullet_iter != player->GetShip()->GetBullets()->end(); ++bullet_iter) {
+						
+							Collision::BulletToSpaceObject(&(*bullet_iter), spaceObjectPointer1, dt);
+						
+						}
+						
+						Spawn::CheckKill(spaceObjectPointer1, *player);
+						
+						for (list<Bullet>::iterator bullet_iter = ship_iter->GetBullets()->begin(); bullet_iter != ship_iter->GetBullets()->end(); ++bullet_iter) {
+						
+							Collision::BulletToSpaceObject(&(*bullet_iter), spaceObjectPointer2, dt);
+						
+						}
+					
+					} else {
+					
+						for (list<Bullet>::iterator bullet_iter = ship_iter->GetBullets()->begin(); bullet_iter != ship_iter->GetBullets()->end();) {
+
+							bullet_iter = ship_iter->GetBullets()->erase(bullet_iter);
+
+						}
 
 					}
 
 				}
 
-			}
+				//Update Asteroids
+				for (list<Asteroid>::iterator asteroid_iter = zone_iter->GetAsteroidList()->begin(); asteroid_iter != zone_iter->GetAsteroidList()->end(); ++asteroid_iter) {
+				
+					SpaceObject* spaceObjectPointer1 = &(*asteroid_iter);
+					SpaceObject* spaceObjectPointer2 = player->GetShip();
+					Collision::SpaceObjectToSpaceObject(spaceObjectPointer1, spaceObjectPointer2, dt);
 
-			//Update Asteroids
-			for (list<Asteroid>::iterator asteroid_iter = zone_iter->GetAsteroidList()->begin(); asteroid_iter != zone_iter->GetAsteroidList()->end(); ++asteroid_iter) {
-			
-				SpaceObject* spaceObjectPointer1 = &(*asteroid_iter);
-				SpaceObject* spaceObjectPointer2 = player->GetShip();
-				Collision::SpaceObjectToSpaceObject(spaceObjectPointer1, spaceObjectPointer2, dt);
+					Mining::Mine(player->GetShip(), &(*asteroid_iter), dt);
+					Spawn::CheckKill(spaceObjectPointer1, *player);
 
-				Mining::Mine(player->GetShip(), &(*asteroid_iter), dt);
-				Spawn::CheckKill(spaceObjectPointer1, *player);
+					RigidBody* rigidBodyPointer = &(*asteroid_iter);
+					RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
 
-				RigidBody* rigidBodyPointer = &(*asteroid_iter);
-				RigidBody::UpdateRigidBody(rigidBodyPointer, dt);
+				}
 
 			}
 
 		}
 
-	}
-
-	//Interactables Update
-	UpdateSpaceInteractable(dt);
+		//Interactables Update
+		UpdateSpaceInteractable(dt);
 		
 	}
 	else if (player->GetState() == DEAD)
@@ -305,10 +306,10 @@ void OuterSpace::UpdateDeathScreen()
 
 void OuterSpace::DeathCheck()
 {
-	if (player->GetShip()->GetHealth() <= 0)
+	/*if (player->GetShip()->GetHealth() <= 0)
 	{
 		player->SetState(DEAD);
-	}
+	}*/
 }
 
 void OuterSpace::UpdateSpaceInteractable(double &dt)
@@ -374,30 +375,9 @@ void OuterSpace::Render() { //Render VBO here.
 
 	if (player->GetState() == PLAYING) {
 		
+		RenderPlayerShip();
 		RenderInteractables();
-		RenderObject(player->GetShip(), true);
-
-		if (player->GetShip()->IsMining()) {
-	
-			modelStack.PushMatrix();
-
-				modelStack.Translate(player->GetShip()->GetMiningLaser()->GetPosition().x, player->GetShip()->GetMiningLaser()->GetPosition().y, player->GetShip()->GetMiningLaser()->GetPosition().z);
-				modelStack.MultMatrix(player->GetShip()->GetMiningLaser()->GetRotationMatrix());
-				modelStack.Scale(1, 1, player->GetShip()->GetMiningLaser()->GetLength() + 30.0f);
-				RenderMesh(player->GetShip()->GetMiningLaser()->GetMesh(), false);
-
-			modelStack.PopMatrix();
-
-		}
-
-		for (list<Bullet>::iterator bullet_iter = (*player->GetShip()->GetBullets()).begin(); bullet_iter != (*player->GetShip()->GetBullets()).end(); ++bullet_iter) {
-		
-			RenderObject(&(*bullet_iter), false);
-
-		}
-
 		RenderSpawnZones();
-		RenderObjects();
 		RenderFlightHUD();
 
 	} else if (player->GetState() == DEAD) {
@@ -475,24 +455,12 @@ void OuterSpace::RenderFlightHUD()
 
 		for (map<Item, int>::iterator iter = player->GetInventory()->GetItems()->begin(); iter != player->GetInventory()->GetItems()->end(); ++iter) {
 
-			std::cout << (iter->first).GetName();
 			RenderTextOnScreen(mesh[FONT_CONSOLAS], (iter->first).GetName() + ": " + std::to_string(iter->second), Colour(0.5, 0.5, 1), 100, 1, posY);
 			--posY;
 		}
 
 	}
 
-}
-
-void OuterSpace::RenderObjects()
-{
-	for (std::list<Interactable*>::iterator it = iSpaceObjects.begin(); it != iSpaceObjects.end(); ++it)
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate((*it)->GetPosition().x, (*it)->GetPosition().y, (*it)->GetPosition().z);
-		RenderMesh((*it)->GetMesh(), true);
-		modelStack.PopMatrix();
-	}
 }
 
 void OuterSpace::Exit() {

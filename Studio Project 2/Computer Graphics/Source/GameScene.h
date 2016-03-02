@@ -30,8 +30,6 @@ protected:
 		SKYBOX_BACK,
 		SKYBOX_RIGHT,
 
-	
-
 		//Text
 		FONT_CONSOLAS,
 
@@ -201,7 +199,6 @@ protected:
 
 	//Zones
 	vector<SpawnZone> spawnZones;
-	
 	//Interactables
 	list<Interactable*> iSpaceObjects;
 
@@ -212,6 +209,7 @@ protected:
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Colour colour, float size, float x, float y);
 	void RenderObjectOnScreen(Mesh* mesh, float sizex, float sizey, float sizez, float x, float y, float z,float rotate, float rx, float ry, float rz);
 	void RenderObject(GameObject* object, bool enableLight);
+	void RenderPlayerShip();
 	void RenderSpawnZones();
 	void RenderInteractables();
 	void RenderSkybox();

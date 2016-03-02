@@ -9,78 +9,98 @@ AI::~AI() {
 void AI::FaceTarget(GameObject* object, GameObject* target, float maxTurnAngle, double &dt) {
 	
 	float distance = Physics::getDistance(object->GetPosition(), target->GetPosition());
-
-	if (distance < 0.5f) {
-	
-		return;
-
-	} else if (distance < 50.0f && object->GetForwardVector().AngleBetween(target->GetPosition() - object->GetPosition()) <= 90.0f) {
-	
-		return;
-
-	}
-
-	//Rotating on the Y-Axis.
 	float yRotation = 0.0f;
+	float xRotation = 0.0f;
 
-	Vector3 targetVector = (target->GetPosition() - object->GetPosition()).Normalized();
+	if (distance < 0.1f) {
 	
-	Vector3 yRotationForwardVector = Vector3(object->GetForwardVector().x, 0, object->GetForwardVector().z);
-	Vector3 yRotationTargetVector = Vector3(targetVector.x, 0, targetVector.z);
+		return;
 
-	if (yRotationForwardVector.Length() > Math::EPSILON && yRotationTargetVector.Length() > Math::EPSILON) {
+	} else if (distance < 30.0f && object->GetForwardVector().AngleBetween(target->GetPosition() - object->GetPosition()) <= 90) {
 	
-		yRotationForwardVector.Normalize();
-		yRotationTargetVector.Normalize();
-		yRotation += yRotationForwardVector.AngleBetween(yRotationTargetVector);
+		yRotation = GenerateRange(-maxTurnAngle, maxTurnAngle);
+		xRotation = GenerateRange(-maxTurnAngle, maxTurnAngle);
+		Mtx44 rotate;
+		rotate.SetToRotation(yRotation, 0, 1, 0);
+		rotate.SetToRotation(xRotation, 1, 0, 0);
+		object->Rotate(rotate);
 
-		if (yRotation > maxTurnAngle) {
-			yRotation = maxTurnAngle;
+	} else if (distance > 30.f && distance < 180.0f && object->GetForwardVector().AngleBetween(target->GetPosition() - object->GetPosition()) >= 90) {
+	
+		/*xRotation = GenerateRange(-maxTurnAngle, maxTurnAngle);
+		if (xRotation > 15.0f) {
+			xRotation = 15.0f;
+		} else if (xRotation < -15.0f) {
+			xRotation = -15.0f;
+		}
+		Mtx44 rotate;
+		rotate.SetToRotation(xRotation, 1, 0, 0);
+		object->Rotate(rotate);*/
+
+		return;
+
+	} else if (distance > 150.f && object->GetForwardVector().AngleBetween(target->GetPosition() - object->GetPosition()) <= 90) {
+
+		//Rotating on the Y-Axis.
+		Vector3 targetVector = (target->GetPosition() - object->GetPosition()).Normalized();
+		Vector3 yRotationForwardVector = Vector3(object->GetForwardVector().x, 0, object->GetForwardVector().z);
+		Vector3 yRotationTargetVector = Vector3(targetVector.x, 0, targetVector.z);
+
+		if (yRotationForwardVector.Length() > Math::EPSILON && yRotationTargetVector.Length() > Math::EPSILON) {
+		
+			yRotationForwardVector.Normalize();
+			yRotationTargetVector.Normalize();
+			yRotation += yRotationForwardVector.AngleBetween(yRotationTargetVector);
+
+			if (yRotation > maxTurnAngle) {
+				yRotation = maxTurnAngle;
+			}
+
+			if (yRotationForwardVector.AngleBetween(yRotationTargetVector) > Math::EPSILON) {
+				
+				Mtx44 rotate;
+				//I think I fixed the crash. Will have to test further to confirm. 24-2-2016.
+				if (yRotationForwardVector.AngleBetween(yRotationTargetVector) < 180.0f - Math::EPSILON && yRotationForwardVector.Cross(yRotationTargetVector).Length() > Math::EPSILON && yRotationForwardVector.Cross(yRotationTargetVector).Normalized().y > 0.0f) {
+			
+					rotate.SetToRotation(yRotation, 0, 1, 0);
+
+				} else {
+					
+					rotate.SetToRotation(-yRotation, 0, 1, 0);
+					
+				}
+
+				object->Rotate(rotate);
+
+			}
+
 		}
 
-		if (yRotationForwardVector.AngleBetween(yRotationTargetVector) > Math::EPSILON) {
-			
-			Mtx44 rotate;
-			//I think I fixed the crash. Will have to test further to confirm. 24-2-2016.
-			if (yRotationForwardVector.AngleBetween(yRotationTargetVector) < 180.0f - Math::EPSILON && yRotationForwardVector.Cross(yRotationTargetVector).Length() > Math::EPSILON && yRotationForwardVector.Cross(yRotationTargetVector).Normalized().y > 0.0f) {
+		//Rotating on the X-Axis
+		Vector3 xRotationForwardVector = Vector3(sqrt(1.0f - object->GetForwardVector().y * object->GetForwardVector().y) * targetVector.x, object->GetForwardVector().y, sqrt(1.0f - object->GetForwardVector().y * object->GetForwardVector().y) * targetVector.z).Normalized();
+		xRotation += xRotationForwardVector.AngleBetween(targetVector);
+
+		if (xRotation > Math::EPSILON * 100) {
 		
-				rotate.SetToRotation(yRotation, 0, 1, 0);
+			if (xRotation > maxTurnAngle) {
+				xRotation = maxTurnAngle;
+			}
+
+			Mtx44 rotate;
+
+			if (xRotationForwardVector.y > targetVector.y) {
+		
+				rotate.SetToRotation(xRotation, 1, 0, 0);
 
 			} else {
-				
-				rotate.SetToRotation(-yRotation, 0, 1, 0);
-				
+			
+				rotate.SetToRotation(-xRotation, 1, 0, 0);
+
 			}
 
 			object->Rotate(rotate);
 
 		}
-
-	}
-
-	//Rotating on the X-Axis
-	Vector3 xRotationForwardVector = Vector3(sqrt(1.0f - object->GetForwardVector().y * object->GetForwardVector().y) * targetVector.x, object->GetForwardVector().y, sqrt(1.0f - object->GetForwardVector().y * object->GetForwardVector().y) * targetVector.z).Normalized();
-	float xRotation = xRotationForwardVector.AngleBetween(targetVector);
-
-	if (xRotation > Math::EPSILON * 100) {
-	
-		if (xRotation > maxTurnAngle) {
-			xRotation = maxTurnAngle;
-		}
-
-		Mtx44 rotate;
-
-		if (xRotationForwardVector.y > targetVector.y) {
-	
-			rotate.SetToRotation(xRotation, 1, 0, 0);
-
-		} else {
-		
-			rotate.SetToRotation(-xRotation, 1, 0, 0);
-
-		}
-
-		object->Rotate(rotate);
 
 	}
 

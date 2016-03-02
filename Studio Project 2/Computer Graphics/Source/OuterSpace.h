@@ -29,14 +29,6 @@ private:
 	//Variables
 	bool warning;
 	MENU menuOption;
-
-	//GameObjects
-	list<Interactable*> iSpaceObjects;
-	
-	//Zones
-	vector<SpawnZone> spawnZones;
-
-	Player* player;
 	
 	//Functions
 	void BoundsCheck();
@@ -46,7 +38,6 @@ private:
 	void UpdateUserInterFace(double&dt);
 	void RenderFlightHUD();
 	void UpdateStartMenu();
-	void RenderObjects();
 	void RenderStartMenu();
 	void DeathCheck();
 	void UpdateDeathScreen();
