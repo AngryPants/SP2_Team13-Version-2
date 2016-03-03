@@ -3,10 +3,10 @@
 /****************************************************************************/
 /*!
 \file MiningLaser.h
-\author
-\par email:
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
 \brief
-
+Header file for MiningLaser.
 */
 /****************************************************************************/
 #include "GameObject.h"
@@ -14,6 +14,8 @@
 /*!
 		Class MiningLaser:
 \brief
+Defines MiningLaser, a child class of GameObject.
+
 */
 /******************************************************************************/
 class MiningLaser : public GameObject {

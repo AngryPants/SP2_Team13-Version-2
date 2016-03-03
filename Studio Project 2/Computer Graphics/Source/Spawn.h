@@ -6,7 +6,7 @@
 \author Tan Teck Ling
 \par email: teckling1998@gmail.com
 \brief
-Struct that generates the coordinates using an algorithm for each Objects in OuterSpace
+Header file for Spawn
 */
 /****************************************************************************/
 #include "Veldspar.h"

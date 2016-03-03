@@ -6,7 +6,7 @@
 \author Chua Teck Lee
 \par email:c_tecklee@hotmail.com
 \brief
-Creates a CarrickStation
+Header File for CarrickStation.
 */
 /*****************************************/
 #include "SpaceStation.h"

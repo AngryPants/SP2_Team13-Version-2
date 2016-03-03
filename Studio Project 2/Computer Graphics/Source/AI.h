@@ -3,9 +3,10 @@
 /****************************************************************************/
 /*!
 \file AI.h
-\author
-\par email:
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
 \brief
+Header for AI
 
 */
 /****************************************************************************/
@@ -15,6 +16,7 @@
 /*!
 		Struct AI
 \brief
+Defines AI, a struct that holds the static functions for enemy ship's behaviour.
 
 */
 /*****************************************/

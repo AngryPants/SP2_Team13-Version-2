@@ -3,9 +3,10 @@
 /****************************************************************************/
 /*!
 \file MaterialList.h
-\author
-\par email:
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
 \brief
+Header file for MaterialList.
 
 */
 /****************************************************************************/
@@ -14,6 +15,7 @@
 /*!
 		Class MaterialList
 \brief
+Defines MaterialList, a singleton which stores various presets of materials.
 
 */
 /*****************************************/

@@ -1,3 +1,13 @@
+/****************************************************************************/
+/*!
+\file SpawnZone.cpp
+\author Tan Teck Ling
+\par email: teckling1998@gmail.com
+\brief
+CPP file for SpawnZone.
+*/
+/****************************************************************************/
+
 #include "SpawnZone.h"
 #include "Spawn.h"
 

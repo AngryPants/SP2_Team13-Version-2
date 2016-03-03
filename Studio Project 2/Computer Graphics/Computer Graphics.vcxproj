@@ -113,10 +113,8 @@
     <ClCompile Include="Source\Omber.cpp" />
     <ClCompile Include="Source\OuterSpace.cpp" />
     <ClCompile Include="Source\SpaceStation.cpp" />
-    <ClCompile Include="Source\Physics.cpp" />
     <ClCompile Include="Source\Pirate.cpp" />
     <ClCompile Include="Source\Player.cpp" />
-    <ClCompile Include="Source\PlayerHuman.cpp" />
     <ClCompile Include="Source\Position.cpp" />
     <ClCompile Include="Source\Quest.cpp" />
     <ClCompile Include="Source\RigidBody.cpp" />
@@ -167,10 +165,8 @@
     <ClInclude Include="Source\MousePosition.h" />
     <ClInclude Include="Source\Omber.h" />
     <ClInclude Include="Source\OuterSpace.h" />
-    <ClInclude Include="Source\Physics.h" />
     <ClInclude Include="Source\Pirate.h" />
     <ClInclude Include="Source\Player.h" />
-    <ClInclude Include="Source\PlayerHuman.h" />
     <ClInclude Include="Source\Position.h" />
     <ClInclude Include="Source\Quest.h" />
     <ClInclude Include="Source\RigidBody.h" />

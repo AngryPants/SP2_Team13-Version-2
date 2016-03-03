@@ -1,3 +1,13 @@
+/*****************************************/
+/*!
+\file CarrickStation.cpp
+\author Chua Teck Lee
+\par email:c_tecklee@hotmail.com
+\brief
+CPP File for CarrickStation.
+*/
+/*****************************************/
+
 #include "CarrickStation.h"
 /*****************************************/
 /*!
@@ -13,10 +23,6 @@ Creates a CarrickStation
 /*!
 \brief
 constructor of carrickstation
-\param
-none
-\return
-nothing
 */
 /*******************************************************/
 CarrickStation::CarrickStation()
@@ -27,10 +33,6 @@ CarrickStation::CarrickStation()
 /*!
 \brief
 destruction of carrickstation
-\param
-none
-\return
-nothing
 */
 /*******************************************************/
 CarrickStation::~CarrickStation() {

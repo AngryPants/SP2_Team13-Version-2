@@ -3,9 +3,10 @@
 /****************************************************************************/
 /*!
 \file Camera.h
-\author
-\par email:
+\author Tang Wen Sheng
+\par email: tang_wen_sheng@nyp.edu.sg
 \brief
+Header file for Camera. Original by Tang Wen Sheng and edited by Lim Ngian Xin Terry.
 
 */
 /****************************************************************************/
@@ -14,6 +15,7 @@
 /*!
 		Class Camera
 \brief
+Defines the Camera class.
 
 */
 /*****************************************/

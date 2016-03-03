@@ -2,11 +2,11 @@
 #define _WARPGATE_H
 /*****************************************/
 /*!
-\file WarpGate
+\file WarpGate.h
 \author Chua Teck Lee
 \par email:c_tecklee@hotmail.com
 \brief
-Creates a Warp Gate object
+Header file for WarpGate
 */
 /*****************************************/
 #include"Interactable.h"

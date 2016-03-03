@@ -1,5 +1,22 @@
-#include "MaterialList.h"
+/****************************************************************************/
+/*!
+\file MaterialList.cpp
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
+\brief
+CPP file for MaterialList.
 
+*/
+/****************************************************************************/
+#include "MaterialList.h"
+/***********************************************************************************/
+/*!
+
+\brief
+Constructor for MaterialList. The materials are initialised here.
+
+*/
+/***********************************************************************************/
 MaterialList::MaterialList() {
 
 	material[PLASTIC].kAmbient.Set(0.25f, 0.25f, 0.25f);
@@ -29,9 +46,28 @@ MaterialList::MaterialList() {
 
 }
 
+/***********************************************************************************/
+/*!
+
+\brief
+An empty destructor.
+
+*/
+/***********************************************************************************/
 MaterialList::~MaterialList() {
 }
 
+/***********************************************************************************/
+/*!
+
+\brief
+Gets a static instance of the MaterialList.
+
+\return
+Returns a static instance of the MaterialList.
+
+*/
+/***********************************************************************************/
 MaterialList* MaterialList::GetInstance() {
 
 	static MaterialList materialList;

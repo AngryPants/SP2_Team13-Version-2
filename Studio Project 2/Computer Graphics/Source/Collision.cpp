@@ -1,3 +1,13 @@
+/*****************************************/
+/*!
+\file Collision
+\author Chua Teck Lee
+\par email:c_tecklee@hotmail.com
+\brief
+CPP file for Collision
+*/
+/*****************************************/
+
 #include "Collision.h"
 /*****************************************/
 /*!

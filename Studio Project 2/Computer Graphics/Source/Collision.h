@@ -6,7 +6,7 @@
 \author Chua Teck Lee
 \par email:c_tecklee@hotmail.com
 \brief
-Struct to define Collision Detection between objects
+Header file for Collision
 */
 /*****************************************/
 #include "Bullet.h"
@@ -16,7 +16,7 @@ Struct to define Collision Detection between objects
 /*!
 		Struct Collision
 \brief
-Define Collision Detection and its methods
+Define Collision Detection and its methods. Used to check collision between objects.
 */
 /*****************************************/
 struct Collision

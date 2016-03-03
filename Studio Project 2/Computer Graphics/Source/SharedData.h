@@ -6,7 +6,7 @@
 \author Terry
 \par email: lnxTerry@gmail.com
 \brief
-Singleton for every files using it
+Header file for SharedData
 */
 /****************************************************************************/
 /******************************************************************************/
@@ -14,7 +14,7 @@ Singleton for every files using it
 		Class SharedData:
 \brief
 
-Class to define an SharedData
+Class to define an SharedData, a singleton used to store global variables.
 */
 /******************************************************************************/
 class SharedData {

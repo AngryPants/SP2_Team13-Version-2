@@ -1,5 +1,33 @@
+/****************************************************************************/
+/*!
+\file Mining.cpp
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
+\brief
+CPP file for Mining
+
+*/
+/****************************************************************************/
+
 #include "Mining.h"
 
+/****************************************************************************************************************/
+/*!
+
+\brief
+Mines an asteroid and fixes the player's Ship.
+
+\param playerShip
+The player's ship.
+
+\param asteroid
+The Asteroid currently being mined.
+
+\param dt
+The time taken for this frame to be completed.
+
+*/
+/****************************************************************************************************************/
 void Mining::Mine(PlayerShip* playerShip, Asteroid* asteroid, double &dt) {
 
 	if (Application::IsKeyPressed(VK_RBUTTON)) {

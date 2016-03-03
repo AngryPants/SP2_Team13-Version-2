@@ -6,7 +6,7 @@
 \author Tan Teck Ling
 \par email: teckling1998@gmail.com
 \brief
-Class that defines the values of Kernite Asteroids
+Header file for Kernite
 */
 /****************************************************************************/
 #include "Asteroid.h"
