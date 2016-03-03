@@ -38,7 +38,7 @@ public:
 	Load();
 	~Load();
 
-	static void LoadFile(string FilePath, Player &player, Inventory &inventory, PlayerShip &playerShip);
+	static void LoadFile(string FilePath, Player &player);
 	static void SaveFile(string FilePath, Player &player);
 
 

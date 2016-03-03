@@ -2,6 +2,12 @@
 #include "Spawn.h"
 
 //Constructors
+
+/****************************************************************************/
+/*!
+\brief
+Constructor of the Class SpawnZone
+/****************************************************************************/
 SpawnZone::SpawnZone()
 : GameObject("<Spawn Zone Name>", "OBJ//ZoneBeacon//Beacon.obj", "Image//PlaceHolder//PlaceHolder.tga", MaterialList::GetInstance()->material[MaterialList::PLASTIC])
 {
@@ -16,6 +22,26 @@ SpawnZone::SpawnZone()
 
 }
 
+//Copy Constructor
+
+/****************************************************************************/
+/*!
+\brief
+Copy constructor of the Class SpawnZone
+\param name
+Defines the name of the Class SpawnZone
+\param position
+Defines the position of the Class SpawnZone
+\param spawnRadius
+Defines the spawnRadius of the Class SpawnZone
+\param activeRadius
+Defines the activeRadius of the Class SpawnZone
+\param despawnRadius
+Defines the despawnRadius of the Class SpawnZone
+\param colour
+Defines the BEACON_COLOUR of the Class SpawnZone
+*/
+/****************************************************************************/
 SpawnZone::SpawnZone(string name, Vector3 position, float spawnRadius, float activeRadius, float despawnRadius, BEACON_COLOUR colour) 
 : GameObject(name, "OBJ//ZoneBeacon//Beacon.obj", "Image//PlaceHolder//PlaceHolder.tga", MaterialList::GetInstance()->material[MaterialList::PLASTIC])
 {
@@ -31,46 +57,96 @@ SpawnZone::SpawnZone(string name, Vector3 position, float spawnRadius, float act
 }
 
 //Destructor
+
+/****************************************************************************/
+/*!
+\brief
+Destructor of the Class SpawnZone
+/****************************************************************************/
 SpawnZone::~SpawnZone() {
 }
 
 //Getters
+
+/****************************************************************************/
+/*!
+\brief
+Getter of the value spawnRadius
+\return
+returns the value spawnRadius of the Class SpawnZone
+/****************************************************************************/
 float SpawnZone::GetSpawnRadius() {
 
 	return this->spawnRadius;
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Getter of the value activeRadius
+\return
+returns the value activeRadius of the Class SpawnZone
+/****************************************************************************/
 float SpawnZone::GetActiveRadius() {
 
 	return this->activeRadius;
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Getter of the value despawnRadius
+\return
+returns the value despawnRadius of the Class SpawnZone
+/****************************************************************************/
 float SpawnZone::GetDespawnRadius() {
 
 	return this->despawnRadius;
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Getter of the string name
+\return
+returns the string name of the Class SpawnZone
+/****************************************************************************/
 string SpawnZone::GetName() {
 
 	return this->name;
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Getter of the pointer Asteroid
+\return
+returns the pointer Asteroid of the Class SpawnZone
+/****************************************************************************/
 list<Asteroid>* SpawnZone::GetAsteroidList() {
 	
 	return &(this->asteroids);
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Getter of the pointer Enemy
+\return
+returns the pointer Enemy of the Class SpawnZone
+/****************************************************************************/
 list<Ship>* SpawnZone::GetEnemyList() {
 
 	return &(this->enemies);
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Getter of the enum ZONE_STATE
+\return
+returns the enum ZONE_STATE of the Class SpawnZone
+/****************************************************************************/
 ZONE_STATE SpawnZone::GetZoneState() {
 
 	return this->zoneState;
@@ -78,6 +154,14 @@ ZONE_STATE SpawnZone::GetZoneState() {
 }
 
 //Setters
+
+/****************************************************************************/
+/*!
+\brief
+Setter of the value spawnRadius
+\param radius
+Sets the value of spawnRadius of the Class SpawnZone
+/****************************************************************************/
 void SpawnZone::SetSpawnRadius(float radius) {
 
 	if (radius >= 0.0f) {
@@ -91,7 +175,13 @@ void SpawnZone::SetSpawnRadius(float radius) {
 	}
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Setter of the value activeRadius
+\param radius
+Sets the value of activeRadius of the Class SpawnZone
+/****************************************************************************/
 void SpawnZone::SetActiveRadius(float radius) {
 
 	if (radius >= this->spawnRadius) {
@@ -105,7 +195,13 @@ void SpawnZone::SetActiveRadius(float radius) {
 	}
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Setter of the value despawnRadius
+\param radius
+Sets the value of despawnRadius of the Class SpawnZone
+/****************************************************************************/
 void SpawnZone::SetDespawnRadius(float radius) {
 
 	if (radius >= this->activeRadius) {
@@ -119,7 +215,11 @@ void SpawnZone::SetDespawnRadius(float radius) {
 	}
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Sets enum ZONE_STATE of the Class SpawnZone to ACTIVE
+/****************************************************************************/
 void SpawnZone::SetActive() {
 
 	for (list<Asteroid>::iterator iter = asteroids.begin(); iter != asteroids.end(); ++iter) {
@@ -138,7 +238,11 @@ void SpawnZone::SetActive() {
 	zoneState = ACTIVE;
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Sets enum ZONE_STATE of the Class SpawnZone to INACTIVE
+/****************************************************************************/
 void SpawnZone::SetInactive() {
 
 	for (list<Asteroid>::iterator iter = asteroids.begin(); iter != asteroids.end(); ++iter) {
@@ -156,7 +260,13 @@ void SpawnZone::SetInactive() {
 	zoneState = INACTIVE;
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Setter of the enum BEACON_COLOUR
+\param colour
+Sets the enum BEACON_COLOUR of the Class SpawnZone
+/****************************************************************************/
 void SpawnZone::SetBeaconColour(BEACON_COLOUR colour) {
 	
 	switch (colour) {

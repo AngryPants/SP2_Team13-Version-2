@@ -3,11 +3,10 @@
 /****************************************************************************/
 /*!
 \file Kernite.h
-\author
-\par email:
+\author Tan Teck Ling
+\par email: teckling1998@gmail.com
 \brief
-An asteroid, just with the constructor parameters filled up.
-
+Class that defines the values of Kernite Asteroids
 */
 /****************************************************************************/
 #include "Asteroid.h"
@@ -15,8 +14,7 @@ An asteroid, just with the constructor parameters filled up.
 /*!
 		Class Kernite
 \brief
-Defines Kernite, child class of asteroid.
-
+Defines the values of the Kernite Asteroids
 */
 /*****************************************/
 class Kernite : public Asteroid {

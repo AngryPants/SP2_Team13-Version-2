@@ -3,10 +3,10 @@
 /****************************************************************************/
 /*!
 \file SpawnZone.h
-\author
-\par email:
+\author Tan Teck Ling
+\par email: teckling1998@gmail.com
 \brief
-
+Class that defines the radii, Beacon, and type of Object that is to be rendered in
 */
 /****************************************************************************/
 #include "Vector3.h"
@@ -19,6 +19,7 @@ using std::string;
 /*!
 		Class SpawnZone:
 \brief
+Defines the radii, Beacon, and type of Object that is to be rendered in
 */
 /******************************************************************************/
 enum ZONE_STATE {

@@ -3,9 +3,10 @@
 /****************************************************************************/
 /*!
 \file Spawn.h
-\author 
+\author Tan Teck Ling
+\par email: teckling1998@gmail.com
 \brief
-Struct that generates the coordinates using an algorithm for each Objects in Space
+Struct that generates the coordinates using an algorithm for each Objects in OuterSpace
 */
 /****************************************************************************/
 #include "Veldspar.h"
@@ -22,6 +23,7 @@ Struct that generates the coordinates using an algorithm for each Objects in Spa
 /*!
 		Struct Spawn:
 \brief
+Generates the coordinates using an algorithm for each Objects in OuterSpace
 */
 /******************************************************************************/
 struct Spawn

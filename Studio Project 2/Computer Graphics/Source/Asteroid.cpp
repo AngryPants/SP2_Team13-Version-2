@@ -1,4 +1,6 @@
 #include "Asteroid.h"
+//Constructor
+
 
 /*******************************************************************************/
 /*!
@@ -30,6 +32,8 @@ Asteroid::Asteroid(string name, float mass, const char* textureFile, float healt
 	SetMaxRadius(60.0f);
 
 }
+//Destructor
+
 
 /*******************************************************************************/
 /*!

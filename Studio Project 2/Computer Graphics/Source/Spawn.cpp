@@ -27,15 +27,17 @@ Spawn::~Spawn()
 \brief
 Seeds a value then generates a coordinate for Objects in space to have within its zone
 \param object
-A pointer to SpaceObject that would be pushed into the list and be rendered later
-/param i
-A integer value that adds into the Seeded value
-/param zoneCentre
-A Vector3 value that is the Coordinate of the centre of each zone
-/param zoneRadius
-A float value that determines how far each zone stretches
-/param objectlist
-A list that would have the final result pushed into
+A pointer to Asteroid that would be pushed into the list and be rendered later
+/param objectRadius
+A float value that defines the radius of the object
+/param numObjects
+An unsigned integer that defines the number of times the object would be pushed into the list
+/param &spawnZone
+A reference to the Class SpawnZone
+/param &asteroids
+A reference to the list<Asteroid>
+/param seed
+A integer value that is to be seeded
 */
 /****************************************************************************/
 void Spawn::SpawnObjects(Asteroid* object, float objectRadius, unsigned int numObjects, SpawnZone &spawnZone, list<Asteroid> &asteroids, int seed) {
@@ -124,7 +126,24 @@ void Spawn::SpawnObjects(Asteroid* object, float objectRadius, unsigned int numO
 	delete object;
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Seeds a value then generates a coordinate for Objects in space to have within its zone
+\param object
+A pointer to Ship that would be pushed into the list and be rendered later
+/param objectRadius
+A float value that defines the radius of the object
+/param numObjects
+An unsigned integer that defines the number of times the object would be pushed into the list
+/param &spawnZone
+A reference to the Class SpawnZone
+/param &ship
+A reference to the list<Ship>
+/param seed
+A integer value that is to be seeded
+*/
+/****************************************************************************/
 void Spawn::SpawnObjects(Ship* object, float objectRadius, unsigned int numObjects, SpawnZone &spawnZone, list<Ship> &ship, int seed) {
 
 	if (objectRadius > spawnZone.GetSpawnRadius()) {
@@ -212,7 +231,16 @@ void Spawn::SpawnObjects(Ship* object, float objectRadius, unsigned int numObjec
 	delete object;
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Respawns the Enemy into the SpawnZone
+/param &spawnZone
+A reference to the Class SpawnZone
+/param seed
+A integer value that is to be seeded
+*/
+/****************************************************************************/
 void Spawn::RespawnEnemies(SpawnZone &spawnZone, int seed) {
 
 	srand(seed);
@@ -231,7 +259,16 @@ void Spawn::RespawnEnemies(SpawnZone &spawnZone, int seed) {
 	}
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Checks if the player has killed an Enemy
+\param object
+A pointer to he Class SpaceObject
+/param &player
+A reference to the Class Player
+*/
+/****************************************************************************/
 void Spawn::CheckKill(SpaceObject* object, Player &player) {
 
 	if (object->IsDead() && !object->IsDisabled()) {
@@ -249,7 +286,14 @@ void Spawn::CheckKill(SpaceObject* object, Player &player) {
 	}
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Checks if the player is killed by an Enemy
+/param &player
+A reference to the Class Player
+*/
+/****************************************************************************/
 void Spawn::CheckKill(Player &player) {
 
 	if (player.GetShip()->IsDead()) {
@@ -258,7 +302,16 @@ void Spawn::CheckKill(Player &player) {
 
 	}
 }
-
+/****************************************************************************/
+/*!
+\brief
+Checks if the player has killed an Enemy
+\param &spawnZone
+A pointer to the Class SpawnZone
+/param playerPosition
+A vector that is Position of the Class Player
+*/
+/****************************************************************************/
 void Spawn::CheckZone(SpawnZone &spawnZone, Vector3 playerPosition) {
 
 	if (spawnZone.GetZoneState() == INACTIVE && Physics::getDistance(playerPosition, spawnZone.GetPosition()) <= spawnZone.GetActiveRadius()) {

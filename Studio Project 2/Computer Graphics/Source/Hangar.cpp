@@ -130,7 +130,7 @@ void Hangar::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	player = new Player("Malcolm", "", "", "");
 
 	player->GetShip()->SetPosition(0,3,0);
-	Load::LoadFile("Text/PlayerStat.txt", *player, *player->GetInventory(), *player->GetShip());
+	Load::LoadFile("Text/PlayerStat.txt", *player);
 	if (player->GetState() != MAIN_MENU)
 	{
 		player->SetState(PLAYING);

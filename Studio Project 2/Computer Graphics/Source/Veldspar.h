@@ -3,11 +3,10 @@
 /****************************************************************************/
 /*!
 \file Veldspar.h
-\author 
-\par email:
+\author Tan Teck Ling
+\par email: teckling1998@gmail.com
 \brief
-An asteroid, just with the constructor parameters filled up.
-
+Class that defines the values of Veldspar Asteroids
 */
 /****************************************************************************/
 #include "Asteroid.h"
@@ -15,6 +14,7 @@ An asteroid, just with the constructor parameters filled up.
 /*!
 		Class Veldspar:
 \brief
+Defines the values of a Veldspar Asteroids
 */
 /******************************************************************************/
 class Veldspar : public Asteroid {

@@ -136,7 +136,7 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	player = new Player("Malcolm", "", "", "");
 	warning = false;
-	Load::LoadFile("Text/PlayerStat.txt", *player, *player->GetInventory(), *player->GetShip());
+	Load::LoadFile("Text/PlayerStat.txt", *player);
 	player->GetShip()->SetPosition(150,50,100);
 	player->SetState(PLAYING);
 	menuOption = RESTART;
