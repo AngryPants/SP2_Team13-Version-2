@@ -295,7 +295,7 @@ void Hangar::UpdateStartMenu()
 		}
 		else if (menuOption == RESET) {
 
-			
+			Load::ResetFile("Text//PlayerStat.txt","Text//ResetFile.txt");
 
 		}
 		else if (menuOption == QUIT) {

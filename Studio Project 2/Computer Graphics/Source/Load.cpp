@@ -167,3 +167,37 @@ void Load::LoadFile(string filePath, Player &player)
 	}
 	fileStream.close();
 }
+/****************************************************************************/
+/*!
+\brief
+Transfer data from a text file to another to reset the player's progress
+\param filePath
+A string that defines the filePath of the text file
+\param resetFile
+A string that defines the filePath of the resetting text file
+*/
+/****************************************************************************/
+void Load::ResetFile(string filePath, string resetFile)
+{
+	std::fstream fileStream;
+	std::fstream resetFileStream;
+
+	fileStream.open(filePath, std::ofstream::out | std::ofstream::trunc);
+
+	if (!fileStream.is_open()) {
+
+		std::cout << "Impossible to open and reset " << filePath << ". Are you in the right directory?\n";
+		return;
+
+	}
+
+	fileStream.close();
+
+	fileStream.open(filePath, std::fstream::in | std::fstream::out);
+	resetFileStream.open(resetFile, std::fstream::in | std::fstream::out);
+
+	resetFileStream << fileStream.rdbuf();
+
+	resetFileStream.close();
+	fileStream.close();
+}

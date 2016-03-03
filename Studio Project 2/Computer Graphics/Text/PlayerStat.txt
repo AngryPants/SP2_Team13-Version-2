@@ -1,6 +1,6 @@
 Name Malcolm
 State 0
-Gold 0
+Gold 53000
 Armour 5000.000000
-Tin 3 3
+Steel 2 6000
 End

@@ -40,7 +40,7 @@ public:
 
 	static void LoadFile(string FilePath, Player &player);
 	static void SaveFile(string FilePath, Player &player);
-
+	static void ResetFile(string FilePath, string ResetFile);
 
 };
 
