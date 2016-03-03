@@ -288,20 +288,20 @@ void OuterSpace::UpdateDeathScreen()
 			SharedData::GetInstance()->sceneNumber = 1;
 
 		}
-		else if (menuOption == SOUND) {
+		//else if (menuOption == SOUND) {
 
-			if (SharedData::GetInstance()->soundOn == true) {
+		//	if (SharedData::GetInstance()->soundOn == true) {
 
-				SharedData::GetInstance()->soundOn = false;
+		//		SharedData::GetInstance()->soundOn = false;
 
-			}
-			else if (SharedData::GetInstance()->soundOn == false) {
+		//	}
+		//	else if (SharedData::GetInstance()->soundOn == false) {
 
-				SharedData::GetInstance()->soundOn = true;
+		//		SharedData::GetInstance()->soundOn = true;
 
-			}
+		//	}
 
-		}
+		//}
 		else if (menuOption == QUIT) {
 
 			player->SetState(MAIN_MENU);
@@ -408,13 +408,9 @@ void OuterSpace::RenderDeathScreen()
 	{
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], ">", textColour, textSize, posX - 1.0f, posY);
 	}
-	else if (menuOption == SOUND)
-	{
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], ">", textColour, textSize, posX - 1.0f, posY - 1.0f);
-	}
 	else if (menuOption == QUIT)
 	{
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], ">", textColour, textSize, posX - 1.0f, posY - 2.0f);
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], ">", textColour, textSize, posX - 1.0f, posY - 1.0f);
 	}
 
 	if (player->GetState() == DEAD)
@@ -423,9 +419,7 @@ void OuterSpace::RenderDeathScreen()
 
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "RESTART", textColour, textSize, posX, posY);
 
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], "SOUND", textColour, textSize, posX, posY - 1.0f);
-
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], "QUIT", textColour, textSize, posX, posY - 2.0f);
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "QUIT", textColour, textSize, posX, posY - 1.0f);
 
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Press Enter to select.", textColour, textSize, 6.5f, posY - 4.0f);
 

@@ -1,8 +1,24 @@
 #ifndef _SPACESTATION_H
 #define _SPACESTATION_H
-
+/*****************************************/
+/*!
+\file SpaceStation
+\author Chua Teck Lee
+\par email:c_tecklee@hotmail.com
+\brief
+Creates a spacestation object
+*/
+/*****************************************/
 #include"Interactable.h"
 #include "Load.h"
+
+/*****************************************/
+/*!
+		Class SpaceStation
+\brief
+Define a SpaceStation and its methods,child class of interactable
+*/
+/*****************************************/
 class SpaceStation : public Interactable {
 
 private:

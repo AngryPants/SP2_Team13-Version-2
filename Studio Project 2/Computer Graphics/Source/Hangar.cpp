@@ -227,18 +227,9 @@ void Hangar::UpdateStartMenu()
 			player->SetState(PLAYING);
 
 		}
-		else if (menuOption == SOUND) {
+		else if (menuOption == RESET) {
 
-			if (SharedData::GetInstance()->soundOn == true) {
-
-				SharedData::GetInstance()->soundOn = false;
-
-			}
-			else if (SharedData::GetInstance()->soundOn == false) {
-
-				SharedData::GetInstance()->soundOn = true;
-
-			}
+			
 
 		}
 		else if (menuOption == QUIT) {
@@ -290,7 +281,7 @@ void Hangar::RenderStartMenu()
 	{
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], ">", textColour, textSize, posX - 1.0f, posY);
 	}
-	else if (menuOption == SOUND)
+	else if (menuOption == RESET)
 	{
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], ">", textColour, textSize, posX - 1.0f, posY - 1.0f);
 	}
@@ -304,7 +295,7 @@ void Hangar::RenderStartMenu()
 	
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "START", textColour, textSize, posX, posY);
 
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], "SOUND", textColour, textSize, posX, posY - 1.0f);
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "RESET", textColour, textSize, posX, posY - 1.0f);
 
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "QUIT", textColour, textSize, posX, posY - 2.0f);
 
@@ -354,10 +345,7 @@ void Hangar::RenderUI()
 		RenderObjectOnScreen(mesh[SCREEN], 1940, 1150, 2200, 950, 550, 5000, 180, 0, 1, 0);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "PRESS S TO CLOSE CODEX", Colour(1, 0, 0), 70, 2, 1);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Ship Health : "+ std::to_string(((int)player->GetShip()->GetMaxHealth())), Colour(1, 0, 0), 100, 1.5, 9);
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Gold : " + std::to_string(((int)player->GetInventory()->GetGold())), Colour(1, 1, 0.1), 100, 1.5, 8);
-		//RenderTextOnScreen(mesh[FONT_CONSOLAS], "veldspar : ", Colour(0.5, 0.5, 0.5), 100, 1.5, 7);
-		//RenderTextOnScreen(mesh[FONT_CONSOLAS], "omber : ", Colour(0.5, 0.35, 0.05), 100, 1.5, 6);
-		//RenderTextOnScreen(mesh[FONT_CONSOLAS], "kernite : ", Colour(0, 1, 1), 100, 1.5, 5);
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Score : " + std::to_string(((int)player->GetInventory()->GetGold())), Colour(1, 1, 0.1), 100, 1.5, 8);
 		
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Name : Drone ", Colour(1, 1, 0.4), 80, 18, 12);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Health : Low", Colour(1, 1, 0.4), 80, 18, 11.5);

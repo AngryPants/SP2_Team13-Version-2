@@ -21,7 +21,6 @@ private:
 	enum MENU
 	{
 		RESTART,
-		SOUND,
 		QUIT,
 		THE_END,
 	};
