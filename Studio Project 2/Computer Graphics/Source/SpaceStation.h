@@ -31,7 +31,6 @@ public:
 
 	//Functions
 	virtual void Interact(Player &player,double &dt);
-	virtual void PlayAnimation(Player &player, double &dt);
 
 };
 

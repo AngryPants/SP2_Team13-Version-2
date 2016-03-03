@@ -97,13 +97,13 @@ How much to rotate the GameObject by.
 void GameObject::Rotate(Vector3 rotation) {
 
 	Mtx44 rotate;
+	rotate.SetToRotation(rotation.z, 0, 0, 1);
+	rotationMatrix = rotationMatrix * rotate;
 	rotate.SetToRotation(rotation.x, 1, 0, 0);
 	rotationMatrix = rotationMatrix * rotate;
 	rotate.SetToRotation(rotation.y, 0, 1, 0);
 	rotationMatrix = rotationMatrix * rotate;
-	rotate.SetToRotation(rotation.z, 0, 0, 1);
-	rotationMatrix = rotationMatrix * rotate;
-
+	
 }
 
 /*************************************************************************************************************************/

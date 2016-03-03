@@ -38,7 +38,7 @@ public:
 	void Reset();
 	void Update(double dt);
 	void FollowObject(SpaceObject* object, Vector3 offset);
-	void UpdateXRotation(double &dt);
+	//void UpdateXRotation(double &dt);
 	void Rotate(Vector3 rotation);
 	void Rotate(float x, float y, float z);
 

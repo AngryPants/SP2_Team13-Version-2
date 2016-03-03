@@ -38,7 +38,6 @@ public:
 	
 	//Functions
 	virtual void Interact(Player &player, double &dt) = 0;
-	virtual void PlayAnimation(Player &player, double &dt) = 0;
 
 	//Getters
 	string GetApproachMessage();
