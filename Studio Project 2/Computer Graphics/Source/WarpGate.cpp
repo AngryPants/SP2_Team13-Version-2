@@ -3,8 +3,12 @@
 /*!
 \brief
 Constructor of warpGate
-\param
-the name of gate,position,its exit position
+\param string name
+the name of gate
+\param vector3 position
+spawn position
+\param vector3 exitPosition
+its exit position
 \return
 none
 */
@@ -33,8 +37,10 @@ WarpGate::~WarpGate() {
 /*!
 \brief
 interaction between player and object
-\param
-the player and dt
+\param player
+player to check for interact
+\param dt
+update the interaction per frame
 \return
 return nothing
 
@@ -65,7 +71,7 @@ Vector3 WarpGate::GetExitPosition() {
 /*!
 \brief
 set the exit position of the object
-\param
+\param vector3 position
 vector 3 of the position of the object
 \return
 none
@@ -81,11 +87,10 @@ void WarpGate::SetExitPosition(Vector3 position) {
 /*!
 \brief
 Alternative of setting the exit position of the warpgate
-\param
+\param float x,y,z
 takes in 3 floats 
 \return
 none
-
 */
 /*******************************************************/
 void WarpGate::SetExitPosition(float x, float y, float z) {

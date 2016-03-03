@@ -3,9 +3,20 @@
 /*!
 \brief
 Constructor of interactable
-\param
-name of the object,the bigger radius, the interact radius the mesh name,texture and material
-
+\param string name
+name of the object
+\param approachRadius
+the bigger radius
+\param interactRadius
+the interact radius 
+\param approachMessage
+the message the player gets while close
+\param interact radius
+the interact radius
+\param meshfile the mesh name
+texture of the
+\param material
+material of the object
 \return
 nothing
 */
@@ -100,7 +111,7 @@ float Interactable::GetInteractRadius() {
 /*!
 \brief
 set the approach message of the object
-\param
+\param message
 a approach message for the object
 \return
 none
@@ -116,7 +127,7 @@ void Interactable::SetApproachMessage(string message) {
 /*!
 \brief
 set the interact message of the object
-\param
+\param message
 a interact message for the obj
 \return
 none
@@ -132,7 +143,7 @@ void Interactable::SetInteractMessage(string message) {
 /*!
 \brief
 set the approach radius of the object
-\param
+\param radius
 set the appr radius of the obj
 \return
 none
@@ -148,7 +159,7 @@ void Interactable::SetApproachRadius(float radius) {
 \brief
 
 set the approach radius of the object
-\param
+\param radius
 set the radius of the interact radius
 \return
 none

@@ -32,8 +32,10 @@ SpaceStation::~SpaceStation() {
 /*!
 \brief
 Interaction between player and spacestation
-\param
-player and dt
+\param player 
+player to check for distance
+\param dt
+use to update the interaction
 \return
 nothing
 */
