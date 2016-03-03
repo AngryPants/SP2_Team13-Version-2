@@ -12,7 +12,7 @@ private:
 	enum MENU
 	{
 		START,
-		SOUND,
+		RESET,
 		QUIT,
 		THE_END,l
 	};
