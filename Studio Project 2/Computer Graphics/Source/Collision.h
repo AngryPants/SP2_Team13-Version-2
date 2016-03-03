@@ -1,10 +1,24 @@
 #ifndef _COLLISION_H
 #define _COLLISION_H
-
+/*****************************************/
+/*!
+\file Collision
+\author Chua Teck Lee
+\par email:c_tecklee@hotmail.com
+\brief
+Struct to define Collision Detection between objects
+*/
+/*****************************************/
 #include "Bullet.h"
 #include "SpaceObject.h"
 #include "StaticObject.h"
-
+/*****************************************/
+/*!
+		Struct Collision
+\brief
+Define Collision Detection and its methods
+*/
+/*****************************************/
 struct Collision
 {
 

@@ -1,10 +1,24 @@
 #ifndef _INTERACTABLE_H
 #define _INTERACTABLE_H
-
+/*****************************************/
+/*!
+\file Interactable
+\author Chua Teck Lee
+\par email:c_tecklee@hotmail.com
+\brief
+Class to define an Interactable object
+*/
+/*****************************************/
 #include "Application.h"
 #include "SharedData.h"
 #include "Player.h"
-
+/*****************************************/
+/*!
+Class Interactable
+\brief
+Define a Interactable and its methods,child class of GameObject
+*/
+/*****************************************/
 class Interactable : public GameObject {
 
 private:

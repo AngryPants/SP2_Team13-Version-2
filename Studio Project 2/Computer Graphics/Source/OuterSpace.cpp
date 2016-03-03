@@ -403,7 +403,7 @@ void OuterSpace::RenderDeathScreen()
 	}
 	else if (menuOption == QUIT)
 	{
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], ">", textColour, textSize, posX - 1.0f, posY - 2.0f);
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], ">", textColour, textSize, posX - 1.0f, posY - 1.0f);
 	}
 
 	if (player->GetState() == DEAD)
@@ -411,7 +411,6 @@ void OuterSpace::RenderDeathScreen()
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "YOU DIED", textColour, 200,3.5,4);
 
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "RESTART", textColour, textSize, posX, posY);
-
 
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "QUIT", textColour, textSize, posX, posY - 1.0f);
 
