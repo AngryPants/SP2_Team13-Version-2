@@ -2,4 +2,7 @@ Name Malcolm
 State 0
 Gold 0
 Armour 5000.000000
+Copper 1 0
+Steel 2 0
+Tin 3 0
 End

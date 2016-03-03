@@ -158,7 +158,7 @@ void Load::LoadFile(string filePath, Player &player)
 		else if (strncmp("Tin ", buf, 4) == 0) {
 
 			sscanf_s((buf + 4), "%d", &kerniteID);
-			sscanf_s((buf + 4), "%d", &kernite);
+			sscanf_s((buf + 6), "%d", &kernite);
 			player.GetInventory()->AddItem(Item("Tin", 20, kerniteID), kernite);
 
 		}
@@ -177,27 +177,15 @@ A string that defines the filePath of the text file
 A string that defines the filePath of the resetting text file
 */
 /****************************************************************************/
-void Load::ResetFile(string filePath, string resetFile)
+void Load::ResetFile(string filePath, Player &player, string resetFile)
 {
-	std::fstream fileStream;
+	std::ifstream fileStream;
 	std::fstream resetFileStream;
 
-	fileStream.open(filePath, std::ofstream::out | std::ofstream::trunc);
+	LoadFile(resetFile, player);
+	player.GetInventory()->DecreaseItem(Item("Copper", 3, 1), (player.GetInventory()->GetNumberOf(Item("Copper", 3, 1))));
+	player.GetInventory()->DecreaseItem(Item("Steel", 8, 2), (player.GetInventory()->GetNumberOf(Item("Steel", 8, 2))));
+	player.GetInventory()->DecreaseItem(Item("Tin", 20, 3), (player.GetInventory()->GetNumberOf(Item("Tin", 20, 3))));
+	SaveFile(filePath, player);
 
-	if (!fileStream.is_open()) {
-
-		std::cout << "Impossible to open and reset " << filePath << ". Are you in the right directory?\n";
-		return;
-
-	}
-
-	fileStream.close();
-
-	fileStream.open(filePath, std::fstream::in | std::fstream::out);
-	resetFileStream.open(resetFile, std::fstream::in | std::fstream::out);
-
-	resetFileStream << fileStream.rdbuf();
-
-	resetFileStream.close();
-	fileStream.close();
 }
