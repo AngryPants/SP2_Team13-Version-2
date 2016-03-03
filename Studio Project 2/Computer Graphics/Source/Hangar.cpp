@@ -1,5 +1,15 @@
 #include "Hangar.h"
 #include<iostream>
+/*****************************************/
+/*!
+\file Hangar.cpp
+\author Chua Teck Lee
+\par email:c_tecklee@hotmail.com
+\brief
+Creates a Hanger Scene
+*/
+/*****************************************/
+
 /*******************************************************/
 /*!
 \brief
@@ -144,6 +154,7 @@ void Hangar::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	spinObj = 0;
 	srand(time(0));
 	random = rand() % 100;
+
 
 }
 /*******************************************************/

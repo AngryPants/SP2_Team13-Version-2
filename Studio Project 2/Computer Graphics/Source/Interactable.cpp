@@ -1,4 +1,14 @@
 #include"Interactable.h"
+/*****************************************/
+/*!
+\file Interactable.cpp
+\author Chua Teck Lee
+\par email:c_tecklee@hotmail.com
+\brief
+Create the Object class of interactables
+*/
+/*****************************************/
+
 /*******************************************************/
 /*!
 \brief

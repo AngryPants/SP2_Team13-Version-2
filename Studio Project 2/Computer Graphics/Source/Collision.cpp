@@ -1,5 +1,13 @@
 #include "Collision.h"
-
+/*****************************************/
+/*!
+\file Collision.cpp
+\author Chua Teck Lee
+\par email:c_tecklee@hotmail.com
+\brief
+Collision Methods and functions
+*/
+/*****************************************/
 /*******************************************************/
 /*!
 \brief

@@ -1,10 +1,10 @@
 #include "Application.h"
-
 #include "OuterSpace.h"
 #include "SpaceStation.h"
 #include "SharedData.h"
 #include "Hangar.h"
-
+#include <Windows.h>
+#include <MMSystem.h>
 const unsigned char FPS = 60; // FPS of this game
 const unsigned int frameTime = 1000 / FPS; // time for each frame
 
@@ -93,6 +93,7 @@ void Application::Init() {
 		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
 		//return -1;
 	}
+
 }
 
 void Application::Run() {
@@ -102,18 +103,18 @@ void Application::Run() {
 	//ShopSystem::GetInstance();
 	//QuestSystem::GetInstance();
 	//PlayerShip::GetInstance();
-
 	Scene* hangar = new Hangar();
 	Scene* outerSpace = new OuterSpace();
 	Scene* scene;
 
+	// PlaySound(TEXT("Bees.wav"), NULL, SND_ASYNC); FOR PLAYING SOUND DONT DELETE
 
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
 	while (!glfwWindowShouldClose(m_window) && !SharedData::GetInstance()->quitGame) {
 
 		if (SharedData::GetInstance()->sceneNumber == 1) {
 			scene = hangar;
-			scene->Init();
+			scene->Init(); 
 			SharedData::GetInstance()->sceneNumber = 0;
 		}
 

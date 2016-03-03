@@ -1,4 +1,13 @@
 #include "Interaction.h"
+/*****************************************/
+/*!
+\file Interaction.h
+\author Chua Teck Lee
+\par email:c_tecklee@hotmail.com
+\brief
+Creates the interactions between CPP
+*/
+/*****************************************/
 
 //Static Variable
 string Interaction::message = "";

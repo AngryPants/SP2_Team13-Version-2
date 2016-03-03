@@ -1,4 +1,14 @@
 #include "WarpGate.h"
+/*****************************************/
+/*!
+\file WarpGate.cpp
+\author Chua Teck Lee
+\par email:c_tecklee@hotmail.com
+\brief
+Create a WarpGate Obj
+*/
+/*****************************************/
+
 /*******************************************************/
 /*!
 \brief

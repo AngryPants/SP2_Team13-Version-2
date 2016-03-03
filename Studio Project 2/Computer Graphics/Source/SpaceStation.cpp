@@ -1,5 +1,14 @@
 #include "SpaceStation.h"
 #include "PlayerShip.h"
+/*****************************************/
+/*!
+\file SpaceStation.cpp
+\author Chua Teck Lee
+\par email:c_tecklee@hotmail.com
+\brief
+Creates a SpaceStation obj
+*/
+/*****************************************/
 
 /*******************************************************/
 /*!

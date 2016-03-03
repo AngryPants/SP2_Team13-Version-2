@@ -1,4 +1,14 @@
 #include "SharedData.h"
+/*****************************************/
+/*!
+\file SharedData.cpp
+\author Chua Teck Lee
+\par email:c_tecklee@hotmail.com
+\brief
+Data that is being shared 
+*/
+/*****************************************/
+
 /****************************************************************************/
 /*!
 \brief
