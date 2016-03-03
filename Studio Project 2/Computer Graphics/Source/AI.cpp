@@ -1,11 +1,38 @@
 #include "AI.h"
 
+/*******************************************************************************/
+/*!
+
+\brief
+An empty constructor
+
+*/
+/*******************************************************************************/
 AI::AI() {
 }
 
+/*******************************************************************************/
+/*!
+
+\brief
+An empty destructor
+
+*/
+/*******************************************************************************/
 AI::~AI() {
 }
 
+/*******************************************************************************/
+/*!
+
+\brief
+Rotates the enemy to face the player.
+
+\exception return
+	Distance between enemy and player is less than 0.1f.
+
+*/
+/*******************************************************************************/
 void AI::FaceTarget(GameObject* object, GameObject* target, float maxTurnAngle, double &dt) {
 	
 	float distance = Physics::getDistance(object->GetPosition(), target->GetPosition());
@@ -108,6 +135,15 @@ void AI::FaceTarget(GameObject* object, GameObject* target, float maxTurnAngle, 
 
 }
 
+/*******************************************************************************/
+/*!
+
+\brief
+Moves the enemy ship forward by adding a force on the enemy in the direction of the enemy's forward vector.
+
+*/
+/*******************************************************************************/
+
 void AI::MoveToTarget(Ship* ship, GameObject* target, float force, double &dt) {
 
 	if (Physics::getDistance(ship->GetPosition(), target->GetPosition()) <= ship->GetRadius() || Physics::getDistance(ship->GetPosition(), target->GetPosition()) <= 0.1f) {
@@ -127,6 +163,14 @@ void AI::MoveToTarget(Ship* ship, GameObject* target, float force, double &dt) {
 
 }
 
+/*******************************************************************************/
+/*!
+
+/brief
+If the enemy is roughly looking at the player and within 250 units, shoot at the player.
+
+*/
+/*******************************************************************************/
 void AI::ShootAtTarget(Ship* ship, GameObject* target) {
 
 	Vector3 targetVector = target->GetPosition() - ship->GetPosition();
