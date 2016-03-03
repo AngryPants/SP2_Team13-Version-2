@@ -3,9 +3,10 @@
 /****************************************************************************/
 /*!
 \file PlayerControl.h
-\author
-\par email:
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
 \brief
+Header file for PlayerControl
 
 */
 /****************************************************************************/
@@ -17,6 +18,8 @@
 /*!
 		Struct PlayerControl:
 \brief
+Defines the static functions for PlayerControl.
+
 */
 /******************************************************************************/
 struct PlayerControl {
@@ -28,11 +31,6 @@ struct PlayerControl {
 	static void RotateShip(Ship* ship, float maxTurningAngle, double &dt);
 	static void MoveShip(PlayerShip* ship, float force, double &dt);
 	static void Shoot(Ship* ship, Vector3 bulletPosition);
-	//static void RotatePlayer();
-	//static void MovePlayer();
-	//static void RotateCameraX(Camera* camera);
-	//static void RotateCameraY(Camera* camera);
-	//static void RotateCameraZ(Camera* camera);
 
 };
 

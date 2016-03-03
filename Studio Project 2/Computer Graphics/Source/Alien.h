@@ -3,9 +3,10 @@
 /****************************************************************************/
 /*!
 \file Alien.h
-\author
-\par email:
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
 \brief
+Header file for Alien.
 
 */
 /****************************************************************************/
@@ -14,6 +15,7 @@
 /*!
 		Class Alien
 \brief
+A Ship, just with the constructor parameters filled up.
 
 */
 /*****************************************/

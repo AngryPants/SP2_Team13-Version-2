@@ -3,9 +3,10 @@
 /****************************************************************************/
 /*!
 \file RigidBody.h
-\author
-\par email:
+\author Lim Ngiain Xin Terry
+\par email: lnxterry@gmail.com
 \brief
+Header file for Rigidbody.
 
 */
 /****************************************************************************/
@@ -18,6 +19,8 @@ using std::list;
 /*!
 		Class RigidBody:
 \brief
+Class to define a rigidbody, a GameObject that has physical values.
+
 */
 /******************************************************************************/
 class RigidBody : public GameObject {

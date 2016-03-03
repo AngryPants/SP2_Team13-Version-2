@@ -3,9 +3,10 @@
 /****************************************************************************/
 /*!
 \file Ship.h
-\author
-\par email:
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
 \brief
+Header file for Ship
 
 */
 /****************************************************************************/
@@ -19,6 +20,8 @@ using std::list;
 /*!
 		Class Ship:
 \brief
+Defines Ship, a child class of SpaceObject.
+
 */
 /******************************************************************************/
 enum BULLET_COLOUR {

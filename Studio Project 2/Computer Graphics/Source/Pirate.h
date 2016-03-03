@@ -3,9 +3,10 @@
 /****************************************************************************/
 /*!
 \file Pirate.h
-\author
-\par email:
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
 \brief
+Header file for Pirate
 
 */
 /****************************************************************************/
@@ -14,6 +15,8 @@
 /*!
 		Class Pirate:
 \brief
+A Ship, just with the constructor parameters filled up.
+
 */
 /******************************************************************************/
 class Pirate : public Ship {

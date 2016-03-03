@@ -1,11 +1,30 @@
 #include "Load.h"
-
+/****************************************************************************/
+/*!
+\brief
+Constructor of the Class Load
+*/
+/****************************************************************************/
 Load::Load() {
 }
-
+/****************************************************************************/
+/*!
+\brief
+Destructor of the Class Load
+*/
+/****************************************************************************/
 Load::~Load() {
 }
-
+/****************************************************************************/
+/*!
+\brief
+Saves the player's progress onto a text file
+\param filePath
+A string value that defines the filePath of the file to be loaded
+\param player
+A reference of the Class Player
+*/
+/****************************************************************************/
 void Load::SaveFile(string filePath, Player &player)
 {
 	std::fstream fileStream;
@@ -43,7 +62,7 @@ void Load::SaveFile(string filePath, Player &player)
 
 	for (map<Item, int>::iterator iter = player.GetInventory()->GetItems()->begin(); iter != player.GetInventory()->GetItems()->end(); ++iter) {
 
-		fileStream << iter->first.GetName() + " " + std::to_string(iter->second) << endl;
+		fileStream << iter->first.GetName() + " " + std::to_string(iter->first.GetID()) + " " + std::to_string(iter->second) << endl;
 
 	}
 
@@ -52,21 +71,31 @@ void Load::SaveFile(string filePath, Player &player)
 	fileStream.close();
 
 }
-
-void Load::LoadFile(string filePath, Player &player, Inventory &inventory, PlayerShip &playerShip)
+/****************************************************************************/
+/*!
+\brief
+Read from a text file and stores the data into a Player Class
+\param filePath
+A string that defines the filePath of the text file
+\param player
+A reference to the Class Player
+*/
+/****************************************************************************/
+void Load::LoadFile(string filePath, Player &player)
 {
 
 	std::fstream fileStream;
 	fileStream.open(filePath, std::fstream::in | std::fstream::out);
 
-	//PLAYER_STATE state;
 	int state = 0 ;
 	int gold = 0;
-	//int *test = &gold;
 	int armour;
 	int veldspar;
+	int veldsparID;
 	int omber;
+	int omberID;
 	int kernite;
+	int kerniteID;
 	
 	while (!fileStream.eof()) {
 
@@ -114,20 +143,23 @@ void Load::LoadFile(string filePath, Player &player, Inventory &inventory, Playe
 		}
 		else if (strncmp("Copper ", buf, 7) == 0) {
 
-			sscanf_s((buf + 7), "%d", &veldspar);
-			player.GetInventory()->AddItem(Item("Copper", 3, 1), veldspar);
+			sscanf_s((buf + 7), "%d", &veldsparID);
+			sscanf_s((buf + 9), "%d", &veldspar);
+			player.GetInventory()->AddItem(Item("Copper", 3, veldsparID), veldspar);
 
 		}
 		else if (strncmp("Steel ", buf, 6) == 0) {
 
-			sscanf_s((buf + 6), "%d", &omber);
-			player.GetInventory()->AddItem(Item("Steel", 8, 2), omber);
+			sscanf_s((buf + 6), "%d", &omberID);
+			sscanf_s((buf + 8), "%d", &omber);
+			player.GetInventory()->AddItem(Item("Steel", 8, omberID), omber);
 
 		}
 		else if (strncmp("Tin ", buf, 4) == 0) {
 
+			sscanf_s((buf + 4), "%d", &kerniteID);
 			sscanf_s((buf + 4), "%d", &kernite);
-			player.GetInventory()->AddItem(Item("Tin", 20, 3), kernite);
+			player.GetInventory()->AddItem(Item("Tin", 20, kerniteID), kernite);
 
 		}
 		else if (strncmp("End", buf, 3) == 0) {}

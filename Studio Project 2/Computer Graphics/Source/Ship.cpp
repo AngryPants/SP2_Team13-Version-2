@@ -1,6 +1,49 @@
 #include "Ship.h"
 
-//Constructor
+/****************************************************************************************/
+/*!
+
+\brief
+The constructor of Ship.
+
+\param name
+The name of the Ship.
+
+\param int
+The ID of the Ship.
+
+\param radius
+The radius of the Ship.
+
+\param health
+The health of the Ship.
+
+\param meshFile
+The file path of the OBJ.
+
+\param textureFile
+The file path of the texture.
+
+\param material
+The material of the mesh.
+
+\param mass
+The mass of the Ship.
+
+\param maxSpeed
+The maximum speed of the Ship.
+
+\param fireRate
+The fire rate of the Ship.
+
+\param damage
+The damage of the Ship.
+
+\param bulletColour
+The colour of the Ship's bullet.
+
+*/
+/****************************************************************************************/
 Ship::Ship(string name, int ID, float radius, float health, string meshFile, const char* textureFile, Material material, float mass, float maxSpeed, int fireRate, int damage, BULLET_COLOUR bulletColour)
 : SpaceObject(name, meshFile, textureFile, material, mass, radius, health, ID)
 {
@@ -14,17 +57,40 @@ Ship::Ship(string name, int ID, float radius, float health, string meshFile, con
 }
 
 //Destructor
+
+/****************************************************************************/
+/*!
+\brief
+Destructor of the Class Ship
+*/
+/****************************************************************************/
 Ship::~Ship() {
 }
 
 //Functions
+
+/****************************************************************************/
+/*!
+\brief
+Update function of the Class Kernite
+\param &dt
+A double reference value also known as Delta Time
+*/
+/****************************************************************************/
 void Ship::Update(double &dt) {
 
 	UpdateTimeToFire(dt);
 	UpdateBullets(dt);
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Update the variables of bullets with respect to Delta Time
+\param &dt
+A double reference value also known as Delta Time
+*/
+/****************************************************************************/
 void Ship::UpdateBullets(double &dt) {
 
 	for (list<Bullet>::iterator iter = bullets.begin(); iter != bullets.end();) {
@@ -43,7 +109,14 @@ void Ship::UpdateBullets(double &dt) {
 	}
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Assigns the textureFile and limit the firing speed
+\param bulletPosition
+A vector of the position of the bullet
+*/
+/****************************************************************************/
 void Ship::Shoot(Vector3 bulletPosition) {
 
 	const char* textureFile;
@@ -89,13 +162,25 @@ void Ship::Shoot(Vector3 bulletPosition) {
 	}
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Overloaded function to call the other Shoot function
+*/
+/****************************************************************************/
 void Ship::Shoot() {
 
 	Shoot(GetPosition() + (GetForwardVector() * (GetRadius()/2.0f + 2.0f)));
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Checks if the next bullet can be fired
+\param dt
+A double reference value also known as Delta Time
+*/
+/****************************************************************************/
 void Ship::UpdateTimeToFire(double &dt) {
 
 	if (timeToFire > 0.0f) {
@@ -115,24 +200,54 @@ void Ship::UpdateTimeToFire(double &dt) {
 }
 
 //Getters
+
+/****************************************************************************/
+/*!
+\brief
+Getter of the value maxSpeed
+\return
+Returns the maxSpeed of the Class Ship
+*/
+/****************************************************************************/
 float Ship::GetMaxSpeed() {
 
 	return this->maxSpeed;
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Getter of the value fireRate
+\return
+Returns the fireRate of the Class Ship
+*/
+/****************************************************************************/
 float Ship::GetFireRate() {
 
 	return this->fireRate;
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Getter of the value damage
+\return
+Returns the damage of the Class Ship
+*/
+/****************************************************************************/
 int Ship::GetDamage() {
 
 	return this->damage;
 
 }
-
+/****************************************************************************/
+/*!
+\brief
+Getter of the list pointer bullets
+\return
+Returns the reference of the list pointer of the Class Ship
+*/
+/****************************************************************************/
 list<Bullet>* Ship::GetBullets() {
 
 	return &this->bullets;

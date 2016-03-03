@@ -3,9 +3,10 @@
 /****************************************************************************/
 /*!
 \file Drone.h
-\author
-\par email:
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
 \brief
+Header file for Drone
 
 */
 /****************************************************************************/
@@ -14,6 +15,8 @@
 /*!
 		Class Drone
 \brief
+Defines
+A Ship, just with the constructor parameters filled up.
 
 */
 /*****************************************/
