@@ -4,8 +4,12 @@
 /*!
 \brief
 effect of collision between bullet and objects
-\param
-bullet,SpaceObject and dt
+\param bullet
+to find the different relevant vectors and radius
+\param SpaceObject 
+to find the different relevant vectors and radius
+\param dt
+to update the object and check against update
 \return
 none
 */
@@ -30,8 +34,12 @@ void Collision::BulletToSpaceObject(Bullet* bullet, SpaceObject* object, double&
 /*!
 \brief
 effects of collision between spaceobject and playership
-\param
-a spaceobjec,the playership and dt
+\param spaceobject
+the object the ship collides to
+\param playership 
+the playership to apply collision
+\param dt
+to update the object and check against update
 \return
 none
 */
@@ -84,8 +92,12 @@ void Collision::SpaceObjectToSpaceObject(SpaceObject* object, SpaceObject* playe
 /*!
 \brief
 effects of collision between 2 moving spaceobjects
-\param
-2 space objects and dt
+\param spaceobject1
+moving spaceobj1 collision
+\param spaceobject2
+moving spaceobj2 collision
+\param dt
+to update the object and check against update
 \return
 none
 */
@@ -122,21 +134,12 @@ void Collision::MovingSpaceObjectToMovingSpaceObject(SpaceObject* object1, Space
 /*******************************************************/
 /*!
 \brief
-effects of collision between gameobject and a static object
-\param
-a gameobject and a staticObject
-\return
-none
-*/
-/*******************************************************/
-void Collision::GameObjectToStaticObject(GameObject* object, StaticObject* object2) {
-}
-/*******************************************************/
-/*!
-\brief
 Collision Detection between 2 spaceobjects with their own radius
-\param
-2 spaceObjects
+\param spaceObject1
+sphere radius of spaceobject1
+\param spaceobject2
+sphere radius of spaceobject2 
+
 \return
 none
 */
@@ -235,8 +238,14 @@ bool Collision::SphereSphereCollision(SpaceObject* object1, SpaceObject* object2
 /*!
 \brief
 Collision detection between a bullet and a spaceobject with radius
-\param
-2 vector3, a lineLength ,a spaceObject 
+\param vector3 lineOrigin
+check for the line vector3 updates
+\param vector3 lineForward
+check for the forward vector
+\param float lineLength 
+check for the length
+\param spaceObject 
+check against a spaceobject
 \return
 none
 */

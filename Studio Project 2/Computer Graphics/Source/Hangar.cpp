@@ -8,7 +8,6 @@ Constructor of Hangar
 None
 \return
 nothing
-
 */
 /*******************************************************/
 Hangar::Hangar() {
@@ -151,7 +150,7 @@ void Hangar::Init() { //Initialise Vertex Buffer Object (VBO) here.
 /*!
 \brief
 Update the Hangar every frame
-\param
+\param dt
 dt to update every frame
 \return
 nothing
@@ -207,7 +206,7 @@ void Hangar::Update(double dt) {
 /*!
 \brief
 The leaving animation of the ship
-\param
+\param dt
 dt to update per frame
 \return
 nothing

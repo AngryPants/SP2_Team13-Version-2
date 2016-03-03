@@ -46,8 +46,12 @@ string Interaction::GetRenderMessage()
 /*!
 \brief
 interaction between playership and different interactables
-\param
-player and objects and dt
+\param player 
+to make the player to interact
+\param objects 
+the object the player is gonna interact with
+\param dt
+to update per frame
 \return
 none
 */
