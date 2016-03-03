@@ -3,9 +3,10 @@
 /****************************************************************************/
 /*!
 \file Item.h
-\author
-\par email:
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
 \brief
+Header file for Item
 
 */
 /****************************************************************************/
@@ -16,6 +17,7 @@ using std::string;
 /*!
 		Class Inventory
 \brief
+Defines an item.
 
 */
 /*****************************************/

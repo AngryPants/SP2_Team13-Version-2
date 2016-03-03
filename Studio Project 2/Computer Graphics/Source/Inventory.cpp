@@ -1,23 +1,59 @@
 #include "Inventory.h"
 
-//Constructor
+/**********************************************************************************************************************/
+/*!
+
+\brief
+Default constructor for the Inventory.
+
+*/
+/**********************************************************************************************************************/
 Inventory::Inventory() {
 
 	SetGold(0);
 
 }
 
-//Destructor
+/**********************************************************************************************************************/
+/*!
+
+\brief
+An empty destructor
+
+*/
+/**********************************************************************************************************************/
 Inventory::~Inventory() {
 }
 
 //Functions
+/**********************************************************************************************************************/
+/*!
+
+\brief
+Adds gold to the Inventory.
+
+\param gold
+The amount of gold to add to the Inventory.
+
+*/
+/**********************************************************************************************************************/
 void Inventory::AddGold(int gold) {
 
 	this->gold += gold;
 
 }
 
+/**********************************************************************************************************************/
+/*!
+
+\brief
+Decreases gold to the Inventory.
+
+\param gold
+The amount of gold to decrease from the Inventory.
+
+*/
+/**********************************************************************************************************************/
 bool Inventory::DecreaseGold(int gold) {
 
 	if (gold > this->gold) {
@@ -31,6 +67,20 @@ bool Inventory::DecreaseGold(int gold) {
 
 }
 
+/**********************************************************************************************************************/
+/*!
+
+\brief
+Adds Items to the Inventory.
+
+\param item
+The Item to add to the Inventory.
+
+\param numItems
+The number of Items to add.
+
+*/
+/**********************************************************************************************************************/
 void Inventory::AddItem(Item item, int numItems) {
 
 	if (numItems <= 0) {
@@ -53,6 +103,20 @@ void Inventory::AddItem(Item item, int numItems) {
 
 }
 
+/**********************************************************************************************************************/
+/*!
+
+\brief
+Removes Items from the Inventory.
+
+\param item
+The Item to remove from the Inventory.
+
+\param numItems
+The number of Items to remove.
+
+*/
+/**********************************************************************************************************************/
 bool Inventory::DecreaseItem(Item item, int numItem) {
 
 	map<Item, int>::iterator mapIter = items.find(item);
@@ -76,12 +140,34 @@ bool Inventory::DecreaseItem(Item item, int numItem) {
 }
 
 //Getters
+/**********************************************************************************************************************/
+/*!
+
+\brief
+Gets the amount of gold in the Inventory.
+
+\return
+Returns the amount of gold in the Inventory.
+
+*/
+/**********************************************************************************************************************/
 int Inventory::GetGold() {
 
 	return this->gold;
 
 }
 
+/**********************************************************************************************************************/
+/*!
+
+\brief
+Gets the number of an Item in the Inventory.
+
+\param item
+The Item to check for.
+
+*/
+/**********************************************************************************************************************/
 int Inventory::GetNumberOf(Item item) {
 
 	map<Item, int>::iterator mapIter = items.find(item);
@@ -96,6 +182,17 @@ int Inventory::GetNumberOf(Item item) {
 
 }
 
+/**********************************************************************************************************************/
+/*!
+
+\brief
+Gets the map of items in the Inventory.
+
+\return
+Return the map of items in the Inventory.
+
+*/
+/**********************************************************************************************************************/
 map<Item, int>* Inventory::GetItems() {
 
 	return &(this->items);
@@ -103,6 +200,17 @@ map<Item, int>* Inventory::GetItems() {
 }
 
 //Setters
+/**********************************************************************************************************************/
+/*!
+
+\brief
+Sets the amount of gold in the Inventory.
+
+\param gold
+The new amount of gold in the Inventory.
+
+*/
+/**********************************************************************************************************************/
 void Inventory::SetGold(int gold) {
 	 
 	if (gold >= 0) {

@@ -157,6 +157,17 @@ MiningLaser* PlayerShip::GetMiningLaser() {
 }
 
 //Setters
+/****************************************************************************************************************************/
+/*!
+
+\brief
+Sets the speed of the PlayerShip.
+
+\param newSpeed
+The new speed of the PlayerShip.
+
+*/
+/****************************************************************************************************************************/
 void PlayerShip::SetSpeed(float newSpeed) {
 
 	if (newSpeed > GetMaxSpeed()) {
@@ -175,6 +186,17 @@ void PlayerShip::SetSpeed(float newSpeed) {
 
 }
 
+/****************************************************************************************************************************/
+/*!
+
+\brief
+Sets the whether the PlayerShip is mining or not.
+
+\param isMining
+The new value of PlayerShip's isMining.
+
+*/
+/****************************************************************************************************************************/
 void PlayerShip::SetMining(bool isMining) {
 
 	this->isMining = isMining;

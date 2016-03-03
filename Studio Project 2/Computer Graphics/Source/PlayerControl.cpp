@@ -2,12 +2,45 @@
 
 extern GLFWwindow* m_window;
 
+/******************************************************************************/
+/*!
+
+\brief
+An empty constructor.
+
+*/
+/******************************************************************************/
 PlayerControl::PlayerControl() {
 }
 
+/******************************************************************************/
+/*!
+
+\brief
+An empty destructor.
+
+*/
+/******************************************************************************/
 PlayerControl::~PlayerControl() {
 }
 
+/******************************************************************************/
+/*!
+
+\brief
+Rotates the player's ship.
+
+\param ship
+The player's ship.
+
+\param maxTurningAngle
+The maximum angle the ship can rotate this frame.
+
+\param dt
+The time taken for this frame to complete.
+
+*/
+/******************************************************************************/
 void PlayerControl::RotateShip(Ship* ship, float maxTurningAngle, double &dt) {
 
 	float centreMouseSpeed = 0.95f;//The bigger the faster. 1 is that max and 0 is the min
@@ -70,6 +103,23 @@ void PlayerControl::RotateShip(Ship* ship, float maxTurningAngle, double &dt) {
 
 }
 
+/******************************************************************************/
+/*!
+
+\brief
+Moves the player's ship by applying a force in the ship's forward direction.
+
+\param ship
+The player's ship.
+
+\param force
+The magnitude of the force to apply on the ship.
+
+\dt
+The time taken for this frame to complete.
+
+*/
+/******************************************************************************/
 void PlayerControl::MoveShip(PlayerShip* ship, float force, double &dt) {
 
 	if (Application::IsKeyPressed('W')) {
@@ -104,6 +154,20 @@ void PlayerControl::MoveShip(PlayerShip* ship, float force, double &dt) {
 
 }
 
+/******************************************************************************/
+/*!
+
+\brief
+Makes the player's ship shoot upon pressing the left mouse button.
+
+\param ship
+The player's ship.
+
+\param bulletPosition
+The spawn position of the bullet.
+
+*/
+/******************************************************************************/
 void PlayerControl::Shoot(Ship* ship, Vector3 bulletPosition) {
 
 	if (Application::IsKeyPressed(VK_LBUTTON)) {
