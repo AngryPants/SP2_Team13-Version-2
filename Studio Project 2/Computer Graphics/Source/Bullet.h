@@ -3,9 +3,10 @@
 /****************************************************************************/
 /*!
 \file Bullet.h
-\author
-\par email:
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
 \brief
+Header file for Bullet
 
 */
 /****************************************************************************/
@@ -14,6 +15,7 @@
 /*!
 		Class Bullet
 \brief
+Defines Bullet, a child class of GameObject.
 
 */
 /*****************************************/
@@ -21,7 +23,6 @@
 class Bullet : public GameObject {
 
 private:
-	bool removeBullet;
 	float speed;
 	int damage;
 	double timeToDespawn;

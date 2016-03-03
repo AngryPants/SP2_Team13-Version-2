@@ -3,9 +3,10 @@
 /****************************************************************************/
 /*!
 \file StaticObject.h
-\author
-\par email:
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
 \brief
+Header file for StaticObject
 
 */
 /****************************************************************************/
@@ -14,6 +15,8 @@
 /*!
 		Class StaticObject:
 \brief
+Defines StaticObject, a child class of GameObject.
+
 */
 /******************************************************************************/
 class StaticObject : public GameObject {

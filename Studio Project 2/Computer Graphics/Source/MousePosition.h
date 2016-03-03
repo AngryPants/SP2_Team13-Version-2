@@ -3,9 +3,10 @@
 /****************************************************************************/
 /*!
 \file MousePosition.h
-\author
-\par email:
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
 \brief
+Header for MousePosition
 
 */
 /****************************************************************************/
@@ -13,6 +14,8 @@
 /*!
 Class MousePosition:
 \brief
+Defines MousePosition.
+
 */
 /******************************************************************************/
 struct MousePosition {
@@ -21,7 +24,14 @@ public:
 	double x;
 	double y;
 
-	//Constructors & Destructor
+	/***************************/
+	/*!
+	
+	\brief
+	Default constructor for MousePosition.
+
+	*/
+	/***************************/
 	MousePosition() {
 		
 		this->x = 0;
@@ -29,6 +39,20 @@ public:
 
 	}
 
+	/***************************/
+	/*!
+	
+	\brief
+	Constructor for MousePosition.
+
+	\param x
+	x value of MousePosition.
+
+	\param y
+	y value of MousePosition.
+
+	*/
+	/***************************/
 	MousePosition(double x, double y) {
 	
 		this->x = x;
@@ -36,6 +60,14 @@ public:
 
 	}
 
+	/***************************/
+	/*!
+	
+	\brief
+	An empty destructor
+
+	*/
+	/***************************/
 	~MousePosition() {
 	}
 
