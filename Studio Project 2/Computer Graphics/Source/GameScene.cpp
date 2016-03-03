@@ -374,6 +374,15 @@ void GameScene::RenderSpawnZones() {
 
 	for (vector<SpawnZone>::iterator zone_iter = spawnZones.begin(); zone_iter != spawnZones.end(); ++zone_iter) {
 
+		modelStack.PushMatrix();
+
+			modelStack.Translate(zone_iter->GetPosition().x, zone_iter->GetPosition().y, zone_iter->GetPosition().z);
+			modelStack.MultMatrix(zone_iter->GetRotationMatrix());
+			modelStack.Scale(zone_iter->GetDespawnRadius(), zone_iter->GetDespawnRadius(), zone_iter->GetDespawnRadius());
+			RenderMesh(zone_iter->GetMesh(), false);
+
+		modelStack.PopMatrix();
+
 		if (zone_iter->GetZoneState() != INACTIVE) {
 
 			//Render Enemies

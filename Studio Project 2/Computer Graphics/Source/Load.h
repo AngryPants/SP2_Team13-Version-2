@@ -18,6 +18,16 @@ using std::string;
 using std::cout;
 using std::endl;
 
+/****************************************************************************/
+/*!
+\file Load.h
+\author
+\brief
+Struct that Loads information and details from text files
+*/
+/****************************************************************************/
+
+
 struct Load {
 
 public:

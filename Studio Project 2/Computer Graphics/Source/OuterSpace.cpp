@@ -103,35 +103,35 @@ void OuterSpace::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	iSpaceObjects.push_back(new CarrickStation());
 
-	iSpaceObjects.push_back(new WarpGate("Gate Omber 2", Vector3(1250, 1250, 1250), Vector3(190, 190, 190)));
-	iSpaceObjects.push_back(new WarpGate("Gate Kernite 2", Vector3(-1250, 1250, 1250), Vector3(-190, 190, 190)));
-	iSpaceObjects.push_back(new WarpGate("Gate Drone 2", Vector3(1250, -1250, 1250), Vector3(190, -190, 190)));
-	iSpaceObjects.push_back(new WarpGate("Gate Dmitri 2", Vector3(1250, 1250, -1250), Vector3(190, 190, -190)));
-	iSpaceObjects.push_back(new WarpGate("Gate Elena 2", Vector3(-1250, -1250, 1250), Vector3(-190, -190, 190)));
-	iSpaceObjects.push_back(new WarpGate("Gate Veldspar 2", Vector3(-1250, 1250, -1250), Vector3(-190, 190, -190)));
-	iSpaceObjects.push_back(new WarpGate("Gate Alien 2", Vector3(1250, -1250, -1250), Vector3(190, -190, -190)));
-	iSpaceObjects.push_back(new WarpGate("Gate Pirate 2", Vector3(-1250, -1250, -1250), Vector3(-190, -190, -190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Omber 2", Vector3(1450, 1450, 1450), Vector3(190, 190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Kernite 2", Vector3(-1450, 1450, 1450), Vector3(-190, 190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Drone 2", Vector3(1450, -1450, 1450), Vector3(190, -190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Dmitri 2", Vector3(1450, 1450, -1450), Vector3(190, 190, -190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Elena 2", Vector3(-1450, -1450, 1450), Vector3(-190, -190, 190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Veldspar 2", Vector3(-1450, 1450, -1450), Vector3(-190, 190, -190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Alien 2", Vector3(1450, -1450, -1450), Vector3(190, -190, -190)));
+	iSpaceObjects.push_back(new WarpGate("Gate Pirate 2", Vector3(-1450, -1450, -1450), Vector3(-190, -190, -190)));
 
-	iSpaceObjects.push_back(new WarpGate("Gate Omber 1", Vector3(150, 150, 150), Vector3(1400, 1400, 1400)));
-	iSpaceObjects.push_back(new WarpGate("Gate Kernite 1", Vector3(-150, 150, 150), Vector3(-1400, 1400, 1400)));
-	iSpaceObjects.push_back(new WarpGate("Gate Drone 1", Vector3(150, -150, 150), Vector3(1425, -1425, 1425)));
-	iSpaceObjects.push_back(new WarpGate("Gate Dmitri 1", Vector3(150, 150, -150), Vector3(1400, 1400, -1400)));
-	iSpaceObjects.push_back(new WarpGate("Gate Elena 1", Vector3(-150, -150, 150), Vector3(-1425, -1425, 1425)));
-	iSpaceObjects.push_back(new WarpGate("Gate Veldspar 1", Vector3(-150, 150, -150), Vector3(-1400, 1400, -1400)));
-	iSpaceObjects.push_back(new WarpGate("Gate Alien 1", Vector3(150, -150, -150), Vector3(1425, -1425, -1425)));
-	iSpaceObjects.push_back(new WarpGate("Gate Pirate 1", Vector3(-150, -150, -150), Vector3(-1425, -1425, -1425)));
+	iSpaceObjects.push_back(new WarpGate("Gate Omber 1", Vector3(150, 150, 150), Vector3(1650, 1650, 1650)));
+	iSpaceObjects.push_back(new WarpGate("Gate Kernite 1", Vector3(-150, 150, 150), Vector3(-1650, 1650, 1650)));
+	iSpaceObjects.push_back(new WarpGate("Gate Drone 1", Vector3(150, -150, 150), Vector3(1500, -1500, 1500)));
+	iSpaceObjects.push_back(new WarpGate("Gate Dmitri 1", Vector3(150, 150, -150), Vector3(1650, 1650, -1650)));
+	iSpaceObjects.push_back(new WarpGate("Gate Elena 1", Vector3(-150, -150, 150), Vector3(-1500, -1500, 1500)));
+	iSpaceObjects.push_back(new WarpGate("Gate Veldspar 1", Vector3(-150, 150, -150), Vector3(-1650, 1650, -1650)));
+	iSpaceObjects.push_back(new WarpGate("Gate Alien 1", Vector3(150, -150, -150), Vector3(1500, -1500, -1500)));
+	iSpaceObjects.push_back(new WarpGate("Gate Pirate 1", Vector3(-150, -150, -150), Vector3(-1500, -1500, -1500)));
 
-	spawnZones.push_back(SpawnZone("Veldspar Zone", Vector3(-1250, 1250, -1250), 600.0f, 900.0f, 1200.0f));
+	spawnZones.push_back(SpawnZone("Veldspar Zone", Vector3(-1250, 1250, -1250), 600.0f, 900.0f, 1100.0f, BLUE_BEACON));
 	Spawn::SpawnObjects(new Veldspar(), Veldspar().GetRadius(), 25, spawnZones[0], (*spawnZones[0].GetAsteroidList()), 7990);
-	spawnZones.push_back(SpawnZone("Omber Zone", Vector3(1250, 1250, 1250), 600.0f, 900.0f, 1200.0f));
+	spawnZones.push_back(SpawnZone("Omber Zone", Vector3(1250, 1250, 1250), 600.0f, 900.0f, 1100.0f, RED_BEACON));
 	Spawn::SpawnObjects(new Omber(), Omber().GetRadius(), 25, spawnZones[1], (*spawnZones[1].GetAsteroidList()), 12);
-	spawnZones.push_back(SpawnZone("Kernite Zone", Vector3(-1250, 1250, 1250), 600.0f, 900.0f, 1200.0f));
+	spawnZones.push_back(SpawnZone("Kernite Zone", Vector3(-1250, 1250, 1250), 600.0f, 900.0f, 1100.0f, BROWN_BEACON));
 	Spawn::SpawnObjects(new Kernite(), Kernite().GetRadius(), 25, spawnZones[2], (*spawnZones[2].GetAsteroidList()), 489);
-	spawnZones.push_back(SpawnZone("Drone Zone", Vector3(1250, -1250, 1250), 50.0f, 500.0f, 800.0f));
+	spawnZones.push_back(SpawnZone("Drone Zone", Vector3(1250, -1250, 1250), 50.0f, 500.0f, 900.0f, TURQUOISE_BEACON));
 	Spawn::SpawnObjects(new Drone(), Drone().GetRadius(), 8, spawnZones[3], (*spawnZones[3].GetEnemyList()), 42);
-	spawnZones.push_back(SpawnZone("Pirate Zone", Vector3(-1250, -1250, -1250), 50.0f, 500.0f, 800.0f));
+	spawnZones.push_back(SpawnZone("Pirate Zone", Vector3(-1250, -1250, -1250), 50.0f, 500.0f, 900.0f, YELLOW_BEACON));
 	Spawn::SpawnObjects(new Pirate(), Pirate().GetRadius(), 6, spawnZones[4], (*spawnZones[4].GetEnemyList()), 234);
-	spawnZones.push_back(SpawnZone("Alien Zone", Vector3(1250, -1250, -1250), 50.0f, 500.0f, 800.0f));
+	spawnZones.push_back(SpawnZone("Alien Zone", Vector3(1250, -1250, -1250), 50.0f, 500.0f, 900.0f, GREEN_BEACON));
 	Spawn::SpawnObjects(new Alien(), Alien().GetRadius(), 4, spawnZones[5], (*spawnZones[5].GetEnemyList()), 153);
 
 	player = new Player("Malcolm", "", "", "");

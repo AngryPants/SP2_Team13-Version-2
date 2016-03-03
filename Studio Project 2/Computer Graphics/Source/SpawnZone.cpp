@@ -2,24 +2,30 @@
 #include "Spawn.h"
 
 //Constructors
-SpawnZone::SpawnZone() {
+SpawnZone::SpawnZone()
+: GameObject("<Spawn Zone Name>", "OBJ//ZoneBeacon//Beacon.obj", "Image//PlaceHolder//PlaceHolder.tga", MaterialList::GetInstance()->material[MaterialList::PLASTIC])
+{
 
-	SetName("<Zone Name>");
 	SetPosition(0.0f, 0.0f, 0.0f);
-	SetSpawnRadius(0.0f);
-	SetActiveRadius(0.0f);
-	SetDespawnRadius(0.0f);
+	SetSpawnRadius(0.1f);
+	SetActiveRadius(0.1f);
+	SetDespawnRadius(0.1f);
+	mesh = MeshBuilder::GenerateOBJ("Beacon", "OBJ//ZoneBeacon//Beacon.obj");
+	SetBeaconColour(RED_BEACON);
 	zoneState = ACTIVE;
 
 }
 
-SpawnZone::SpawnZone(string name, Vector3 position, float spawnRadius, float activeRadius, float despawnRadius) {
+SpawnZone::SpawnZone(string name, Vector3 position, float spawnRadius, float activeRadius, float despawnRadius, BEACON_COLOUR colour) 
+: GameObject(name, "OBJ//ZoneBeacon//Beacon.obj", "Image//PlaceHolder//PlaceHolder.tga", MaterialList::GetInstance()->material[MaterialList::PLASTIC])
+{
 
-	SetName(name);
 	SetPosition(position);
 	SetSpawnRadius(spawnRadius);
 	SetActiveRadius(activeRadius);
 	SetDespawnRadius(despawnRadius);
+	mesh = MeshBuilder::GenerateOBJ("Beacon", "OBJ//ZoneBeacon//Beacon.obj");
+	SetBeaconColour(colour);
 	zoneState = ACTIVE;
 
 }
@@ -29,12 +35,6 @@ SpawnZone::~SpawnZone() {
 }
 
 //Getters
-Vector3 SpawnZone::GetPosition() {
-
-	return this->position;
-
-}
-
 float SpawnZone::GetSpawnRadius() {
 
 	return this->spawnRadius;
@@ -78,18 +78,6 @@ ZONE_STATE SpawnZone::GetZoneState() {
 }
 
 //Setters
-void SpawnZone::SetPosition(Vector3 position) {
-
-	this->position = position;
-
-}
-
-void SpawnZone::SetPosition(float x, float y, float z) {
-
-	SetPosition(Vector3(x, y, z));
-
-}
-
 void SpawnZone::SetSpawnRadius(float radius) {
 
 	if (radius >= 0.0f) {
@@ -132,12 +120,6 @@ void SpawnZone::SetDespawnRadius(float radius) {
 
 }
 
-void SpawnZone::SetName(string name) {
-
-	this->name = name;
-
-}
-
 void SpawnZone::SetActive() {
 
 	for (list<Asteroid>::iterator iter = asteroids.begin(); iter != asteroids.end(); ++iter) {
@@ -172,5 +154,34 @@ void SpawnZone::SetInactive() {
 	}
 
 	zoneState = INACTIVE;
+
+}
+
+void SpawnZone::SetBeaconColour(BEACON_COLOUR colour) {
+	
+	switch (colour) {
+	
+		case YELLOW_BEACON:
+			mesh->textureID = LoadTGA("Image//ZoneBeacon//YellowBeacon.tga"); break;
+	
+		case BLUE_BEACON:
+			mesh->textureID = LoadTGA("Image//ZoneBeacon//BlueBeacon.tga"); break;
+	
+		case BROWN_BEACON:
+			mesh->textureID = LoadTGA("Image//ZoneBeacon//BrownBeacon.tga"); break;
+
+		case TURQUOISE_BEACON:
+			mesh->textureID = LoadTGA("Image//ZoneBeacon//TurquoiseBeacon.tga"); break;
+
+		case RED_BEACON:
+			mesh->textureID = LoadTGA("Image//ZoneBeacon//RedBeacon.tga"); break;
+
+		case GREEN_BEACON:
+			mesh->textureID = LoadTGA("Image//ZoneBeacon//GreenBeacon.tga"); break;
+	
+		default:
+			mesh->textureID = LoadTGA("Image//ZoneBeacon//BlueBeacon.tga"); break;
+				
+	}
 
 }

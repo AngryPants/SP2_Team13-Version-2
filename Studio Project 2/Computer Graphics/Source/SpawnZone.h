@@ -17,12 +17,23 @@ enum ZONE_STATE {
 
 };
 
-class SpawnZone {
+enum BEACON_COLOUR {
+
+	BLUE_BEACON = 0,
+	RED_BEACON,
+	TURQUOISE_BEACON,
+	BROWN_BEACON,
+	GREEN_BEACON,
+	YELLOW_BEACON,
+
+	NUM_BEACON_COLOUR,
+
+};
+
+class SpawnZone : public GameObject {
 
 private:
 	//Variables
-	string name;
-	Vector3 position;
 	float spawnRadius;
 	float activeRadius;
 	float despawnRadius;
@@ -33,11 +44,10 @@ private:
 public:
 	//Constructors & Destructor
 	SpawnZone();
-	SpawnZone(string name, Vector3 position, float spawnRadius, float activeRadius, float depawnRadius);
+	SpawnZone(string name, Vector3 position, float spawnRadius, float activeRadius, float despawnRadius, BEACON_COLOUR colour);
 	~SpawnZone();
 
 	//Getters
-	Vector3 GetPosition();
 	float GetSpawnRadius();
 	float GetActiveRadius();
 	float GetDespawnRadius();
@@ -47,12 +57,11 @@ public:
 	ZONE_STATE GetZoneState();
 
 	//Setters
-	void SetPosition(float x, float y, float z);
-	void SetPosition(Vector3 position);
 	void SetSpawnRadius(float radius);
 	void SetActiveRadius(float radius);
 	void SetDespawnRadius(float radius);
-	void SetName(string name);
+	void SetBeaconColour(BEACON_COLOUR colour);
+	void SetBeaconMesh(Mesh *OBJ);
 	void SetActive();
 	void SetInactive();
 

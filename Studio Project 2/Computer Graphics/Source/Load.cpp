@@ -112,21 +112,21 @@ void Load::LoadFile(string filePath, Player &player, Inventory &inventory, Playe
 			player.GetShip()->SetMaxHealth(armour);
 			
 		}
-		else if (strncmp("Veldspar ", buf, 9) == 0) {
+		else if (strncmp("Copper ", buf, 7) == 0) {
 
-			sscanf_s((buf + 9), "%d", &veldspar);
+			sscanf_s((buf + 7), "%d", &veldspar);
 			player.GetInventory()->AddItem(Item("Copper", 3, 1), veldspar);
 
 		}
-		else if (strncmp("Omber ", buf, 6) == 0) {
+		else if (strncmp("Steel ", buf, 6) == 0) {
 
 			sscanf_s((buf + 6), "%d", &omber);
 			player.GetInventory()->AddItem(Item("Steel", 8, 2), omber);
 
 		}
-		else if (strncmp("Kernite ", buf, 8) == 0) {
+		else if (strncmp("Tin ", buf, 4) == 0) {
 
-			sscanf_s((buf + 8), "%d", &kernite);
+			sscanf_s((buf + 4), "%d", &kernite);
 			player.GetInventory()->AddItem(Item("Tin", 20, 3), kernite);
 
 		}
