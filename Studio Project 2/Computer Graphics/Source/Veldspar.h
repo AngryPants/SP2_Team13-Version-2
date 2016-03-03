@@ -1,8 +1,8 @@
 /****************************************************************************/
 /*!
 \file Veldspar.h
-\author 
-\par email:
+\author Tan Teck Ling
+\par email: teckling1998@gmail.com
 \brief
 Header file for Veldspar
 

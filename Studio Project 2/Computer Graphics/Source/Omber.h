@@ -3,11 +3,10 @@
 /****************************************************************************/
 /*!
 \file Omber.h
-\author
-\par email:
+\author Tan Teck Ling
+\par email: teckling1998@gmail.com
 \brief
-An asteroid, just with the constructor parameters filled up.
-
+Class that defines the values of Omber Asteroids
 */
 /****************************************************************************/
 #include "Asteroid.h"
@@ -15,8 +14,7 @@ An asteroid, just with the constructor parameters filled up.
 /*!
 		Class Omber:
 \brief
-Defines Omber, child class of asteroid.
-
+Defines the values of the Omber Asteroids
 */
 /******************************************************************************/
 class Omber : public Asteroid {
