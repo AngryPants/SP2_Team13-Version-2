@@ -1,5 +1,6 @@
 Name Malcolm
-State 1
+State 0
 Gold 0
 Armour 5000.000000
+Tin 3 3
 End

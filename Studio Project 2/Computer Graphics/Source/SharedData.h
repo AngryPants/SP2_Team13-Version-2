@@ -3,16 +3,18 @@
 /****************************************************************************/
 /*!
 \file SharedData.h
-\author
-\par email:
+\author Terry
+\par email: lnxTerry@gmail.com
 \brief
-
+Singleton for every files using it
 */
 /****************************************************************************/
 /******************************************************************************/
 /*!
 		Class SharedData:
 \brief
+
+Class to define an SharedData
 */
 /******************************************************************************/
 class SharedData {
