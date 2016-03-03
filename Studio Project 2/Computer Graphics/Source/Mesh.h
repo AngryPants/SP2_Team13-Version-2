@@ -1,6 +1,14 @@
 #ifndef MESH_H
 #define MESH_H
+/****************************************************************************/
+/*!
+\file Mesh.h
+\author
+\par email:
+\brief
 
+*/
+/****************************************************************************/
 #include <string>
 #include "Vertex.h"
 #include "Material.h"

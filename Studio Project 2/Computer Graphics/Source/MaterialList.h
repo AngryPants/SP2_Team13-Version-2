@@ -1,8 +1,22 @@
 #ifndef _MATERIALLIST_H
 #define _MATERIALLIST_H
+/****************************************************************************/
+/*!
+\file MaterialList.h
+\author
+\par email:
+\brief
 
+*/
+/****************************************************************************/
 #include "Material.h"
+/*****************************************/
+/*!
+		Class MaterialList
+\brief
 
+*/
+/*****************************************/
 class MaterialList {
 
 public:

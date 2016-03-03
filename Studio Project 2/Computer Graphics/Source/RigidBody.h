@@ -1,12 +1,25 @@
 #ifndef _RIGIDBODY_H
 #define _RIGIDBODY_H
+/****************************************************************************/
+/*!
+\file RigidBody.h
+\author
+\par email:
+\brief
 
+*/
+/****************************************************************************/
 #include "GameObject.h"
 #include "Physics.h"
 #include <list>
 
 using std::list;
-
+/******************************************************************************/
+/*!
+		Class RigidBody:
+\brief
+*/
+/******************************************************************************/
 class RigidBody : public GameObject {
 
 protected:
