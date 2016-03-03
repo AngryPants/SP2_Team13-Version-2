@@ -1,13 +1,26 @@
 #ifndef _SPAWNZONE_H
 #define _SPAWNZONE_H
+/****************************************************************************/
+/*!
+\file SpawnZone.h
+\author
+\par email:
+\brief
 
+*/
+/****************************************************************************/
 #include "Vector3.h"
 #include <string>
 #include "Asteroid.h"
 #include "Ship.h"
 
 using std::string;
-
+/******************************************************************************/
+/*!
+		Class SpawnZone:
+\brief
+*/
+/******************************************************************************/
 enum ZONE_STATE {
 
 	ACTIVE,

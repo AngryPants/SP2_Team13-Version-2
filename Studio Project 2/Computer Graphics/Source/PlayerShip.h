@@ -1,11 +1,24 @@
 #ifndef _PLAYERSHIP_H
 #define _PLAYERSHIP_H
+/****************************************************************************/
+/*!
+\file PlayerShip.h
+\author
+\par email:
+\brief
 
+*/
+/****************************************************************************/
 #include "Ship.h"
 #include "Upgrade.h"
 #include "Application.h"
 #include "MiningLaser.h"
-
+/******************************************************************************/
+/*!
+		Class PlayerShip:
+\brief
+*/
+/******************************************************************************/
 class PlayerShip : public Ship {
 
 private:
