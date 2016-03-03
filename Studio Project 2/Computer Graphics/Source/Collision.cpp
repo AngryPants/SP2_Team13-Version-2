@@ -1,6 +1,15 @@
 #include "Collision.h"
 
-
+/*******************************************************/
+/*!
+\brief
+effect of collision between bullet and objects
+\param
+bullet,SpaceObject and dt
+\return
+none
+*/
+/*******************************************************/
 void Collision::BulletToSpaceObject(Bullet* bullet, SpaceObject* object, double& dt) {
 	
 	if (bullet->GetSpeed() <= 0.1f || object->GetRadius() <= 0.1f) {
@@ -17,7 +26,16 @@ void Collision::BulletToSpaceObject(Bullet* bullet, SpaceObject* object, double&
 	}
 
 }
-
+/*******************************************************/
+/*!
+\brief
+effects of collision between spaceobject and playership
+\param
+a spaceobjec,the playership and dt
+\return
+none
+*/
+/*******************************************************/
 void Collision::SpaceObjectToSpaceObject(SpaceObject* object, SpaceObject* playerShip, double &dt)
 {
 
@@ -62,7 +80,16 @@ void Collision::SpaceObjectToSpaceObject(SpaceObject* object, SpaceObject* playe
 	}
 
 }
-
+/*******************************************************/
+/*!
+\brief
+effects of collision between 2 moving spaceobjects
+\param
+2 space objects and dt
+\return
+none
+*/
+/*******************************************************/
 void Collision::MovingSpaceObjectToMovingSpaceObject(SpaceObject* object1, SpaceObject* object2, double &dt)
 {
 
@@ -92,10 +119,28 @@ void Collision::MovingSpaceObjectToMovingSpaceObject(SpaceObject* object1, Space
 	}
 
 }
-
+/*******************************************************/
+/*!
+\brief
+effects of collision between gameobject and a static object
+\param
+a gameobject and a staticObject
+\return
+none
+*/
+/*******************************************************/
 void Collision::GameObjectToStaticObject(GameObject* object, StaticObject* object2) {
 }
-
+/*******************************************************/
+/*!
+\brief
+Collision Detection between 2 spaceobjects with their own radius
+\param
+2 spaceObjects
+\return
+none
+*/
+/*******************************************************/
 bool Collision::SphereSphereCollision(SpaceObject* object1, SpaceObject* object2) {
 	// Early Escape test: if the length of the movevec is less
 	// than distance between the centers of these circles minus
@@ -114,7 +159,6 @@ bool Collision::SphereSphereCollision(SpaceObject* object1, SpaceObject* object2
 	Vector3 movevec;
 	movevec = object1->GetVelocity();
 
-	//float movevec = Physics::getDistance(object1->GetPosition(), object1->GetPosition() + object1->GetForwardVector());
 	if (movevec.Length() < dist) {
 
 		return false;
@@ -187,7 +231,16 @@ bool Collision::SphereSphereCollision(SpaceObject* object1, SpaceObject* object2
 	return true;
 
 }
-
+/*******************************************************/
+/*!
+\brief
+Collision detection between a bullet and a spaceobject with radius
+\param
+2 vector3, a lineLength ,a spaceObject 
+\return
+none
+*/
+/*******************************************************/
 bool Collision::LineSphereCollision(Vector3 lineOrigin, Vector3 lineForward, float lineLength, SpaceObject* object) {
 
 	//Discriminant

@@ -1,12 +1,40 @@
 #include "Hangar.h"
 #include<iostream>
+/*******************************************************/
+/*!
+\brief
+Constructor of Hangar
+\param
+None
+\return
+nothing
 
+*/
+/*******************************************************/
 Hangar::Hangar() {
 }
-
+/*******************************************************/
+/*!
+\brief
+Destructor of hangar
+\param
+none
+\return
+nothing
+*/
+/*******************************************************/
 Hangar::~Hangar() {
 }
-
+/*******************************************************/
+/*!
+\brief
+Initialize the things in the hangar
+\param
+none
+\return
+nothing
+*/
+/*******************************************************/
 void Hangar::Init() { //Initialise Vertex Buffer Object (VBO) here.
 
 	//Set the background colour to dark blue.
@@ -119,7 +147,16 @@ void Hangar::Init() { //Initialise Vertex Buffer Object (VBO) here.
 	random = rand() % 100;
 
 }
-
+/*******************************************************/
+/*!
+\brief
+Update the Hangar every frame
+\param
+dt to update every frame
+\return
+nothing
+*/
+/*******************************************************/
 void Hangar::Update(double dt) {
 
 	CheckKeyPress();
@@ -166,7 +203,17 @@ void Hangar::Update(double dt) {
 	camera.FollowObject(player->GetShip(), Vector3(0.0f, 2.0f, 2.0f));
 
 }
+/*******************************************************/
+/*!
+\brief
+The leaving animation of the ship
+\param
+dt to update per frame
+\return
+nothing
 
+*/
+/*******************************************************/
 void Hangar::LeavingAnimation(double &dt)
 {
 	if (Leave == true)
@@ -191,7 +238,16 @@ void Hangar::LeavingAnimation(double &dt)
 	}
 	
 }
-
+/*******************************************************/
+/*!
+\brief
+Update Start Menu during runtime
+\param
+none
+\return
+nothing
+*/
+/*******************************************************/
 void Hangar::UpdateStartMenu()
 {
 	if (!isPressed[UP] && Application::IsKeyPressed(VK_UP)) {
@@ -241,7 +297,16 @@ void Hangar::UpdateStartMenu()
 
 	}
 }
-
+/*******************************************************/
+/*!
+\brief
+Render Objects into the game
+\param
+none
+\return
+nothing
+*/
+/*******************************************************/
 void Hangar::Render() { //Render VBO here.
 
 	//Clear colour & depth buffer every frame
@@ -269,7 +334,16 @@ void Hangar::Render() { //Render VBO here.
 		RenderUI();
 	}
 }
-
+/*******************************************************/
+/*!
+\brief
+Render the start menu 
+\param
+none
+\return
+nothing
+*/
+/*******************************************************/
 void Hangar::RenderStartMenu()
 {
 	Colour textColour = Colour(1.0f, 0.0f, 0.0f);
@@ -303,7 +377,16 @@ void Hangar::RenderStartMenu()
 
 	}
 }
-
+/*******************************************************/
+/*!
+\brief
+Render NPC in game
+\param
+none 
+\return
+nothing
+*/
+/*******************************************************/
 void Hangar::RenderNPC()
 {
 
@@ -337,7 +420,16 @@ void Hangar::RenderNPC()
 	modelStack.PopMatrix();
 
 }
-
+/*******************************************************/
+/*!
+\brief
+Render UI in the game 
+\param
+none
+\return
+nothing
+*/
+/*******************************************************/
 void Hangar::RenderUI()
 {
 	if (codex)
@@ -388,7 +480,16 @@ void Hangar::RenderUI()
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "PRESS ESC FOR MAIN MENU", Colour(1, 0, 0), 70, 2, 1);
 	}
 }
-
+/*******************************************************/
+/*!
+\brief
+RenderObjects on Screen in Game
+\param
+none
+\return
+nothing
+*/
+/*******************************************************/
 void Hangar::RenderObjects()
 {
 	modelStack.PushMatrix();
@@ -435,7 +536,16 @@ void Hangar::RenderObjects()
 	}
 
 }
-
+/*******************************************************/
+/*!
+\brief
+Exiting the game
+\param
+none
+\return
+nothing
+*/
+/*******************************************************/
 void Hangar::Exit() {
 
 	glDeleteProgram(m_programID);
