@@ -3,9 +3,10 @@
 /****************************************************************************/
 /*!
 \file Mining.h
-\author
-\par email:
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
 \brief
+Header file for Mining
 
 */
 /****************************************************************************/
@@ -16,6 +17,8 @@
 /*!
 		Class Mining:
 \brief	
+Defines Mining, a struct that stores the static functions used to mine Asteroids.
+
 */
 /******************************************************************************/
 struct Mining {

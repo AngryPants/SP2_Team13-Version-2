@@ -3,8 +3,8 @@
 /****************************************************************************/
 /*!
 \file MiningLaser.h
-\author
-\par email:
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
 \brief
 
 */
@@ -14,6 +14,8 @@
 /*!
 		Class MiningLaser:
 \brief
+Header file for MiningLaser.
+
 */
 /******************************************************************************/
 class MiningLaser : public GameObject {
