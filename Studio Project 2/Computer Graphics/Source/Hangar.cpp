@@ -345,7 +345,7 @@ void Hangar::RenderUI()
 		RenderObjectOnScreen(mesh[SCREEN], 1940, 1150, 2200, 950, 550, 5000, 180, 0, 1, 0);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "PRESS S TO CLOSE CODEX", Colour(1, 0, 0), 70, 2, 1);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Ship Health : "+ std::to_string(((int)player->GetShip()->GetMaxHealth())), Colour(1, 0, 0), 100, 1.5, 9);
-		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Gold : " + std::to_string(((int)player->GetInventory()->GetGold())), Colour(1, 1, 0.1), 100, 1.5, 8);
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Score : " + std::to_string(((int)player->GetInventory()->GetGold())), Colour(1, 1, 0.1), 100, 1.5, 8);
 		
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Name : Drone ", Colour(1, 1, 0.4), 80, 18, 12);
 		RenderTextOnScreen(mesh[FONT_CONSOLAS], "Health : Low", Colour(1, 1, 0.4), 80, 18, 11.5);

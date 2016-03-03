@@ -1,7 +1,6 @@
 #include "Collision.h"
 
 
-
 void Collision::BulletToSpaceObject(Bullet* bullet, SpaceObject* object, double& dt) {
 	
 	if (bullet->GetSpeed() <= 0.1f || object->GetRadius() <= 0.1f) {
