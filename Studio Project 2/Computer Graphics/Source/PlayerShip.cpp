@@ -1,6 +1,13 @@
 #include "PlayerShip.h"
 
-//Constructor
+/****************************************************************************************************************************/
+/*!
+
+\brief
+The constructor for PlayerShip.
+
+*/
+/****************************************************************************************************************************/
 PlayerShip::PlayerShip()
 : Ship("Condor", 0, 8.0f, 5000.0f, "OBJ//Condor//Condor.obj", "Image//Condor//Condor.tga", MaterialList::GetInstance()->material[MaterialList::METAL], 6000.0f, 75.0f, 8, 400, YELLOW)
 {
@@ -10,10 +17,29 @@ PlayerShip::PlayerShip()
 
 }
 
-//Destructor
+/****************************************************************************************************************************/
+/*!
+
+\brief
+An empty destructor.
+
+*/
+/****************************************************************************************************************************/
 PlayerShip::~PlayerShip() {
 }
 
+//Functions
+/****************************************************************************************************************************/
+/*!
+
+\brief
+Increases the speed of the PlayerShip.
+
+\param
+The amount to increase the speed by.
+
+*/
+/****************************************************************************************************************************/
 void PlayerShip::IncreaseSpeed(float increaseAmount) {
 
 	if (increaseAmount > 0.0f) {
@@ -30,6 +56,17 @@ void PlayerShip::IncreaseSpeed(float increaseAmount) {
 
 }
 
+/****************************************************************************************************************************/
+/*!
+
+\brief
+Decreases the speed of the PlayerShip.
+
+\param
+The amount to decrease the speed by.
+
+*/
+/****************************************************************************************************************************/
 void PlayerShip::DecreaseSpeed(float decreaseAmount) {
 
 	if (decreaseAmount > 0.0f) {
@@ -46,6 +83,17 @@ void PlayerShip::DecreaseSpeed(float decreaseAmount) {
 
 }
 
+/****************************************************************************************************************************/
+/*!
+
+ \brief
+ Updates the PlayerShip.
+
+ \param dt
+ The time taken for this frame to complete.
+
+*/
+/****************************************************************************************************************************/
 void PlayerShip::Update(double &dt) {
 
 	UpdateTimeToFire(dt);
@@ -56,6 +104,17 @@ void PlayerShip::Update(double &dt) {
 }
 
 //Is-ters
+/****************************************************************************************************************************/
+/*!
+
+\brief
+Gets whether the PlayerShip is currently mining or not.
+
+\return
+Returns a true if the PlayerShip is mining and a false if it is not.
+
+*/
+/****************************************************************************************************************************/
 bool PlayerShip::IsMining() {
 
 	return this->isMining;
@@ -63,12 +122,34 @@ bool PlayerShip::IsMining() {
 }
 
 //Getters
+/****************************************************************************************************************************/
+/*!
+
+\brief
+Gets the current speed of the player.
+
+\return
+Returns the current speed of the player.
+
+*/
+/****************************************************************************************************************************/
 float PlayerShip::GetSpeed() {
 
 	return this->speed;
 
 }
 
+/****************************************************************************************************************************/
+/*!
+
+\brief
+Gets the mining laser of the PlayerShip.
+
+\return
+Returns the PlayerShip's mining laser.
+
+*/
+/****************************************************************************************************************************/
 MiningLaser* PlayerShip::GetMiningLaser() {
 
 	return &(this->miningLaser);	

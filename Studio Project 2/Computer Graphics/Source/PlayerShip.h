@@ -2,10 +2,12 @@
 #define _PLAYERSHIP_H
 /****************************************************************************/
 /*!
+
 \file PlayerShip.h
-\author
-\par email:
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
 \brief
+Header file for PlayerShip
 
 */
 /****************************************************************************/
@@ -16,6 +18,8 @@
 /*!
 		Class PlayerShip:
 \brief
+Defines PlayerShip, a child class of ship.
+
 */
 /******************************************************************************/
 class PlayerShip : public Ship {
