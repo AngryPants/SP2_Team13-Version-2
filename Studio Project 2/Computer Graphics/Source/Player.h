@@ -3,17 +3,16 @@
 /****************************************************************************/
 /*!
 \file Player.h
-\author
-\par email:
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
 \brief
-
+Header file for Player
 */
 /****************************************************************************/
 #include <string>
 #include "Quest.h"
 #include <list>
 #include "PlayerShip.h"
-#include "PlayerHuman.h"
 
 using std::list;
 using std::string;
@@ -21,6 +20,7 @@ using std::string;
 /*!
 		Struct Player:
 \brief
+Defines Player, a class used to store the player's information.
 */
 /******************************************************************************/
 enum PLAYER_STATE {
@@ -40,7 +40,6 @@ private:
 	Inventory inventory;
 	list<Quest> quests;
 	PlayerShip ship;
-	PlayerHuman human;
 	PLAYER_STATE playerState;
 	bool godMode;
 
@@ -54,7 +53,6 @@ public:
 	Inventory* GetInventory();
 	list<Quest>* GetQuests();
 	PlayerShip* GetShip();
-	PlayerHuman* GetHuman();
 	PLAYER_STATE GetState();
 	bool GodModeOn();
 

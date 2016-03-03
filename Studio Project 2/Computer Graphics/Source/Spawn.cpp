@@ -1,3 +1,12 @@
+/****************************************************************************/
+/*!
+\file Spawn.cpp
+\author Tan Teck Ling
+\par email: teckling1998@gmail.com
+\brief
+CPP file for Spawn
+*/
+/****************************************************************************/
 #include "Spawn.h"
 
 int Spawn::counter = 0; //A counter that changes the seed value everytime it runs to make the values more random

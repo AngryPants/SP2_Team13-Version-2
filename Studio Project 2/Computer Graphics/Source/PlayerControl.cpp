@@ -1,3 +1,14 @@
+/****************************************************************************/
+/*!
+\file PlayerControl.cpp
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
+\brief
+CPP file for PlayerControl
+
+*/
+/****************************************************************************/
+
 #include "PlayerControl.h"
 
 extern GLFWwindow* m_window;

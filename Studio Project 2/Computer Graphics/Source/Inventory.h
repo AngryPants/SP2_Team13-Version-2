@@ -2,10 +2,12 @@
 #define _INVENTORY_H
 /****************************************************************************/
 /*!
+
 \file Inventory.h
-\author
-\par email:
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
 \brief
+Header file for Inventory
 
 */
 /****************************************************************************/
@@ -19,7 +21,7 @@ using std::map;
 /*!
 		Class Inventory
 \brief
-
+Defines Inventory, used to store the player's gold and Items.
 */
 /*****************************************/
 class Inventory {

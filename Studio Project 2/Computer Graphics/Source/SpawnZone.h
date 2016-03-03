@@ -6,7 +6,7 @@
 \author Tan Teck Ling
 \par email: teckling1998@gmail.com
 \brief
-Class that defines the radii, Beacon, and type of Object that is to be rendered in
+Header file for SpawnZone.
 */
 /****************************************************************************/
 #include "Vector3.h"

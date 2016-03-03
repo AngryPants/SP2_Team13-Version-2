@@ -6,7 +6,7 @@
 \author Tan Teck Ling
 \par email: teckling1998@gmail.com
 \brief
-Class that defines the values of Omber Asteroids
+Header file of Omber
 */
 /****************************************************************************/
 #include "Asteroid.h"
