@@ -150,6 +150,13 @@ void OuterSpace::Update(double dt) {
 	else if (Application::IsKeyPressed('2')) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
+
+	if (Application::IsKeyPressed('3')) {
+		player->SetGodMode(true);
+	} else if (Application::IsKeyPressed('4')) {
+		player->SetGodMode(false);
+	}
+
 	CheckKeyPress();
 	BoundsCheck();
 	DeathCheck();
@@ -308,7 +315,7 @@ void OuterSpace::UpdateDeathScreen()
 
 void OuterSpace::DeathCheck()
 {
-	if (player->GetShip()->GetHealth() <= 0)
+	if (!player->GodModeOn() && player->GetShip()->GetHealth() <= 0)
 	{
 		player->SetState(DEAD);
 	}
@@ -428,7 +435,7 @@ void OuterSpace::RenderDeathScreen()
 void OuterSpace::RenderFlightHUD()
 {
 	//Debug Info
-	RenderTextOnScreen(mesh[FONT_CONSOLAS], "X: " + std::to_string((int)(player->GetShip()->GetPosition().x)) + " Y: " + std::to_string((int)(player->GetShip()->GetPosition().y)) + " Z: " + std::to_string((int)(player->GetShip()->GetPosition().z)), Colour(0, 1, 0), 70, 11, 14.8);
+	RenderTextOnScreen(mesh[FONT_CONSOLAS], "X: " + std::to_string((int)(player->GetShip()->GetPosition().x)) + " Y: " + std::to_string((int)(player->GetShip()->GetPosition().y)) + " Z: " + std::to_string((int)(player->GetShip()->GetPosition().z)), Colour(0, 1, 0), 70, 9.5, 14.8);
 
 	if (Interaction::GetRenderMessage().size() != 0)
 	{
@@ -446,6 +453,12 @@ void OuterSpace::RenderFlightHUD()
 	RenderObjectOnScreen(mesh[MAXHEALTH], 600.0f, 30, 40, 955, 1000,0, 180, 1, 0, 0);
 	RenderObjectOnScreen(mesh[CURRHEALTH], player->GetShip()->GetHealth() / player->GetShip()->GetMaxHealth() * 600.0f, 30, 40, 955, 1000,0, 180, 1, 0, 0);
 	
+	RenderTextOnScreen(mesh[FONT_CONSOLAS], "Score : " + std::to_string(player->GetInventory()->GetGold()), Colour(1, 1, 0.1), 70, 0.2, 14.8);
+
+	if (player->GodModeOn()) {
+		RenderTextOnScreen(mesh[FONT_CONSOLAS], "God Mode On", Colour(1, 1, 0), 50, 35, 21);
+	}
+
 	if (Application::IsKeyPressed(VK_TAB)) // UI 2
 	{
 		RenderObjectOnScreen(mesh[TAB], 1000, 1100, 100, 500, 550,0, 180, 0, 1, 0);

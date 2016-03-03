@@ -5,6 +5,8 @@ Player::Player(string name, string questFile, string inventoryFile, string shipF
 : human(name) {
 
 	this->name = name;
+	SetGodMode(false);
+
 }
 
 //Destructor
@@ -48,9 +50,21 @@ PLAYER_STATE Player::GetState() {
 
 }
 
+bool Player::GodModeOn() {
+
+	return this->godMode;
+
+}
+
 //Setters
 void Player::SetState(PLAYER_STATE playerState) {
 
 	this->playerState = playerState;
+
+}
+
+void Player::SetGodMode(bool mode) {
+
+	this->godMode = mode;
 
 }

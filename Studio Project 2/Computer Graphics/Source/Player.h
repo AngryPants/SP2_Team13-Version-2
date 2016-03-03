@@ -30,6 +30,7 @@ private:
 	PlayerShip ship;
 	PlayerHuman human;
 	PLAYER_STATE playerState;
+	bool godMode;
 
 public:
 	//Constructor & Destructor
@@ -43,9 +44,11 @@ public:
 	PlayerShip* GetShip();
 	PlayerHuman* GetHuman();
 	PLAYER_STATE GetState();
+	bool GodModeOn();
 
 	//Setters
 	void SetState(PLAYER_STATE playerState);
+	void SetGodMode(bool mode);
 
 };
 
