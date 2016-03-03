@@ -1,5 +1,4 @@
 #include "Application.h"
-
 #include "OuterSpace.h"
 #include "SpaceStation.h"
 #include "SharedData.h"

@@ -6,7 +6,7 @@
 \author Tan Teck Ling
 \par email: teckling1998@gmail.com
 \brief
-Class that defines the maximum radii of the asteroids
+Header file for Asteroid.
 */
 /****************************************************************************/
 #include "SpaceObject.h"

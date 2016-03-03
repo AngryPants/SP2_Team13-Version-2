@@ -1,3 +1,14 @@
+/****************************************************************************/
+/*!
+\file Camera.cpp
+\author Tang Wen Sheng
+\par email: tang_wen_sheng@nyp.edu.sg
+\brief
+CPP file for Camera. Original by Tang Wen Sheng and edited by Lim Ngian Xin Terry.
+
+*/
+/****************************************************************************/
+
 #include "Camera.h"
 #include "Application.h"
 
