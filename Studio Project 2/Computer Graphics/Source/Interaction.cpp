@@ -2,20 +2,56 @@
 
 //Static Variable
 string Interaction::message = "";
-
+/*******************************************************/
+/*!
+\brief
+Constructor of interaction
+\param
+none
+\return
+nothing
+*/
+/*******************************************************/
 //Constructor
 Interaction::Interaction() {
 }
-
+/*******************************************************/
+/*!
+\brief
+Destructor of interaction
+\param
+none
+\return
+nothing
+*/
+/*******************************************************/
 //Destructor
 Interaction::~Interaction() {
 }
-
+/*******************************************************/
+/*!
+\brief
+Get Render Message
+\param
+none
+\return
+returns a string "message"
+*/
+/*******************************************************/
 string Interaction::GetRenderMessage()
 {
 	return message;
 }
-
+/*******************************************************/
+/*!
+\brief
+interaction between playership and different interactables
+\param
+player and objects and dt
+\return
+none
+*/
+/*******************************************************/
 bool Interaction::ShipToObject(Player &player, Interactable* object, double &dt) {
 
 	if (Physics::getDistance(player.GetShip()->GetPosition(), object->GetPosition()) < object->GetApproachRadius()) 
