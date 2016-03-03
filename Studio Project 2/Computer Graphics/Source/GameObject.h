@@ -1,14 +1,17 @@
-#ifndef _GAMEOBJECT_H
-#define _GAMEOBJECT_H
 /****************************************************************************/
 /*!
 \file GameObject.h
-\author
-\par email:
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
 \brief
+Header file for GameObject
 
 */
 /****************************************************************************/
+
+#ifndef _GAMEOBJECT_H
+#define _GAMEOBJECT_H
+
 #include <string>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -19,13 +22,14 @@
 #include "MatrixStack.h"
 
 using std::string;
-/*****************************************/
+/****************************************************************************************/
 /*!
 		Class GameObject
 \brief
+Class to define a GameObject, the base class for all objects in the game.
 
 */
-/*****************************************/
+/****************************************************************************************/
 class GameObject {
 
 protected:

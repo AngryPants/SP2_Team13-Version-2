@@ -6,6 +6,7 @@
 \author
 \par email:
 \brief
+An asteroid, just with the constructor parameters filled up.
 
 */
 /****************************************************************************/
@@ -14,6 +15,8 @@
 /*!
 		Class Omber:
 \brief
+Defines Omber, child class of asteroid.
+
 */
 /******************************************************************************/
 class Omber : public Asteroid {

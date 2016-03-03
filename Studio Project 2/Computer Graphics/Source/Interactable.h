@@ -16,7 +16,7 @@ Class to define an Interactable object
 /*!
 Class Interactable
 \brief
-Define a Interactable and its methods,child class of GameObject
+Define a Interactable and its methods, child class of GameObject.
 */
 /*****************************************/
 class Interactable : public GameObject {

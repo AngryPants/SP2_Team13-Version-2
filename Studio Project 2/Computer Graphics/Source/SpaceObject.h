@@ -3,9 +3,10 @@
 /****************************************************************************/
 /*!
 \file SpaceObject.h
-\author
-\par email:
+\author Lim Ngian Xin Terry
+\par email: lnxterry@gmail.com
 \brief
+Header file for SpaceObject
 
 */
 /****************************************************************************/
@@ -15,6 +16,8 @@
 /*!
 		Class SpaceObject:
 \brief
+Defines a SpaceObject, a child class of RigidBody.
+
 */
 /******************************************************************************/
 class SpaceObject : public RigidBody {

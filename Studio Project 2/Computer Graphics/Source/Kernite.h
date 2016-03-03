@@ -6,6 +6,7 @@
 \author
 \par email:
 \brief
+An asteroid, just with the constructor parameters filled up.
 
 */
 /****************************************************************************/
@@ -14,6 +15,7 @@
 /*!
 		Class Kernite
 \brief
+Defines Kernite, child class of asteroid.
 
 */
 /*****************************************/

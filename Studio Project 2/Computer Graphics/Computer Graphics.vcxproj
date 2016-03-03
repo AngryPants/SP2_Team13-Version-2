@@ -129,7 +129,6 @@
     <ClCompile Include="Source\Spawn.cpp" />
     <ClCompile Include="Source\SpawnZone.cpp" />
     <ClCompile Include="Source\StaticObject.cpp" />
-    <ClCompile Include="Source\Upgrade.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
     <ClCompile Include="Source\Veldspar.cpp" />
     <ClCompile Include="Source\WarpGate.cpp" />
@@ -183,7 +182,6 @@
     <ClInclude Include="Source\SpaceObject.h" />
     <ClInclude Include="Source\Spawn.h" />
     <ClInclude Include="Source\StaticObject.h" />
-    <ClInclude Include="Source\Upgrade.h" />
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Veldspar.h" />
     <ClInclude Include="Source\Vertex.h" />

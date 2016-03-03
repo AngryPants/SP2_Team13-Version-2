@@ -1,6 +1,49 @@
 #include "Ship.h"
 
-//Constructor
+/****************************************************************************************/
+/*!
+
+\brief
+The constructor of Ship.
+
+\param name
+The name of the Ship.
+
+\param int
+The ID of the Ship.
+
+\param radius
+The radius of the Ship.
+
+\param health
+The health of the Ship.
+
+\param meshFile
+The file path of the OBJ.
+
+\param textureFile
+The file path of the texture.
+
+\param material
+The material of the mesh.
+
+\param mass
+The mass of the Ship.
+
+\param maxSpeed
+The maximum speed of the Ship.
+
+\param fireRate
+The fire rate of the Ship.
+
+\param damage
+The damage of the Ship.
+
+\param bulletColour
+The colour of the Ship's bullet.
+
+*/
+/****************************************************************************************/
 Ship::Ship(string name, int ID, float radius, float health, string meshFile, const char* textureFile, Material material, float mass, float maxSpeed, int fireRate, int damage, BULLET_COLOUR bulletColour)
 : SpaceObject(name, meshFile, textureFile, material, mass, radius, health, ID)
 {

@@ -69,9 +69,6 @@
     <ClCompile Include="Source\MaterialList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Upgrade.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\PlayerShip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -231,9 +228,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\MaterialList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Upgrade.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\PlayerShip.h">

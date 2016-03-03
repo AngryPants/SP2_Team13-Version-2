@@ -10,7 +10,6 @@
 */
 /****************************************************************************/
 #include "Ship.h"
-#include "Upgrade.h"
 #include "Application.h"
 #include "MiningLaser.h"
 /******************************************************************************/
@@ -24,7 +23,6 @@ class PlayerShip : public Ship {
 private:
 	//Variables
 	float speed;
-	Upgrade* upgrades[Upgrade::NUM_UPGRADE];
 	MiningLaser miningLaser;
 	bool isMining;
 

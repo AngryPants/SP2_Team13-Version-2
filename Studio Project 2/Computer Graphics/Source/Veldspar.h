@@ -3,9 +3,10 @@
 /****************************************************************************/
 /*!
 \file Veldspar.h
-\author
+\author 
 \par email:
 \brief
+An asteroid, just with the constructor parameters filled up.
 
 */
 /****************************************************************************/
