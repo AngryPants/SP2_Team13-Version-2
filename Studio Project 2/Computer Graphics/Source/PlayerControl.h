@@ -1,11 +1,24 @@
 #ifndef _PLAYERCONTROL_H
 #define _PLAYERCONTROL_H
+/****************************************************************************/
+/*!
+\file PlayerControl.h
+\author
+\par email:
+\brief
 
+*/
+/****************************************************************************/
 #include "MousePosition.h"
 #include "PlayerShip.h"
 #include "Camera.h"
 #include "Application.h"
-
+/******************************************************************************/
+/*!
+		Struct PlayerControl:
+\brief
+*/
+/******************************************************************************/
 struct PlayerControl {
 
 	//Constructor & Destructor

@@ -1,6 +1,14 @@
 #ifndef _GAMEOBJECT_H
 #define _GAMEOBJECT_H
+/****************************************************************************/
+/*!
+\file GameObject.h
+\author
+\par email:
+\brief
 
+*/
+/****************************************************************************/
 #include <string>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -11,7 +19,13 @@
 #include "MatrixStack.h"
 
 using std::string;
+/*****************************************/
+/*!
+		Class GameObject
+\brief
 
+*/
+/*****************************************/
 class GameObject {
 
 protected:

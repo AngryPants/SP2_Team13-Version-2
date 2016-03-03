@@ -1,6 +1,13 @@
 #ifndef _SPAWN_H
 #define _SPAWN_H
-
+/****************************************************************************/
+/*!
+\file Spawn.h
+\author 
+\brief
+Struct that generates the coordinates using an algorithm for each Objects in Space
+*/
+/****************************************************************************/
 #include "Veldspar.h"
 #include "Omber.h"
 #include "Kernite.h"
@@ -11,16 +18,12 @@
 #include "Ship.h"
 #include "SpawnZone.h"
 #include "GenerateRange.h"
-
-/****************************************************************************/
+/******************************************************************************/
 /*!
-\file Spawn.h
-\author 
+		Struct Spawn:
 \brief
-Struct that generates the coordinates using an algorithm for each Objects in Space
 */
-/****************************************************************************/
-
+/******************************************************************************/
 struct Spawn
 {
 public:

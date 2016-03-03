@@ -1,6 +1,14 @@
 #ifndef _LOADFILE_H
 #define _LOADFILE_H
-
+/****************************************************************************/
+/*!
+\file Load.h
+\author
+\par email:
+\brief
+Struct that Loads information and details from text files
+*/
+/****************************************************************************/
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -17,17 +25,13 @@ using std::vector;
 using std::string;
 using std::cout;
 using std::endl;
-
-/****************************************************************************/
+/*****************************************/
 /*!
-\file Load.h
-\author
+		Struct Load
 \brief
-Struct that Loads information and details from text files
+
 */
-/****************************************************************************/
-
-
+/*****************************************/
 struct Load {
 
 public:

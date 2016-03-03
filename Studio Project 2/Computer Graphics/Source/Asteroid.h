@@ -1,7 +1,22 @@
 #ifndef _ASTEROID_H
 #define _ASTEROID_H
+/****************************************************************************/
+/*!
+\file Asteroid.h
+\author
+\par email:
+\brief
 
+*/
+/****************************************************************************/
 #include "SpaceObject.h"
+/*****************************************/
+/*!
+		Class Asteroid
+\brief
+
+*/
+/*****************************************/
 
 class Asteroid : public SpaceObject {
 

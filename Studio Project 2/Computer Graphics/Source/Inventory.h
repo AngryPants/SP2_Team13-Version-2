@@ -1,13 +1,27 @@
 #ifndef _INVENTORY_H
 #define _INVENTORY_H
+/****************************************************************************/
+/*!
+\file Inventory.h
+\author
+\par email:
+\brief
 
+*/
+/****************************************************************************/
 #include "Item.h"
 #include <list>
 #include <map>
 
 using std::list;
 using std::map;
+/*****************************************/
+/*!
+		Class Inventory
+\brief
 
+*/
+/*****************************************/
 class Inventory {
 
 private:

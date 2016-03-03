@@ -1,8 +1,15 @@
 #ifndef _PLAYER_H
 #define _PLAYER_H
+/****************************************************************************/
+/*!
+\file Player.h
+\author
+\par email:
+\brief
 
+*/
+/****************************************************************************/
 #include <string>
-//#include "Inventory.h"
 #include "Quest.h"
 #include <list>
 #include "PlayerShip.h"
@@ -10,7 +17,12 @@
 
 using std::list;
 using std::string;
-
+/******************************************************************************/
+/*!
+		Struct Player:
+\brief
+*/
+/******************************************************************************/
 enum PLAYER_STATE {
 
 	MAIN_MENU = 0,

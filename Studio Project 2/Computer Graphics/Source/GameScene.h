@@ -1,6 +1,14 @@
 #ifndef _GAMESCENE_H
 #define _GAMESCENE_H
+/****************************************************************************/
+/*!
+\file GameScene.h
+\author
+\par email:
+\brief
 
+*/
+/****************************************************************************/
 #include "Application.h"
 #include "Scene.h"
 #include "Asteroid.h"
@@ -15,7 +23,13 @@
 #include "Interactable.h"
 
 using std::list;
+/*****************************************/
+/*!
+		Class GameScene
+\brief
 
+*/
+/*****************************************/
 class GameScene : public Scene {
 
 protected:

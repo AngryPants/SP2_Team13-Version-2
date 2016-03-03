@@ -1,6 +1,14 @@
 #ifndef _OUTERSPACE_H
 #define _OUTERSPACE_H
+/****************************************************************************/
+/*!
+\file OuterSpace.h
+\author
+\par email:
+\brief
 
+*/
+/****************************************************************************/
 #include "GameScene.h";
 #include "Player.h"
 #include "Drone.h"
@@ -14,6 +22,12 @@
 #include "Spawn.h"
 #include "Interaction.h"
 #include "Load.h"
+/******************************************************************************/
+/*!
+		Class OuterSpace:
+\brief
+*/
+/******************************************************************************/
 class OuterSpace : public GameScene {
 
 private:
